@@ -1,25 +1,28 @@
-import { useSelector } from "react-redux"
-import { selectIsAuthenticated } from "../../store/slices/authSlice"
-import { Navigate, Outlet } from "react-router-dom"
-
+import { useSelector } from "react-redux";
+import { selectIsAuthenticated } from "../../store/slices/authSlice";
+import { Navigate, Outlet } from "react-router-dom";
+import { selectIsStudentSet } from "../../store/slices/studentSlice";
 
 const AuthLayout = () => {
-
-    const isAuthenticated = useSelector(selectIsAuthenticated)
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const isStudentSet = useSelector(selectIsStudentSet);
 
   return (
-    <div> <>
-    {isAuthenticated ? (
-      <Navigate to="/"/>
-    ):(
+    <div>
+      {" "}
       <>
-        <section>
-          <Outlet />
-        </section>
+        {isAuthenticated && isStudentSet ? (
+          <Navigate to="/" />
+        ) : (
+          <>
+            <section>
+              <Outlet />
+            </section>
+          </>
+        )}
       </>
-    )}
-  </></div>
-  )
-}
+    </div>
+  );
+};
 
-export default AuthLayout
+export default AuthLayout;

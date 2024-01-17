@@ -35,7 +35,6 @@ export const Login = () => {
         dispatch(setToken(response.accessToken.token));
         const id = dispatch(setStudentId(response?.studentId));
         console.log(id);
-        navigate("/");
       } else {
         toast.error("Yanlış E-mail veya Şifre Lütfen Tekrar Deneyiniz!");
       }

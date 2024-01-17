@@ -16,7 +16,6 @@ const initialState = {
         certificates: null,
         languageLevels: null,
         skills: null,
-        appeals: null,
         studentEducations: null,
         studentExperiences: null,
         studentClasses: null,
@@ -36,10 +35,11 @@ export const studentSlice = createSlice({
     },
     clearStudent : (state) => {
       state.student = initialState.student
-    }
+    },
   },
 });
 
 export const { setStudent, clearStudent } = studentSlice.actions;
 export default studentSlice.reducer;
 export const selectStudent = (state:any) => state.student.student;
+export const selectIsStudentSet = (state:any) => !!state.student.student.id;

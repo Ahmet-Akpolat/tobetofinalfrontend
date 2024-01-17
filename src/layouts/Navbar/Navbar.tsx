@@ -13,6 +13,7 @@ import {
   setStudent,
 } from "../../store/slices/studentSlice";
 import { persistor } from "../../store/configureStore";
+import { clearAppeal } from "../../store/slices/appealSlice";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export const Navbar = () => {
   const handleLogOut = async () => {
     dispatch(clearAuth());
     dispatch(clearStudent());
+    dispatch(clearAppeal());
     navigate("/login");
   };
 
@@ -33,6 +35,7 @@ export const Navbar = () => {
         const service = new StudentService();
         try {
           const studentData = await service.getStudent(studentId);
+          console.log(studentData);
           dispatch(setStudent(studentData)); // Öğrenci bilgilerini Redux state'ine kaydedin
         } catch (error) {
           console.error("Öğrenci bilgileri alınamadı", error);
