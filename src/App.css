@@ -1,38 +1,114 @@
-.App {
-  text-align: center;
+.welcome-message {
+  margin: 50px;
 }
 
-.App-logo {
-  height: 40vmin;
+.spans-elements {
+  font-size: 40px;
+}
+
+.tobete-text-secondary {
+  font-weight: 700;
+  color: blueviolet !important;
+}
+
+/* snowfall */
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.snow_wrap {
+  width: 100%;
+  background-size: cover;
+  background-position: center bottom;
+}
+.snow,
+.snow:after,
+.snow::before {
+  overflow: hidden; /* İçerik sınırlarını aşan kısmı gösterme */
+  content: "";
+  position: absolute;
+  top: -650px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: radial-gradient(4px 4px at 100px 50px, #dadada, transparent),
+    radial-gradient(6px 6px at 200px 150px, #dadada, transparent),
+    radial-gradient(3px 3px at 300px 250px, #dadada, transparent),
+    radial-gradient(4px 4px at 400px 350px, #dadada, transparent),
+    radial-gradient(6px 6px at 500px 100px, #dadada, transparent),
+    radial-gradient(3px 3px at 50px 200px, #dadada, transparent),
+    radial-gradient(4px 4px at 150px 300px, #dadada, transparent),
+    radial-gradient(6px 6px at 250px 400px, #dadada, transparent),
+    radial-gradient(3px 3px at 350px 500px, #dadada, transparent),
+    radial-gradient(2px 4px at 550px 550px, #dadada, transparent),
+    radial-gradient(1px 4px at 550px 550px, #dadada, transparent),
+    radial-gradient(4px 2px at 550px 550px, #dadada, transparent),
+    radial-gradient(2px 3px at 550px 550px, #dadada, transparent),
+    radial-gradient(6px 6px at 500px 100px, #dadada, transparent),
+    radial-gradient(3px 3px at 50px 200px, #dadada, transparent),
+    radial-gradient(4px 4px at 150px 300px, #dadada, transparent),
+    radial-gradient(6px 6px at 250px 400px, #dadada, transparent),
+    radial-gradient(3px 3px at 350px 500px, #dadada, transparent),
+    radial-gradient(2px 4px at 550px 550px, #dadada, transparent),
+    radial-gradient(1px 4px at 550px 550px, #dadada, transparent),
+    radial-gradient(4px 2px at 550px 550px, #dadada, transparent),
+    radial-gradient(2px 3px at 550px 550px, #dadada, transparent),
+    radial-gradient(6px 6px at 500px 100px, #dadada, transparent),
+    radial-gradient(3px 3px at 50px 200px, #dadada, transparent),
+    radial-gradient(4px 4px at 150px 300px, #dadada, transparent),
+    radial-gradient(6px 6px at 250px 400px, #dadada, transparent),
+    radial-gradient(3px 3px at 350px 500px, #dadada, transparent),
+    radial-gradient(2px 4px at 550px 550px, #dadada, transparent),
+    radial-gradient(1px 4px at 550px 550px, #dadada, transparent),
+    radial-gradient(4px 2px at 550px 550px, #dadada, transparent),
+    radial-gradient(2px 3px at 550px 550px, #dadada, transparent),
+    radial-gradient(3px 3px at 50px 200px, #dadada, transparent),
+    radial-gradient(4px 4px at 150px 300px, #dadada, transparent),
+    radial-gradient(6px 6px at 250px 400px, #dadada, transparent),
+    radial-gradient(3px 3px at 350px 500px, #dadada, transparent),
+    radial-gradient(2px 4px at 550px 550px, #dadada, transparent),
+    radial-gradient(1px 4px at 550px 550px, #dadada, transparent),
+    radial-gradient(4px 2px at 550px 550px, #dadada, transparent),
+    radial-gradient(2px 3px at 550px 550px, #dadada, transparent),
+    radial-gradient(6px 6px at 500px 100px, #dadada, transparent),
+    radial-gradient(3px 3px at 50px 200px, #dadada, transparent),
+    radial-gradient(4px 4px at 150px 300px, #dadada, transparent),
+    radial-gradient(6px 6px at 250px 400px, #dadada, transparent),
+    radial-gradient(3px 3px at 350px 500px, #dadada, transparent),
+    radial-gradient(2px 4px at 550px 550px, #dadada, transparent),
+    radial-gradient(1px 4px at 550px 550px, #dadada, transparent),
+    radial-gradient(4px 2px at 550px 550px, #dadada, transparent),
+    radial-gradient(2px 3px at 550px 550px, #dadada, transparent),
+    radial-gradient(4px 4px at 550px 550px, #dadada, transparent);
+  background-size: 650px 650px;
+  animation: SnowAnim 3s linear infinite;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.snow:after {
+  margin-left: -250px;
+  opacity: 0.5;
+  filter: blur(2px);
+  animation-direction: reverse;
+  animation-duration: 6s;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.snow::before {
+  margin-left: -350px;
+  opacity: 0.7;
+  filter: blur(1px);
+  animation-direction: reverse;
+  animation-duration: 7s;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+@keyframes SnowAnim {
   from {
-    transform: rotate(0deg);
+    transform: translateY(0);
   }
   to {
-    transform: rotate(360deg);
+    transform: translateY(100vh);
   }
 }

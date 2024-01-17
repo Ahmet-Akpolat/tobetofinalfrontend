@@ -1,0 +1,227 @@
+.navbar {
+  border: 1px solid #ebebeb;
+}
+
+.tobetoImage {
+  box-sizing: border-box;
+  display: inline-block;
+  overflow: hidden;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  max-width: 100%;
+}
+
+.logo {
+  position: absolute;
+  inset: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+  border: none;
+  margin: auto;
+  display: block;
+  width: 0px;
+  height: 0px;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+.tobetoImage span {
+  box-sizing: border-box;
+  display: block;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  max-width: 100%;
+}
+.tobetoImage span span img {
+  display: block;
+  max-width: 100%;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+.nav-link {
+  display: block;
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+  font-size: var(--bs-nav-link-font-size);
+  font-weight: var(--bs-nav-link-font-weight);
+  color: var(--bs-nav-link-color);
+  text-decoration: none;
+  background: none;
+  border: 0;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+  outline: none;
+  outline-width: 0;
+}
+
+.nav-active {
+  color: #93f !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid #93f;
+}
+.c-gray-3 {
+  color: #282828 !important;
+}
+.d-flex {
+  display: flex !important;
+}
+.align-items-center {
+  align-items: center !important;
+}
+.mx-3 {
+  margin-right: 0.75rem !important;
+  margin-left: 0.75rem !important;
+  gap: 1em;
+}
+.btn-group {
+  border-radius: 25px;
+}
+.header-avatar {
+  background: #fff;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-radius: 35px;
+  padding: 7px 10px;
+  display: inline-flex;
+  align-items: center;
+}
+.btn-group,
+.btn-group-vertical {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
+.text-end {
+  text-align: right !important;
+}
+.fw-normal {
+  font-weight: 400 !important;
+}
+.p-0 {
+  padding: 0 !important;
+}
+.me-2 {
+  margin-right: 0.5rem !important;
+}
+.me-2 span {
+  box-sizing: border-box;
+  display: inline-block;
+  overflow: hidden;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  max-width: 100%;
+}
+.me-2 span span {
+  box-sizing: border-box;
+  display: block;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  max-width: 100%;
+}
+.me-2 span span img {
+  display: block;
+  max-width: 100%;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.cv-pp-img {
+  inset: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+  border: none;
+  display: block;
+  margin: auto;
+  width: 50%;
+  height: 10% !important;
+}
+.header-avatar .name {
+  font-size: 14px;
+  color: #828282;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.me-3 {
+  margin-right: 0.75rem !important;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.profil-dropdown {
+  font-size: 14px !important;
+  color: black !important;
+}
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+  clear: both;
+  font-weight: 400;
+  color: var(--bs-dropdown-link-color);
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  border-radius: var(--bs-dropdown-item-border-radius, 0);
+}
+.dropdown-menu.show.profile {
+  background-color: #93f !important;
+  border-width: 1px;
+  border-color: #fff;
+  width: 100%;
+}
+.dropdown-menu.show {
+  display: block;
+}
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+@media (min-width: 1400px) {
+  .navbar-expand-xxl .navbar-nav .nav-link {
+    padding-right: var(--bs-navbar-nav-link-padding-x);
+    padding-left: var(--bs-navbar-nav-link-padding-x);
+  }
+  .d-xxl-block {
+    display: block !important;
+  }
+}
+
+.d-xll-block {
+  border-radius: 50px;
+  width: 220px;
+  display: flex;
+}

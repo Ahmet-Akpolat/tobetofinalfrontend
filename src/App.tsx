@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import AuthLayout from "./pages/Auth/AuthLayout";
+import { Login } from "./pages/Auth/Login/Login";
+import { Signup } from "./pages/Auth/Signup/Signup";
+import Home from "./pages/Home/Home";
+import PrivateRoute from "./utilities/PrivateRoute";
+import { Navbar } from "./layouts/Navbar/Navbar";
+import { useSelector } from "react-redux";
+import { selectIsAuthenticated } from "./store/slices/authSlice";
 
 function App() {
+  const isAuth = useSelector(selectIsAuthenticated);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {isAuth && <Navbar />}
+      <Routes>
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<Login />} />
+      </Routes>
     </div>
   );
 }
