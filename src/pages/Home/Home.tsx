@@ -1,4 +1,3 @@
-import React from "react";
 import MainSection from "./MainSection/MainSection";
 import { selectStudent } from "../../store/slices/studentSlice";
 import { useSelector } from "react-redux";

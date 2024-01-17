@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./MainSection.css";
 import { useNavigate } from "react-router-dom";
 import Appeal from "../../../components/Appeal/Appeal";
+import AppealService from "../../../services/AppealService";
+import { useSelector } from "react-redux";
+import { selectStudent } from "../../../store/slices/studentSlice";
+import { AppealResponses } from "../../../models/responses/AppealResponses";
+import { StudentAppealResponse } from "../../../models/responses/StudentAppealResponses";
 
 function MainSection() {
   const navigate = useNavigate();
@@ -15,13 +20,22 @@ function MainSection() {
   });
 
   const [section, setSection] = useState(0);
+  const student = useSelector(selectStudent);
+
+  const fetchData = async () => {
+    const service = new AppealService();
+    try {
+      const appeals = await service.getAppeal(student.id); // appeal listesini bekleyin
+      console.log(appeals.appealId);
+    } catch (error) {
+      console.error("AppealService.getAppeal çağrısı sırasında hata:", error);
+    }
+  };
+
+  // Fonksiyonu çağır
 
   useEffect(() => {
-    // axiosData("lectures", LectureService.getAll);
-    // axiosData("appeals", AppealService.getAll);
-    // axiosData("announcements", AnnouncementService.getAll);
-    // axiosData("exams", ExamService.getAll);
-    // axiosData("surveys", SurveyService.getAll);
+    fetchData();
   }, []);
 
   return (
