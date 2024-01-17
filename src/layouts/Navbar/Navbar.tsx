@@ -7,7 +7,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearAuth, selectStudentId } from "../../store/slices/authSlice";
 import StudentService from "../../services/StudentService";
-import { selectStudent, setStudent } from "../../store/slices/studentSlice";
+import {
+  clearStudent,
+  selectStudent,
+  setStudent,
+} from "../../store/slices/studentSlice";
+import { persistor } from "../../store/configureStore";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -16,8 +21,9 @@ export const Navbar = () => {
   const student = useSelector(selectStudent);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     dispatch(clearAuth());
+    dispatch(clearStudent());
     navigate("/login");
   };
 

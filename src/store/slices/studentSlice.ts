@@ -34,9 +34,12 @@ export const studentSlice = createSlice({
     setStudent: (state, action) => {
       state.student = action.payload;
     },
+    clearStudent : (state) => {
+      state.student = initialState.student
+    }
   },
 });
 
-export const { setStudent } = studentSlice.actions;
+export const { setStudent, clearStudent } = studentSlice.actions;
 export default studentSlice.reducer;
 export const selectStudent = (state:any) => state.student.student;

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -16,7 +17,6 @@ export const authSlice = createSlice({
     clearAuth: (state) => {
     state.token = null;
     state.studentId = null
-    localStorage.clear();
     },
   },
 });
