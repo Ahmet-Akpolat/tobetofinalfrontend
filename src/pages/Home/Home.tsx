@@ -11,7 +11,7 @@ const Home = () => {
         <h3 className="spans-elements">
           <span className="tobete-text-secondary">TOBETO</span>
           <span className="sub-text-name">
-            'ya hoş geldin <br /> {student.firstName + " " + student.lastName}
+            'ya hoş geldin <br /> {student.firstName}
           </span>
         </h3>
         <div>
