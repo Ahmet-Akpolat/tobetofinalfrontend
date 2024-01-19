@@ -32,7 +32,7 @@ function MainSection() {
       setIsLoading(true); // Yükleme başladı
       const service = new AppealService();
       try {
-        const appeals = await service.getAppeal(studentId);
+        const appeals = await service.getAppeal();
         dispatch(setAppeal(appeals)); // çözümlenen veriyi dispatch ile state'e kaydet
         setIsLoading(false); // Yükleme bitti
       } catch (error) {
@@ -40,7 +40,6 @@ function MainSection() {
         setIsLoading(false); // Hata durumunda da yükleme bitti olarak ayarla
       }
     };
-
     if (studentId) {
       fetchAppeals();
     }

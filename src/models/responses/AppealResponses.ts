@@ -8,17 +8,17 @@ export interface AppealResponses extends SingleResponseModel{
     endTime: Date;
 }
 
-export interface GetListClassTagResponse extends GetAllModel<AppealResponses>{
+export interface GetListAppealResponse extends GetAllModel<AppealResponses>{
 }
 
-export interface CreatedTagLectureResponse extends CreatedResponseModel{
+export interface CreatedAppealResponse extends CreatedResponseModel{
     id: GUID | string;
     name: string;
     startTime: Date;
     endTime: Date;
 }
 
-export interface UpdatedClassTagResponse extends UpdatedResponseModel{
+export interface UpdatedAppealResponse extends UpdatedResponseModel{
     id: GUID | string;
     name: string;
     startTime: Date;

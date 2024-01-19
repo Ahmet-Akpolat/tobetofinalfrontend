@@ -17,7 +17,7 @@ const Appeal = ({ index }: any) => {
     const fetchAppeals = async () => {
       const service = new AppealService();
       try {
-        const appeals = await service.getAppeal(studentId);
+        const appeals = await service.getAppeal();
         console.log(appeals);
         dispatch(setAppeal(appeals)); // çözümlenen veriyi dispatch ile state'e kaydet
       } catch (error) {
