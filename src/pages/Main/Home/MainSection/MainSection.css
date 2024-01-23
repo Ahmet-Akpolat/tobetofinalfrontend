@@ -1,0 +1,201 @@
+.main-section {
+  width: 92%;
+  margin: auto;
+}
+
+.my-2 {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.cv-box {
+  background: #fff;
+  box-shadow: 0 7px 29px rgba(0, 0, 0, 0.13);
+  border-radius: 12px;
+  margin-top: 1em;
+}
+
+.cv-padding {
+  padding: 22px;
+}
+
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-0.5 * var(--bs-gutter-x));
+  margin-left: calc(-0.5 * var(--bs-gutter-x));
+}
+
+.ik-logo-platform {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tobeto-main-logo {
+  box-sizing: border-box;
+  display: inline-block;
+  overflow: hidden;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  max-width: 100%;
+}
+
+.tobeto-main-logo img {
+  margin: 1em auto !important;
+  width: 300px !important;
+  height: 128px !important;
+  display: block;
+  inset: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+  border: none;
+  margin: auto;
+  display: block;
+  width: 0px;
+  height: 0px;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+
+.tobeto-main-logo span {
+  box-sizing: border-box;
+  display: block;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  max-width: 100%;
+}
+
+.tobeto-main-logo span img {
+  display: block;
+  max-width: 100%;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.mb-4 {
+  margin-bottom: 1rem !important;
+}
+
+.px-10 {
+  padding-right: 2.5rem !important;
+  padding-left: 2.5rem !important;
+}
+
+.ik-logo-platform .header-text-md {
+  color: #282828;
+  font-weight: 500 !important;
+  font-size: 28px;
+  font-family: "Poppins", sans-serif;
+}
+
+.mt-4 {
+  margin-top: 1rem !important;
+}
+
+.ik-logo-platform .header-text .quot {
+  color: #00d29b !important;
+}
+
+.ik-logo-platform .header-text {
+  font-family: "Roboto", sans-serif;
+  color: #282828;
+  font-weight: 600;
+  font-size: 48px;
+}
+
+.mainTablist {
+  border: none;
+  margin-bottom: 0.75em;
+}
+
+.nav-tabs {
+  --bs-nav-tabs-border-width: var(--bs-border-width);
+  --bs-nav-tabs-border-color: var(--bs-border-color);
+  --bs-nav-tabs-border-radius: var(--bs-border-radius);
+  --bs-nav-tabs-link-hover-border-color: var(--bs-secondary-bg)
+    var(--bs-secondary-bg) var(--bs-border-color);
+  --bs-nav-tabs-link-active-color: var(--bs-emphasis-color);
+  --bs-nav-tabs-link-active-bg: var(--bs-body-bg);
+  --bs-nav-tabs-link-active-border-color: var(--bs-border-color)
+    var(--bs-border-color) var(--bs-body-bg);
+  border-bottom: var(--bs-nav-tabs-border-width) solid
+    var(--bs-nav-tabs-border-color);
+}
+
+.nav {
+  --bs-nav-link-padding-x: 1rem;
+  --bs-nav-link-padding-y: 0.5rem;
+  --bs-nav-link-font-size: 0.95rem;
+  --bs-nav-link-font-weight: 500;
+  --bs-nav-link-color: #4d4d4d;
+  --bs-nav-link-hover-color: #93f;
+  --bs-nav-link-disabled-color: var(--bs-secondary-color);
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+.mainTablist .nav-item .nav-link {
+  font-weight: 500;
+  color: rgba(40, 40, 40, 0.8);
+  margin: auto 0;
+  border: none;
+  padding: 8px 16px;
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+}
+
+.mainTablist .nav-item .nav-link:focus {
+  color: #282828;
+  background-color: transparent;
+  border: none;
+  position: relative;
+}
+
+.mainTablist .nav-item .nav-link:focus:after {
+  content: "";
+  width: 100%;
+  height: 0.2em;
+  background-color: rgba(40, 40, 40, 0.8);
+  border-radius: 0.2em;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 0 11px hsla(0, 0%, 100%, 0.5);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 32px;
+}
