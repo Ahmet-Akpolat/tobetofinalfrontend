@@ -8,6 +8,7 @@ import { object, ref, string } from "yup";
 import FormikInput from "../../../components/FormikInput/FormikInput";
 import { CreateStudentRequest } from "../../../models/requests/StudentRequests";
 import authService from "../../../services/authService/authService";
+import { passwordValidator } from "../../../utils/customValidations";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -27,7 +28,13 @@ const Signup = () => {
     email: string()
       .email("Geçersiz e-posta adresi*")
       .required("Doldurulması zorunlu alan*"),
-    password: string().required("Doldurulması zorunlu alan*"),
+    password: string()
+      .required("Doldurulması zorunlu alan*")
+      .test(
+        "buyuk-kucuk-sayi",
+        "En Az 1 Büyük Harf, 1 Küçük Harf ve 1 Sayı Giriniz!",
+        passwordValidator
+      ),
     retypePassword: string()
       .required("Doldurulması zorunlu alan*")
       .oneOf([ref("password")], "Şifreler Eslesmiyor"),
@@ -36,11 +43,11 @@ const Signup = () => {
   const submit = async (values: CreateStudentRequest) => {
     try {
       setLoading(true);
-      let signUp = authService.register(values);
+      await authService.register(values);
       toast.success("Kayıt Başarılı.");
       navigate("/login");
-    } catch {
-      toast.error("Bu Maile Ait Bir Kullanici Zaten Var");
+    } catch (error) {
+      toast.error("Bu E Postaya Sahip Bir Kullanıcı Zaten Mevcut");
     } finally {
       setLoading(false);
     }

@@ -9,6 +9,7 @@ import announcementService from '../services/announcementService';
 import { setAnnouncement } from '../store/slices/announcementSlice';
 import lectureService from '../services/lectureService';
 import { setLecture } from '../store/slices/lectureSlice';
+import { toast } from 'react-toastify';
 
 
 const fetchAllData = async (dispatch: Dispatch, values:any) => {
@@ -37,6 +38,7 @@ const fetchAllData = async (dispatch: Dispatch, values:any) => {
     dispatch(setStudent(student));
 
   } catch (error) {
+    toast.error("Şifre Yada E Posta Yanlış");
     console.error('Veri çekerken hata oluştu:', error);
   }
 };

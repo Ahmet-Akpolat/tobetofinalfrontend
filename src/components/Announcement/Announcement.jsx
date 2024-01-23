@@ -3,7 +3,7 @@ import "./Announcement.css";
 import AnnouncementModal from "./Modal/AnnouncementModal";
 import { useSelector } from "react-redux";
 import { selectAnnouncement } from "../../store/slices/announcementSlice";
-import { formatDate } from "../../environment/environment";
+import { formatDate } from "../../utils/formatDate";
 
 function Announcement({index}) {
   const [modalShow, setModalShow] = useState(false);

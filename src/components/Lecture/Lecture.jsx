@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import "./Lecture.css";
 import { Link, useNavigate } from "react-router-dom";
 import { selectLecture } from "../../store/slices/lectureSlice";
-import { formatDate } from "../../environment/environment";
+import { formatDate } from "../../utils/formatDate";
 
  const Lecture = (props) => {
   const lectures = useSelector(selectLecture)
