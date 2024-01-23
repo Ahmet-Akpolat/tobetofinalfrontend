@@ -10,7 +10,7 @@ class AuthService {
     
 	public async login(data: AuthLoginRequest): Promise<TokenModel | null> {
         try {
-            const response = await axios.post<LoginResponseModel>( baseURL + "Auth/Login", data);
+            const response = await axios.post<LoginResponseModel>( baseURL + "Auth/StudentLogin", data);
             const loginResponse = response.data;
 
             if (loginResponse && loginResponse.accessToken?.token) {

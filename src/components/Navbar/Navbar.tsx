@@ -8,6 +8,7 @@ import { useState } from "react";
 import "./Navbar.css";
 import { clearAppeal } from "../../store/slices/appealSlice";
 import { clearAnnouncement } from "../../store/slices/announcementSlice";
+import { clearLecture } from "../../store/slices/lectureSlice";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Navbar = () => {
     dispatch(clearStudent());
     dispatch(clearAppeal());
     dispatch(clearAnnouncement());
+    dispatch(clearLecture());
     navigate("/login");
   };
 
