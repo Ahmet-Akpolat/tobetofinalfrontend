@@ -7,7 +7,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { object, ref, string } from "yup";
 import FormikInput from "../../../components/FormikInput/FormikInput";
 import { CreateStudentRequest } from "../../../models/requests/StudentRequests";
-import authService from "../../../services/authService/authService";
+import AuthService from "../../../services/authService/authService";
 import { passwordValidator } from "../../../utils/customValidations";
 
 const Signup = () => {
@@ -43,11 +43,12 @@ const Signup = () => {
   const submit = async (values: CreateStudentRequest) => {
     try {
       setLoading(true);
-      await authService.register(values);
+      await AuthService.register(values);
       toast.success("Kayıt Başarılı.");
       navigate("/login");
     } catch (error) {
-      toast.error("Bu E Postaya Sahip Bir Kullanıcı Zaten Mevcut");
+      console.log(error)
+      toast.error("Bu E-Postaya Sahip Bir Kullanıcı Zaten Mevcut");
     } finally {
       setLoading(false);
     }

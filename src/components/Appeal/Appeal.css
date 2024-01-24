@@ -5,6 +5,7 @@
   border-radius: 8px;
   border-color: #076b34;
   width: 520px;
+  min-height: 140px;
 }
 
 .appeal-card::after {
