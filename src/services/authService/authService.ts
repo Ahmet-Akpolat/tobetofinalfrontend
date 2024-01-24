@@ -27,7 +27,7 @@ class AuthService {
     }
 
 	async register(data:CreateStudentRequest) {
-		await axios.post(baseURL + "Auth/Register", data)
+		await axios.post("http://localhost:60805/api/Students", data)
 	}
 }
 
