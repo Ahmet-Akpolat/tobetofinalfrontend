@@ -6,6 +6,8 @@ import { selectIsAuthenticated } from "./store/slices/authSlice";
 import { useSelector } from "react-redux";
 import MainLayout from "./pages/Main/MainLayout";
 import Home from "./pages/Main/Home/Home";
+import Footer from "./components/Footer/Footer";
+import LectureDetail from "./pages/LectureDetail/LectureDetail";
 
 function App() {
   const isAuth = useSelector(selectIsAuthenticated);
@@ -22,8 +24,10 @@ function App() {
         {/*Giriş Yaptıktan Sonra Erişilebilen Sayfalar*/}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/ders-detay" element={<LectureDetail />} />
         </Route>
       </Routes>
+      <Footer />
     </div>
   );
 }

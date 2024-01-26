@@ -18,7 +18,7 @@ const MainSection = () => {
 
   return (
     <section>
-      <div className="container d-flex align-items-center justify-content-center">
+      <div className="main-section d-flex align-items-center justify-content-center">
         <div className="row cv-box cv-padding display-flex mmt-n-4 main-section">
           <div className="col-12 ik-logo-platform">
             <div className="p-4">

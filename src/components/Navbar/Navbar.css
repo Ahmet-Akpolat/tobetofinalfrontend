@@ -144,6 +144,7 @@
   padding: 0px;
   max-width: 100%;
 }
+
 .me-2 span span img {
   display: block;
   max-width: 100%;
@@ -163,7 +164,7 @@
   border: none;
   display: block;
   margin: auto;
-  width: 50%;
+  width: 100%;
   height: 10% !important;
 }
 .header-avatar .name {

@@ -2,7 +2,7 @@ import { Form, Formik } from "formik";
 import { AuthLoginRequest } from "../../../models/requests/auth/AuthLoginRequest";
 import FormikInput from "../../../components/FormikInput/FormikInput";
 import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
 import { useState } from "react";
 import "./Login.css";
@@ -36,7 +36,7 @@ const Login = () => {
 
   return (
     <div className="login-base">
-      <div className="login">
+      <div className="login col-12 col-md-5">
         <Formik
           initialValues={initialValues}
           onSubmit={(values: AuthLoginRequest) => {

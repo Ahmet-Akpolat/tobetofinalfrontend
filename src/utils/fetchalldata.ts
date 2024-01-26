@@ -15,13 +15,14 @@ import { toast } from 'react-toastify';
 const fetchAllData = async (dispatch: Dispatch, values:any) => {
   try {
 
-    // Login
+    // Login // BUNU BURADAN AYIR!
     const login = await authService.login(values)
     dispatch(setToken(login?.token))
 
     // Appeal
     const appeal = await appealService.getAll(login?.token)
     dispatch(setAppeal(appeal));
+    console.log(appeal)
 
     // Lecture
     const lecture = await lectureService.getAll(login?.token)
@@ -38,8 +39,8 @@ const fetchAllData = async (dispatch: Dispatch, values:any) => {
     dispatch(setStudent(student));
 
   } catch (error) {
-    toast.error("Şifre Yada E Posta Yanlış");
-    console.error('Veri çekerken hata oluştu:', error);
+    console.log(error)
+    toast.error("E-Posta veya Şifre Yanlış");
   }
 };
 

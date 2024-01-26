@@ -1,0 +1,55 @@
+.content-header {
+  padding-bottom: 4%;
+  cursor: pointer;
+}
+
+.expand {
+  transform: rotate(90deg);
+  transition: transform 0.5s ease;
+}
+
+.unexpand {
+  transition: transform 0.5s ease;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.info-section {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+
+.lecture-video-header {
+  padding: 4%;
+  padding-left: 5%;
+  cursor: pointer;
+}
+
+.lecture-video-header sub {
+  font-weight: 600;
+  color: gray;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lecture-video-header {
+  animation: fadeIn 0.6s ease-in-out;
+}

@@ -1,93 +1,96 @@
-.login {
-  font-family: "Poppins", sans-serif;
-  font-weight: bold;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 100px 200px;
-  display: grid;
-  place-items: center;
-  border: 5px solid transparent;
-  background: #fff;
+.login-base {
+  min-height: 84.2vh;
 }
 
-.login::before {
-  z-index: -1;
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: conic-gradient(
-    from var(--angle),
-    #0ebeff,
-    #ffdd40,
-    #ae63e4,
-    #47cf73,
-    #0ebeff,
-    #ffdd40,
-    #ae63e4,
-    #47cf73,
-    #0ebeff
-  );
-  border-image-slice: 1;
-  border-radius: 1em;
-  animation: 4s rotate linear infinite;
+.login
+{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 100px 200px;
+    display: grid;
+    place-items: center;
+    border: 5px solid transparent;
+    background: #fff;
 }
 
-.login::after {
-  bottom: 2px;
-  top: 2px;
-  left: 2px;
-  right: 2px;
-  height: auto;
-  width: auto;
-  margin: 3px;
-  background: inherit;
-  content: "";
-  position: absolute;
-  z-index: -1;
-  border-radius: 1em;
+.login::before 
+{
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(from var(--angle), #0ebeff,#ffdd40,#ae63e4,#47cf73,#0ebeff,#ffdd40,#ae63e4,#47cf73, #0ebeff);
+    border-image-slice: 1;
+    border-radius: 1em;
+    animation: 4s rotate linear infinite;
 }
 
-@keyframes rotate {
-  to {
-    --angle: 360deg;
-  }
+.login::after 
+{
+    bottom: 2px;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    height: auto;
+    width: auto;
+    margin: 3px;
+    background: inherit;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border-radius: 1em;
 }
 
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
+
+@keyframes rotate 
+{
+	to {
+		--angle: 360deg;
+	}
 }
 
-.login-img {
-  max-width: 250px;
-  margin-bottom: 20px;
+@property --angle 
+{
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
 }
 
-.login-input {
-  width: 300px;
-  height: 35px;
-  border-radius: 10px;
-  margin-top: 10px;
-  border: 1px solid grey;
+.login-img
+{
+    max-width: 250px;
+    margin-bottom: 20px;
 }
 
-.login-btn {
-  width: 100%;
-  margin-top: 10px;
-  cursor: pointer;
-  color: white;
-  background-color: #93f;
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: none;
+.login-input 
+{
+    width: 300px;
+    height: 35px;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 1px solid grey;
 }
 
-.register > h1 {
-  color: #0ebeff;
+.login-btn
+{
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+    color: white;
+    background-color: #93f;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+}
+
+.register>h1
+{
+    color: #0ebeff;
 }

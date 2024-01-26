@@ -1,0 +1,78 @@
+.lecture {
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.blur {
+  filter: blur(2px);
+}
+
+.lecture-detail {
+  box-shadow: 5px 5px 10px 10px rgb(204, 204, 204);
+  border-radius: 20px;
+  width: calc(100% - 200px);
+  margin: auto;
+  padding: 30px;
+  min-height: 750px;
+}
+
+.lecture-info h3 {
+  font-weight: bold;
+  font-size: large;
+}
+
+.date-info span {
+  font-weight: bold;
+  font-size: small;
+  color: #2372ba;
+}
+
+.lecture-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.like,
+.save {
+  cursor: pointer;
+  width: 54px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.like:hover,
+.save:hover {
+  transform: scale(1.2);
+  transition: transform 0.4s ease-in-out;
+}
+
+.like img,
+.save img {
+  width: 100%;
+  height: 100%;
+}
+
+.lecture-content {
+  margin-top: 25px;
+}
+
+@media screen and (min-width: 150px) and (max-width: 600px) {
+  .lecture-detail {
+    width: calc(100% - 70px);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lecture-detail {
+  animation: fadeIn 0.6s ease-in-out;
+}

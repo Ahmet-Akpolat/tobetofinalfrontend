@@ -1,4 +1,3 @@
-import Logo from "../../images/images/tobeto-logo.png";
 import { clearAuth, selectIsAuthenticated } from "../../store/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { clearStudent, selectStudent } from "../../store/slices/studentSlice";
@@ -33,7 +32,7 @@ const Navbar = () => {
             <span>
               <img src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg'%20version='1.1'%20width='170'%20height='35'/>" />
             </span>
-            <img className="logo" src={Logo} alt="tobeto-logo" />
+            <img className="logo" src="images/tobeto-logo.png" alt="tobeto-logo" />
           </span>
         </Link>
         <ul className="d-none d-xxl-flex navbar-nav gap-3">

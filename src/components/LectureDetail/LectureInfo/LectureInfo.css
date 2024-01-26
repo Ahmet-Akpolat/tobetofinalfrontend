@@ -1,0 +1,22 @@
+.info-section {
+  padding-bottom: 25px;
+}
+
+.info-section strong {
+  font-size: medium;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.info-section {
+  animation: fadeIn 0.6s ease-in-out;
+}

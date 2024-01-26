@@ -1,5 +1,5 @@
 .main-section {
-  width: 92%;
+  width: 85%;
   margin: auto;
 }
 
@@ -197,5 +197,5 @@ li {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 32px;
+  gap: 11px;
 }
