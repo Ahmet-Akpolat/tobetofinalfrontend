@@ -1,17 +1,46 @@
 import "./LectureDetail.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LectureDetailSidebar from "../../components/LectureDetail/LectureDetailSidebar/LectureDetailSidebar";
-import LectureContent from "../../components/LectureDetail/LectureContent/LectureContent"
-import LectureInfo from "../../components/LectureDetail/LectureInfo/LectureInfo"
+import LectureContent from "../../components/LectureDetail/LectureContent/LectureContent";
+import LectureInfo from "../../components/LectureDetail/LectureInfo/LectureInfo";
 import { useSelector } from "react-redux";
 import { selectLectureDetail } from "../../store/slices/lectureDetailSlice";
+import lectureService from "../../services/lectureService";
+import { selectToken } from "../../store/slices/authSlice";
+import { ToastContainer, toast } from "react-toastify";
+import { selectStudent } from "../../store/slices/studentSlice";
 
 function LectureDetail() {
   const [liked, setLiked] = useState(false);
-  const [saved, setSaved] = useState(false);
   const [section, setSection] = useState(0);
-  const lecture = useSelector(selectLectureDetail)
+  const lecture = useSelector(selectLectureDetail);
+  const token = useSelector(selectToken);
+  const student = useSelector(selectStudent);
   const [showDetail, setShowDetail] = useState(false);
+
+  const getLectureLiked = async () => {
+    try {
+      const likedLecture = await lectureService.getLectureLiked(
+        lecture.id,
+        token
+      );
+      console.log(likedLecture);
+      if (likedLecture.isLiked) setLiked(true);
+    } catch {}
+  };
+
+  const setLectureLiked = async () => {
+    try {
+      await lectureService.setLectureLiked(student.id, lecture.id, token);
+      setLiked(!liked);
+    } catch (error) {
+      toast.error("Bir sorun oluştu...");
+    }
+  };
+
+  useEffect(() => {
+    getLectureLiked();
+  }, []);
 
   return (
     <div className="lecture">
@@ -36,13 +65,14 @@ function LectureDetail() {
                 </div>
                 <div className="actions d-flex">
                   <div className="like-actions ">
-                    <div className="like" onClick={() => setLiked(!liked)}>
-                      <img src={liked === false ? "icons/favorite_FILL0_wght100.svg" : "icons/favorite_FILL1.svg"}></img>
-                    </div>
-                  </div>
-                  <div className="save-actions">
-                    <div className="save" onClick={() => setSaved(!saved)}>
-                      <img src={saved === false ? "icons/bookmark_FILL0.svg" : "icons/bookmark_FILL1.svg"}></img>
+                    <div className="like" onClick={setLectureLiked}>
+                      <img
+                        src={
+                          liked === false
+                            ? "icons/favorite_FILL0_wght100.svg"
+                            : "icons/favorite_FILL1.svg"
+                        }
+                      ></img>
                     </div>
                   </div>
                 </div>
@@ -72,6 +102,7 @@ function LectureDetail() {
       {showDetail === true && (
         <LectureDetailSidebar setShowDetail={setShowDetail} />
       )}
+      <ToastContainer position="bottom-right" theme="light" />
     </div>
   );
 }
