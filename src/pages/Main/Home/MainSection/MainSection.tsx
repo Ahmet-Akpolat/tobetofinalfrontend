@@ -19,8 +19,6 @@ const MainSection = () => {
   const lectures = useSelector(selectLecture);
   const exams = useSelector(selectExams);
 
-  console.log(exams);
-
   return (
     <section>
       <div className="main-section d-flex align-items-center justify-content-center">

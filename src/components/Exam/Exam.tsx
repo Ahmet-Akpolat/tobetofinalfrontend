@@ -5,7 +5,6 @@ import { selectExams } from "../../store/slices/examSlice";
 
 const Exam = ({ index }: any) => {
   const exams = useSelector(selectExams)
-  console.log(exams)
 
   return (
     <div className="col-md-5 d-flex exam-card">
