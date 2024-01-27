@@ -8,7 +8,7 @@ const Appeal = ({ index }: any) => {
   const appeals = useSelector(selectAppeal);
 
   return (
-    <div className="col-12 col-md-5 mb-4 d-flex appeal-card">
+    <div className="col-10 col-md-5 mb-4 d-flex appeal-card">
       <div>
         <div className="appeal-name col-5 col-md-6">{appeals[index].appealName}</div>
         <div className="appeal-stages">

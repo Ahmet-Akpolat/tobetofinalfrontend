@@ -1,0 +1,61 @@
+.exam-card {
+  position: relative;
+  box-shadow: 0 1px 15px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 8px 12px;
+  transition: transform 0.2s;
+  cursor: pointer;
+  margin-left: 40px;
+}
+
+.exam-card::after {
+  content: "";
+  position: absolute;
+  background-image: url(https://tobeto.com/_next/static/media/done-purple.b4443456.svg);
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: 1.5em 1.5em;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  right: 15px;
+  top: 15px;
+}
+
+.exam-card:hover {
+  transform: scale(1.03);
+}
+
+.exam-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exam-name {
+  font-weight: 800;
+}
+
+.lesson-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #828282;
+}
+
+.exam-time {
+  margin-top: 12px;
+  display: flex;
+  gap: 4px;
+  font-weight: 800;
+}
+
+.exam-time::before {
+  content: "";
+  background-image: url(https://tobeto.com/_next/static/media/countdown.458879a2.svg);
+  background-repeat: no-repeat;
+  background-size: 1.2em 1.2em;
+  width: 1.2em;
+  height: 1.2em;
+  display: block;
+}

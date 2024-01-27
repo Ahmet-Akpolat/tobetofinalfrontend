@@ -10,34 +10,33 @@ import { setAnnouncement } from '../store/slices/announcementSlice';
 import lectureService from '../services/lectureService';
 import { setLecture } from '../store/slices/lectureSlice';
 import { toast } from 'react-toastify';
+import examService from '../services/examService';
+import { setExams } from '../store/slices/examSlice';
 
 
-const fetchAllData = async (dispatch: Dispatch, values:any) => {
+const fetchAllData = async (dispatch: Dispatch, token: any) => {
   try {
-
-    // Login // BUNU BURADAN AYIR!
-    const login = await authService.login(values)
-    dispatch(setToken(login?.token))
-
     // Appeal
-    const appeal = await appealService.getAll(login?.token)
+    const appeal = await appealService.getAll(token)
     dispatch(setAppeal(appeal));
 
     // Lecture
-    const lecture = await lectureService.getAll(login?.token)
+    const lecture = await lectureService.getAll(token)
     dispatch(setLecture(lecture))
 
+    const exams = await examService.getAll(token)
+    dispatch(setExams(exams))
+
     // Announcement
-    const announcement = await announcementService.getAll(login?.token)
+    const announcement = await announcementService.getAll(token)
     dispatch(setAnnouncement(announcement))
     
     // Student
-    const student = await studentService.getByToken(login?.token);
+    const student = await studentService.getByToken(token);
     dispatch(setStudent(student));
 
   } catch (error) {
-    console.log(error)
-    toast.error("E-Posta veya Şifre Yanlış");
+    toast.error("Bir Sorun Oluştu...");
   }
 };
 

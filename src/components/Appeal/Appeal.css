@@ -4,9 +4,9 @@
   border-left: 6px solid #076b34;
   border-radius: 8px;
   border-color: #076b34;
-  width: 520px;
   min-height: 120px;
   padding: 5px;
+  margin-left: 40px;
 }
 
 .appeal-card::after {

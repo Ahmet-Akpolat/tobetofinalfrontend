@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 240px;
-  height: 256px;
+  max-width: 220px!important;
+  height: 240px;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
@@ -12,7 +12,7 @@
 }
 
 .info-card-list {
-  gap: 120px;
+  gap: 80px;
 }
 
 .info-card:hover {

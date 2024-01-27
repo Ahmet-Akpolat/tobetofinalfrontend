@@ -8,6 +8,8 @@ import Announcement from "../../../../components/Announcement/Announcement";
 import { selectAnnouncement } from "../../../../store/slices/announcementSlice";
 import { selectLecture } from "../../../../store/slices/lectureSlice";
 import Lecture from "../../../../components/Lecture/Lecture";
+import Exam from "../../../../components/Exam/Exam";
+import { selectExams } from "../../../../store/slices/examSlice";
 
 const MainSection = () => {
   const [section, setSection] = useState(0);
@@ -15,6 +17,9 @@ const MainSection = () => {
   const appeals = useSelector(selectAppeal);
   const announcements = useSelector(selectAnnouncement);
   const lectures = useSelector(selectLecture);
+  const exams = useSelector(selectExams);
+
+  console.log(exams);
 
   return (
     <section>
@@ -97,7 +102,7 @@ const MainSection = () => {
             <div className="tab-content">
               {section == 0 && (
                 <div className="tab-pane fade show active">
-                  <div className="row justify-content-center gap-5">
+                  <div className="row">
                     {appeals.map((_: any, index: any) => (
                       <Appeal key={index} index={index} />
                     ))}
@@ -154,23 +159,26 @@ const MainSection = () => {
               )}
               {section == 3 && (
                 <div className="tab-pane fade show active">
-                  <div className="row justify-content-center gap-5"></div>
+                  <div className="row gap-5"></div>
                 </div>
               )}
               {section == 4 && (
                 <div className="tab-pane fade show active">
-                  <div className="row justify-content-center gap-5">
-                    {/* <Exam />
-                    <Exam /> */}
+                  <div className="row gap-5">
+                    {exams.map((_: any, index: any) => (
+                      <Exam key={index} index={index} />
+                    ))}
                   </div>
-                  <a
-                    className="showMoreBtn"
-                    onClick={() => {
-                      navigate("/sinavlarim");
-                    }}
-                  >
-                    Daha Fazla Göster
-                  </a>
+                  {exams.lenght > 2 && (
+                    <a
+                      className="showMoreBtn"
+                      onClick={() => {
+                        navigate("/sinavlarim");
+                      }}
+                    >
+                      Daha Fazla Göster
+                    </a>
+                  )}
                 </div>
               )}
             </div>

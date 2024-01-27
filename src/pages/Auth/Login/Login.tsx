@@ -8,6 +8,8 @@ import { useState } from "react";
 import "./Login.css";
 import { useDispatch } from "react-redux";
 import fetchAllData from "../../../utils/fetchalldata";
+import authService from "../../../services/authService/authService";
+import { setToken } from "../../../store/slices/authSlice";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -23,12 +25,14 @@ const Login = () => {
     password: Yup.string().required("Doldurulması zorunlu alan*"),
   });
 
-  const submit = async (values: AuthLoginRequest) => {
+  const handleLogin = async (values: AuthLoginRequest) => {
     try {
       setLoading(true);
-      await fetchAllData(dispatch, values);
-    } catch (error) {
-      console.error("Login error:", error);
+      const login = await authService.login(values);
+      dispatch(setToken(login?.token));
+      if (login?.token) {
+        await fetchAllData(dispatch, login?.token);
+      }
     } finally {
       setLoading(false);
     }
@@ -40,7 +44,7 @@ const Login = () => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values: AuthLoginRequest) => {
-            submit(values);
+            handleLogin(values);
           }}
           validationSchema={validationSchema}
         >

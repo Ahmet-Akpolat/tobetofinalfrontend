@@ -8,6 +8,7 @@ import announcementSlice from './slices/announcementSlice';
 import lectureSlice from './slices/lectureSlice';
 import lectureDetailSlice from './slices/lectureDetailSlice';
 import contentSlice from './slices/contentSlice';
+import examSlice from './slices/examSlice';
 
 const rootReducer = combineReducers({
     lecture: lectureSlice,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     announcement: announcementSlice,
     lectureDetail: lectureDetailSlice,
     content: contentSlice,
+    exams: examSlice,
 });
 
 const persistConfig = {

@@ -8,7 +8,7 @@ interface Props {
 
 function InfoCard({ background, header, onClick }: Props) {
   return (
-    <div className={`info-card ${background} col-9 col-md-3`}>
+    <div className={`info-card ${background} col-12 col-md-4`}>
       <div>
         <h1 className="mt-5">{header}</h1>
         <button className="save-button w-100" onClick={onClick}>

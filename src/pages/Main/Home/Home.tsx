@@ -32,7 +32,7 @@ const Home = () => {
       <MainSection />
       <section>
         <div className="container d-flex align-items-center justify-content-center">
-          <div className="info-card-list row col-9 d-flex align-items-center justify-content-center mt-5 mb-5">
+          <div className="info-card-list col-12 row d-flex align-items-center justify-content-center mt-5 mb-5">
             <InfoCard
               background="background-1"
               header="Profilini oluştur"
