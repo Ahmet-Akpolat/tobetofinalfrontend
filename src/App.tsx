@@ -8,6 +8,7 @@ import MainLayout from "./pages/Main/MainLayout";
 import Home from "./pages/Main/Home/Home";
 import Footer from "./components/Footer/Footer";
 import LectureDetail from "./pages/LectureDetail/LectureDetail";
+import { OverlayLoader } from "./components/OverlayLoader/OverlayLoader";
 
 function App() {
   const isAuth = useSelector(selectIsAuthenticated);
@@ -28,6 +29,7 @@ function App() {
         </Route>
       </Routes>
       <Footer />
+      <OverlayLoader/>
     </div>
   );
 }

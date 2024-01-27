@@ -9,10 +9,12 @@ import FormikInput from "../../../components/FormikInput/FormikInput";
 import { CreateStudentRequest } from "../../../models/requests/StudentRequests";
 import AuthService from "../../../services/authService/authService";
 import { passwordValidator } from "../../../utils/customValidations";
+import { useDispatch } from "react-redux";
+import { activeLoading, clearLoading } from "../../../store/slices/loadingSlice";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const initialValues = {
     firstName: "",
@@ -42,21 +44,21 @@ const Signup = () => {
 
   const submit = async (values: CreateStudentRequest) => {
     try {
-      setLoading(true);
+      dispatch(activeLoading());
       await AuthService.register(values);
       toast.success("Kayıt Başarılı.");
       navigate("/login");
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Bu E-Postaya Sahip Bir Kullanıcı Zaten Mevcut");
     } finally {
-      setLoading(false);
+      dispatch(clearLoading());
     }
   };
 
   return (
     <div className="register-base">
-      <div className="register">
+      <div className="register col-12 col-md-5">
         <Formik
           initialValues={initialValues}
           onSubmit={(initialValues) => {
@@ -103,8 +105,8 @@ const Signup = () => {
                 className="register-input"
                 placeholder="Şifre Tekrar"
               />
-              <button className="register-btn" type="submit" disabled={loading}>
-                {loading ? "Yükleniyor..." : "Kayıt Ol"}
+              <button className="register-btn" type="submit">
+                Kayıt Ol
               </button>
             </div>
             <div className="d-flex align-items-center justify-content-center mt-2">

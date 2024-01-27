@@ -7,6 +7,7 @@ import LectureService from "../../services/lectureService";
 import { ToastContainer, toast } from "react-toastify";
 import { clearAuth, selectToken } from "../../store/slices/authSlice";
 import { setLectureDetail } from "../../store/slices/lectureDetailSlice";
+import { activeLoading, clearLoading } from "../../store/slices/loadingSlice";
 
 const Lecture = (props) => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Lecture = (props) => {
 
   const handleClick = async () => {
     try {
+      dispatch(activeLoading());
       const response = await LectureService.getWithDetails(lectures[props.index].lectureId,token);
       dispatch(setLectureDetail(response));
       navigate("ders-detay");
@@ -23,6 +25,7 @@ const Lecture = (props) => {
       dispatch(clearAuth())
       toast("Oturumunuzun süresi doldu lütfen tekrar giriş yapın..");
     }
+    dispatch(clearLoading());
   };
 
   return (

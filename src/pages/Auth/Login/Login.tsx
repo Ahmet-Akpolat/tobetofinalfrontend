@@ -10,9 +10,9 @@ import { useDispatch } from "react-redux";
 import fetchAllData from "../../../utils/fetchalldata";
 import authService from "../../../services/authService/authService";
 import { setToken } from "../../../store/slices/authSlice";
+import { activeLoading, clearLoading } from "../../../store/slices/loadingSlice";
 
 const Login = () => {
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const initialValues = {
@@ -27,14 +27,14 @@ const Login = () => {
 
   const handleLogin = async (values: AuthLoginRequest) => {
     try {
-      setLoading(true);
+      dispatch(activeLoading());
       const login = await authService.login(values);
       dispatch(setToken(login?.token));
       if (login?.token) {
         await fetchAllData(dispatch, login?.token);
       }
     } finally {
-      setLoading(false);
+      dispatch(clearLoading());
     }
   };
 
@@ -67,8 +67,8 @@ const Login = () => {
                 className="login-input"
                 placeholder="Şifre"
               />
-              <button className="login-btn" type="submit" disabled={loading}>
-                {loading ? "Yükleniyor..." : "Giriş Yap"}
+              <button className="login-btn" type="submit">
+                Giriş Yap
               </button>
             </div>
             <div className="d-flex align-items-center justify-content-center mt-2">
