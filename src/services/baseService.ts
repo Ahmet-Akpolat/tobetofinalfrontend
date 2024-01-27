@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import axiosInstance from "../utils/axiosInterceptors";
 
 export class BaseService<
   GetAllType,
@@ -14,40 +15,32 @@ export class BaseService<
     this.apiUrl = "";
   }
 
-  async getAll(token:any) {
-    const response = await axios.get<any>(`${this.apiUrl}?PageIndex=0&PageSize=999`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+  async getAll() {
+    const response = await axiosInstance.get<any>(`${this.apiUrl}?PageIndex=0&PageSize=999`);
     return response.data.items;
 }
 
   async getById(id: string) {
-    const response = await axios.get<AxiosResponse<GetByIdType>>(`${this.apiUrl}/${id}`);
+    const response = await axiosInstance.get<AxiosResponse<GetByIdType>>(`${this.apiUrl}/${id}`);
     return response.data; // Directly returning the data part of the response
   }
 
   add(request: AddRequestType): Promise<AxiosResponse<AddResponseType, any>> {
-    return axios.post<AddResponseType>(this.apiUrl, request);
+    return axiosInstance.post<AddResponseType>(this.apiUrl, request);
   }
 
   update(
     request: UpdateRequestType,
   ): Promise<AxiosResponse<UpdateResponseType, any>> {
-    return axios.put<UpdateResponseType>(this.apiUrl, request);
+    return axiosInstance.put<UpdateResponseType>(this.apiUrl, request);
   }
 
   delete(id: number) {
-    return axios.delete(`${this.apiUrl}/${id}`);
+    return axiosInstance.delete(`${this.apiUrl}/${id}`);
   }
 
-  async getByToken(token:any) {
-    const response = await axios.get(`${this.apiUrl}/getByToken`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+  async getByToken() {
+    const response = await axiosInstance.get(`${this.apiUrl}/getByToken`);
     return response.data;
 }
 }

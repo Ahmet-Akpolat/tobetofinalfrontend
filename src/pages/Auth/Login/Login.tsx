@@ -10,7 +10,10 @@ import { useDispatch } from "react-redux";
 import fetchAllData from "../../../utils/fetchalldata";
 import authService from "../../../services/authService/authService";
 import { setToken } from "../../../store/slices/authSlice";
-import { activeLoading, clearLoading } from "../../../store/slices/loadingSlice";
+import {
+  activeLoading,
+  clearLoading,
+} from "../../../store/slices/loadingSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -31,7 +34,7 @@ const Login = () => {
       const login = await authService.login(values);
       dispatch(setToken(login?.token));
       if (login?.token) {
-        await fetchAllData(dispatch, login?.token);
+        await fetchAllData(dispatch);
       }
     } finally {
       dispatch(clearLoading());
