@@ -6,6 +6,7 @@
   border-color: #076b34;
   width: 520px;
   min-height: 120px;
+  padding: 5px;
 }
 
 .appeal-card::after {
@@ -24,15 +25,12 @@
 .appeal-name {
   font-size: 14px;
   font-weight: 600;
-  min-width: 200px;
   margin-left: 2%;
   margin-top: 8px;
 }
 
 .appeal-stages {
   font-size: 12px;
-  width: 260px;
-  min-width: 200px;
 }
 
 .status-card {

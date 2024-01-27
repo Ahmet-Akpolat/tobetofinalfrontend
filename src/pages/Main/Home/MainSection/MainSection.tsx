@@ -102,14 +102,16 @@ const MainSection = () => {
                       <Appeal key={index} index={index} />
                     ))}
                   </div>
-                  <a
-                    className="showMoreBtn"
-                    onClick={() => {
-                      navigate("/basvurularim");
-                    }}
-                  >
-                    {/* ... rest of your code for the anchor tag ... */}
-                  </a>
+                  {appeals.length > 2 && (
+                    <a
+                      className="showMoreBtn"
+                      onClick={() => {
+                        navigate("/basvurularim");
+                      }}
+                    >
+                      Daha Fazla Göster
+                    </a>
+                  )}
                 </div>
               )}
               {section == 1 && (
@@ -119,14 +121,16 @@ const MainSection = () => {
                       <Lecture key={index} index={index} />
                     ))}
                   </div>
-                  <a
-                    className="showMoreBtn"
-                    onClick={() => {
-                      navigate("/egitimlerim");
-                    }}
-                  >
-                    Daha Fazla Göster
-                  </a>
+                  {lectures.length > 4 && (
+                    <a
+                      className="showMoreBtn"
+                      onClick={() => {
+                        navigate("/egitimlerim");
+                      }}
+                    >
+                      Daha Fazla Göster
+                    </a>
+                  )}
                 </div>
               )}
               {section == 2 && (
@@ -136,27 +140,21 @@ const MainSection = () => {
                       <Announcement key={index} index={index} />
                     ))}
                   </div>
-                  <a
-                    className="showMoreBtn"
-                    onClick={() => {
-                      navigate("/duyurularim");
-                    }}
-                  >
-                    Daha Fazla Göster
-                  </a>
+                  {announcements.length > 3 && (
+                    <a
+                      className="showMoreBtn"
+                      onClick={() => {
+                        navigate("/duyurularim");
+                      }}
+                    >
+                      Daha Fazla Göster
+                    </a>
+                  )}
                 </div>
               )}
               {section == 3 && (
                 <div className="tab-pane fade show active">
                   <div className="row justify-content-center gap-5"></div>
-                  <a
-                    className="showMoreBtn"
-                    onClick={() => {
-                      navigate("/anketlerim");
-                    }}
-                  >
-                    Daha Fazla Göster
-                  </a>
                 </div>
               )}
               {section == 4 && (

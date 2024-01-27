@@ -64,7 +64,7 @@ const Navbar = () => {
               <div className="me-2 d-flex align-items-center justify-content-center">
                 <span>
                   <img
-                    src="https://pbs.twimg.com/profile_images/1697250796906348546/JAYDV2ix_400x400.jpg"
+                    src={student.profilePhotoPath ? student.profilePhotoPath : "https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png"}
                     className="cv-pp-img rounded-circle"
                   />
                 </span>

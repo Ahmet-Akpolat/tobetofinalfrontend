@@ -10,7 +10,7 @@
 .lecture-detail {
   box-shadow: 5px 5px 10px 10px rgb(204, 204, 204);
   border-radius: 20px;
-  width: calc(100% - 200px);
+  width: calc(100% - 400px);
   margin: auto;
   padding: 30px;
   min-height: 750px;

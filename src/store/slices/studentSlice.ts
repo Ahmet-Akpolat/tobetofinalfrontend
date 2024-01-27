@@ -7,6 +7,7 @@ const initialState = {
         cityName: null,
         districtName: null,
         nationalIdentity: null,
+        profilePhotoPath: null,
         phone: null,
         birthDate: null,
         addressDetail: null,

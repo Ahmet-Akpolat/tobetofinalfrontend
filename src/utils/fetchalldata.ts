@@ -22,17 +22,14 @@ const fetchAllData = async (dispatch: Dispatch, values:any) => {
     // Appeal
     const appeal = await appealService.getAll(login?.token)
     dispatch(setAppeal(appeal));
-    console.log(appeal)
 
     // Lecture
     const lecture = await lectureService.getAll(login?.token)
     dispatch(setLecture(lecture))
-    console.log(lecture)
 
     // Announcement
     const announcement = await announcementService.getAll(login?.token)
     dispatch(setAnnouncement(announcement))
-    console.log(announcement)
     
     // Student
     const student = await studentService.getByToken(login?.token);

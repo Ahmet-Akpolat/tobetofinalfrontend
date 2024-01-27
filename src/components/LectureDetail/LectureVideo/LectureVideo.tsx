@@ -1,12 +1,16 @@
 import { useState } from "react";
 import VideoPlayer from "../../VideoPlayer/VideoPlayer";
 import "./LectureVideo.css";
+import { useSelector } from "react-redux";
+import { selectContent } from "../../../store/slices/contentSlice";
 
 interface Props {
   setShowDetail:  React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const LectureVideo: React.FC<Props> = ({ setShowDetail }) => {
+function LectureVideo({ setShowDetail }: Props) {
+  const content = useSelector(selectContent)
+
   return (
     <div className="lecture-video align-content-center">
       <div className="video-player">
@@ -18,7 +22,7 @@ const LectureVideo: React.FC<Props> = ({ setShowDetail }) => {
           style={{ flex: "1" }}
         >
           <div className="video-title">
-            <strong>Sorularla Sorgu Çalışmaları - 3</strong>
+            <strong>{content.name}</strong>
           </div>
           <div className="d-flex justify-content-between">
             <text style={{ color: "grey" }}>Video - 10 dk</text>

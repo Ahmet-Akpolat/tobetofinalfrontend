@@ -6,6 +6,8 @@ import studentSlice from './slices/studentSlice';
 import appealSlice from './slices/appealSlice';
 import announcementSlice from './slices/announcementSlice';
 import lectureSlice from './slices/lectureSlice';
+import lectureDetailSlice from './slices/lectureDetailSlice';
+import contentSlice from './slices/contentSlice';
 
 const rootReducer = combineReducers({
     lecture: lectureSlice,
@@ -13,6 +15,8 @@ const rootReducer = combineReducers({
     auth: authSlice,
     student: studentSlice,
     announcement: announcementSlice,
+    lectureDetail: lectureDetailSlice,
+    content: contentSlice,
 });
 
 const persistConfig = {

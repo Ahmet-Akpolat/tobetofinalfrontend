@@ -1,25 +1,28 @@
+import { useSelector } from "react-redux";
 import "./LectureDetailSidebar.css";
 import { useState } from "react";
+import { selectContent } from "../../../store/slices/contentSlice";
 
 interface Props {
   setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LectureDetailSidebar: React.FC<Props> = ({ setShowDetail }) => {
+function LectureDetailSidebar({ setShowDetail }: Props) {
   const [liked, setLiked] = useState(false);
+  const content = useSelector(selectContent);
 
   return (
     <div className="lecture-detail-sidebar">
       <div className="container">
         <div className="row mt-4">
           <div className="d-flex justify-content-between gap-5">
-            <div className="content-img col-lg-1 col-md-2 col-sm-2">
+            <div className="content-img">
               <img src="https://lms.tobeto.com/tobeto/eep/common_show_picture_cached.aspx?pQS=eaAjNZ0uaOFNO7nf8wuXoA%3d%3d"></img>
             </div>
             <div className="col-sm-10 col-xs-12">
               <div className="d-flex justify-content-between">
                 <div className="lecture-info">
-                  <h3>.NET & React Fullstack | Öğrenme Yolculuğu</h3>
+                  <h3>{content.name}</h3>
                   <div className="d-flex align-items-center gap-3">
                     <div className="content-type">
                       <span>VIDEO</span>
@@ -29,7 +32,9 @@ const LectureDetailSidebar: React.FC<Props> = ({ setShowDetail }) => {
                         className="time-img"
                         src="icons/timer_FILL0_wght100.svg"
                       ></img>
-                      <strong>7 dk</strong>
+                      <strong>{`${
+                        content.duration / 60
+                      } dk`}</strong>
                     </div>
                     <div className="content-views">
                       <img
@@ -54,10 +59,7 @@ const LectureDetailSidebar: React.FC<Props> = ({ setShowDetail }) => {
                 <div className="row gap-4">
                   <div className="d-flex gap-2 align-items-center">
                     <div>
-                      <button
-                        className="content-detail-button"
-                        onClick={() => console.log("asd")}
-                      >
+                      <button className="content-detail-button">
                         <strong>EGITIME GIT</strong>
                       </button>
                     </div>
@@ -77,14 +79,14 @@ const LectureDetailSidebar: React.FC<Props> = ({ setShowDetail }) => {
               </div>
             </div>
           </div>
-          <div className="content-info"></div>
+          <div className="content-info mt-5"></div>
           <div className="content-info-section">
             <div className="d-flex gap-5">
               <div>
                 <img src="icons/sell_FILL0.svg"></img>
                 <strong> Kategori</strong>
               </div>
-              <strong>İş'te Mükemmellik / Programlama</strong>
+              <strong>{content.contentCategoryName}</strong>
             </div>
           </div>
           <div className="content-info-section">
@@ -93,7 +95,7 @@ const LectureDetailSidebar: React.FC<Props> = ({ setShowDetail }) => {
                 <img src="icons/public_FILL0.svg"></img>
                 <strong> Dili</strong>
               </div>
-              <strong>Türkçe</strong>
+              <strong>{content.languageName}</strong>
             </div>
           </div>
           <div className="content-info-section">
@@ -102,23 +104,23 @@ const LectureDetailSidebar: React.FC<Props> = ({ setShowDetail }) => {
                 <img src="icons/crossword_FILL0.svg"></img>
                 <strong> Alt Tip</strong>
               </div>
-              <strong>Konu Uzman Videosu</strong>
+              <strong>{content.subTypeName}</strong>
             </div>
           </div>
           <div className="content-info-section">
             <div className="d-flex gap-5">
               <div>
                 <img src="icons/work_FILL0_wght100.svg"></img>
-                <strong> Uretici Firma</strong>
+                <strong>Üretici Firma</strong>
               </div>
-              <strong>Enocta</strong>
+              <strong>{content.manufacturerName}</strong>
             </div>
           </div>
           <div>
             <div>
-              <strong>Icerik</strong>
+              <strong>İçerik</strong>
             </div>
-            <text>Bu Bölümde Axios ile Veri Çekme İşlemini Öğreneceğiz.</text>
+            <text>{content.description}</text>
           </div>
         </div>
       </div>

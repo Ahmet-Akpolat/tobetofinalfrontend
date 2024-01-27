@@ -1,8 +1,15 @@
 import { useState } from "react";
 import "./LectureContentHeader.css";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
+import { setContent } from "../../../store/slices/contentSlice";
 
-function LectureContentHeader() {
+function LectureContentHeader({ index }: any) {
+  const dispatch = useDispatch()
   const [expand, setExpand] = useState(false);
+  const lecture = useSelector(selectLectureDetail);
+
+  const lectureContents = lecture.courses;
 
   return (
     <div className="content-header">
@@ -15,32 +22,21 @@ function LectureContentHeader() {
         </div>
         <div>
           <strong onClick={() => setExpand(!expand)}>
-            Veri Tabanı ve Erişimi: Microsoft SQL Server Database Management
-            Basic
+            {lectureContents[index].name}
           </strong>
         </div>
       </div>
       {expand === true && (
-        <>
-          <div className="lecture-video-header row">
-            <div className="mb-1">
-              <text>ASPNET Core ve ASPNET Tarihçesi</text>
+        <div>
+          {lectureContents[index].contents.map((content: any, index: any) => (
+            <div className="lecture-video-header row" onClick={() => dispatch(setContent(content))}>
+              <div className="mb-1">
+                <text>{content.name}</text>
+              </div>
+              <sub>{`Video ${content.duration / 60} dk`}</sub>
             </div>
-            <sub>Video - 4 dk</sub>
-          </div>
-          <div className="lecture-video-header row">
-            <div className="mb-1">
-              <text>ASPNET Core ve ASPNET Tarihçesi</text>
-            </div>
-            <sub>Video - 4 dk</sub>
-          </div>
-          <div className="lecture-video-header row">
-            <div className="mb-1">
-              <text>ASPNET Core ve ASPNET Tarihçesi</text>
-            </div>
-            <sub>Video - 4 dk</sub>
-          </div>
-        </>
+          ))}
+        </div>
       )}
     </div>
   );

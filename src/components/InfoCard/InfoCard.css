@@ -1,0 +1,51 @@
+.info-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 256px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.info-card-list {
+  gap: 120px;
+}
+
+.info-card:hover {
+  scale: 1.08;
+}
+
+.background-1 {
+  background: linear-gradient(209.21deg, #1d0b8c 13.57%, #bda6fe 98.38%);
+}
+
+.background-2 {
+  background: linear-gradient(209.21deg, #0e0b93 13.57%, #5eb6ca 98.38%);
+}
+
+.background-3 {
+  background: linear-gradient(209.21deg, #3c0b8c 13.57%, #e3a6fe 98.38%);
+}
+
+.info-card h1 {
+  color: white;
+  font-size: x-large;
+  font-weight: bold;
+  min-height: 100px;
+  max-width: 180px;
+}
+
+
+.save-button {
+  color: white;
+  border: none;
+  min-width: 150px;
+  height: 35px;
+  background-color: #93f;
+  border-radius: 20px;
+  transition: 0.4s;
+}

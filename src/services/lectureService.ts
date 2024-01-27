@@ -27,7 +27,6 @@ class LectureService extends BaseService<
   }
 
   async getWithDetails(id: string, token: any) {
-    console.log(id)
     const response = await axios.get<LectureResponse>(`${baseURL}Lectures/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,

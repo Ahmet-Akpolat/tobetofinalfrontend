@@ -3,19 +3,22 @@ import React, { useState } from "react";
 import LectureDetailSidebar from "../../components/LectureDetail/LectureDetailSidebar/LectureDetailSidebar";
 import LectureContent from "../../components/LectureDetail/LectureContent/LectureContent"
 import LectureInfo from "../../components/LectureDetail/LectureInfo/LectureInfo"
+import { useSelector } from "react-redux";
+import { selectLectureDetail } from "../../store/slices/lectureDetailSlice";
 
 function LectureDetail() {
-  const [showDetail, setShowDetail] = useState(false);
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
   const [section, setSection] = useState(0);
+  const lecture = useSelector(selectLectureDetail)
+  const [showDetail, setShowDetail] = useState(false);
 
   return (
     <div className="lecture">
-      <div className={`lecture-detail container ${showDetail && "blur"}`}>
+      <div className={`lecture-detail  ${showDetail && "blur"}`}>
         <div className="lecture-activity">
           <div className="row">
-            <div className="col-lg-1 col-sm-2 mt-2 col-12">
+            <div className="col-lg-1 col-sm-2 col-12">
               <img
                 className="lecture-img"
                 src="https://lms.tobeto.com/tobeto/eep/common_show_picture_cached.aspx?pQS=eaAjNZ0uaOFNO7nf8wuXoA%3d%3d"
@@ -25,10 +28,10 @@ function LectureDetail() {
               <div className="d-flex justify-content-between">
                 <div>
                   <div className="lecture-info">
-                    <h3>.NET & React Fullstack | Öğrenme Yolculuğu</h3>
+                    <h3>{lecture.name}</h3>
                   </div>
                   <div className="date-info text-dark-blue">
-                    <span>29 Şubat 2024 tarihine kadar bitirebilirsin</span>
+                    <span>{`${lecture.endDate} tarihine kadar bitirebilirsin`}</span>
                   </div>
                 </div>
                 <div className="actions d-flex">
