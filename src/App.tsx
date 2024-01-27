@@ -25,11 +25,13 @@ function App() {
         {/*Giriş Yaptıktan Sonra Erişilebilen Sayfalar*/}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+        </Route>
+
+        <Route element={<MainLayout showLayout={false} />}>
           <Route path="/ders-detay" element={<LectureDetail />} />
         </Route>
       </Routes>
-      <Footer />
-      <OverlayLoader/>
+      <OverlayLoader />
     </div>
   );
 }

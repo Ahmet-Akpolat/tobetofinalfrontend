@@ -4,7 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
-const MainLayout = () => {
+const MainLayout = ({ showLayout = true }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   return (
@@ -12,8 +12,9 @@ const MainLayout = () => {
       <>
         {isAuthenticated ? (
           <section>
-            <Navbar />
+            {showLayout && <Navbar />}
             <Outlet />
+            {showLayout && <Footer />}
           </section>
         ) : (
           <>
