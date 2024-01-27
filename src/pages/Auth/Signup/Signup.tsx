@@ -49,7 +49,6 @@ const Signup = () => {
       toast.success("Kayıt Başarılı.");
       navigate("/login");
     } catch (error) {
-      console.log(error);
       toast.error("Bu E-Postaya Sahip Bir Kullanıcı Zaten Mevcut");
     } finally {
       dispatch(clearLoading());
