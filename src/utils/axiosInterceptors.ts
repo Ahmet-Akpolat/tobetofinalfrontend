@@ -2,10 +2,8 @@ import axios from 'axios';
 import { selectToken } from '../store/slices/authSlice';
 import { store } from '../store/configureStore';;
 
-
-
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:60805/api/"
+    baseURL: "http://localhost:5278/api/"
 });
 
 axiosInstance.interceptors.request.use((config) => {

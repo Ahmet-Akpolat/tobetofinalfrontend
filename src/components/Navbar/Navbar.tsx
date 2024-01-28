@@ -25,84 +25,91 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-xxl py-4 mb-4 bg-white">
-      <div className="container-fluid">
-        <Link to="/">
-          <span className="tobetoImage">
-            <span>
-              <img src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg'%20version='1.1'%20width='170'%20height='35'/>" />
-            </span>
-            <img
-              className="logo"
-              src="images/tobeto-logo.png"
-              alt="tobeto-logo"
-            />
+    <nav className="navbar navbar-expand-xxl navbar-custom py-4 mb-4 bg-white justify-content-between">
+      <Link to="/">
+        <span className="tobetoImage">
+          <span>
+            <img src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg'%20version='1.1'%20width='170'%20height='35'/>" />
           </span>
-        </Link>
-        <ul className="d-none d-xxl-flex navbar-nav gap-3">
-          <li className="nav-item">
-            <a className="nav-link nav-active">Ana Sayfa</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link c-gray-3">Profilim</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link c-gray-3">Değerlendirmeler</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link c-gray-3">Katalog</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link c-gray-3">Takvim</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link c-gray-3">İstanbul Kodluyor</a>
-          </li>
-        </ul>
-        <div className="navbar-sec d-xll-block">
-          <div className="d-flex justify-space-between align-items-center">
-            <div className="mx-3 align-items-center d-flex align-items-center">
-              <span className="tbt-gradient" onClick={() => navigate("/")}>
+          <img
+            className="logo"
+            src="images/tobeto-logo.png"
+            alt="tobeto-logo"
+          />
+        </span>
+      </Link>
+      <ul className="d-none d-xxl-flex navbar-nav gap-3">
+        <li className="nav-item">
+          <a className="nav-link nav-active">Ana Sayfa</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link c-gray-3">Profilim</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link c-gray-3">Değerlendirmeler</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link c-gray-3">Katalog</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link c-gray-3">Takvim</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link c-gray-3">İstanbul Kodluyor</a>
+        </li>
+      </ul>
+      <div className="navbar-sec">
+        <div className="d-flex justify-space-between align-items-center">
+          <div className="mx-3 align-items-center d-flex align-items-center">
+            <span className="tbt-gradient" onClick={() => navigate("/")}>
+              <img
+                className="navbar-tobeto-icon"
+                src="/icons/tbtlogo-mainlogo.svg"
+                alt="navbar-tobeto-logo"
+              />
+            </span>
+          </div>
+          <div className="header-avatar">
+            <div className="me-2 d-flex align-items-center justify-content-center">
+              <span>
                 <img
-                  className="navbar-tobeto-icon"
-                  src="/icons/tbtlogo-mainlogo.svg"
-                  alt="navbar-tobeto-logo"
+                  className="profile-photo"
+                  src={
+                    student.profilePhotoPath
+                      ? student.profilePhotoPath
+                      : "https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png"
+                  }
                 />
               </span>
             </div>
-            <div className="header-avatar ">
-              <div className="me-2 d-flex align-items-center justify-content-center">
-                <span className="profilphoto">
-                  <img
-                    src={
-                      student.profilePhotoPath
-                        ? student.profilePhotoPath
-                        : "https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png"
-                    }
-                    className="cv-pp-img rounded-circle"
-                  />
-                </span>
-              </div>
-              <span>
-                <Dropdown
-                  show={dropdownOpen}
-                  onToggle={(isOpen) => setDropdownOpen(isOpen)}
+            <span className="d-flex justify-space-between align-items-center">
+              <Dropdown
+                show={dropdownOpen}
+                onToggle={(isOpen) => setDropdownOpen(isOpen)}
+              >
+                <Dropdown.Toggle
+                  variant="Secondary"
+                  id="dropdown-basic"
+                  style={{ color: "gray" }}
                 >
-                  <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
-                    {student.firstName + " " + student.lastName + "İsmail"}
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
-                    <Dropdown.Item onClick={() => navigate("/profilim")}>
-                      Profil Bilgileri
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={handleLogOut}>
-                      Oturumu Kapat
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </span>
-            </div>
+                  {student.firstName + " " + student.lastName}
+                </Dropdown.Toggle>
+                <Dropdown.Menu style={{ backgroundColor: "#73f" }}>
+                  <Dropdown.Item
+                    className="dropdown-item"
+                    onClick={() => navigate("/profilim")}
+                  >
+                    Profil Bilgileri
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    className="dropdown-item"
+                    onClick={handleLogOut}
+                  >
+                    Oturumu Kapat
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </span>
           </div>
         </div>
       </div>

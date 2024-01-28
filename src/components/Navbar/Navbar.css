@@ -1,5 +1,9 @@
-.navbar {
-  border: 1px solid #ebebeb;
+.navbar-custom {
+  padding: 20px;
+}
+
+.navbar a {
+  font-weight: 500;
 }
 
 .tobetoImage {
@@ -11,10 +15,11 @@
   background: none;
   opacity: 1;
   border: 0px;
-  margin: 0px;
+  margin-left: 30px;
   padding: 0px;
   position: relative;
   max-width: 100%;
+
 }
 
 .logo {
@@ -100,6 +105,7 @@
   display: inline-flex;
   align-items: center;
 }
+
 .btn-group,
 .btn-group-vertical {
   position: relative;
@@ -221,25 +227,29 @@
   }
 }
 
-.d-xll-block {
+.header-avatar {
+  margin-right: 20px;
+}
+
+.navbar-sec {
   border-radius: 50px;
-  width: 220px;
   display: flex;
 }
 
 .navbar-tobeto-icon {
   width: 25px;
-}
-
-.navbar-tobeto-icon {
   cursor: pointer;
 }
-.navbar-sec {
-  position: relative;
-  right: 50px;
+
+.profile-photo {
+  border-radius: 30px;
+  max-width: 35px;
 }
 
-.profilphoto {
-  min-width: 35px;
-  max-width: 35px;
+.dropdown-item {
+  color: white!important;
+}
+
+.dropdown-item:hover {
+  color: black!important;
 }
