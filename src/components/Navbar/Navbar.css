@@ -226,3 +226,11 @@
   width: 220px;
   display: flex;
 }
+
+.navbar-tobeto-icon {
+  width: 25px;
+}
+
+.navbar-tobeto-icon {
+  cursor: pointer;
+}

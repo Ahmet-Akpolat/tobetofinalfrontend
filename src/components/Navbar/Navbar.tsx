@@ -32,7 +32,11 @@ const Navbar = () => {
             <span>
               <img src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg'%20version='1.1'%20width='170'%20height='35'/>" />
             </span>
-            <img className="logo" src="images/tobeto-logo.png" alt="tobeto-logo" />
+            <img
+              className="logo"
+              src="images/tobeto-logo.png"
+              alt="tobeto-logo"
+            />
           </span>
         </Link>
         <ul className="d-none d-xxl-flex navbar-nav gap-3">
@@ -58,13 +62,23 @@ const Navbar = () => {
         <div className=" d-xll-block">
           <div className="d-flex justify-space-between align-items-center">
             <div className="mx-3 align-items-center d-flex align-items-center">
-              <span className="tbt-gradient"></span>
+              <span className="tbt-gradient" onClick={() => navigate("/")}>
+                <img
+                  className="navbar-tobeto-icon"
+                  src="/icons/tbtlogo-mainlogo.svg"
+                  alt="navbar-tobeto-logo"
+                />
+              </span>
             </div>
             <div className="header-avatar ">
               <div className="me-2 d-flex align-items-center justify-content-center">
                 <span>
                   <img
-                    src={student.profilePhotoPath ? student.profilePhotoPath : "https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png"}
+                    src={
+                      student.profilePhotoPath
+                        ? student.profilePhotoPath
+                        : "https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png"
+                    }
                     className="cv-pp-img rounded-circle"
                   />
                 </span>
