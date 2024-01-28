@@ -12,6 +12,7 @@ import {
   UpdateLectureRequest,
 } from "../models/requests/LectureRequests";
 import { LectureLikeResponse } from "../models/responses/LectureLikeResponses";
+import axiosInstance from "../utils/axiosInterceptors";
 
 class LectureService extends BaseService<
   GetListLectureResponse,
@@ -26,42 +27,27 @@ class LectureService extends BaseService<
     this.apiUrl = baseURL + "ClassLectures";
   }
 
-  async getWithDetails(id: string, token: any) {
-    const response = await axios.get<LectureResponse>(
-      `${baseURL}Lectures/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+  async getWithDetails(id: string) {
+    const response = await axiosInstance.get<LectureResponse>(
+      `${baseURL}Lectures/${id}`
     );
     return response.data;
   }
 
-  async getLectureLiked(lectureId: string, token: any) {
-    const response = await axios.get<LectureLikeResponse>(
-      `${baseURL}LectureLikes/getByLectureId${lectureId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+  async getLectureLiked(lectureId: string) {
+    const response = await axiosInstance.get<LectureLikeResponse>(
+      `${baseURL}LectureLikes/getByLectureId${lectureId}`
     );
     return response.data;
   }
 
-  async setLectureLiked(id: string, lectureId: string, token: any) {
+  async setLectureLiked(id: string, lectureId: string) {
     await axios.post(
       `${baseURL}LectureLikes`,
       {
         isLiked: true,
         studentId: id,
         lectureId: lectureId,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       }
     );
   }

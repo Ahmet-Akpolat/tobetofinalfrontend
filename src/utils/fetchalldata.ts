@@ -1,7 +1,5 @@
 import { Dispatch } from 'redux';
 import studentService from '../services/studentService';
-import authService from '../services/authService/authService';
-import { setToken } from '../store/slices/authSlice';
 import { setStudent } from '../store/slices/studentSlice';
 import appealService from '../services/appealService';
 import { setAppeal } from '../store/slices/appealSlice';

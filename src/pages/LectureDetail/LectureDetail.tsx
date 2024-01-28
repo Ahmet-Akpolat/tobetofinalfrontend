@@ -1,12 +1,11 @@
 import "./LectureDetail.css";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LectureDetailSidebar from "../../components/LectureDetail/LectureDetailSidebar/LectureDetailSidebar";
 import LectureContent from "../../components/LectureDetail/LectureContent/LectureContent";
 import LectureInfo from "../../components/LectureDetail/LectureInfo/LectureInfo";
 import { useSelector } from "react-redux";
 import { selectLectureDetail } from "../../store/slices/lectureDetailSlice";
 import lectureService from "../../services/lectureService";
-import { selectToken } from "../../store/slices/authSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { selectStudent } from "../../store/slices/studentSlice";
 
@@ -14,16 +13,12 @@ function LectureDetail() {
   const [liked, setLiked] = useState(false);
   const [section, setSection] = useState(0);
   const lecture = useSelector(selectLectureDetail);
-  const token = useSelector(selectToken);
   const student = useSelector(selectStudent);
   const [showDetail, setShowDetail] = useState(false);
 
   const getLectureLiked = async () => {
     try {
-      const likedLecture = await lectureService.getLectureLiked(
-        lecture.id,
-        token
-      );
+      const likedLecture = await lectureService.getLectureLiked(lecture.id);
       console.log(likedLecture);
       if (likedLecture.isLiked) setLiked(true);
     } catch {}
@@ -31,7 +26,7 @@ function LectureDetail() {
 
   const setLectureLiked = async () => {
     try {
-      await lectureService.setLectureLiked(student.id, lecture.id, token);
+      await lectureService.setLectureLiked(student.id, lecture.id);
       setLiked(!liked);
     } catch (error) {
       toast.error("Bir sorun oluştu...");

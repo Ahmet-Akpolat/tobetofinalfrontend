@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import axiosInstance from "../utils/axiosInterceptors";
 
 export class BaseService<

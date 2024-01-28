@@ -1,19 +1,24 @@
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 import { selectToken } from '../store/slices/authSlice';
 import { store } from '../store/configureStore';
-import { Token } from 'typescript';
-import { TokenModel } from '../models/responses/AuthResponses/TokenModel';
+import { baseURL } from '../environment/environment';
+
+
 
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:60805/api/"
+    baseURL: baseURL
 });
 
-const token:TokenModel = store.dispatch(selectToken)
+axiosInstance.interceptors.request.use((config) => {
+    // Store'dan güncel state'i alın
+    const state = store.getState();
+    // State üzerinde selector'u uygulayarak token'ı alın
+    const token = selectToken(state);
 
-axiosInstance.interceptors.request.use(async (config) => {
-   
-    config.headers.Authorization = `Bearer` + token ;
+    // Eğer token varsa, header'a ekleyin
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
 
 }, error => {
@@ -21,4 +26,4 @@ axiosInstance.interceptors.request.use(async (config) => {
     return Promise.reject(error);
 });
 
-export default axiosInstance; 
+export default axiosInstance;
