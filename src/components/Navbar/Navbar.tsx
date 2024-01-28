@@ -59,7 +59,7 @@ const Navbar = () => {
             <a className="nav-link c-gray-3">İstanbul Kodluyor</a>
           </li>
         </ul>
-        <div className=" d-xll-block">
+        <div className="navbar-sec d-xll-block">
           <div className="d-flex justify-space-between align-items-center">
             <div className="mx-3 align-items-center d-flex align-items-center">
               <span className="tbt-gradient" onClick={() => navigate("/")}>
@@ -72,7 +72,7 @@ const Navbar = () => {
             </div>
             <div className="header-avatar ">
               <div className="me-2 d-flex align-items-center justify-content-center">
-                <span>
+                <span className="profilphoto">
                   <img
                     src={
                       student.profilePhotoPath
@@ -89,7 +89,7 @@ const Navbar = () => {
                   onToggle={(isOpen) => setDropdownOpen(isOpen)}
                 >
                   <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
-                    {student.firstName + " " + student.lastName}
+                    {student.firstName + " " + student.lastName + "İsmail"}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
