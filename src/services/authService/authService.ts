@@ -2,7 +2,6 @@ import { LoginResponseModel } from "./../../models/responses/AuthResponses/Login
 import axios from "axios";
 import { AuthLoginRequest } from "../../models/requests/auth/AuthLoginRequest";
 import { CreateStudentRequest } from "../../models/requests/StudentRequests";
-import { baseURL } from "../../environment/environment";
 import { TokenModel } from "../../models/responses/AuthResponses/TokenModel";
 import { toast } from "react-toastify";
 
@@ -10,7 +9,7 @@ class AuthService {
   public async login(data: AuthLoginRequest): Promise<TokenModel | null> {
     try {
       const response = await axios.post<LoginResponseModel>(
-        baseURL + "Auth/StudentLogin",
+        "http://localhost:60805/api/Auth/StudentLogin",
         data
       );
       const loginResponse = response.data;

@@ -1,12 +1,11 @@
 import axios from 'axios';
 import { selectToken } from '../store/slices/authSlice';
-import { store } from '../store/configureStore';
-import { baseURL } from '../environment/environment';
+import { store } from '../store/configureStore';;
 
 
 
 const axiosInstance = axios.create({
-    baseURL: baseURL
+    baseURL: "http://localhost:60805/api/"
 });
 
 axiosInstance.interceptors.request.use((config) => {

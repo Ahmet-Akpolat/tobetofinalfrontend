@@ -1,5 +1,4 @@
 import { BaseService } from './baseService';
-import { baseURL } from '../environment/environment';
 import { CreatedExamResponse, ExamResponse, GetListExamResponse, UpdatedExamResponse } from '../models/responses/ExamResponses';
 import { CreateExamRequest, UpdateExamRequest } from '../models/requests/ExamRequests';
 
@@ -13,7 +12,7 @@ class ExamService extends BaseService<
 > {
   constructor() {
     super()
-    this.apiUrl = baseURL + "ClassExams"
+    this.apiUrl =  "ClassExams"
   }
 }
 

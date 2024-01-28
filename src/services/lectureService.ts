@@ -1,5 +1,4 @@
 import { BaseService } from "./baseService";
-import { baseURL } from "../environment/environment";
 import {
   CreatedLectureResponse,
   GetListLectureResponse,
@@ -24,26 +23,26 @@ class LectureService extends BaseService<
 > {
   constructor() {
     super();
-    this.apiUrl = baseURL + "ClassLectures";
+    this.apiUrl = "ClassLectures";
   }
 
   async getWithDetails(id: string) {
     const response = await axiosInstance.get<LectureResponse>(
-      `${baseURL}Lectures/${id}`
+      `Lectures/${id}`
     );
     return response.data;
   }
 
   async getLectureLiked(lectureId: string) {
     const response = await axiosInstance.get<LectureLikeResponse>(
-      `${baseURL}LectureLikes/getByLectureId${lectureId}`
+      `LectureLikes/getByLectureId${lectureId}`
     );
     return response.data;
   }
 
   async setLectureLiked(id: string, lectureId: string) {
-    await axios.post(
-      `${baseURL}LectureLikes`,
+    await axiosInstance.post(
+      `LectureLikes`,
       {
         isLiked: true,
         studentId: id,
