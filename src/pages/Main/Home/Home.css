@@ -10,3 +10,14 @@
 .sub-text-name {
   font-weight: 400;
 }
+
+.home {
+  position: relative;
+}
+
+.dot-img {
+  position: absolute;
+  right: 100px;
+  width: 150px;
+  top: 0;
+}

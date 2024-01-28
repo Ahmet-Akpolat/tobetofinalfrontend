@@ -15,18 +15,18 @@ import { setExams } from '../store/slices/examSlice';
 const fetchAllData = async (dispatch: Dispatch) => {
   try {
     // Appeal
-    const appeal = await appealService.getAll()
+    const appeal = await appealService.getAll(0,3)
     dispatch(setAppeal(appeal));
 
     // Lecture
-    const lecture = await lectureService.getAll()
+    const lecture = await lectureService.getAll(0,5)
     dispatch(setLecture(lecture))
 
-    const exams = await examService.getAll()
+    const exams = await examService.getAll(0,3)
     dispatch(setExams(exams))
 
     // Announcement
-    const announcement = await announcementService.getAll()
+    const announcement = await announcementService.getAll(0,4)
     dispatch(setAnnouncement(announcement))
     
     // Student

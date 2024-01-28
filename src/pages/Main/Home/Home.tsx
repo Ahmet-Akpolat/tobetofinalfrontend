@@ -7,11 +7,11 @@ import InfoCard from "../../../components/InfoCard/InfoCard";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const student = useSelector(selectStudent);
 
   return (
-    <div>
+    <div className="home">
       <div className="welcome-message container text-center mt-5">
         <h3 className="spans-elements">
           <span className="tobeto-text-secondary">TOBETO</span>
@@ -20,6 +20,7 @@ const Home = () => {
           </span>
           <span className="sub-text-name">{student.firstName}</span>
         </h3>
+        <img className="dot-img" src="/icons/dot-purple.home.svg" />
         <div className="mt-5 mb-5">
           <h4>
             <p>
@@ -38,10 +39,7 @@ const Home = () => {
               header="Profilini oluştur"
               onClick={() => navigate("/profilim")}
             />
-            <InfoCard
-              background="background-2"
-              header="Kendini değerlendir"
-            />
+            <InfoCard background="background-2" header="Kendini değerlendir" />
             <InfoCard
               background="background-3"
               header="Öğrenmeye başla"
