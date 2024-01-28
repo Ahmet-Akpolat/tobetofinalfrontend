@@ -5,12 +5,19 @@ import { useSelector } from "react-redux";
 export const OverlayLoader = () => {
   const isLoading = useSelector(selectLoading);
   return (
-    <div className="overlay">
-      <div className="overlay__inner">
-        <div className="overlay__content">
-          <img className="spinner" src="/images/Tobeto-logo-yatay-beyaz.png" />
+    <>
+      {isLoading === true && (
+        <div className="overlay">
+          <div className="overlay__inner">
+            <div className="overlay__content">
+              <img
+                className="spinner"
+                src="/images/Tobeto-logo-yatay-beyaz.png"
+              />
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
