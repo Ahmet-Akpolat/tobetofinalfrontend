@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./LectureContentHeader.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
@@ -10,6 +10,11 @@ function LectureContentHeader({ index }: any) {
   const lecture = useSelector(selectLectureDetail);
 
   const lectureContents = lecture.courses;
+
+  useEffect(() => {
+    console.log(lectureContents.contents[0])
+    dispatch(setContent(lecture[0].contents[0]))
+  }, [])
 
   return (
     <div className="content-header">

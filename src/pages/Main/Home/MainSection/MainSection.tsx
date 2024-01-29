@@ -30,7 +30,7 @@ const MainSection = () => {
 
   const MAX_ITEMS_DISPLAY = {
     appeals: 2,
-    lectures: 4,
+    lectures: 10,
     announcements: 3,
     surveys: 3,
     exams: 2,
@@ -222,9 +222,8 @@ const MainSection = () => {
           </div>
         </div>
       </div>
-      <div style={{ height: "1rem" }}></div>
       <div className="main-section d-flex align-items-center justify-content-center">
-        <div className="cv-box cv-padding display-flex mmt-n-4 main-section">
+        <div className="exam cv-box display-flex mmt-n-4 main-section">
           <span className="exam-header">Sınavlarım</span>
           <div className="col-12 mt-3 mb-3">
             <div className="tab-pane fade show active">

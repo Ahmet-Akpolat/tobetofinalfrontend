@@ -168,25 +168,6 @@ li {
   transition: color 0.5s ease;
 }
 
-/* .mainTablist .nav-item .nav-link:focus {
-  color: #282828;
-  background-color: transparent;
-  border: none;
-  position: relative;
-} */
-
-/* .mainTablist .nav-item .nav-link:focus:after {
-  content: "";
-  width: 100%;
-  height: 0.2em;
-  background-color: rgba(40, 40, 40, 0.8);
-  border-radius: 0.2em;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  box-shadow: 0 0 11px hsla(0, 0%, 100%, 0.5);
-} */
-
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -215,22 +196,25 @@ li {
 
 .nav-tabs .nav-item .nav-link.active {
   color: black !important;
-  position: relative; /* Pozisyonu relative yaparak, after pseudo-element'i konumlandırabiliriz */
+  position: relative;
 }
 
 .nav-tabs .nav-item .nav-link.active:after {
   content: "";
   width: 100%;
   height: 0.2em;
-  background-color: rgba(
-    40,
-    40,
-    40,
-    0.8
-  ); /* Border'ın rengi, buradan değiştirebilirsiniz */
+  background-color: rgba(40, 40, 40, 0.8);
   border-radius: 0.2em;
   position: absolute;
   bottom: 0;
   left: 0;
-  box-shadow: 0 0 11px hsla(0, 0%, 100%, 0.5); /* İsteğe bağlı olarak gölge eklenebilir veya kaldırılabilir */
+  box-shadow: 0 0 11px hsla(0, 0%, 100%, 0.5);
+}
+
+.exam {
+  padding: 12px;
+}
+
+.gap-config {
+  gap: 5em;
 }

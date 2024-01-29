@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import LectureDetailSidebar from "../../components/LectureDetail/LectureDetailSidebar/LectureDetailSidebar";
 import LectureContent from "../../components/LectureDetail/LectureContent/LectureContent";
 import LectureInfo from "../../components/LectureDetail/LectureInfo/LectureInfo";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectLectureDetail } from "../../store/slices/lectureDetailSlice";
 import lectureService from "../../services/lectureService";
 import { ToastContainer, toast } from "react-toastify";
 import { selectStudent } from "../../store/slices/studentSlice";
+import { useNavigate } from "react-router-dom";
+import { clearContent } from "../../store/slices/contentSlice";
 
 function LectureDetail() {
   const [liked, setLiked] = useState(false);
@@ -16,17 +18,18 @@ function LectureDetail() {
   const lecture = useSelector(selectLectureDetail);
   const student = useSelector(selectStudent);
   const [showDetail, setShowDetail] = useState(false);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const getLectureLikeInfo = async () => {
     try {
       const likedLecture = await lectureService.getLectureLiked(lecture.id);
-      const lectureNumberOfLikes = await lectureService.getLectureNumberOfLikes(
-        lecture.id
-      );
+      const lectureNumberOfLikes = await lectureService.getLectureNumberOfLikes(lecture.id);
       if (likedLecture.isLiked) setLiked(true);
       console.log(lectureNumberOfLikes.count);
       setNumberOfLikes(lectureNumberOfLikes.count);
-    } catch {
+    } catch (error) {
+      console.log(error)
       toast.error("Bir Sorun Oluştu...");
     }
   };
@@ -45,12 +48,18 @@ function LectureDetail() {
     }
   };
 
+  const handleBackButton = () => {
+    dispatch(clearContent())
+    navigate("/")
+  }
+
   useEffect(() => {
     getLectureLikeInfo();
   }, []);
 
   return (
     <div className="lecture">
+      <div className="back-button" onClick={handleBackButton}></div>
       <div className={`lecture-detail  ${showDetail && "blur"}`}>
         <div className="lecture-activity">
           <div className="row">

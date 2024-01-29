@@ -21,7 +21,7 @@ const fetchAllData = async (dispatch: Dispatch) => {
     dispatch(setAppeal(appeal));
 
     // Lecture
-    const lecture = await lectureService.getAll(0,5)
+    const lecture = await lectureService.getAll(0,10)
     dispatch(setLecture(lecture))
 
     const exams = await examService.getAll(0,3)

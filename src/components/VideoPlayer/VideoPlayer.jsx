@@ -3,13 +3,12 @@ import { useSelector } from "react-redux";
 import { selectContent } from "../../store/slices/contentSlice";
 
 function VideoPlayer() {
-  const content = useSelector(selectContent)
-
+  const content = useSelector(selectContent);
   return (
     <ReactPlayer
-      url={content.videUrl}
+      url={content.videoUrl}
       width="100%"
-      height="auto"
+      height="395px"
       controls={true}
     />
   );

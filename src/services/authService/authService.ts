@@ -20,6 +20,7 @@ class AuthService {
         return null;
       }
     } catch (error) {
+        console.log(error)
         toast.error("Yanlış E-posta veya Şifre!")
       return null;
     }
