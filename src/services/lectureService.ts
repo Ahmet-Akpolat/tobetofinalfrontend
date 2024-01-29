@@ -31,7 +31,6 @@ class LectureService extends BaseService<
 
   async getWithDetails(id: string) {
     const response = await axiosInstance.get<LectureResponse>(`Lectures/${id}`);
-    console.log(response)
     return response.data;
   }
 

@@ -26,7 +26,6 @@ function LectureDetail() {
       const likedLecture = await lectureService.getLectureLiked(lecture.id);
       const lectureNumberOfLikes = await lectureService.getLectureNumberOfLikes(lecture.id);
       if (likedLecture.isLiked) setLiked(true);
-      console.log(lectureNumberOfLikes.count);
       setNumberOfLikes(lectureNumberOfLikes.count);
     } catch (error) {
       console.log(error)

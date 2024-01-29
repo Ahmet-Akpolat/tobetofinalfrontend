@@ -11,10 +11,7 @@ function LectureContentHeader({ index }: any) {
 
   const lectureContents = lecture.courses;
 
-  useEffect(() => {
-    console.log(lectureContents.contents[0])
-    dispatch(setContent(lecture[0].contents[0]))
-  }, [])
+  dispatch(setContent(lectureContents[0].contents[0]))
 
   return (
     <div className="content-header">

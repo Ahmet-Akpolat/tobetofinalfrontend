@@ -3,9 +3,10 @@ import LectureContentHeader from "../LectureContentHeader/LectureContentHeader";
 import { Scrollbar } from "react-scrollbars-custom";
 import LectureVideo from "../LectureVideo/LectureVideo";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
 import NoContent from "../../NoContent/NoContent";
+import { setContent } from "../../../store/slices/contentSlice";
 
 interface Props {
   setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
