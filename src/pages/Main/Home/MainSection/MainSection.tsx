@@ -113,35 +113,31 @@ const MainSection = () => {
           </div>
           <div className="col-12">
             <div className="tab-content">
-              <div className="two-content">
-                {section == 0 && (
-                  <div className="tab-pane fade show active">
-                    <div className="row" style={{ marginLeft: -10 }}>
-                      {appeals.length === 0 ? (
-                        <div className="no-content">
-                          <NoContent content="başvurunuz" />
-                        </div>
-                      ) : (
-                        appeals
-                          .slice(0, MAX_ITEMS_DISPLAY.appeals)
-                          .map((_: any, index: any) => (
-                            <Appeal key={index} index={index} />
-                          ))
-                      )}
-                    </div>
-                    {appeals.length > MAX_ITEMS_DISPLAY.appeals && (
-                      <a
-                        className="showMoreBtn"
-                        onClick={() => {
-                          navigate("/basvurularim");
-                        }}
-                      >
-                        Daha Fazla Göster
-                      </a>
+              {section == 0 && (
+                <div className="tab-pane fade show active">
+                  <div className="row">
+                    {appeals.length === 0 ? (
+                      <NoContent content="başvurunuz" />
+                    ) : (
+                      appeals
+                        .slice(0, MAX_ITEMS_DISPLAY.appeals)
+                        .map((_: any, index: any) => (
+                          <Appeal key={index} index={index} />
+                        ))
                     )}
                   </div>
-                )}
-              </div>
+                  {appeals.length > MAX_ITEMS_DISPLAY.appeals && (
+                    <a
+                      className="showMoreBtn"
+                      onClick={() => {
+                        navigate("/basvurularim");
+                      }}
+                    >
+                      Daha Fazla Göster
+                    </a>
+                  )}
+                </div>
+              )}
 
               {section == 1 && (
                 <div className="tab-pane fade show active">
@@ -227,37 +223,32 @@ const MainSection = () => {
         </div>
       </div>
       <div style={{ height: "1rem" }}></div>
-      {/* Sınavlarım bölümü, yukarıdaki div ile aynı stil ve yapıda */}
       <div className="main-section d-flex align-items-center justify-content-center">
         <div className="cv-box cv-padding display-flex mmt-n-4 main-section">
           <span className="exam-header">Sınavlarım</span>
           <div className="col-12 mt-3 mb-3">
-            <div className="two-content">
-              <div className="tab-pane fade show active">
-                <div className="row">
-                  {exams.length === 0 ? (
-                    <div className="no-content">
-                      <NoContent content="sınavınız" />
-                    </div>
-                  ) : (
-                    exams
-                      .slice(0, MAX_ITEMS_DISPLAY.exams)
-                      .map((_: any, index: any) => (
-                        <Exam key={index} index={index} />
-                      ))
-                  )}
-                </div>
-                {exams.length > MAX_ITEMS_DISPLAY.exams && (
-                  <a
-                    className="showMoreBtn"
-                    onClick={() => {
-                      navigate("/sınavlarım");
-                    }}
-                  >
-                    Daha Fazla Göster
-                  </a>
+            <div className="tab-pane fade show active">
+              <div className="row">
+                {exams.length === 0 ? (
+                  <NoContent content="sınavınız" />
+                ) : (
+                  exams
+                    .slice(0, MAX_ITEMS_DISPLAY.exams)
+                    .map((_: any, index: any) => (
+                      <Exam key={index} index={index} />
+                    ))
                 )}
               </div>
+              {exams.length > MAX_ITEMS_DISPLAY.exams && (
+                <a
+                  className="showMoreBtn"
+                  onClick={() => {
+                    navigate("/sınavlarım");
+                  }}
+                >
+                  Daha Fazla Göster
+                </a>
+              )}
             </div>
           </div>
         </div>

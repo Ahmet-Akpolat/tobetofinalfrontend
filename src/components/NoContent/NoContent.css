@@ -7,6 +7,7 @@
   height: 100%; /* Veya belirli bir yükseklik */
   text-align: center; /* Metni ortala */
   border-radius: 15px;
+  width:100%
 }
 
 .no-content-img {

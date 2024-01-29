@@ -11,22 +11,34 @@ import { selectStudent } from "../../store/slices/studentSlice";
 
 function LectureDetail() {
   const [liked, setLiked] = useState(false);
+  const [numberOfLikes, setNumberOfLikes] = useState(0);
   const [section, setSection] = useState(0);
   const lecture = useSelector(selectLectureDetail);
   const student = useSelector(selectStudent);
   const [showDetail, setShowDetail] = useState(false);
 
-  const getLectureLiked = async () => {
+  const getLectureLikeInfo = async () => {
     try {
       const likedLecture = await lectureService.getLectureLiked(lecture.id);
-      console.log(likedLecture);
+      const lectureNumberOfLikes = await lectureService.getLectureNumberOfLikes(
+        lecture.id
+      );
       if (likedLecture.isLiked) setLiked(true);
-    } catch {}
+      console.log(lectureNumberOfLikes.count);
+      setNumberOfLikes(lectureNumberOfLikes.count);
+    } catch {
+      toast.error("Bir Sorun Oluştu...");
+    }
   };
 
   const setLectureLiked = async () => {
     try {
       await lectureService.setLectureLiked(student.id, lecture.id);
+      if (liked == true) {
+        setNumberOfLikes(numberOfLikes - 1);
+      } else {
+        setNumberOfLikes(numberOfLikes + 1);
+      }
       setLiked(!liked);
     } catch (error) {
       toast.error("Bir sorun oluştu...");
@@ -34,7 +46,7 @@ function LectureDetail() {
   };
 
   useEffect(() => {
-    getLectureLiked();
+    getLectureLikeInfo();
   }, []);
 
   return (
@@ -58,7 +70,7 @@ function LectureDetail() {
                     <span>{`${lecture.endDate} tarihine kadar bitirebilirsin`}</span>
                   </div>
                 </div>
-                <div className="actions d-flex">
+                <div className="actions d-flex align-items-center">
                   <div className="like-actions ">
                     <div className="like" onClick={setLectureLiked}>
                       <img
@@ -70,6 +82,7 @@ function LectureDetail() {
                       ></img>
                     </div>
                   </div>
+                  <span className="number-of-likes">{numberOfLikes}</span>
                 </div>
               </div>
             </div>

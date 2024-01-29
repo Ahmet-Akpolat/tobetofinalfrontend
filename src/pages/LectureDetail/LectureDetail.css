@@ -76,3 +76,8 @@
 .lecture-detail {
   animation: fadeIn 0.6s ease-in-out;
 }
+
+.number-of-likes {
+  color: #ff4757;
+  font-size: 30px
+}

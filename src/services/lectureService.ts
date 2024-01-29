@@ -10,7 +10,10 @@ import {
   CreateLectureRequest,
   UpdateLectureRequest,
 } from "../models/requests/LectureRequests";
-import { LectureLikeResponse } from "../models/responses/LectureLikeResponses";
+import {
+  GetLectureLikeCountResponse,
+  LectureLikeResponse,
+} from "../models/responses/LectureLikeResponses";
 import axiosInstance from "../utils/axiosInterceptors";
 
 class LectureService extends BaseService<
@@ -27,9 +30,7 @@ class LectureService extends BaseService<
   }
 
   async getWithDetails(id: string) {
-    const response = await axiosInstance.get<LectureResponse>(
-      `Lectures/${id}`
-    );
+    const response = await axiosInstance.get<LectureResponse>(`Lectures/${id}`);
     return response.data;
   }
 
@@ -41,14 +42,18 @@ class LectureService extends BaseService<
   }
 
   async setLectureLiked(id: string, lectureId: string) {
-    await axiosInstance.post(
-      `LectureLikes`,
-      {
-        isLiked: true,
-        studentId: id,
-        lectureId: lectureId,
-      }
+    await axiosInstance.post(`LectureLikes`, {
+      isLiked: true,
+      studentId: id,
+      lectureId: lectureId,
+    });
+  }
+
+  async getLectureNumberOfLikes(lectureId: string) {
+    const response = await axiosInstance.get(
+      `LectureLikes/GetCount${lectureId}`
     );
+    return response.data;
   }
 }
 
