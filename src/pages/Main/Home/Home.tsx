@@ -15,7 +15,7 @@ const Home = () => {
       <div className="welcome-message container text-center mt-5">
         <h3 className="spans-elements">
           <span className="tobeto-text-secondary">TOBETO</span>
-          <span>
+          <span className="tobeto-text-welcome">
             'ya hoş geldin <br />
           </span>
           <span className="sub-text-name">{student.firstName}</span>
@@ -23,7 +23,7 @@ const Home = () => {
         <img className="dot-img" src="/icons/dot-purple.home.svg" />
         <div className="mt-5 mb-5">
           <h4>
-            <p>
+            <p className="alt-text">
               Yeni nesil öğrenme deneyimi ile Tobeto kariyer yolculuğunda senin
               yanında!
             </p>

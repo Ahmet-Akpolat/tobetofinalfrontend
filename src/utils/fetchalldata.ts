@@ -10,6 +10,8 @@ import { setLecture } from '../store/slices/lectureSlice';
 import { toast } from 'react-toastify';
 import examService from '../services/examService';
 import { setExams } from '../store/slices/examSlice';
+import surveyService from '../services/surveyService';
+import { setSurvey } from '../store/slices/surveySlice';
 
 
 const fetchAllData = async (dispatch: Dispatch) => {
@@ -28,6 +30,10 @@ const fetchAllData = async (dispatch: Dispatch) => {
     // Announcement
     const announcement = await announcementService.getAll(0,4)
     dispatch(setAnnouncement(announcement))
+
+    // Survey
+    const survey = await surveyService.getAll(0,4)
+    dispatch(setSurvey(survey))
     
     // Student
     const student = await studentService.getByToken();

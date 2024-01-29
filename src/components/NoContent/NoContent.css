@@ -1,0 +1,20 @@
+.no-content-main {
+  background-color: #e6e6e6;
+  display: flex; /* Flexbox container olarak ayarla */
+  flex-direction: column; /* Çocuk elementleri dikey (sütun) olarak hizala */
+  align-items: center; /* Yatay eksende ortala */
+  justify-content: center; /* Dikey eksende ortala */
+  height: 100%; /* Veya belirli bir yükseklik */
+  text-align: center; /* Metni ortala */
+  border-radius: 15px;
+}
+
+.no-content-img {
+  width: 220px;
+}
+
+.no-content-message {
+  color: #6a369f;
+  font-size: 14pt;
+  font-weight: 500;
+}

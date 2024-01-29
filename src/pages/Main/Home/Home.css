@@ -3,12 +3,14 @@
 }
 
 .tobeto-text-secondary {
-  color: #93fd;
-  font-weight: 800;
+  color: #82fd;
+  font-weight: 700;
+  font-size: 28pt;
 }
 
 .sub-text-name {
   font-weight: 400;
+  font-size: 25pt;
 }
 
 .home {
@@ -20,4 +22,18 @@
   right: 100px;
   width: 150px;
   top: 0;
+}
+
+.tobeto-text-welcome {
+  font-size: 30pt;
+  font-weight: 400;
+}
+
+.alt-text {
+  font-size: 20pt;
+}
+
+.Exam {
+  width: 100%; /* Komponentin tüm kolon genişliğini kaplamasını sağlar */
+  /* Diğer stil tanımları */
 }
