@@ -1,0 +1,129 @@
+.authnav-istkodluyor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1e0f41;
+  height: 9.5vh;
+}
+
+.istkodluyor-banner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 13vw 0 16vw;
+}
+
+.ik-authnav-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 700;
+  font-size: 20pt;
+}
+
+.authnav-istkodluyor-img {
+  height: 42px;
+}
+
+.appeal-button {
+  display: flex;
+  cursor: pointer;
+  color: #1e0f41;
+  background-color: #08b47c;
+  padding: 6px 45px;
+  border-radius: 20px;
+  border: none;
+  font-weight: 700;
+}
+
+.quot1 {
+  color: #08b47c;
+  margin-left: 0.3em;
+}
+
+.quot2 {
+  color: #08b47c;
+  margin-right: 0.3em;
+}
+
+.authnav-tobeto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #181717;
+  height: 10.7vh;
+}
+
+.authnav-tobeto-banner {
+  justify-content: space-between;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 0 2vw 0 2vw;
+}
+
+.authnav-tobeto-logo {
+  width: 165px;
+  cursor: pointer;
+}
+
+.authnav-section {
+  display: flex;
+  list-style: none; /* Liste işaretlerini kaldır */
+  padding: 0; /* Varsayılan padding'i kaldır */
+  margin: 0; /* Varsayılan margin'i kaldır */
+  gap: 65px;
+}
+
+.authnav-buttons {
+  display: flex;
+  gap: 30px;
+}
+
+.authnav-login {
+  display: flex;
+  cursor: pointer;
+  color: white;
+  background-color: #181717;
+  padding: 5px 15px 8px 17px;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: white;
+  font-weight: 800;
+  text-align: center;
+  font-size: 11pt;
+}
+
+.authnav-signup {
+  display: flex;
+  cursor: pointer;
+  color: white;
+  background-color: #181717;
+  padding: 4px 12px 0px 12px;
+  border-radius: 20px;
+  border: 3px solid;
+  border-color: white;
+  font-weight: 800;
+  text-align: center;
+  font-size: 11pt;
+}
+
+.auth-nav-link {
+  text-decoration: none;
+  font-weight: 600;
+  color: white;
+  font-size: 13pt;
+  transition: color 0.2s ease;
+}
+
+.auth-nav-link:hover {
+  color: #93f;
+  cursor: pointer;
+}
+
+.auth-nav-item.selected .auth-nav-link {
+  color: #93f;
+  font-weight: 700;
+}

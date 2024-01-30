@@ -1,6 +1,6 @@
 .navbar-custom {
   padding: 20px;
-  border: 1px solid rgb(245, 245, 245);
+  border: 1px solid rgb(245, 245, 245); /* navbar altında ve ortada olmasını sağlar */
 }
 
 .tobetoImage {

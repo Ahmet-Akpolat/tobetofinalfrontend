@@ -23,7 +23,7 @@ const MainSection = () => {
   const exams = useSelector(selectExams);
   const surveys = useSelector(selectSurvey);
 
-  const [activeNavLink, setActiveNavLink] = useState("appeal");
+  const [activeNavLink, setActiveNavLink] = useState("appeals");
   const handleNavLinkClick = (navLinkId: any) => {
     setActiveNavLink(navLinkId);
   };
