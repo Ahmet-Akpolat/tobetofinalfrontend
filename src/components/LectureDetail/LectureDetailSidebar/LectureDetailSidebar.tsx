@@ -1,15 +1,70 @@
 import { useSelector } from "react-redux";
 import "./LectureDetailSidebar.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { selectContent } from "../../../store/slices/contentSlice";
+import { GUID } from "../../../models/abstracts/GuidModel";
+import lectureService from "../../../services/lectureService";
+import { toast } from "react-toastify";
 
 interface Props {
   setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
+  lectureId:GUID;
 }
 
-function LectureDetailSidebar({ setShowDetail }: Props) {
+function LectureDetailSidebar({ setShowDetail,lectureId }: Props) {
   const [liked, setLiked] = useState(false);
+  const [contentLikeCount,setContentCountLike]=useState<number>(0);
   const content = useSelector(selectContent);
+  const [allViewersCount,setViewersCount]=useState<number>(0);
+  const [reloadFlag,setReloadFlag]=useState<boolean>(true);
+
+  //Etiketleri de olabilir..
+
+  const getContentLikeCount=async ()=>{
+    try{
+      
+    const contentLikeCount =  (await lectureService.getContentLikeCount(content.id)).data;
+    setContentCountLike(contentLikeCount.count);
+    }
+    catch (error) {
+      console.log(error)
+      toast.error("Bir Sorun Oluştu...");
+    }
+  }
+  const likeContent= async ()=>{
+    try{
+      (await lectureService.setContentLiked(content.id).then(()=>{getContentLikeCount();contentIsLiked();}));
+    }catch (error) {
+      console.log(error)
+      toast.error("Bir Sorun Oluştu...");
+    }
+      
+  }
+  const contentIsLiked = async () => {
+    try {
+      const likedLecture = (await lectureService.getContentLiked(content.id)).data;
+      setLiked(likedLecture.isLiked);
+    } catch (error) {
+      console.log(error)
+      toast.error("Bir Sorun Oluştu...");
+    }
+  };
+  const getContentViewers = async()=>  {
+    try {
+      const lectureViewersCount = (await lectureService.getLectureViewCount(lectureId,content.id)).data;
+      setViewersCount(lectureViewersCount.count);
+    } catch (error) {
+      console.log(error)
+      toast.error("Bir Sorun Oluştu...");
+    }
+  }
+
+  useEffect(() => {
+    contentIsLiked();
+    getContentLikeCount();
+    getContentViewers();
+  },[reloadFlag]);
+  
 
   return (
     <div className="lecture-detail-sidebar">
@@ -33,7 +88,7 @@ function LectureDetailSidebar({ setShowDetail }: Props) {
                         src="icons/timer_FILL0_wght100.svg"
                       ></img>
                       <strong>{`${
-                        content.duration / 60
+                        content.duration 
                       } dk`}</strong>
                     </div>
                     <div className="content-views">
@@ -41,19 +96,23 @@ function LectureDetailSidebar({ setShowDetail }: Props) {
                         className="views-img"
                         src="icons/visibility_FILL0.svg"
                       ></img>
-                      <strong>16</strong>
+                      <strong>{allViewersCount}</strong>
                     </div>
                   </div>
                   <div>
                     <img
+                      
                       className="content-like"
                       src={
                         liked === false
                           ? "icons/favorite_FILL0_wght100.svg"
                           : "icons/favorite_FILL1.svg"
                       }
-                      onClick={() => setLiked(!liked)}
-                    ></img>
+                      onClick={() => {
+                        likeContent();
+                      }}
+                    />
+                    {contentLikeCount}
                   </div>
                 </div>
                 <div className="row gap-4">
@@ -67,14 +126,7 @@ function LectureDetailSidebar({ setShowDetail }: Props) {
                       <img src="icons/more_horiz_FILL1.svg"></img>
                     </div>
                   </div>
-                  <div className="d-flex gap-5">
-                    <div>
-                      <text>Devam Ediyor</text>
-                    </div>
-                    <div>
-                      <strong>0.9 Puan</strong>
-                    </div>
-                  </div>
+
                 </div>
               </div>
             </div>

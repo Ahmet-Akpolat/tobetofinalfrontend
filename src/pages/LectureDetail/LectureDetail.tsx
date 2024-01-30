@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { selectStudent } from "../../store/slices/studentSlice";
 import { useNavigate } from "react-router-dom";
 import { clearContent } from "../../store/slices/contentSlice";
+import { GetByLoggedStudentCompletionConditionResponse } from "../../models/responses/LectureCompletionDetailResponse";
 
 function LectureDetail() {
   const [liked, setLiked] = useState(false);
@@ -18,6 +19,8 @@ function LectureDetail() {
   const lecture = useSelector(selectLectureDetail);
   const student = useSelector(selectStudent);
   const [showDetail, setShowDetail] = useState(false);
+  const [lectureCompletionDetail,setLectureCompletionDetail]=useState<GetByLoggedStudentCompletionConditionResponse>();
+  const [completionControl,setCompletionControl]=useState<boolean>(false);
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -25,7 +28,7 @@ function LectureDetail() {
     try {
       const likedLecture = await lectureService.getLectureLiked(lecture.id);
       const lectureNumberOfLikes = await lectureService.getLectureNumberOfLikes(lecture.id);
-      if (likedLecture.isLiked) setLiked(true);
+      setLiked(likedLecture.isLiked);
       setNumberOfLikes(lectureNumberOfLikes.count);
     } catch (error) {
       console.log(error)
@@ -33,15 +36,23 @@ function LectureDetail() {
     }
   };
 
+  const getLectureCompletionDetails = async ()=>{
+    try {
+      const completionDetail = (await lectureService.getLectureCompletionDetails(lecture.id)).data;
+      setLectureCompletionDetail(completionDetail);
+      
+      setCompletionControl(true);
+      
+    } catch (error) {
+      console.log(error)
+      toast.error("Bir Sorun Oluştu...");
+    }
+  }
+
   const setLectureLiked = async () => {
     try {
       await lectureService.setLectureLiked(student.id, lecture.id);
-      if (liked == true) {
-        setNumberOfLikes(numberOfLikes - 1);
-      } else {
-        setNumberOfLikes(numberOfLikes + 1);
-      }
-      setLiked(!liked);
+      getLectureLikeInfo();
     } catch (error) {
       toast.error("Bir sorun oluştu...");
     }
@@ -54,6 +65,7 @@ function LectureDetail() {
 
   useEffect(() => {
     getLectureLikeInfo();
+    getLectureCompletionDetails();
   }, []);
 
   return (
@@ -74,6 +86,12 @@ function LectureDetail() {
                   <div className="lecture-info">
                     <h3>{lecture.name}</h3>
                   </div>
+                  {completionControl && 
+                  (<span>
+                  Bu Kursta Öğrencinin izlediği = {lectureCompletionDetail?.totalWatchedCount} +
+                  Bu Kursta Yüzde Kaç Bitirdi= {lectureCompletionDetail?.completionPercentage}+
+                  Bu Kursta Kaç İçerik Var={lectureCompletionDetail?.totalContentCount}
+                  </span>)}
                   <div className="date-info text-dark-blue">
                     <span>{`${lecture.endDate} tarihine kadar bitirebilirsin`}</span>
                   </div>
@@ -116,7 +134,7 @@ function LectureDetail() {
         {section === 1 && <LectureInfo />}
       </div>
       {showDetail === true && (
-        <LectureDetailSidebar setShowDetail={setShowDetail} />
+        <LectureDetailSidebar setShowDetail={setShowDetail} lectureId={lecture.id}/>
       )}
       <ToastContainer position="bottom-right" theme="light" />
     </div>

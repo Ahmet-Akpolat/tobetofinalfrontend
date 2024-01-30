@@ -5,12 +5,14 @@ import { useSelector } from "react-redux";
 import { selectContent } from "../../../store/slices/contentSlice";
 
 interface Props {
-  setShowDetail:  React.Dispatch<React.SetStateAction<boolean>>
+  setShowDetail:  React.Dispatch<React.SetStateAction<boolean>>;
+  lectureId:string;
 }
 
-function LectureVideo({ setShowDetail }: Props) {
+function LectureVideo({ setShowDetail,lectureId }: Props) {
   const content = useSelector(selectContent)
-
+  console.clear();
+  
   return (
     <div className="lecture-video align-content-center">
       <div className="video-player">
@@ -25,8 +27,7 @@ function LectureVideo({ setShowDetail }: Props) {
             <strong>{content.name}</strong>
           </div>
           <div className="d-flex justify-content-between">
-            <text style={{ color: "grey" }}>Video - 10 dk</text>
-            <text>1.4 Puan</text>
+            <text style={{ color: "grey" }}>Video - {content.duration} dk</text>
             <span>Devam ediyor</span>
           </div>
         </div>

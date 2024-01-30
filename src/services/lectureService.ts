@@ -5,7 +5,7 @@ import {
   LectureResponse,
   UpdatedLectureResponse,
 } from "../models/responses/LectureResponses";
-import axios from "axios";
+import axios, { AxiosPromise, AxiosResponse } from "axios";
 import {
   CreateLectureRequest,
   UpdateLectureRequest,
@@ -15,6 +15,9 @@ import {
   LectureLikeResponse,
 } from "../models/responses/LectureLikeResponses";
 import axiosInstance from "../utils/axiosInterceptors";
+import { GetByLoggedStudentCompletionConditionResponse } from "../models/responses/LectureCompletionDetailResponse";
+import { GetContentLikeCountResponse } from "../models/responses/ContentLikeCountRespose";
+import { GetByContentIdContentLikeResponse } from "../models/responses/ContentLikeResponse";
 
 class LectureService extends BaseService<
   GetListLectureResponse,
@@ -54,6 +57,29 @@ class LectureService extends BaseService<
       `LectureLikes/GetCount${lectureId}`
     );
     return response.data;
+  }
+  async getLectureCompletionDetails(lectureId:string):Promise<AxiosResponse<GetByLoggedStudentCompletionConditionResponse, any>>{
+    return await axiosInstance.get<GetByLoggedStudentCompletionConditionResponse>('LectureCompletionConditions/getByLectureId'+lectureId);
+  }
+  async getContentLikeCount(contentId:string):Promise<AxiosResponse<GetContentLikeCountResponse, any>>{
+    return await axiosInstance.get<GetContentLikeCountResponse>('ContentLikes/GetCount'+contentId);
+  }
+  async setContentLiked(contentId: string) {
+    await axiosInstance.post(`ContentLikes`, {
+      contentId: contentId
+    });
+  }
+ 
+  async getContentLiked(contentId: string):Promise<AxiosResponse<GetByContentIdContentLikeResponse, any>> {
+    return await axiosInstance.get<GetByContentIdContentLikeResponse>(
+      `ContentLikes/getByContentId${contentId}`
+    );
+  }
+  
+  async getLectureViewCount(lectureId: string,contentId:string) {
+    return await axiosInstance.get(
+      `LectureViews/getCountWithLectureAndContentId?lectureId=${lectureId}&contentId=${contentId}`
+    );
   }
 }
 

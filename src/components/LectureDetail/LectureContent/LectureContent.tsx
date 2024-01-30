@@ -31,7 +31,7 @@ function LectureContent({ setShowDetail }: Props) {
             </Scrollbar>
           </div>
           <div className="col-lg-7 col-sm-12 col-xs-12">
-            <LectureVideo setShowDetail={setShowDetail} />
+            <LectureVideo setShowDetail={setShowDetail} lectureId={lecture.id}/>
           </div>
         </div>
       )}
