@@ -5,28 +5,15 @@ import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
 import { setContent } from "../../../store/slices/contentSlice";
 import lectureService from "../../../services/lectureService";
 
-function LectureContentHeader({ index }: any) {
-  const contentsViews = [] as any
+function LectureContentHeader({ index, contentsViews }: any) {
   const dispatch = useDispatch()
   const [expand, setExpand] = useState(false);
   const lecture = useSelector(selectLectureDetail);
 
   const lectureContents = lecture.courses;
 
-  async function getContentsIsWatched() {
-    try {
-      const contentViews = await lectureService.getContentsIsWatched("6d310b2f-ffc6-48c8-4f65-08dc20cca1a2")
-      contentViews.data.forEach((content: any) => {
-        contentsViews.push(content.contentId)
-      });
-    } catch (error){
-      console.log(error)
-    }
-  }
-
   useEffect(() => {
     dispatch(setContent(lectureContents[0].contents[0]))
-    getContentsIsWatched()
   }, [])
 
   return (

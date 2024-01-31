@@ -51,6 +51,7 @@ function LectureDetail() {
     } catch (error) {
       console.log(error);
       toast.error("Bir Sorun Oluştu...");
+      navigate("/login");
     }
   };
 
@@ -60,12 +61,13 @@ function LectureDetail() {
       getLectureLikeInfo();
     } catch (error) {
       toast.error("Bir sorun oluştu...");
+      navigate("/login");
     }
   };
 
   const handleBackButton = () => {
     dispatch(clearContent());
-    navigate("/login");
+    navigate("/");
   };
 
   useEffect(() => {

@@ -7,15 +7,16 @@ import { selectContent } from "../../../store/slices/contentSlice";
 interface Props {
   setShowDetail:  React.Dispatch<React.SetStateAction<boolean>>;
   lectureId:string;
+  setContentsViews: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function LectureVideo({ setShowDetail,lectureId }: Props) {
+function LectureVideo({ setShowDetail, lectureId, setContentsViews }: Props) {
   const content = useSelector(selectContent)
   
   return (
     <div className="lecture-video align-content-center">
       <div className="video-player">
-        <VideoPlayer />
+        <VideoPlayer setContentsViews={setContentsViews} />
       </div>
       <div className="lecture-video-detail d-flex align-items-center">
         <div

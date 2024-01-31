@@ -82,11 +82,17 @@ class LectureService extends BaseService<
     );
   }
 
-
   async getContentsIsWatched(lectureId: string) {
     return await axiosInstance.get(
       `/LectureViews/getForLoggedStudent${lectureId}`
     )
+  }
+
+  async setContentIsWatched(lectureId: string, contentId: string) {
+    await axiosInstance.post(`/LectureViews`, {
+      lectureId: lectureId,
+      contentId: contentId,
+    });
   }
 }
 

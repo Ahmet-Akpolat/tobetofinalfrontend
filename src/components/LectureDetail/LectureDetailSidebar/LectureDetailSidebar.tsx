@@ -8,63 +8,66 @@ import { toast } from "react-toastify";
 
 interface Props {
   setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
-  lectureId:GUID;
+  lectureId: GUID;
 }
 
-function LectureDetailSidebar({ setShowDetail,lectureId }: Props) {
+function LectureDetailSidebar({ setShowDetail, lectureId }: Props) {
   const [liked, setLiked] = useState(false);
-  const [contentLikeCount,setContentCountLike]=useState<number>(0);
+  const [contentLikeCount, setContentCountLike] = useState<number>(0);
   const content = useSelector(selectContent);
-  const [allViewersCount,setViewersCount]=useState<number>(0);
-  const [reloadFlag,setReloadFlag]=useState<boolean>(true);
+  const [allViewersCount, setViewersCount] = useState<number>(0);
+  const [reloadFlag, setReloadFlag] = useState<boolean>(true);
 
-  //Etiketleri de olabilir..
-
-  const getContentLikeCount=async ()=>{
-    try{
-      
-    const contentLikeCount =  (await lectureService.getContentLikeCount(content.id)).data;
-    setContentCountLike(contentLikeCount.count);
-    }
-    catch (error) {
-      console.log(error)
-      toast.error("Bir Sorun Oluştu...");
-    }
-  }
-  const likeContent= async ()=>{
-    try{
-      (await lectureService.setContentLiked(content.id).then(()=>{getContentLikeCount();contentIsLiked();}));
-    }catch (error) {
-      console.log(error)
-      toast.error("Bir Sorun Oluştu...");
-    }
-      
-  }
-  const contentIsLiked = async () => {
+  const getContentLikeCount = async () => {
     try {
-      const likedLecture = (await lectureService.getContentLiked(content.id)).data;
-      setLiked(likedLecture.isLiked);
+      const contentLikeCount = (
+        await lectureService.getContentLikeCount(content.id)
+      ).data;
+      setContentCountLike(contentLikeCount.count);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Bir Sorun Oluştu...");
     }
   };
-  const getContentViewers = async()=>  {
+  const likeContent = async () => {
     try {
-      const lectureViewersCount = (await lectureService.getLectureViewCount(lectureId,content.id)).data;
-      setViewersCount(lectureViewersCount.count);
+      await lectureService.setContentLiked(content.id).then(() => {
+        getContentLikeCount();
+        contentIsLiked();
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Bir Sorun Oluştu...");
     }
-  }
+  };
+  const contentIsLiked = async () => {
+    try {
+      const likedLecture = (await lectureService.getContentLiked(content.id))
+        .data;
+      if (likedLecture) 
+        setLiked(likedLecture.isLiked);
+    } catch (error) {
+      console.log(error);
+      toast.error("Bir Sorun Oluştu...");
+    }
+  };
+  const getContentViewers = async () => {
+    try {
+      const lectureViewersCount = (
+        await lectureService.getLectureViewCount(lectureId, content.id)
+      ).data;
+      setViewersCount(lectureViewersCount.count);
+    } catch (error) {
+      console.log(error);
+      toast.error("Bir Sorun Oluştu...");
+    }
+  };
 
   useEffect(() => {
     contentIsLiked();
     getContentLikeCount();
     getContentViewers();
-  },[reloadFlag]);
-  
+  }, [reloadFlag]);
 
   return (
     <div className="lecture-detail-sidebar">
@@ -87,9 +90,7 @@ function LectureDetailSidebar({ setShowDetail,lectureId }: Props) {
                         className="time-img"
                         src="icons/timer_FILL0_wght100.svg"
                       ></img>
-                      <strong>{`${
-                        content.duration 
-                      } dk`}</strong>
+                      <strong>{`${content.duration} dk`}</strong>
                     </div>
                     <div className="content-views">
                       <img
@@ -101,7 +102,6 @@ function LectureDetailSidebar({ setShowDetail,lectureId }: Props) {
                   </div>
                   <div>
                     <img
-                      
                       className="content-like"
                       src={
                         liked === false
@@ -126,7 +126,6 @@ function LectureDetailSidebar({ setShowDetail,lectureId }: Props) {
                       <img src="icons/more_horiz_FILL1.svg"></img>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -181,6 +180,6 @@ function LectureDetailSidebar({ setShowDetail,lectureId }: Props) {
       </button>
     </div>
   );
-};
+}
 
 export default LectureDetailSidebar;
