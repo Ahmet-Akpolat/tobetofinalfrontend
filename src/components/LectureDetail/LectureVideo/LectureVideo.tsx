@@ -11,7 +11,6 @@ interface Props {
 
 function LectureVideo({ setShowDetail,lectureId }: Props) {
   const content = useSelector(selectContent)
-  console.clear();
   
   return (
     <div className="lecture-video align-content-center">

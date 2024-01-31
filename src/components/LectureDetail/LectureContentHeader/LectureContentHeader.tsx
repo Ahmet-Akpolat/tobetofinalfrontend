@@ -3,15 +3,31 @@ import "./LectureContentHeader.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
 import { setContent } from "../../../store/slices/contentSlice";
+import lectureService from "../../../services/lectureService";
 
 function LectureContentHeader({ index }: any) {
+  const contentsViews = [] as any
   const dispatch = useDispatch()
   const [expand, setExpand] = useState(false);
   const lecture = useSelector(selectLectureDetail);
 
   const lectureContents = lecture.courses;
 
-  dispatch(setContent(lectureContents[0].contents[0]))
+  async function getContentsIsWatched() {
+    try {
+      const contentViews = await lectureService.getContentsIsWatched("6d310b2f-ffc6-48c8-4f65-08dc20cca1a2")
+      contentViews.data.forEach((content: any) => {
+        contentsViews.push(content.contentId)
+      });
+    } catch (error){
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    dispatch(setContent(lectureContents[0].contents[0]))
+    getContentsIsWatched()
+  }, [])
 
   return (
     <div className="content-header">
@@ -35,7 +51,12 @@ function LectureContentHeader({ index }: any) {
               <div className="mb-1">
                 <text>{content.name}</text>
               </div>
-              <sub>{`Video ${content.duration / 60} dk`}</sub>
+              <sub>{`Video ${content.duration} dk`}</sub>
+              {
+                contentsViews.includes(content.id) && (
+                  <div className="is-finish"></div>
+                ) 
+              }
             </div>
           ))}
         </div>

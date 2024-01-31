@@ -59,10 +59,10 @@ class LectureService extends BaseService<
     return response.data;
   }
   async getLectureCompletionDetails(lectureId:string):Promise<AxiosResponse<GetByLoggedStudentCompletionConditionResponse, any>>{
-    return await axiosInstance.get<GetByLoggedStudentCompletionConditionResponse>('LectureCompletionConditions/getByLectureId'+lectureId);
+    return await axiosInstance.get<GetByLoggedStudentCompletionConditionResponse>(`LectureCompletionConditions/getByLectureId${lectureId}`);
   }
   async getContentLikeCount(contentId:string):Promise<AxiosResponse<GetContentLikeCountResponse, any>>{
-    return await axiosInstance.get<GetContentLikeCountResponse>('ContentLikes/GetCount'+contentId);
+    return await axiosInstance.get<GetContentLikeCountResponse>(`ContentLikes/GetCount${contentId}`);
   }
   async setContentLiked(contentId: string) {
     await axiosInstance.post(`ContentLikes`, {
@@ -80,6 +80,13 @@ class LectureService extends BaseService<
     return await axiosInstance.get(
       `LectureViews/getCountWithLectureAndContentId?lectureId=${lectureId}&contentId=${contentId}`
     );
+  }
+
+
+  async getContentsIsWatched(lectureId: string) {
+    return await axiosInstance.get(
+      `/LectureViews/getForLoggedStudent${lectureId}`
+    )
   }
 }
 

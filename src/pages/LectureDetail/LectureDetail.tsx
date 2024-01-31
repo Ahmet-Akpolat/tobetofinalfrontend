@@ -19,35 +19,40 @@ function LectureDetail() {
   const lecture = useSelector(selectLectureDetail);
   const student = useSelector(selectStudent);
   const [showDetail, setShowDetail] = useState(false);
-  const [lectureCompletionDetail,setLectureCompletionDetail]=useState<GetByLoggedStudentCompletionConditionResponse>();
-  const [completionControl,setCompletionControl]=useState<boolean>(false);
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const [lectureCompletionDetail, setLectureCompletionDetail] =
+    useState<GetByLoggedStudentCompletionConditionResponse>();
+  const [completionControl, setCompletionControl] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const getLectureLikeInfo = async () => {
     try {
       const likedLecture = await lectureService.getLectureLiked(lecture.id);
-      const lectureNumberOfLikes = await lectureService.getLectureNumberOfLikes(lecture.id);
+      const lectureNumberOfLikes = await lectureService.getLectureNumberOfLikes(
+        lecture.id
+      );
       setLiked(likedLecture.isLiked);
       setNumberOfLikes(lectureNumberOfLikes.count);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Bir Sorun Oluştu...");
+      navigate("/login");
     }
   };
 
-  const getLectureCompletionDetails = async ()=>{
+  const getLectureCompletionDetails = async () => {
     try {
-      const completionDetail = (await lectureService.getLectureCompletionDetails(lecture.id)).data;
+      const completionDetail = (
+        await lectureService.getLectureCompletionDetails(lecture.id)
+      ).data;
       setLectureCompletionDetail(completionDetail);
-      
+
       setCompletionControl(true);
-      
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("Bir Sorun Oluştu...");
     }
-  }
+  };
 
   const setLectureLiked = async () => {
     try {
@@ -59,9 +64,9 @@ function LectureDetail() {
   };
 
   const handleBackButton = () => {
-    dispatch(clearContent())
-    navigate("/")
-  }
+    dispatch(clearContent());
+    navigate("/login");
+  };
 
   useEffect(() => {
     getLectureLikeInfo();
@@ -86,12 +91,6 @@ function LectureDetail() {
                   <div className="lecture-info">
                     <h3>{lecture.name}</h3>
                   </div>
-                  {completionControl && 
-                  (<span>
-                  Bu Kursta Öğrencinin izlediği = {lectureCompletionDetail?.totalWatchedCount} +
-                  Bu Kursta Yüzde Kaç Bitirdi= {lectureCompletionDetail?.completionPercentage}+
-                  Bu Kursta Kaç İçerik Var={lectureCompletionDetail?.totalContentCount}
-                  </span>)}
                   <div className="date-info text-dark-blue">
                     <span>{`${lecture.endDate} tarihine kadar bitirebilirsin`}</span>
                   </div>
@@ -110,6 +109,17 @@ function LectureDetail() {
                   </div>
                   <span className="number-of-likes">{numberOfLikes}</span>
                 </div>
+              </div>
+              <div className="d-flex align-items-center mt-3 gap-2">
+                <div className="status-bar" id="status-bar">
+                  <div
+                    className="completion-bar"
+                    style={{
+                      width: `${lectureCompletionDetail?.completionPercentage}%`,
+                    }}
+                  ></div>
+                </div>
+                <span>{`%${lectureCompletionDetail?.completionPercentage}`}</span>
               </div>
             </div>
           </div>
@@ -134,7 +144,10 @@ function LectureDetail() {
         {section === 1 && <LectureInfo />}
       </div>
       {showDetail === true && (
-        <LectureDetailSidebar setShowDetail={setShowDetail} lectureId={lecture.id}/>
+        <LectureDetailSidebar
+          setShowDetail={setShowDetail}
+          lectureId={lecture.id}
+        />
       )}
       <ToastContainer position="bottom-right" theme="light" />
     </div>

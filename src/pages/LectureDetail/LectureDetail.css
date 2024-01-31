@@ -100,3 +100,15 @@
   transition: transform 1s;
 }
 
+.status-bar {
+  background-color: rgb(221, 221, 221);
+  height: 8px;
+  width: 94%;
+  border-radius: 10px;
+}
+
+.completion-bar {
+  background-image: linear-gradient(to right,#2ddfff,#b7df2d);
+  height: 8px;
+  border-radius: 10px;
+}
