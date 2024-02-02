@@ -1,0 +1,12 @@
+.profile-side-bar-element a {
+  width: 15rem;
+  border-radius: 20px;
+  font-size: large;
+  color: gray;
+  transition: all 0.2s ease-in-out;
+}
+
+.profile-side-bar-element a:hover {
+  color: #93f;
+  scale: 1.08;
+}

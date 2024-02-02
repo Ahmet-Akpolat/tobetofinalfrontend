@@ -1,0 +1,55 @@
+.education-card {
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 10px 24px 0 hsla(0, 0%, 9%, 0.05);
+  padding: 12px;
+  transition: 0.5s;
+}
+
+.education-card:hover {
+  scale: 1.04;
+}
+
+.education-card-header span {
+  color: #9933ff;
+  font-size: small;
+  margin-top: 2px;
+}
+
+.date {
+  display: flex;
+}
+
+.date::before {
+  content: url(/public/icons/calendar_month_FILL0.svg);
+  margin-right: 5px;
+}
+
+.education-card-detail-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.education-card-detail-header {
+  color: gray;
+}
+
+.education-card-detail-content {
+  font-weight: bolder;
+}
+
+.education-card-delete-button::before {
+  content: url(/public/icons/delete_FILL0.svg);
+  background-color: #fc6d6d;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 1.8em;
+  height: 1.8em;
+  padding-top: 6px;
+  right: -10px;
+  bottom: 30px;
+}

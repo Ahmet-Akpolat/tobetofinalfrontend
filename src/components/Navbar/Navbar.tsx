@@ -110,7 +110,7 @@ const Navbar = () => {
             <div className="me-2 d-flex align-items-center justify-content-center">
               <span>
                 <img
-                  className="profile-photo"
+                  className="navbar-profile-photo"
                   src={
                     student.profilePhotoPath
                       ? student.profilePhotoPath

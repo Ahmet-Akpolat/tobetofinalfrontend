@@ -1,0 +1,48 @@
+.social-media-card label {
+    color: grey
+}
+
+
+.social-media-card-content {
+    position: relative;
+    border: 1px solid grey;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.social-media-card-content img {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.social-media-card-content::before {
+    content: url(/public/icons/delete_FILL0.svg);
+    background-color: #fc6d6d;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+    width: 1.6em;
+    height: 1.6em;
+    position: absolute;
+    right: 65px;
+    cursor: pointer;
+
+}
+
+.social-media-card-content::after {
+    content: url(/public/icons/edit_FILL0.svg);
+    background-color: rgb(237, 218, 255);
+    border-radius: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+    width: 1.5em;
+    height: 1.5em;
+    position: absolute;
+    right: 15px;    
+    bottom: 10px;
+    cursor: pointer;
+}

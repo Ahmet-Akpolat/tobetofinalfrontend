@@ -31,7 +31,7 @@ function LectureDetail() {
       const lectureNumberOfLikes = await lectureService.getLectureNumberOfLikes(
         lecture.id
       );
-      setLiked(likedLecture.isLiked);
+      if (likedLecture.isLiked == true) setLiked(likedLecture.isLiked);
       setNumberOfLikes(lectureNumberOfLikes.count);
     } catch (error) {
       console.log(error);
@@ -58,6 +58,7 @@ function LectureDetail() {
     try {
       await lectureService.setLectureLiked(student.id, lecture.id);
       getLectureLikeInfo();
+      setLiked(!liked)
     } catch (error) {
       toast.error("Bir sorun oluştu...");
       navigate("/login");

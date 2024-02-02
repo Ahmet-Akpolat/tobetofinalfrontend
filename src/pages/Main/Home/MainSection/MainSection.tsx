@@ -153,7 +153,7 @@ const MainSection = () => {
                           .map((_: any, index: any) => (
                             <Lecture key={index} index={index} />
                           ))
-                          .reverse()}
+                        }
                       </div>
                       {lectures.length > MAX_ITEMS_DISPLAY.lectures && (
                         <a

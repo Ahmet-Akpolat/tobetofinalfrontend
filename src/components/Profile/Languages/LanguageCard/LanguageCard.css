@@ -1,0 +1,46 @@
+.language-card {
+  background-color: white;
+  border-radius: 50px;
+  max-width: 110px !important;
+  padding: 5px;
+  box-shadow: 0 10px 24px rgb(212, 212, 212);
+  min-width: 200px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.4s;
+}
+
+.language-card::before {
+  content: url(/public/icons/public_FILL0_wght300.svg);
+}
+
+.language-card::after {
+  content: url(/public/icons/delete_FILL0.svg);
+  background-color: #fc6d6d;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
+  width: 1.6em;
+  height: 1.6em;
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+}
+
+.language-card:hover {
+  border: 1px solid #fc6d6d;
+  scale: 1.1;
+}
+
+.language-name {
+  color: gray;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.language-degree {
+  color: gray;
+  font-size: 12px;
+}

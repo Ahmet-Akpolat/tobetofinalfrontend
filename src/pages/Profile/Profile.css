@@ -1,0 +1,73 @@
+.profile-input label,
+.big-profile-input label {
+  font-size: 16px;
+  font-weight: bolder;
+  text-align: left;
+  color: #828282;
+}
+
+.profile-input input,
+.profile-input textarea,
+.profile-input select {
+  border: 1px solid #b3a6c0;
+  border-radius: 8px;
+  width: 100%;
+  padding: 10px;
+  transition: 0.5s;
+}
+
+.big-profile-input input,
+.big-profile-input textarea,
+.big-profile-input select {
+  border: 1px solid #b3a6c0;
+  border-radius: 8px;
+  width: 100%;
+  padding: 10px;
+  transition: 0.5s;
+}
+
+.profile-input input:focus,
+.profile-input textarea:focus,
+.profile-input select:focus {
+  outline: none !important;
+  box-shadow: 0 0 10px rgb(188, 117, 255);
+}
+
+.big-profile-input input:focus,
+.big-profile-input textarea:focus,
+.big-profile-input select:focus {
+  outline: none !important;
+  box-shadow: 0 0 10px rgb(188, 117, 255);
+}
+
+.save-button {
+  color: white;
+  border: none;
+  min-width: 150px;
+  height: 35px;
+  background-color: #93f;
+  border-radius: 20px;
+  transition: 0.4s;
+}
+
+.delete-button {
+  color: white;
+  border: none;
+  min-width: 150px;
+  height: 35px;
+  background-color: #fc5c46;
+  border-radius: 20px;
+  transition: 0.4s;
+}
+
+.delete-button:hover {
+  scale: 1.1;
+}
+
+.save-button:hover {
+  scale: 1.1;
+}
+
+.personal-informations label {
+  color: gray;
+}

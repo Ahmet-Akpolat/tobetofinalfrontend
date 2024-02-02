@@ -1,0 +1,22 @@
+.certificates h5 {
+  color: #93f;
+}
+
+.upload-area {
+  width: 100%;
+  background-color: #f8f8f8;
+  border: 2px dashed #a486c3;
+  border-radius: 20px;
+  height: 125%;
+  cursor: pointer;
+}
+
+.upload-img {
+  display: flex;
+  justify-content: center;
+  border: 2px dashed #93f;
+  border-radius: 50%;
+  background-color: #efdfff;
+  height: 60px;
+  width: 60px;
+}

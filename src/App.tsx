@@ -9,6 +9,7 @@ import Home from "./pages/Main/Home/Home";
 import Footer from "./components/Footer/Footer";
 import LectureDetail from "./pages/LectureDetail/LectureDetail";
 import { OverlayLoader } from "./components/OverlayLoader/OverlayLoader";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   const isAuth = useSelector(selectIsAuthenticated);
@@ -29,6 +30,10 @@ function App() {
 
         <Route element={<MainLayout showLayout={false} />}>
           <Route path="/ders-detay" element={<LectureDetail />} />
+        </Route>
+
+        <Route element={<MainLayout />}>
+          <Route path="profilim" element={<Profile />} />
         </Route>
       </Routes>
       <OverlayLoader />

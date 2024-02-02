@@ -1,0 +1,41 @@
+.profile-photo {
+  position: relative;
+}
+
+.profile-photo-remove::before {
+  content: url(/public/icons/delete_FILL0.svg);
+  background-color: #fc6d6d;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  padding-top: 6px;
+  right: 53%;
+  top: 77%;
+}
+
+.profile-photo-edit::before {
+  content: url(/public/icons/edit_FILL0.svg);
+  background-color: white;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  padding-top: 6px;
+  right: 42%;
+  top: 77%;
+}
+
+.profile-photo img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
