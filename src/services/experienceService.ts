@@ -21,7 +21,7 @@ class ExperienceService extends BaseService<
 > {
   constructor() {
     super();
-    this.apiUrl = "StudentExperience";
+    this.apiUrl = "StudentExperiences";
   }
 
   async getForLoggedStudent() {

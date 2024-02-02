@@ -13,6 +13,7 @@ import experienceService from "../../../services/experienceService";
 function Experiences() {
   const [experiences, setExperiences] = useState([]);
   const [cities, setCities] = useState([]);
+  const [endDateControl, setEndDateControl] = useState<boolean>(true);
 
   const initialValues = {
     companyName: null,
@@ -22,6 +23,7 @@ function Experiences() {
     endDate: null,
     description: null,
     cityId: null,
+    
   };
 
   const addStudentExperiences = async (
@@ -29,6 +31,7 @@ function Experiences() {
   ) => {
     try {
       await studentService.addStudentExperiences(data);
+      getExperiences();
     } catch (error) {
       console.log(error);
     }
@@ -107,14 +110,20 @@ function Experiences() {
               <label>İş Baslangıç Tarihi</label>
               <FormikInput name="startDate" type="date" />
             </div>
-            <div className="profile-input col-12 col-md-6 mb-4">
-              <label>İş Bitişi</label>
-              <FormikInput name="endDate" type="date" />
-              <div className="d-flex gap-2 mt-4">
-                <FormikInput name="continue" type="checkbox" />
-                <small>Calışmaya Devam Ediyorum</small>
-              </div>
+            {
+              endDateControl &&(
+                <div className="profile-input col-12 col-md-6 mb-4">
+                  <label>İş Bitişi</label>
+                  <FormikInput name="endDate" type="date" />
+                </div>
+
+              )
+            }
+            <div className="d-flex gap-2 mt-4">
+              <input type="checkbox" onClick={()=>setEndDateControl(!endDateControl)}></input>
+              <small >Calışmaya Devam Ediyorum</small>
             </div>
+
           </div>
           <div className="big-profile-input col-12 mb-4">
             <label>İş Açıklaması</label>
