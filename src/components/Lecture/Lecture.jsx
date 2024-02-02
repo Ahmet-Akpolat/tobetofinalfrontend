@@ -18,11 +18,14 @@ const Lecture = (props) => {
   const handleClick = async () => {
     try {
       dispatch(activeLoading());
-      const response = await LectureService.getWithDetails(lectures[props.index].lectureId,token);
+      const response = await LectureService.getWithDetails(
+        lectures[props.index].lectureId,
+        token
+      );
       dispatch(setLectureDetail(response));
       navigate("ders-detay");
     } catch (error) {
-      dispatch(clearAuth())
+      dispatch(clearAuth());
       toast("Oturumunuzun süresi doldu lütfen tekrar giriş yapın..");
     }
     dispatch(clearLoading());
@@ -31,10 +34,7 @@ const Lecture = (props) => {
   return (
     <div className="d-flex align-items-center justify-content-center">
       <div className="edu-card">
-        <img
-          className="card-imgg"
-          src="https://miro.medium.com/v2/resize:fit:1400/1*XXI-kg18liPn4XcfZmoqQQ.jpeg"
-        />
+        <img className="card-imgg" src={lectures[props.index].lectureImageUrl} />
         <div className="card-content">
           <div className="d-flex flex-column">
             <span>{lectures[props.index].lectureName}</span>

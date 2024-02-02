@@ -15,24 +15,25 @@ interface Props {
 
 function LectureContent({ setShowDetail }: Props) {
   const lecture = useSelector(selectLectureDetail);
-  const [contentsViews, setContentsViews] = useState([] as any)
+  const [contentsViews, setContentsViews] = useState([] as any);
 
   async function getContentsIsWatched() {
     try {
-      const contentViews = await lectureService.getContentsIsWatched(lecture.id)
-      setContentsViews([])
+      const contentViews = await lectureService.getContentsIsWatched(
+        lecture.id
+      );
+      setContentsViews([]);
       contentViews.data.forEach((content: any) => {
-        contentsViews.push(content.contentId)
+        contentsViews.push(content.contentId);
       });
-    } catch (error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
   }
 
   useEffect(() => {
-    getContentsIsWatched()
-  }, [])
-
+    getContentsIsWatched();
+  }, []);
 
   return (
     <>
@@ -45,12 +46,20 @@ function LectureContent({ setShowDetail }: Props) {
           <div className="col-lg-5 col-sm-12 col-xs-12">
             <Scrollbar style={{ minHeight: "500px" }}>
               {lecture.courses.map((_: any, index: any) => (
-                <LectureContentHeader key={index} index={index} contentsViews={contentsViews}/>
+                <LectureContentHeader
+                  key={index}
+                  index={index}
+                  contentsViews={contentsViews}
+                />
               ))}
             </Scrollbar>
           </div>
           <div className="col-lg-7 col-sm-12 col-xs-12">
-            <LectureVideo setShowDetail={setShowDetail} setContentsViews={setContentsViews} lectureId={lecture.id}/>
+            <LectureVideo
+              setShowDetail={setShowDetail}
+              setContentsViews={setContentsViews}
+              lectureId={lecture.id}
+            />
           </div>
         </div>
       )}

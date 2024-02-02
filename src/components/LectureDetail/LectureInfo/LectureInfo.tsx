@@ -1,6 +1,12 @@
+import { useSelector } from "react-redux";
 import "./LectureInfo.css";
+import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
 
-function LectureInfo() {
+function LectureInfo({ lectureCompletionDetail }: any) {
+  const lecture = useSelector(selectLectureDetail);
+
+  console.log(lecture);
+
   return (
     <div className="lecture-info">
       <div className="info-section">
@@ -9,7 +15,7 @@ function LectureInfo() {
             <img src="icons/event_note_FILL0.svg"></img>
             <strong> Başlangıç</strong>
           </div>
-          <text>27 EKİ 2023 14:52</text>
+          <text>{lecture.startDate.replace("T", " ")}</text>
         </div>
         <div
           className="d-flex justify-content-between"
@@ -18,25 +24,7 @@ function LectureInfo() {
           <div>
             <strong> Bitiş</strong>
           </div>
-          <text>29 ŞUB 2024 23:59</text>
-        </div>
-      </div>
-      <div className="info-section">
-        <div className="d-flex justify-content-between">
-          <div>
-            <img src="icons/timer_FILL0_wght100.svg"></img>
-            <strong> Geçirdiğin Süre</strong>
-          </div>
-          <text>5 sa 26 dk</text>
-        </div>
-      </div>
-      <div className="info-section">
-        <div className="d-flex justify-content-between">
-          <div>
-            <img src="icons/timer_FILL0_wght100.svg"></img>
-            <strong> Tahmini Süre</strong>
-          </div>
-          <text>65 g 36 sa 30 dk</text>
+          <text>{lecture.endDate.replace("T", " ")}</text>
         </div>
       </div>
       <div className="info-section">
@@ -45,7 +33,16 @@ function LectureInfo() {
             <img src="icons/sell_FILL0.svg"></img>
             <strong> Kategori</strong>
           </div>
-          <text>Genel</text>
+          <text>{lecture.categoryName}</text>
+        </div>
+      </div>
+      <div className="info-section">
+        <div className="d-flex justify-content-between">
+          <div>
+            <img src="icons/timer_FILL0_wght100.svg"></img>
+            <strong> İzlenilen İçerik Sayısı</strong>
+          </div>
+          <text>{lectureCompletionDetail.totalWatchedCount}</text>
         </div>
       </div>
       <div className="info-section">
@@ -54,7 +51,7 @@ function LectureInfo() {
             <img src="icons/description_FILL0.svg"></img>
             <strong> İçerik</strong>
           </div>
-          <text>65 Video</text>
+          <text>{lectureCompletionDetail.totalContentCount}</text>
         </div>
       </div>
       <div className="info-section">
@@ -63,7 +60,7 @@ function LectureInfo() {
             <img src="icons/work_FILL0_wght100.svg"></img>
             <strong> Üretici Firma</strong>
           </div>
-          <text>Enocta</text>
+          <text>{lecture.manufacturerName}</text>
         </div>
       </div>
     </div>

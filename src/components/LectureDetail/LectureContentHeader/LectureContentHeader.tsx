@@ -3,18 +3,19 @@ import "./LectureContentHeader.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
 import { setContent } from "../../../store/slices/contentSlice";
-import lectureService from "../../../services/lectureService";
 
 function LectureContentHeader({ index, contentsViews }: any) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [expand, setExpand] = useState(false);
   const lecture = useSelector(selectLectureDetail);
+  const [contentViews, setContentViews] = useState([] as any);
 
   const lectureContents = lecture.courses;
 
   useEffect(() => {
-    dispatch(setContent(lectureContents[0].contents[0]))
-  }, [])
+    setContentViews(contentsViews);
+    dispatch(setContent(lectureContents[0].contents[0]));
+  }, []);
 
   return (
     <div className="content-header">
@@ -34,16 +35,17 @@ function LectureContentHeader({ index, contentsViews }: any) {
       {expand === true && (
         <div>
           {lectureContents[index].contents.map((content: any, index: any) => (
-            <div className="lecture-video-header row" onClick={() => dispatch(setContent(content))}>
+            <div
+              className="lecture-video-header row"
+              onClick={() => dispatch(setContent(content))}
+            >
               <div className="mb-1">
                 <text>{content.name}</text>
               </div>
               <sub>{`Video ${content.duration} dk`}</sub>
-              {
-                contentsViews.includes(content.id) && (
-                  <div className="is-finish"></div>
-                ) 
-              }
+              {contentViews.includes(content.id) && (
+                <div className="is-finish"></div>
+              )}
             </div>
           ))}
         </div>

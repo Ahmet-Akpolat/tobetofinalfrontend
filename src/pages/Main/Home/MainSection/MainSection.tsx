@@ -30,7 +30,7 @@ const MainSection = () => {
 
   const MAX_ITEMS_DISPLAY = {
     appeals: 2,
-    lectures: 10,
+    lectures: 4,
     announcements: 3,
     surveys: 3,
     exams: 2,
@@ -152,7 +152,8 @@ const MainSection = () => {
                           .slice(0, MAX_ITEMS_DISPLAY.lectures)
                           .map((_: any, index: any) => (
                             <Lecture key={index} index={index} />
-                          ))}
+                          ))
+                          .reverse()}
                       </div>
                       {lectures.length > MAX_ITEMS_DISPLAY.lectures && (
                         <a
@@ -223,11 +224,11 @@ const MainSection = () => {
         </div>
       </div>
       <div className="main-section d-flex align-items-center justify-content-center">
-        <div className="exam cv-box display-flex mmt-n-4 main-section">
+        <div className="exam cv-box cv-padding display-flex mmt-n-4 main-section">
           <span className="exam-header">Sınavlarım</span>
           <div className="col-12 mt-3 mb-3">
             <div className="tab-pane fade show active">
-              <div className="row">
+              <div className="row p-2">
                 {exams.length === 0 ? (
                   <NoContent content="sınavınız" />
                 ) : (

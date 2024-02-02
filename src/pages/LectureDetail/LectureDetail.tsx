@@ -46,7 +46,6 @@ function LectureDetail() {
         await lectureService.getLectureCompletionDetails(lecture.id)
       ).data;
       setLectureCompletionDetail(completionDetail);
-
       setCompletionControl(true);
     } catch (error) {
       console.log(error);
@@ -82,10 +81,7 @@ function LectureDetail() {
         <div className="lecture-activity">
           <div className="row">
             <div className="col-lg-1 col-sm-2 col-12">
-              <img
-                className="lecture-img"
-                src="https://lms.tobeto.com/tobeto/eep/common_show_picture_cached.aspx?pQS=eaAjNZ0uaOFNO7nf8wuXoA%3d%3d"
-              ></img>
+              <img className="lecture-img" src={lecture.imageUrl}></img>
             </div>
             <div className="col-lg-11 col-md-11 col-sm-10 col-xs-12">
               <div className="d-flex justify-content-between">
@@ -94,7 +90,10 @@ function LectureDetail() {
                     <h3>{lecture.name}</h3>
                   </div>
                   <div className="date-info text-dark-blue">
-                    <span>{`${lecture.endDate} tarihine kadar bitirebilirsin`}</span>
+                    <span>{`${lecture.endDate.replace(
+                      "T",
+                      " "
+                    )} tarihine kadar bitirebilirsin`}</span>
                   </div>
                 </div>
                 <div className="actions d-flex align-items-center">
@@ -112,16 +111,21 @@ function LectureDetail() {
                   <span className="number-of-likes">{numberOfLikes}</span>
                 </div>
               </div>
-              <div className="d-flex align-items-center mt-3 gap-2">
-                <div className="status-bar" id="status-bar">
-                  <div
-                    className="completion-bar"
-                    style={{
-                      width: `${lectureCompletionDetail?.completionPercentage}%`,
-                    }}
-                  ></div>
+              <div className="lecture-status mt-2">
+                <span
+                  style={{ color: "gray" }}
+                >{`${lectureCompletionDetail?.totalWatchedCount}/${lectureCompletionDetail?.totalContentCount}`}</span>
+                <div className="d-flex align-items-center gap-2">
+                  <div className="status-bar" id="status-bar">
+                    <div
+                      className="completion-bar"
+                      style={{
+                        width: `${lectureCompletionDetail?.completionPercentage}%`,
+                      }}
+                    ></div>
+                  </div>
+                  <span>{`%${lectureCompletionDetail?.completionPercentage}`}</span>
                 </div>
-                <span>{`%${lectureCompletionDetail?.completionPercentage}`}</span>
               </div>
             </div>
           </div>
@@ -143,7 +147,9 @@ function LectureDetail() {
           </div>
         </div>
         {section === 0 && <LectureContent setShowDetail={setShowDetail} />}
-        {section === 1 && <LectureInfo />}
+        {section === 1 && (
+          <LectureInfo lectureCompletionDetail={lectureCompletionDetail} />
+        )}
       </div>
       {showDetail === true && (
         <LectureDetailSidebar

@@ -4,27 +4,22 @@ import { selectContent } from "../../store/slices/contentSlice";
 import { useEffect, useState } from "react";
 import lectureService from "../../services/lectureService";
 import { selectLectureDetail } from "../../store/slices/lectureDetailSlice";
+import { useNavigate } from "react-router-dom";
 
 function VideoPlayer({ setContentsViews }: any) {
-  const [videoProgress, setVideoProgress] = useState(0)
+  const navigate = useNavigate();
   const content = useSelector(selectContent);
   const lecture = useSelector(selectLectureDetail);
 
   const videoViewed = async () => {
-    if (videoProgress == content.duration) {
-      setContentsViews((arr: []) => [...arr, content.id])
-      try {
-        await lectureService.setContentIsWatched(lecture.id, content.id)
-      }
-      catch (error) {
-        console.log(error)
-      }
+    try {
+      await lectureService.setContentIsWatched(lecture.id, content.id);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+      navigate("/login");
     }
-  }
-
-  useEffect(() => {
-    videoViewed()
-  }, [videoProgress])
+  };
 
   return (
     <ReactPlayer
@@ -32,8 +27,8 @@ function VideoPlayer({ setContentsViews }: any) {
       width="100%"
       height="390px"
       controls={true}
-      onProgress={(progress) => {
-        setVideoProgress(progress.played)
+      onEnded={() => {
+        videoViewed();
       }}
     />
   );
