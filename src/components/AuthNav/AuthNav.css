@@ -127,3 +127,9 @@
   color: #93f;
   font-weight: 700;
 }
+
+.button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

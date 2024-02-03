@@ -4,8 +4,12 @@ import * as Yup from "yup";
 import "yup-phone-lite";
 import { Form, Formik } from "formik";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
+import { selectStudent } from "../../../store/slices/studentSlice";
 
 function PersonalInformations() {
+  const student = useSelector(selectStudent);
+
   const initialValues = {
     name: "",
     surname: "",
@@ -52,7 +56,13 @@ function PersonalInformations() {
           <div className="personal-informations row">
             <div className="col-12 mb-5 text-center">
               <div className="profile-photo">
-                <img src="https://pbs.twimg.com/profile_images/1697250796906348546/JAYDV2ix_400x400.jpg"></img>
+                <img
+                  src={
+                    student.profilePhotoPath
+                      ? student.profilePhotoPath
+                      : "https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png"
+                  }
+                ></img>
                 <div className="profile-photo-remove"></div>
                 <div className="profile-photo-edit">
                   <input

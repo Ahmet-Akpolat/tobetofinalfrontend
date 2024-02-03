@@ -1,96 +1,271 @@
 .login-base {
-  min-height: 84.2vh;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.login
-{
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    padding: 100px 200px;
-    display: grid;
-    place-items: center;
-    border: 5px solid transparent;
-    background: #fff;
+.login-section {
+  min-height: 62vh;
+  display: flex;
+  padding: 0 13%;
+  gap: 2%;
 }
 
-.login::before 
-{
-    z-index: -1;
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: conic-gradient(from var(--angle), #0ebeff,#ffdd40,#ae63e4,#47cf73,#0ebeff,#ffdd40,#ae63e4,#47cf73, #0ebeff);
-    border-image-slice: 1;
-    border-radius: 1em;
-    animation: 4s rotate linear infinite;
+.login {
+  position: relative;
+  border: 5px solid transparent;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column; /* Form elemanlarını dikeyde sıralar */
+  align-items: center; /* Form elemanlarını dikeyde ortalar */
+  width: 100%; /* Genişlik 100% olarak ayarlanmalı */
+  background: #fff;
+  overflow: hidden;
 }
 
-.login::after 
-{
-    bottom: 2px;
-    top: 2px;
-    left: 2px;
-    right: 2px;
-    height: auto;
-    width: auto;
-    margin: 3px;
-    background: inherit;
-    content: "";
-    position: absolute;
-    z-index: -1;
-    border-radius: 1em;
+.login-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
 }
 
-
-@keyframes rotate 
-{
-	to {
-		--angle: 360deg;
-	}
+.login:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: conic-gradient(
+    from var(--angle),
+    #0ebeff,
+    #ffdd40,
+    #ae63e4,
+    #47cf73,
+    #0ebeff,
+    #ffdd40,
+    #ae63e4,
+    #47cf73,
+    #0ebeff
+  );
+  border-radius: 1em;
+  border-image-slice: 1;
+  animation: 4s rotate linear infinite;
 }
 
-@property --angle 
-{
-    syntax: '<angle>';
-    initial-value: 0deg;
-    inherits: false;
+.login:after {
+  content: "";
+  position: absolute;
+  top: 5px; /* Border genişliğine eşit olmalı */
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background: #fff; /* Beyaz arka planı burada tanımlayın */
+  border-radius: 0.9em; /* İç kenarlık yarıçapı dış kenarlıktan biraz daha küçük olmalı */
 }
 
-.login-img
-{
-    max-width: 250px;
-    margin-bottom: 20px;
+.login-img-span {
+  width: 100%;
+  margin-top: 4%;
+  display: flex;
+  top: 0;
+  height: 20%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* İçeriği dikeyde sıralar */
+}
+.login-img {
+  width: 38%;
 }
 
-.login-input 
-{
-    width: 300px;
-    height: 35px;
-    border-radius: 10px;
-    margin-top: 10px;
-    border: 1px solid grey;
+.istkodluyor {
+  position: relative;
+  border: 5px solid transparent;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column; /* Form elemanlarını dikeyde sıralar */
+  align-items: center; /* Form elemanlarını dikeyde ortalar */
+  width: 100%; /* Genişlik 100% olarak ayarlanmalı */
+  background: #fff;
+  overflow: hidden;
 }
 
-.login-btn
-{
-    width: 100%;
-    margin-top: 10px;
-    cursor: pointer;
-    color: white;
-    background-color: #93f;
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
+.istkodluyor-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
 }
 
-.register>h1
-{
-    color: #0ebeff;
+.istkodluyor:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: conic-gradient(
+    from var(--angle),
+    #0fcdfa,
+    #87ff87,
+    #1e0f41,
+    #0fcdfa
+  );
+  border-radius: 1em;
+  border-image-slice: 1;
+  animation: 4s rotate linear infinite;
+}
+
+.istkodluyor:after {
+  content: "";
+  position: absolute;
+  top: 5px; /* Border genişliğine eşit olmalı */
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background: #fff; /* Beyaz arka planı burada tanımlayın */
+  border-radius: 0.9em; /* İç kenarlık yarıçapı dış kenarlıktan biraz daha küçük olmalı */
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.login-form {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column; /* Form elemanlarını dikeyde sıralar */
+  align-items: center; /* Form elemanlarını dikeyde ortalar */
+}
+
+.login-input {
+  width: 430px;
+  height: 45px;
+  border-radius: 5px;
+  margin-top: 25px;
+  border: 1px solid grey;
+  border-color: #e3e3e3;
+  transition: box-shadow 0.2s; /* Gölge animasyonu için geçiş efekti ekleyin */
+  padding-left: 5%;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: rgba(153, 51, 255, 0.5);
+  box-shadow: 0 0 0px 4px rgba(153, 51, 255, 0.3); /* Spread değeri sıfır, yani daha keskin bir gölge */
+}
+
+.login-btn {
+  font-weight: 700;
+  width: 100%;
+  margin-top: 20px;
+  cursor: pointer;
+  color: white;
+  background-color: #93f;
+  padding: 5px 20px;
+  border-radius: 20px;
+  border: none;
+}
+
+.dot-image {
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 50px;
+}
+
+.ik-logo {
+  width: 200px;
+}
+
+.ik-logo-span {
+  margin: 10px 10px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.greenline-span {
+  margin: 7% 0 7% 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.greenline {
+  width: 300px;
+}
+
+.quot1 {
+  color: #08b47c;
+  margin-left: 0.3em;
+}
+
+.quot2 {
+  color: #08b47c;
+  margin-right: 0.3em;
+}
+
+.ik-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-weight: 700;
+  font-size: 20pt;
+}
+
+.login-ik-appeal {
+  font-weight: 700;
+  width: 25%;
+  margin-top: 20px;
+  cursor: pointer;
+  color: #0ec5f6;
+  background-color: #200c44;
+  padding: 5px 20px;
+  border-radius: 20px;
+  border: none;
+}
+
+.dot-image-span2 {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+
+.dot-image2 {
+  width: 50px;
+  transform: rotate(-90deg);
+  margin-right: 15px;
+  margin-top: 15px;
+}
+
+.refresh-password {
+  color: #737373;
+  font-size: 12pt;
+  cursor: pointer;
+}
+
+.login-signup-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  font-size: 11pt;
+}
+
+.signup-link {
+  font-weight: 700;
+  color: #4f4f4f;
+  text-decoration: none;
+  margin-left: 5px;
 }
