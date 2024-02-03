@@ -122,6 +122,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <ToastContainer position="bottom-right" />
     </div>
   );
 };
