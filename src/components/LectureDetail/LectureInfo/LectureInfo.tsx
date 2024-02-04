@@ -5,8 +5,6 @@ import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
 function LectureInfo({ lectureCompletionDetail }: any) {
   const lecture = useSelector(selectLectureDetail);
 
-  console.log(lecture);
-
   return (
     <div className="lecture-info">
       <div className="info-section">

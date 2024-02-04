@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./ProfileSidebarElement.css";
 
 function ProfileSidebarElement({ element, setState, svg, header }: any) {

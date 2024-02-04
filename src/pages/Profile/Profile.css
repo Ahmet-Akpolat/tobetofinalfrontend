@@ -71,3 +71,11 @@
 .personal-informations label {
   color: gray;
 }
+
+.is-selected a {
+  color: #93f !important;
+}
+
+.is-selected {
+  color: #93f;
+}

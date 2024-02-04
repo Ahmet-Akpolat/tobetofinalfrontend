@@ -1,15 +1,15 @@
 import {
   CreateStudentExperienceRequest,
   UpdateStudentExperienceRequest,
-} from "../models/requests/StudentExperienceRequests";
+} from "../../models/requests/StudentExperienceRequests";
 import {
   CreatedStudentExperienceResponse,
   GetListStudentExperienceResponse,
   StudentExperienceResponse,
   UpdatedStudentExperienceResponse,
-} from "../models/responses/StudentExperienceResponses";
-import axiosInstance from "../utils/axiosInterceptors";
-import { BaseService } from "./baseService";
+} from "../../models/responses/StudentExperienceResponses";
+import axiosInstance from "../../utils/axiosInterceptors";
+import { BaseService } from "../baseService";
 
 class ExperienceService extends BaseService<
   GetListStudentExperienceResponse,

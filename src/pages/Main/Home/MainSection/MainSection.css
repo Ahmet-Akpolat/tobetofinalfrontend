@@ -1,5 +1,5 @@
 .main-section {
-  width: 87%;
+  width: 80%;
   margin: auto;
 }
 
@@ -17,16 +17,6 @@
 
 .cv-padding {
   padding: 22px;
-}
-
-.row {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(-1 * var(--bs-gutter-y));
-  margin-right: calc(-0.5 * var(--bs-gutter-x));
-  margin-left: calc(-0.5 * var(--bs-gutter-x));
 }
 
 .ik-logo-platform {
@@ -131,24 +121,7 @@
 }
 
 .nav-tabs {
-  --bs-nav-tabs-link-active-color: var(--bs-emphasis-color);
-  --bs-nav-tabs-link-active-bg: var(--bs-body-bg);
   border: none !important;
-}
-
-.nav {
-  --bs-nav-link-padding-x: 1rem;
-  --bs-nav-link-padding-y: 0.5rem;
-  --bs-nav-link-font-size: 0.95rem;
-  --bs-nav-link-font-weight: 500;
-  --bs-nav-link-color: #4d4d4d;
-  --bs-nav-link-hover-color: #93f;
-  --bs-nav-link-disabled-color: var(--bs-secondary-color);
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
 }
 
 li {
@@ -179,7 +152,7 @@ li {
   font-size: 14pt;
   margin-bottom: 2rem;
   width: 100%;
-  margin-left: 3%;
+  margin-left: 1%;
 }
 
 .two-content {

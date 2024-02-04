@@ -85,11 +85,11 @@ const Login = () => {
             </div>
             <div>
               <small className="login-signup-button">
-                Henüz üye değil misin?{" "}
+                Henüz üye değil misin?
                 <Link className="signup-link" to="/signup">
                   Kayıt ol
                 </Link>
-              </small>{" "}
+              </small>
             </div>
           </div>
         </div>
