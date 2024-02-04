@@ -11,17 +11,17 @@ function PersonalInformations() {
   const student = useSelector(selectStudent);
 
   const initialValues = {
-    name: "",
-    surname: "",
-    phone: "",
-    birthDate: "",
-    nationalIdentity: "",
-    email: "",
-    country: "",
-    city: "",
-    district: "",
-    addressDetail: "",
-    description: "",
+    name: student.firstName,
+    surname: student.lastName,
+    phone: student.phone,
+    birthDate: student.birthDate.substring(0, 10),
+    nationalIdentity: student.nationalIdentity,
+    email: student.email,
+    country: student.country,
+    city: student.cityName,
+    district: student.districtName,
+    addressDetail: student.adrressDetail,
+    description: student.description,
   };
 
   const validationSchema = Yup.object({

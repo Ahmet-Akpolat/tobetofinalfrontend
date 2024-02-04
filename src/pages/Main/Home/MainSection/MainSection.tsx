@@ -38,7 +38,7 @@ const MainSection = () => {
 
   return (
     <section>
-      <div className="main-section d-flex align-items-center justify-content-center">
+      <div className="container main-section d-flex align-items-center justify-content-center">
         <div className="row cv-box cv-padding display-flex mmt-n-4 main-section">
           <div className="col-12 ik-logo-platform">
             <div className="p-4">
@@ -141,31 +141,26 @@ const MainSection = () => {
 
               {section == 1 && (
                 <div className="tab-pane fade show active">
-                  {lectures.length === 0 ? (
-                    <div className="row">
+                  <div className="row">
+                    {announcements.length === 0 ? (
                       <NoContent content="eğitiminiz" />
-                    </div>
-                  ) : (
-                    <>
-                      <div className="grid-container">
-                        {lectures
-                          .slice(0, MAX_ITEMS_DISPLAY.lectures)
-                          .map((_: any, index: any) => (
-                            <Lecture key={index} index={index} />
-                          ))
-                        }
-                      </div>
-                      {lectures.length > MAX_ITEMS_DISPLAY.lectures && (
-                        <a
-                          className="showMoreBtn"
-                          onClick={() => {
-                            navigate("/egitimlerim");
-                          }}
-                        >
-                          Daha Fazla Göster
-                        </a>
-                      )}
-                    </>
+                    ) : (
+                      lectures
+                        .slice(0, MAX_ITEMS_DISPLAY.lectures)
+                        .map((_: any, index: any) => (
+                          <Lecture key={index} index={index} />
+                        ))
+                    )}
+                  </div>
+                  {lectures.length > MAX_ITEMS_DISPLAY.lectures && (
+                    <a
+                      className="showMoreBtn"
+                      onClick={() => {
+                        navigate("/egitimlerim");
+                      }}
+                    >
+                      Daha Fazla Göster
+                    </a>
                   )}
                 </div>
               )}
@@ -223,7 +218,7 @@ const MainSection = () => {
           </div>
         </div>
       </div>
-      <div className="main-section d-flex align-items-center justify-content-center">
+      <div className="container main-section d-flex align-items-center justify-content-center">
         <div className="exam cv-box cv-padding display-flex mmt-n-4 main-section">
           <span className="exam-header">Sınavlarım</span>
           <div className="col-12 mt-3 mb-3">

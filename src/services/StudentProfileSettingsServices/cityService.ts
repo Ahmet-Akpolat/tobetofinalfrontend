@@ -1,14 +1,14 @@
 import {
   CreateCityRequest,
   UpdateCityRequest,
-} from "../models/requests/CityRequests";
+} from "../../models/requests/CityRequests";
 import {
   CityResponse,
   CreatedCityResponse,
   GetListCityResponse,
   UpdatedCityResponse,
-} from "../models/responses/CityResponses";
-import { BaseService } from "./baseService";
+} from "../../models/responses/CityResponses";
+import { BaseService } from "../baseService";
 
 class CityService extends BaseService<
   GetListCityResponse,

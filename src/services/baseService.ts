@@ -15,7 +15,7 @@ export class BaseService<
     this.apiUrl = "";
   }
 
-  async getAll(PageIndex:number, PageSize:number) {
+  async getAll(PageIndex:number = 0, PageSize:number = 999) {
     const response = await axiosInstance.get<any>(`${this.apiUrl}?PageIndex=${PageIndex}&PageSize=${PageSize}`);
     return response.data.items;
 }

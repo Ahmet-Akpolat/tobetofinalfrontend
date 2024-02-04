@@ -9,7 +9,7 @@ class AuthService {
   public async login(data: AuthLoginRequest): Promise<TokenModel | null> {
     try {
       const response = await axios.post<LoginResponseModel>(
-        "http://localhost:60805/api/Auth/StudentLogin",
+        "http://localhost:5278/api/Auth/StudentLogin",
         data
       );
       const loginResponse = response.data;
@@ -20,8 +20,8 @@ class AuthService {
         return null;
       }
     } catch (error) {
-        console.log(error)
-        toast.error("Yanlış E-posta veya Şifre!")
+      console.log(error);
+      toast.error("Yanlış E-posta veya Şifre!");
       return null;
     }
   }

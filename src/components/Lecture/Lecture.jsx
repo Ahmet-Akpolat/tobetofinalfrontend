@@ -32,9 +32,12 @@ const Lecture = (props) => {
   };
 
   return (
-    <div className="d-flex align-items-center justify-content-center">
+    <div className="d-flex align-items-center justify-content-center col-sm-6 col-md-5 col-xl-3 col-12 my-4">
       <div className="edu-card">
-        <img className="card-imgg" src={lectures[props.index].lectureImageUrl} />
+        <img
+          className="card-imgg"
+          src={lectures[props.index].lectureImageUrl}
+        />
         <div className="card-content">
           <div className="d-flex flex-column">
             <span>{lectures[props.index].lectureName}</span>

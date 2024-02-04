@@ -1,54 +1,99 @@
+import { useEffect, useState } from "react";
 import "./Skills.css";
+import skillService from "../../../services/StudentProfileSettingsServices/skillService";
+import { Field, Formik, Form } from "formik";
+import studentService from "../../../services/studentService";
+import { CreateStudentSkillRequest } from "../../../models/requests/StudentSkillRequests";
 
 function Skills() {
-  return (
-    <div className="skills">
-      <div className="row">
-        <div className="profile-input col-12 mb-4">
-          <label>Yetkinlik</label>
-          <select>
-            <option>Frontend</option>
-            <option>Backend</option>
-            <option>JavaScript</option>
-            <option>.NET Core</option>
-            <option>ReactJs</option>
-            <option>C#</option>
-            <option>C</option>
-            <option>C++</option>
-            <option>SQL</option>
-            <option>Algoritmalar</option>
-          </select>
-        </div>
-      </div>
-      <button className="save-button">Kaydet</button>
-      <div className="col-12 mt-5">
-        <div className="skill-card">
-          <strong>Javascript</strong>
-          <div className="skill-delete-button"></div>
-        </div>
-        <div className="skill-card">
-          <strong>Algoritmalar</strong>
-          <div className="skill-delete-button"></div>
-        </div>
-        <div className="skill-card">
-          <strong>Frontend</strong>
-          <div className="skill-delete-button"></div>
-        </div>
-        <div className="skill-card">
-          <strong>Backend</strong>
-          <div className="skill-delete-button"></div>
-        </div>
-        <div className="skill-card">
-          <strong>.NET Core</strong>
-          <div className="skill-delete-button"></div>
-        </div>
-        <div className="skill-card">
-          <strong>ReactJs</strong>
-          <div className="skill-delete-button"></div>
-        </div>
+  const [skills, setSkills] = useState([]);
+  const [skillOptions, setSkillOptions] = useState([]);
 
-      </div>
-    </div>
+  const initialValues = {
+    skillId: null,
+  };
+
+  const getSkills = async () => {
+    try {
+      const data = await skillService.getAll();
+      setSkillOptions(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getStudentSkills = async () => {
+    try {
+      const data = (await skillService.getForLoggedStudent()).data.items;
+      setSkills(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addStudentSkills = async (data: CreateStudentSkillRequest) => {
+    try {
+      console.log(data);
+      await studentService.addStudentSkills(data);
+      getStudentSkills();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteStudentSkills = async (id: any) => {
+    try {
+      await skillService.deleteStudentSkill(id);
+      setSkills((arr: any) => {
+        return arr.filter((skill: any) => skill.id !== id);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getSkills();
+    getStudentSkills();
+  }, []);
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={(initialValues: any) => {
+        addStudentSkills(initialValues);
+      }}
+    >
+      <Form>
+        <div className="skills">
+          <div className="row">
+            <div className="profile-input col-12 mb-4">
+              <label>Yetkinlik</label>
+              <Field as="select" name={"skillId"}>
+                {skillOptions.map((skill: any) => (
+                  <option value={skill.id}>{skill.name}</option>
+                ))}
+              </Field>
+            </div>
+          </div>
+          <button className="save-button" type="submit">
+            Kaydet
+          </button>
+          <div className="col-12 mt-5">
+            {skills !== null &&
+              skills.map((skill: any) => (
+                <div className="skill-card">
+                  <strong>{skill.skillName}</strong>
+                  <div
+                    className="skill-delete-button"
+                    onClick={() => deleteStudentSkills(skill.id)}
+                  ></div>
+                </div>
+              ))}
+          </div>
+        </div>
+      </Form>
+    </Formik>
   );
 }
 

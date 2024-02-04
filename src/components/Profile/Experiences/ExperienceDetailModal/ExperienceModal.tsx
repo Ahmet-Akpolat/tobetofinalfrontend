@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { Modal } from 'react-bootstrap'
-import { StudentExperienceResponse } from '../../../../models/responses/StudentExperienceResponses'
-import experienceService from '../../../../services/experienceService'
+import React, { useEffect, useState } from "react";
+import { Modal } from "react-bootstrap";
+import { StudentExperienceResponse } from "../../../../models/responses/StudentExperienceResponses";
+import experienceService from "../../../../services/StudentProfileSettingsServices/experienceService";
 
 type Props = {
-    studentExperience:StudentExperienceResponse;
-    show:boolean;
-    onHide:()=>void;
-
-}
+  studentExperience: StudentExperienceResponse;
+  show: boolean;
+  onHide: () => void;
+};
 
 const ExperienceModal = (props: Props) => {
-    
   return (
     <Modal
-    {...props}
+      {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -31,16 +29,12 @@ const ExperienceModal = (props: Props) => {
             </div>
           </Modal.Header>
           <Modal.Body>
-            <p>
-         
-              {props.studentExperience?.description}
-            </p>
+            <p>{props.studentExperience?.description}</p>
           </Modal.Body>
         </div>
       </div>
     </Modal>
-  )
-}
+  );
+};
 
-export default ExperienceModal
-
+export default ExperienceModal;
