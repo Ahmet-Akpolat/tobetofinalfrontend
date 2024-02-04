@@ -5,10 +5,16 @@ import { useEffect, useState } from "react";
 import socialMediaService from "../../../services/StudentProfileSettingsServices/socialMediaService";
 import studentService from "../../../services/studentService";
 import { CreateStudentSocialMediaRequest } from "../../../models/requests/StudentSocialMediaRequests";
+import ExceptionService from "../../../utils/exceptionService";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import { error } from "console";
 
 function SocialMedia() {
   const [socialMedias, setSocialMedias] = useState([]);
   const [socialMediaOptions, setSocialMediaOptions] = useState([]);
+
+  const exceptionService:ExceptionService=new ExceptionService;
 
   const initialValues = {
     socialMediaId: null,
@@ -18,20 +24,24 @@ function SocialMedia() {
   const addStudentSocialMedia = async (
     data: CreateStudentSocialMediaRequest
   ) => {
-    try {
-      await studentService.addStudentSocialMedias(data);
-      getStudentSocialMedias();
-    } catch (error) {
-      console.log(error);
-    }
+
+      await studentService.addStudentSocialMedias(data).then(()=>{
+        getStudentSocialMedias();
+      }).catch((error:any)=> {
+        alert(exceptionService.errorSelector(JSON.stringify(error.response.data)))
+        toast.error(exceptionService.errorSelector(JSON.stringify(error.response.data)));
+      });
+     
+  
   };
 
   const getSocialMedias = async () => {
     try {
       const data = await socialMediaService.getAll();
       setSocialMediaOptions(data);
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      alert(exceptionService.errorSelector(JSON.stringify(error.response.data)))
+      toast.error(exceptionService.errorSelector(JSON.stringify(error.response.data)));
     }
   };
 
@@ -39,8 +49,9 @@ function SocialMedia() {
     try {
       const data = (await socialMediaService.getForLoggedStudent()).data.items;
       setSocialMedias(data);
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      alert(exceptionService.errorSelector(JSON.stringify(error.response.data)))
+      toast.error(exceptionService.errorSelector(JSON.stringify(error.response.data)));
     }
   };
 

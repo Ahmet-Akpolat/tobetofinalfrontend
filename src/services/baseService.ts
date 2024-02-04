@@ -1,5 +1,6 @@
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import axiosInstance from "../utils/axiosInterceptors";
+import ExceptionService from "../utils/exceptionService";
 
 export class BaseService<
   GetAllType,
@@ -13,6 +14,11 @@ export class BaseService<
 
   constructor() {
     this.apiUrl = "";
+    // this.refreshToken();
+  }
+
+  async refreshToken(){
+    await axiosInstance.get("http://localhost:60805/api/Auth/RefreshToken");
   }
 
   async getAll(PageIndex:number = 0, PageSize:number = 999) {
@@ -25,7 +31,7 @@ export class BaseService<
     return response.data; // Directly returning the data part of the response
   }
 
-  add(request: AddRequestType): Promise<AxiosResponse<AddResponseType, any>> {
+  async add(request: AddRequestType) {
     return axiosInstance.post<AddResponseType>(this.apiUrl, request);
   }
 

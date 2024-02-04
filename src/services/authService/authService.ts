@@ -1,15 +1,17 @@
 import { LoginResponseModel } from "./../../models/responses/AuthResponses/LoginResponseModel";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { AuthLoginRequest } from "../../models/requests/auth/AuthLoginRequest";
 import { CreateStudentRequest } from "../../models/requests/StudentRequests";
 import { TokenModel } from "../../models/responses/AuthResponses/TokenModel";
 import { toast } from "react-toastify";
+import ExceptionService from "../../utils/exceptionService";
 
 class AuthService {
   public async login(data: AuthLoginRequest): Promise<TokenModel | null> {
+    const exceptionService:ExceptionService=new ExceptionService;
     try {
       const response = await axios.post<LoginResponseModel>(
-        "http://localhost:5278/api/Auth/StudentLogin",
+        "http://localhost:60805/api/Auth/StudentLogin",
         data
       );
       const loginResponse = response.data;
@@ -17,11 +19,11 @@ class AuthService {
       if (loginResponse && loginResponse.accessToken?.token) {
         return loginResponse.accessToken;
       } else {
+
         return null;
       }
-    } catch (error) {
-      console.log(error);
-      toast.error("Yanlış E-posta veya Şifre!");
+    } catch (error:any) {
+      exceptionService.errorSelector(JSON.stringify(error.response.data));
       return null;
     }
   }
