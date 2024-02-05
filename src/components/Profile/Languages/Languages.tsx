@@ -1,7 +1,13 @@
 import "./Languages.css";
 import LanguageCard from "./LanguageCard/LanguageCard";
+import { useState } from "react";
+import languagesService from "../../../services/StudentProfileSettingsServices/languagesService";
+import { ToastContainer } from "react-toastify";
 
 function Languages() {
+  const [languageOptions, setLanguageOptions] = useState([]);
+  const [languages, setLanguages] = useState([]);
+
   return (
     <div className="student-languages">
       <div className="row mb-4">
@@ -38,6 +44,7 @@ function Languages() {
         <LanguageCard />
         <LanguageCard />
       </div>
+      <ToastContainer position="bottom-right" />
     </div>
   );
 }

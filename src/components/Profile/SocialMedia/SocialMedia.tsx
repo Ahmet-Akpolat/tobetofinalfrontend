@@ -7,14 +7,13 @@ import studentService from "../../../services/studentService";
 import { CreateStudentSocialMediaRequest } from "../../../models/requests/StudentSocialMediaRequests";
 import ExceptionService from "../../../utils/exceptionService";
 import { AxiosError } from "axios";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { error } from "console";
+import exceptionService from "../../../utils/exceptionService";
 
 function SocialMedia() {
   const [socialMedias, setSocialMedias] = useState([]);
   const [socialMediaOptions, setSocialMediaOptions] = useState([]);
-
-  const exceptionService:ExceptionService=new ExceptionService;
 
   const initialValues = {
     socialMediaId: null,
@@ -24,24 +23,32 @@ function SocialMedia() {
   const addStudentSocialMedia = async (
     data: CreateStudentSocialMediaRequest
   ) => {
-
-      await studentService.addStudentSocialMedias(data).then(()=>{
+    await studentService
+      .addStudentSocialMedias(data)
+      .then(() => {
         getStudentSocialMedias();
-      }).catch((error:any)=> {
-        alert(exceptionService.errorSelector(JSON.stringify(error.response.data)))
-        toast.error(exceptionService.errorSelector(JSON.stringify(error.response.data)));
+      })
+      .catch((error: any) => {
+        alert(
+          exceptionService.errorSelector(JSON.stringify(error.response.data))
+        );
+        toast.error(
+          exceptionService.errorSelector(JSON.stringify(error.response.data))
+        );
       });
-     
-  
   };
 
   const getSocialMedias = async () => {
     try {
       const data = await socialMediaService.getAll();
       setSocialMediaOptions(data);
-    } catch (error:any) {
-      alert(exceptionService.errorSelector(JSON.stringify(error.response.data)))
-      toast.error(exceptionService.errorSelector(JSON.stringify(error.response.data)));
+    } catch (error: any) {
+      alert(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 
@@ -49,15 +56,19 @@ function SocialMedia() {
     try {
       const data = (await socialMediaService.getForLoggedStudent()).data.items;
       setSocialMedias(data);
-    } catch (error:any) {
-      alert(exceptionService.errorSelector(JSON.stringify(error.response.data)))
-      toast.error(exceptionService.errorSelector(JSON.stringify(error.response.data)));
+    } catch (error: any) {
+      alert(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 
   useEffect(() => {
-    getSocialMedias();
     getStudentSocialMedias();
+    getSocialMedias();
   }, []);
 
   return (
@@ -73,6 +84,7 @@ function SocialMedia() {
           <div className="row">
             <div className="profile-input col-6">
               <Field as="select" name={"socialMediaId"}>
+                <option>Seciniz</option>
                 {socialMediaOptions.map((sc: any) => (
                   <option value={sc.id}>{sc.name}</option>
                 ))}
@@ -96,6 +108,7 @@ function SocialMedia() {
           </div>
         </Form>
       </Formik>
+      <ToastContainer position="bottom-right" />
     </div>
   );
 }

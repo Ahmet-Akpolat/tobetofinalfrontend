@@ -17,8 +17,9 @@ export interface UpdateStudentRequest extends UpdateRequestModel {
     birthDate: string | null;
     addressDetail: string | null;
     description: string | null;
-    profilePhotoPath: string | null;
     country: string | null;
+    profilePhotoPathTemp: null,
+
 }
 
 

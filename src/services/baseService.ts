@@ -8,7 +8,7 @@ export class BaseService<
   AddRequestType,
   AddResponseType,
   UpdateRequestType,
-  UpdateResponseType,
+  UpdateResponseType
 > {
   public apiUrl: string;
 
@@ -17,17 +17,21 @@ export class BaseService<
     // this.refreshToken();
   }
 
-  async refreshToken(){
-    await axiosInstance.get("http://localhost:60805/api/Auth/RefreshToken");
+  async refreshToken() {
+    await axiosInstance.get("http://localhost:5278/api/Auth/RefreshToken");
   }
 
-  async getAll(PageIndex:number = 0, PageSize:number = 999) {
-    const response = await axiosInstance.get<any>(`${this.apiUrl}?PageIndex=${PageIndex}&PageSize=${PageSize}`);
+  async getAll(PageIndex: number = 0, PageSize: number = 999) {
+    const response = await axiosInstance.get<any>(
+      `${this.apiUrl}?PageIndex=${PageIndex}&PageSize=${PageSize}`
+    );
     return response.data.items;
-}
+  }
 
   async getById(id: string) {
-    const response = await axiosInstance.get<AxiosResponse<GetByIdType>>(`${this.apiUrl}/${id}`);
+    const response = await axiosInstance.get<AxiosResponse<GetByIdType>>(
+      `${this.apiUrl}/${id}`
+    );
     return response.data; // Directly returning the data part of the response
   }
 
@@ -36,17 +40,21 @@ export class BaseService<
   }
 
   update(
-    request: UpdateRequestType,
+    request: UpdateRequestType
   ): Promise<AxiosResponse<UpdateResponseType, any>> {
-    return axiosInstance.put<UpdateResponseType>(this.apiUrl, request);
+    return axiosInstance.put<UpdateResponseType>(this.apiUrl, request, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   }
 
-  async delete(id: string|number) {
+  async delete(id: string | number) {
     return axiosInstance.delete(`${this.apiUrl}/${id}`);
   }
 
   async getByToken() {
     const response = await axiosInstance.get(`${this.apiUrl}/getByToken`);
     return response.data;
-}
+  }
 }

@@ -222,7 +222,10 @@
 
 .navbar-profile-photo {
   border-radius: 30px;
-  max-width: 35px;
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  background-color: black;
 }
 
 .dropdown-item {

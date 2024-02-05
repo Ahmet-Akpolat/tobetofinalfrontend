@@ -4,44 +4,96 @@ import * as Yup from "yup";
 import "yup-phone-lite";
 import { Form, Formik } from "formik";
 import { useRef } from "react";
-import { useSelector } from "react-redux";
-import { selectStudent } from "../../../store/slices/studentSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectStudent, setStudent } from "../../../store/slices/studentSlice";
+import studentService from "../../../services/studentService";
+import { ToastContainer, toast } from "react-toastify";
+import ExceptionService from "../../../utils/exceptionService";
+import exceptionService from "../../../utils/exceptionService";
 
 function PersonalInformations() {
+  const dispatch = useDispatch();
   const student = useSelector(selectStudent);
 
   const initialValues = {
-    name: student.firstName,
-    surname: student.lastName,
-    phone: student.phone,
-    birthDate: student.birthDate.substring(0, 10),
-    nationalIdentity: student.nationalIdentity,
-    email: student.email,
-    country: student.country,
-    city: student.cityName,
-    district: student.districtName,
-    addressDetail: student.adrressDetail,
-    description: student.description,
+    firstName: student.firstName || null,
+    lastName: student.lastName || null,
+    phone: student.phone || null,
+    birthDate: student.birthDate?.substring(0, 10) || null,
+    nationalIdentity: student.nationalIdentity || null,
+    email: student.email || null,
+    country: student.country || null,
+    addressDetail: student.adrressDetail || null,
+    description: student.description || null,
+    profilePhotoPath: null,
+    profilePhotoPathTemp: null,
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Doldurulması zorunlu alan*"),
-    surname: Yup.string().required("Doldurulması zorunlu alan*"),
-    birthDate: Yup.string().required("Doldurulması zorunlu alan*"),
-    country: Yup.string().required("Doldurulması zorunlu alan*"),
-    city: Yup.string().required("Doldurulması zorunlu alan*"),
-    district: Yup.string().required("Doldurulması zorunlu alan*"),
-    email: Yup.string()
-      .email("Lutfen Gecerli Bir E-Posta Adresi Giriniz")
-      .required("Doldurulması zorunlu alan*"),
-    phone: Yup.string()
-      .phone("TR", "Lutfen Gecerli Bir Telefon Numarasi Giriniz")
-      .required("Doldurulması zorunlu alan*"),
-    nationalIdentity: Yup.string()
-      .required("*Aboneliklerde fatura için doldurulması zorunlu alan")
-      .typeError("*Aboneliklerde fatura için doldurulması zorunlu alan")
-      .matches(/^[0-9]{11}$/, "Lütfen Geçerli Bir TC Kimlik Numarası Giriniz"),
+    // name: Yup.string().required("Doldurulması zorunlu alan*"),
+    // surname: Yup.string().required("Doldurulması zorunlu alan*"),
+    // birthDate: Yup.string().required("Doldurulması zorunlu alan*"),
+    // country: Yup.string().required("Doldurulması zorunlu alan*"),
+    // city: Yup.string().required("Doldurulması zorunlu alan*"),
+    // district: Yup.string().required("Doldurulması zorunlu alan*"),
+    // email: Yup.string()
+    //   .email("Lutfen Gecerli Bir E-Posta Adresi Giriniz")
+    //   .required("Doldurulması zorunlu alan*"),
+    // phone: Yup.string()
+    //   .phone("TR", "Lutfen Gecerli Bir Telefon Numarasi Giriniz")
+    //   .required("Doldurulması zorunlu alan*"),
+    // nationalIdentity: Yup.string()
+    //   .required("*Aboneliklerde fatura için doldurulması zorunlu alan")
+    //   .typeError("*Aboneliklerde fatura için doldurulması zorunlu alan")
+    //   .matches(/^[0-9]{11}$/, "Lütfen Geçerli Bir TC Kimlik Numarası Giriniz"),
   });
+
+  const fileDelete = async () => {
+    try {
+      const updatedInitialValues: any = {
+        ...initialValues,
+        profilePhotoPath: null,
+      };
+      await studentService.update(updatedInitialValues);
+      const newStudent = await studentService.getByToken();
+      dispatch(setStudent(newStudent));
+      toast.success("Degisikler Kaydedildi!");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fileUpload = async (file: any) => {
+    try {
+      const targetFile = new FormData();
+      targetFile.append("ProfilePhotoPathTemp", file.target.files[0]);
+
+      const updatedInitialValues: any = {
+        ...initialValues,
+        profilePhotoPathTemp: file.target.files[0],
+      };
+      await studentService.update(updatedInitialValues);
+      const newStudent = await studentService.getByToken();
+      dispatch(setStudent(newStudent));
+      toast.success("Degisikler Kaydedildi!");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateStudent = async (updatedInitialValues: any) => {
+    try {
+      await studentService.update(updatedInitialValues);
+      const newStudent = await studentService.getByToken();
+      dispatch(setStudent(newStudent));
+      toast.success("Degisikler Kaydedildi!");
+    } catch (error: any) {
+      console.log(error);
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
+    }
+  };
 
   return (
     <div>
@@ -49,7 +101,7 @@ function PersonalInformations() {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(initialValues) => {
-          console.log(initialValues);
+          updateStudent(initialValues);
         }}
       >
         <Form>
@@ -63,23 +115,29 @@ function PersonalInformations() {
                       : "https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png"
                   }
                 ></img>
-                <div className="profile-photo-remove"></div>
-                <div className="profile-photo-edit">
+                <div
+                  className="profile-photo-remove"
+                  onClick={fileDelete}
+                ></div>
+                <label id="file-upload" className="profile-photo-edit">
                   <input
+                    name="profilePhotoPathTemp"
+                    id="file-upload"
                     type="file"
                     accept="image/png, image/gif, image/jpeg"
-                    style={{ display: "none" }}
+                    style={{ visibility: "hidden" }}
+                    onChange={fileUpload}
                   />
-                </div>
+                </label>
               </div>
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
               <label>Adınız*</label>
-              <FormikInput name="name" label="Adiniz*" />
+              <FormikInput name="firstName" label="Adiniz*" />
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
               <label>Soyadınız*</label>
-              <FormikInput name="surname" />
+              <FormikInput name="lastName" />
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
               <label>Telefon Numaranız*</label>
@@ -118,9 +176,12 @@ function PersonalInformations() {
               <FormikInput name="description" as="textarea" rows={4} />
             </div>
           </div>
-          <button className="save-button">Kaydet</button>
+          <button className="save-button" type="submit">
+            Kaydet
+          </button>
         </Form>
       </Formik>
+      <ToastContainer position="bottom-right" />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export default class ExceptionService{
+export default new class ExceptionService{
     
     errorSelector(errorMessage:string){
         
