@@ -2,20 +2,26 @@ import FormikInput from "../../FormikInput/FormikInput";
 import "./PersonalInformations.css";
 import * as Yup from "yup";
 import "yup-phone-lite";
-import { Form, Formik } from "formik";
-import { useRef } from "react";
+import { Field, Form, Formik } from "formik";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectStudent, setStudent } from "../../../store/slices/studentSlice";
 import studentService from "../../../services/studentService";
 import { ToastContainer, toast } from "react-toastify";
-import ExceptionService from "../../../utils/exceptionService";
 import exceptionService from "../../../utils/exceptionService";
+import cityService from "../../../services/StudentProfileSettingsServices/cityService";
+import { PulseLoader } from "react-spinners";
 
 function PersonalInformations() {
   const dispatch = useDispatch();
+  const [cities, setCities] = useState([]);
+  const [districts, setDistricts] = useState([]);
   const student = useSelector(selectStudent);
+  const [loading, setLoading] = useState(false);
 
   const initialValues = {
+    cityId: student.cityId || null,
+    districtId: student.districtId || null,
     firstName: student.firstName || null,
     lastName: student.lastName || null,
     phone: student.phone || null,
@@ -23,30 +29,48 @@ function PersonalInformations() {
     nationalIdentity: student.nationalIdentity || null,
     email: student.email || null,
     country: student.country || null,
-    addressDetail: student.adrressDetail || null,
+    addressDetail: student.addressDetail || null,
     description: student.description || null,
-    profilePhotoPath: null,
+    profilePhotoPath: student.profilePhotoPath || null,
     profilePhotoPathTemp: null,
   };
 
   const validationSchema = Yup.object({
-    // name: Yup.string().required("Doldurulması zorunlu alan*"),
-    // surname: Yup.string().required("Doldurulması zorunlu alan*"),
-    // birthDate: Yup.string().required("Doldurulması zorunlu alan*"),
-    // country: Yup.string().required("Doldurulması zorunlu alan*"),
-    // city: Yup.string().required("Doldurulması zorunlu alan*"),
-    // district: Yup.string().required("Doldurulması zorunlu alan*"),
-    // email: Yup.string()
-    //   .email("Lutfen Gecerli Bir E-Posta Adresi Giriniz")
-    //   .required("Doldurulması zorunlu alan*"),
-    // phone: Yup.string()
-    //   .phone("TR", "Lutfen Gecerli Bir Telefon Numarasi Giriniz")
-    //   .required("Doldurulması zorunlu alan*"),
-    // nationalIdentity: Yup.string()
-    //   .required("*Aboneliklerde fatura için doldurulması zorunlu alan")
-    //   .typeError("*Aboneliklerde fatura için doldurulması zorunlu alan")
-    //   .matches(/^[0-9]{11}$/, "Lütfen Geçerli Bir TC Kimlik Numarası Giriniz"),
+    name: Yup.string().required("Doldurulması zorunlu alan*"),
+    surname: Yup.string().required("Doldurulması zorunlu alan*"),
+    birthDate: Yup.string().required("Doldurulması zorunlu alan*"),
+    country: Yup.string().required("Doldurulması zorunlu alan*"),
+    city: Yup.string().required("Doldurulması zorunlu alan*"),
+    district: Yup.string().required("Doldurulması zorunlu alan*"),
+    email: Yup.string()
+      .email("Lutfen Gecerli Bir E-Posta Adresi Giriniz")
+      .required("Doldurulması zorunlu alan*"),
+    phone: Yup.string()
+      .phone("TR", "Lutfen Gecerli Bir Telefon Numarasi Giriniz")
+      .required("Doldurulması zorunlu alan*"),
+    nationalIdentity: Yup.string()
+      .required("*Aboneliklerde fatura için doldurulması zorunlu alan")
+      .typeError("*Aboneliklerde fatura için doldurulması zorunlu alan")
+      .matches(/^[0-9]{11}$/, "Lütfen Geçerli Bir TC Kimlik Numarası Giriniz"),
   });
+
+  const getCities = async () => {
+    try {
+      const response = await cityService.getAll();
+      setCities(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getDistricts = async () => {
+    try {
+      const response = await cityService.getAllDistricts();
+      setDistricts(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const fileDelete = async () => {
     try {
@@ -64,25 +88,27 @@ function PersonalInformations() {
   };
 
   const fileUpload = async (file: any) => {
+    setLoading(true);
     try {
-      const targetFile = new FormData();
-      targetFile.append("ProfilePhotoPathTemp", file.target.files[0]);
-
       const updatedInitialValues: any = {
         ...initialValues,
         profilePhotoPathTemp: file.target.files[0],
       };
+      updatedInitialValues.profilePhotoPath = "unused";
       await studentService.update(updatedInitialValues);
       const newStudent = await studentService.getByToken();
       dispatch(setStudent(newStudent));
       toast.success("Degisikler Kaydedildi!");
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const updateStudent = async (updatedInitialValues: any) => {
     try {
+      updatedInitialValues.profilePhotoPath = initialValues.profilePhotoPath;
       await studentService.update(updatedInitialValues);
       const newStudent = await studentService.getByToken();
       dispatch(setStudent(newStudent));
@@ -94,6 +120,11 @@ function PersonalInformations() {
       );
     }
   };
+
+  useEffect(() => {
+    getCities();
+    getDistricts();
+  }, []);
 
   return (
     <div>
@@ -119,16 +150,25 @@ function PersonalInformations() {
                   className="profile-photo-remove"
                   onClick={fileDelete}
                 ></div>
-                <label id="file-upload" className="profile-photo-edit">
-                  <input
-                    name="profilePhotoPathTemp"
-                    id="file-upload"
-                    type="file"
-                    accept="image/png, image/gif, image/jpeg"
-                    style={{ visibility: "hidden" }}
-                    onChange={fileUpload}
-                  />
-                </label>
+                {loading === true ? (
+                  <label>
+                    <PulseLoader
+                      className="profile-photo-edit-loading"
+                      color="#9933ff"
+                      size={6}
+                    />
+                  </label>
+                ) : (
+                  <label id="file-upload" className="profile-photo-edit">
+                    <input
+                      id="file-upload"
+                      type="file"
+                      accept="image/png, image/gif, image/jpeg, image/jpg"
+                      style={{ display: "none" }}
+                      onChange={fileUpload}
+                    />
+                  </label>
+                )}
               </div>
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
@@ -161,11 +201,20 @@ function PersonalInformations() {
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
               <label>İl*</label>
-              <FormikInput name="city" />
+              <Field as="select" name={"cityId"}>
+                {cities.map((city: any) => (
+                  <option value={city.id}>{city.name}</option>
+                ))}
+              </Field>
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
               <label>İlçe*</label>
-              <FormikInput name="district" />
+              <Field as="select" name={"districtId"}>
+                <option>Seciniz</option>
+                {districts.map((district: any) => (
+                  <option value={district.id}>{district.name}</option>
+                ))}
+              </Field>
             </div>
             <div className="big-profile-input col-12 mb-4">
               <label>Mahalle / Sokak</label>

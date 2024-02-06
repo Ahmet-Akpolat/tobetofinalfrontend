@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   student: {
     id: null,
-    city: null,
-    district: null,
+    cityId: null,
+    districtId: null,
     nationalIdentity: null,
     profilePhotoPath: null,
     phone: null,

@@ -44,7 +44,7 @@ function Experiences() {
       console.log(error);
     }
   };
-  
+
   const addStudentExperiences = async (
     data: CreateStudentExperienceRequest
   ) => {
@@ -55,7 +55,7 @@ function Experiences() {
       console.log(error);
     }
   };
-  
+
   useEffect(() => {
     getStudentExperiences();
     getCities();
@@ -100,6 +100,7 @@ function Experiences() {
           <div className="profile-input col-12 col-md-6 mb-4">
             <label>İl*</label>
             <Field as="select" name={"cityId"}>
+              <option>Seciniz</option>
               {cities.map((city: any) => (
                 <option value={city.id}>{city.name}</option>
               ))}

@@ -41,3 +41,14 @@
   object-fit: cover;
   background-color: black;
 }
+
+.profile-photo-edit-loading {
+  position: absolute;
+  right: 42%;
+  top: 65%;
+  background-color: white;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  padding-top: 3px;
+}

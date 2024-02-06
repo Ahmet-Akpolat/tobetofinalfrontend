@@ -8,6 +8,8 @@ import {
   GetListCityResponse,
   UpdatedCityResponse,
 } from "../../models/responses/CityResponses";
+import { GetListDistrictResponse } from "../../models/responses/DistrictResponses";
+import axiosInstance from "../../utils/axiosInterceptors";
 import { BaseService } from "../baseService";
 
 class CityService extends BaseService<
@@ -21,6 +23,13 @@ class CityService extends BaseService<
   constructor() {
     super();
     this.apiUrl = "Cities";
+  }
+
+  async getAllDistricts() {
+    const response = await axiosInstance.get<any>(
+      "Districts/?PageIndex=0&PageSize=999"
+    );
+    return response.data.items;
   }
 }
 
