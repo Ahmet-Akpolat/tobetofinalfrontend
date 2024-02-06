@@ -45,10 +45,10 @@ function Experiences() {
     }
   };
 
-  const addStudentExperiences = async (
-    data: CreateStudentExperienceRequest
-  ) => {
+  const addStudentExperiences = async (data: any) => {
     try {
+      if (!endDateControl) data.endDate = null;
+      console.log(data);
       await studentService.addStudentExperiences(data);
       getStudentExperiences();
     } catch (error) {
@@ -117,7 +117,12 @@ function Experiences() {
             </div>
           )}
           <div className="d-flex gap-2 mb-4">
-            <div onClick={() => setEndDateControl(!endDateControl)}>
+            <div
+              onClick={() => {
+                setEndDateControl(!endDateControl);
+                initialValues.endDate = null;
+              }}
+            >
               <FormikInput type="checkbox" name="isContinued"></FormikInput>
             </div>
             <small>Calışmaya Devam Ediyorum</small>

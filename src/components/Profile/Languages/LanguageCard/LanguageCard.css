@@ -14,7 +14,7 @@
   content: url(/public/icons/public_FILL0_wght300.svg);
 }
 
-.language-card::after {
+.language-card-delete::after {
   content: url(/public/icons/delete_FILL0.svg);
   background-color: #fc6d6d;
   border-radius: 50%;
@@ -27,6 +27,7 @@
   position: absolute;
   cursor: pointer;
   right: 0;
+  top: 13px;
 }
 
 .language-card:hover {

@@ -14,6 +14,7 @@ import axiosInstance from "../utils/axiosInterceptors";
 import { CreateStudentEducationRequest } from "../models/requests/StudentEducationRequest";
 import { CreateStudentSkillRequest } from "../models/requests/StudentSkillRequests";
 import { CreateStudentSocialMediaRequest } from "../models/requests/StudentSocialMediaRequests";
+import { CreateStudentLanguageLevelRequest } from "../models/requests/StudentLanguageLevelRequests";
 
 class StudentService extends BaseService<
   GetListStudentResponse,
@@ -41,7 +42,11 @@ class StudentService extends BaseService<
   }
 
   async addStudentSocialMedias(data: CreateStudentSocialMediaRequest) {
-    await axiosInstance.post("StudentSocialMedias", data)
+    await axiosInstance.post("StudentSocialMedias", data);
+  }
+
+  async addStudentLanguages(data: CreateStudentLanguageLevelRequest) {
+    await axiosInstance.post("StudentLanguageLevels", data);
   }
 }
 

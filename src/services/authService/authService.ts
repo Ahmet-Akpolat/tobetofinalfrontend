@@ -6,6 +6,7 @@ import { TokenModel } from "../../models/responses/AuthResponses/TokenModel";
 import { toast } from "react-toastify";
 import ExceptionService from "../../utils/exceptionService";
 import exceptionService from "../../utils/exceptionService";
+import axiosInstance from "../../utils/axiosInterceptors";
 
 class AuthService {
   public async login(data: AuthLoginRequest): Promise<TokenModel | null> {
@@ -29,6 +30,13 @@ class AuthService {
 
   async register(data: CreateStudentRequest) {
     await axios.post("http://localhost:5278/api/Students", data);
+  }
+
+  async changePassword(data: any) {
+    await axiosInstance.put(
+      "http://localhost:5278/api/Students/forPassword",
+      data
+    );
   }
 }
 
