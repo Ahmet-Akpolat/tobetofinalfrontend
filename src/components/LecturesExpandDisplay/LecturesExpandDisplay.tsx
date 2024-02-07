@@ -7,17 +7,18 @@ import { toast } from "react-toastify";
 import exceptionService from "../../utils/exceptionService";
 import lectureService from "../../services/lectureService";
 import Lecture from "../../components/Lecture/Lecture";
+import { LectureResponse } from "../../models/responses/LectureResponses";
+import removeTurkishChars from "../../utils/removeTurkishChars";
 
 function LecturesExpandDisplay() {
   const [pageSize, setPageSize] = useState(0);
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
   const [lectures, setLectures] = useState([] as any);
-  const [searchedValue, setSearchedValue] = useState("");
-  const[allDataCount,setAllDataCount]=useState(0);
+  const [allData, setAllData] = useState<any>();
 
   const handleInputChange = (event: any) => {
-    setSearchedValue(event.target.value);
+    getForSearchedValue(event.target.value);
   };
 
   const getContinuedLectures = async (pageNumber: number) => {
@@ -49,17 +50,27 @@ function LecturesExpandDisplay() {
       const data = await lectureService.getAllWithData(pageNumber, 12);
       setLectures(data.items);
       setPageSize(data.pages);
-      setAllDataCount(data.count);
+      await getAllDatas(data.count);
     } catch (error: any) {
       toast.error(
         exceptionService.errorSelector(JSON.stringify(error.response.data))
       );
     }
   };
+  const getAllDatas = async (allDataCount: number) => {
+    await lectureService.getAll(0, allDataCount).then((r) => setAllData(r));
+    console.log(allData);
 
-  const getForSearchedValue = async () => {
-    const response  = await lectureService.getAll(0,allDataCount);
-    setLectures(response.items);
+  }
+  const getForSearchedValue = async (value: string) => {
+
+
+    const lectures = allData.filter((lecture: any) =>
+      removeTurkishChars(lecture.lectureName.toLowerCase()).includes(removeTurkishChars(value.toLowerCase()))
+    );
+    setLectures(lectures);
+    console.log(lectures);
+
   }
 
   useEffect(() => {
@@ -80,17 +91,9 @@ function LecturesExpandDisplay() {
       <div className="col-12 d-flex justify-content-center filters">
         <ul className="nav nav-tabs mainTablist" role="tablist">
           <li className={`nav-item `}>
-            <input type="text" value={searchedValue}
-                onChange={handleInputChange}  />
-            <button
-              className="filters-link"
-              onClick={() => {
-                console.log(searchedValue);
-                getForSearchedValue();
-              }}
-            >
-              Ara
-            </button>
+            <input type="text"
+              onChange={handleInputChange} />
+
           </li>
           <li className={`nav-item ${clicked === 0 && "is-selectedd"}`}>
             <button
