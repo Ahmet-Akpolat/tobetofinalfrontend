@@ -11,6 +11,7 @@ import LectureDetail from "./pages/LectureDetail/LectureDetail";
 import { OverlayLoader } from "./components/OverlayLoader/OverlayLoader";
 import Profile from "./pages/Profile/Profile";
 import { ToastContainer } from "react-toastify";
+import LecturesExpandDisplay from "./components/LecturesExpandDisplay/LecturesExpandDisplay";
 
 function App() {
   const isAuth = useSelector(selectIsAuthenticated);
@@ -31,6 +32,10 @@ function App() {
 
         <Route element={<MainLayout showLayout={false} />}>
           <Route path="/ders-detay" element={<LectureDetail />} />
+        </Route>
+
+        <Route element={<MainLayout />}>
+          <Route path="/egitimlerim" element={<LecturesExpandDisplay />} />
         </Route>
 
         <Route element={<MainLayout />}>

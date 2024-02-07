@@ -21,6 +21,13 @@ export class BaseService<
     await axiosInstance.get("http://localhost:5278/api/Auth/RefreshToken");
   }
 
+  async getAllWithData(PageIndex: number = 0, PageSize: number = 999) {
+    const response = await axiosInstance.get<any>(
+      `${this.apiUrl}?PageIndex=${PageIndex}&PageSize=${PageSize}`
+    );
+    return response.data;
+  }
+
   async getAll(PageIndex: number = 0, PageSize: number = 999) {
     const response = await axiosInstance.get<any>(
       `${this.apiUrl}?PageIndex=${PageIndex}&PageSize=${PageSize}`

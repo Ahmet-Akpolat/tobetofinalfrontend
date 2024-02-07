@@ -9,20 +9,17 @@ import { setLectureDetail } from "../../store/slices/lectureDetailSlice";
 import { activeLoading, clearLoading } from "../../store/slices/loadingSlice";
 import { toast } from "react-toastify";
 
-const Lecture = ({ key, index }: any) => {
+const Lecture = ({ lecture }: any) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  const lectures = useSelector(selectLecture);
 
   const handleClick = async () => {
     try {
       dispatch(activeLoading());
-      const response = await LectureService.getWithDetails(
-        lectures[index].lectureId
-      );
+      const response = await LectureService.getWithDetails(lecture.lectureId);
       dispatch(setLectureDetail(response));
-      navigate("ders-detay");
+      navigate("/ders-detay");
     } catch (error) {
       dispatch(clearAuth());
       toast.error("Oturumunuzun süresi doldu lütfen tekrar giriş yapın..");
@@ -33,15 +30,12 @@ const Lecture = ({ key, index }: any) => {
   return (
     <div className="d-flex align-items-center justify-content-center col-sm-6 col-md-5 col-xl-3 col-12 my-4">
       <div className="edu-card">
-        <img
-          className="card-imgg"
-          src={lectures[index].lectureImageUrl}
-        />
+        <img className="card-imgg" src={lecture?.lectureImageUrl} />
         <div className="card-content">
           <div className="d-flex flex-column">
-            <span>{lectures[index].lectureName}</span>
+            <span>{lecture?.lectureName}</span>
             <span className="platform-course-date">
-              {formatDate(lectures[index].startDate)}
+              {formatDate(lecture?.startDate)}
             </span>
           </div>
           <a className="apply-btn" onClick={handleClick}>

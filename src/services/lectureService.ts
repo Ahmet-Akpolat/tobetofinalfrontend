@@ -58,25 +58,52 @@ class LectureService extends BaseService<
     );
     return response.data;
   }
-  async getLectureCompletionDetails(lectureId:string):Promise<AxiosResponse<GetByLoggedStudentCompletionConditionResponse, any>>{
-    return await axiosInstance.get<GetByLoggedStudentCompletionConditionResponse>(`LectureCompletionConditions/getByLectureId${lectureId}`);
+
+  async getLectureCompletionDetails(
+    lectureId: string
+  ): Promise<
+    AxiosResponse<GetByLoggedStudentCompletionConditionResponse, any>
+  > {
+    return await axiosInstance.get<GetByLoggedStudentCompletionConditionResponse>(
+      `LectureCompletionConditions/getByLectureId${lectureId}`
+    );
   }
-  async getContentLikeCount(contentId:string):Promise<AxiosResponse<GetContentLikeCountResponse, any>>{
-    return await axiosInstance.get<GetContentLikeCountResponse>(`ContentLikes/GetCount${contentId}`);
+
+  async getAllLectureCompletion(pageIndex: number, pageSize: number) {
+    return await axiosInstance.get(
+      `LectureCompletionConditions/getListForCompleted?PageIndex=${pageIndex}&PageSize=${pageSize}`
+    );
   }
+
+  async getAllLectureContinued(pageIndex: number, pageSize: number) {
+    return await axiosInstance.get(
+      `LectureCompletionConditions/getListForContinued?PageIndex=${pageIndex}&PageSize=${pageSize}`
+    );
+  }
+
+  async getContentLikeCount(
+    contentId: string
+  ): Promise<AxiosResponse<GetContentLikeCountResponse, any>> {
+    return await axiosInstance.get<GetContentLikeCountResponse>(
+      `ContentLikes/GetCount${contentId}`
+    );
+  }
+
   async setContentLiked(contentId: string) {
     await axiosInstance.post(`ContentLikes`, {
-      contentId: contentId
+      contentId: contentId,
     });
   }
- 
-  async getContentLiked(contentId: string):Promise<AxiosResponse<GetByContentIdContentLikeResponse, any>> {
+
+  async getContentLiked(
+    contentId: string
+  ): Promise<AxiosResponse<GetByContentIdContentLikeResponse, any>> {
     return await axiosInstance.get<GetByContentIdContentLikeResponse>(
       `ContentLikes/getByContentId${contentId}`
     );
   }
-  
-  async getLectureViewCount(lectureId: string,contentId:string) {
+
+  async getLectureViewCount(lectureId: string, contentId: string) {
     return await axiosInstance.get(
       `LectureViews/getCountWithLectureAndContentId?lectureId=${lectureId}&contentId=${contentId}`
     );
@@ -85,7 +112,7 @@ class LectureService extends BaseService<
   async getContentsIsWatched(lectureId: string) {
     return await axiosInstance.get(
       `/LectureViews/getForLoggedStudent${lectureId}`
-    )
+    );
   }
 
   async setContentIsWatched(lectureId: string, contentId: string) {

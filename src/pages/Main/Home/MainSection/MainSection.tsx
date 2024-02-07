@@ -147,8 +147,8 @@ const MainSection = () => {
                     ) : (
                       lectures
                         .slice(0, MAX_ITEMS_DISPLAY.lectures)
-                        .map((_: any, index: any) => (
-                          <Lecture key={index} index={index} />
+                        .map((lecture: any) => (
+                          <Lecture lecture={lecture} />
                         ))
                     )}
                   </div>
