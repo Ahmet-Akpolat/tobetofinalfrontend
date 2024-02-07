@@ -13,6 +13,10 @@ function LecturesExpandDisplay() {
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
   const [lectures, setLectures] = useState([] as any);
+  const [searchedValue, setSearchedValue] = useState("");
+  const handleInputChange = (event: any) => {
+    setSearchedValue(event.target.value);
+  };
 
   const getContinuedLectures = async (pageNumber: number) => {
     try {
@@ -50,6 +54,11 @@ function LecturesExpandDisplay() {
     }
   };
 
+  const getForSearchedValue = async () => {
+    const response  = await lectureService.getListForSearch(searchedValue,0,1000);
+    setLectures(response.items);
+  }
+
   useEffect(() => {
     getLectures(0);
   }, []);
@@ -67,6 +76,19 @@ function LecturesExpandDisplay() {
       </div>
       <div className="col-12 d-flex justify-content-center filters">
         <ul className="nav nav-tabs mainTablist" role="tablist">
+          <li className={`nav-item `}>
+            <input type="text" value={searchedValue}
+                onChange={handleInputChange}  />
+            <button
+              className="filters-link"
+              onClick={() => {
+                console.log(searchedValue);
+                getForSearchedValue();
+              }}
+            >
+              Ara
+            </button>
+          </li>
           <li className={`nav-item ${clicked === 0 && "is-selectedd"}`}>
             <button
               className="filters-link"

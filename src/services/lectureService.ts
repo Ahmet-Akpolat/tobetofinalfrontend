@@ -51,7 +51,14 @@ class LectureService extends BaseService<
       lectureId: lectureId,
     });
   }
+  async getListForSearch(searchedValue: string,pageIndex: number, pageSize: number) {
+    const response = await axiosInstance.get(
+      `ClassLectures/GetListForSearch${searchedValue}?PageIndex=${pageIndex}&PageSize=${pageSize}`
+    );
+    return response.data;
+  }
 
+  
   async getLectureNumberOfLikes(lectureId: string) {
     const response = await axiosInstance.get(
       `LectureLikes/GetCount${lectureId}`
