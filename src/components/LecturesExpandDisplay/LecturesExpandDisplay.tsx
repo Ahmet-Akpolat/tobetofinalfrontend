@@ -14,6 +14,8 @@ function LecturesExpandDisplay() {
   const [clicked, setClicked] = useState(0);
   const [lectures, setLectures] = useState([] as any);
   const [searchedValue, setSearchedValue] = useState("");
+  const[allDataCount,setAllDataCount]=useState(0);
+
   const handleInputChange = (event: any) => {
     setSearchedValue(event.target.value);
   };
@@ -47,6 +49,7 @@ function LecturesExpandDisplay() {
       const data = await lectureService.getAllWithData(pageNumber, 12);
       setLectures(data.items);
       setPageSize(data.pages);
+      setAllDataCount(data.count);
     } catch (error: any) {
       toast.error(
         exceptionService.errorSelector(JSON.stringify(error.response.data))
@@ -55,7 +58,7 @@ function LecturesExpandDisplay() {
   };
 
   const getForSearchedValue = async () => {
-    const response  = await lectureService.getListForSearch(searchedValue,0,1000);
+    const response  = await lectureService.getAll(0,allDataCount);
     setLectures(response.items);
   }
 
