@@ -36,12 +36,12 @@ function PersonalInformations() {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Doldurulması zorunlu alan*"),
-    surname: Yup.string().required("Doldurulması zorunlu alan*"),
+    firstName: Yup.string().required("Doldurulması zorunlu alan*"),
+    lastName: Yup.string().required("Doldurulması zorunlu alan*"),
     birthDate: Yup.string().required("Doldurulması zorunlu alan*"),
     country: Yup.string().required("Doldurulması zorunlu alan*"),
-    city: Yup.string().required("Doldurulması zorunlu alan*"),
-    district: Yup.string().required("Doldurulması zorunlu alan*"),
+    cityId: Yup.string().required("Doldurulması zorunlu alan*"),
+    districtId: Yup.string().required("Doldurulması zorunlu alan*"),
     email: Yup.string()
       .email("Lutfen Gecerli Bir E-Posta Adresi Giriniz")
       .required("Doldurulması zorunlu alan*"),
@@ -49,8 +49,8 @@ function PersonalInformations() {
       .phone("TR", "Lutfen Gecerli Bir Telefon Numarasi Giriniz")
       .required("Doldurulması zorunlu alan*"),
     nationalIdentity: Yup.string()
-      .required("*Aboneliklerde fatura için doldurulması zorunlu alan")
-      .typeError("*Aboneliklerde fatura için doldurulması zorunlu alan")
+      .required("Aboneliklerde fatura için doldurulması zorunlu alan*")
+      .typeError("Aboneliklerde fatura için doldurulması zorunlu alan*")
       .matches(/^[0-9]{11}$/, "Lütfen Geçerli Bir TC Kimlik Numarası Giriniz"),
   });
 
@@ -58,8 +58,10 @@ function PersonalInformations() {
     try {
       const response = await cityService.getAll();
       setCities(response);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 
@@ -67,49 +69,53 @@ function PersonalInformations() {
     try {
       const response = await cityService.getAllDistricts();
       setDistricts(response);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 
   const fileDelete = async () => {
     try {
-      const updatedInitialValues: any = {
+      const updatedValues: any = {
         ...initialValues,
         profilePhotoPath: null,
       };
-      await studentService.update(updatedInitialValues);
+      await studentService.update(updatedValues);
       const newStudent = await studentService.getByToken();
       dispatch(setStudent(newStudent));
       toast.success("Degisikler Kaydedildi!");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      exceptionService.errorSelector(JSON.stringify(error.response.data));
     }
   };
 
   const fileUpload = async (file: any) => {
     setLoading(true);
     try {
-      const updatedInitialValues: any = {
+      const updatedValues: any = {
         ...initialValues,
         profilePhotoPathTemp: file.target.files[0],
       };
-      updatedInitialValues.profilePhotoPath = "unused";
-      await studentService.update(updatedInitialValues);
+      updatedValues.profilePhotoPath = "unused";
+      await studentService.update(updatedValues);
       const newStudent = await studentService.getByToken();
       dispatch(setStudent(newStudent));
       toast.success("Degisikler Kaydedildi!");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      exceptionService.errorSelector(JSON.stringify(error.response.data));
     } finally {
       setLoading(false);
     }
   };
 
-  const updateStudent = async (updatedInitialValues: any) => {
+  const updateStudent = async (updatedValues: any) => {
     try {
-      updatedInitialValues.profilePhotoPath = initialValues.profilePhotoPath;
-      await studentService.update(updatedInitialValues);
+      updatedValues.profilePhotoPath = initialValues.profilePhotoPath;
+      await studentService.update(updatedValues);
       const newStudent = await studentService.getByToken();
       dispatch(setStudent(newStudent));
       toast.success("Degisikler Kaydedildi!");
@@ -131,8 +137,9 @@ function PersonalInformations() {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(initialValues) => {
-          updateStudent(initialValues);
+        onSubmit={(updatedValues) => {
+          console.log(updatedValues);
+          updateStudent(updatedValues);
         }}
       >
         <Form>
@@ -230,7 +237,6 @@ function PersonalInformations() {
           </button>
         </Form>
       </Formik>
-      <ToastContainer position="bottom-right" />
     </div>
   );
 }

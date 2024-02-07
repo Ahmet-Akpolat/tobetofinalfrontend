@@ -10,6 +10,7 @@ import Footer from "./components/Footer/Footer";
 import LectureDetail from "./pages/LectureDetail/LectureDetail";
 import { OverlayLoader } from "./components/OverlayLoader/OverlayLoader";
 import Profile from "./pages/Profile/Profile";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const isAuth = useSelector(selectIsAuthenticated);
@@ -37,6 +38,7 @@ function App() {
         </Route>
       </Routes>
       <OverlayLoader />
+      <ToastContainer position="bottom-right" />
     </div>
   );
 }

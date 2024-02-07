@@ -33,7 +33,32 @@
   font-size: 20pt;
 }
 
-.Exam {
-  width: 100%; /* Komponentin tüm kolon genişliğini kaplamasını sağlar */
-  /* Diğer stil tanımları */
+@keyframes bounce {
+  0% {
+    transform: translateY(-250px);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce2 {
+  0% {
+    opacity: 0;
+  }
+
+  70% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+}
+
+.welcome-message {
+  animation: bounce2 1.2s;
+}
+
+.main-section {
+  animation: bounce 1.2s;
+}
+
+.info-card-list {
+  animation: bounce 1.2s;
 }

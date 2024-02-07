@@ -6,6 +6,8 @@ import educationService from "../../../services/StudentProfileSettingsServices/e
 import studentService from "../../../services/studentService";
 import { CreateStudentEducationRequest } from "../../../models/requests/StudentEducationRequest";
 import * as Yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import exceptionService from "../../../utils/exceptionService";
 
 function Education() {
   const [educations, setEducations] = useState([]);
@@ -24,8 +26,11 @@ function Education() {
     try {
       const data = (await educationService.getForLoggedStudent()).data.items;
       setEducations(data);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 
@@ -33,8 +38,11 @@ function Education() {
     try {
       await studentService.addStudentEducations(data);
       getStudentEducations();
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 
@@ -52,6 +60,16 @@ function Education() {
       .min(5, "En az 5 karakter olmalı")
       .max(50, "En fazla 50 karakter olmalı"),
     startDate: Yup.string().required("Doldurulması zorunlu alan*"),
+    graduationDate: Yup.string()
+      .required("Doldurulması zorunlu alan*")
+      .test(
+        "start-before-end",
+        "Mezuniyet tarihi, başlangıç tarihinden sonra olmalıdır.",
+        function (graduationDate) {
+          const { startDate } = this.parent;
+          return new Date(graduationDate) > new Date(startDate);
+        }
+      ),
   });
 
   return (

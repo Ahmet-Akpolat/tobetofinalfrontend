@@ -23,7 +23,10 @@ class AuthService {
         return null;
       }
     } catch (error: any) {
-      exceptionService.errorSelector(JSON.stringify(error.response.data));
+      console.log(error)
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
       return null;
     }
   }

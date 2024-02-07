@@ -2,6 +2,8 @@ import { useState } from "react";
 import experienceService from "../../../../services/StudentProfileSettingsServices/experienceService";
 import "./ExperiencesCard.css";
 import ExperienceModal from "../ExperienceDetailModal/ExperienceModal";
+import { toast } from "react-toastify";
+import exceptionService from "../../../../utils/exceptionService";
 
 function ExperiencesCard({ experience, setExperiences }: any) {
   const [modalShow, setModalShow] = useState(false);
@@ -12,8 +14,10 @@ function ExperiencesCard({ experience, setExperiences }: any) {
       setExperiences((arr: any) => {
         return arr.filter((exp: any) => exp.id !== id);
       });
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   }
 

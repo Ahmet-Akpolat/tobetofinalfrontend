@@ -4,12 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { selectLecture } from "../../store/slices/lectureSlice";
 import { formatDate } from "../../utils/formatDate";
 import LectureService from "../../services/lectureService";
-import { ToastContainer, toast } from "react-toastify";
 import { clearAuth, selectToken } from "../../store/slices/authSlice";
 import { setLectureDetail } from "../../store/slices/lectureDetailSlice";
 import { activeLoading, clearLoading } from "../../store/slices/loadingSlice";
+import { toast } from "react-toastify";
 
-const Lecture = (props) => {
+const Lecture = ({ key, index }: any) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
@@ -19,14 +19,13 @@ const Lecture = (props) => {
     try {
       dispatch(activeLoading());
       const response = await LectureService.getWithDetails(
-        lectures[props.index].lectureId,
-        token
+        lectures[index].lectureId
       );
       dispatch(setLectureDetail(response));
       navigate("ders-detay");
     } catch (error) {
       dispatch(clearAuth());
-      toast("Oturumunuzun süresi doldu lütfen tekrar giriş yapın..");
+      toast.error("Oturumunuzun süresi doldu lütfen tekrar giriş yapın..");
     }
     dispatch(clearLoading());
   };
@@ -36,13 +35,13 @@ const Lecture = (props) => {
       <div className="edu-card">
         <img
           className="card-imgg"
-          src={lectures[props.index].lectureImageUrl}
+          src={lectures[index].lectureImageUrl}
         />
         <div className="card-content">
           <div className="d-flex flex-column">
-            <span>{lectures[props.index].lectureName}</span>
+            <span>{lectures[index].lectureName}</span>
             <span className="platform-course-date">
-              {formatDate(lectures[props.index].startDate)}
+              {formatDate(lectures[index].startDate)}
             </span>
           </div>
           <a className="apply-btn" onClick={handleClick}>
@@ -50,7 +49,6 @@ const Lecture = (props) => {
           </a>
         </div>
       </div>
-      <ToastContainer position="bottom-right" theme="light" />
     </div>
   );
 };

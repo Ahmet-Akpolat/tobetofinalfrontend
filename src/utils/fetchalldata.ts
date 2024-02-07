@@ -12,6 +12,7 @@ import examService from "../services/examService";
 import { setExams } from "../store/slices/examSlice";
 import surveyService from "../services/surveyService";
 import { setSurvey } from "../store/slices/surveySlice";
+import exceptionService from "./exceptionService";
 
 const fetchAllData = async (dispatch: Dispatch) => {
   try {
@@ -37,8 +38,11 @@ const fetchAllData = async (dispatch: Dispatch) => {
     // Student
     const student = await studentService.getByToken();
     dispatch(setStudent(student));
-  } catch (error) {
-    toast.error("Bir Sorun Oluştu...");
+  } catch (error: any) {
+    console.log(error);
+    toast.error(
+      exceptionService.errorSelector(JSON.stringify(error.response.data))
+    );
   }
 };
 

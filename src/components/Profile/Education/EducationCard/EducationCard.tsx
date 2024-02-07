@@ -1,5 +1,7 @@
+import { toast } from "react-toastify";
 import educationService from "../../../../services/StudentProfileSettingsServices/educationService";
 import "./EducationCard.css";
+import exceptionService from "../../../../utils/exceptionService";
 
 function EducationCard({ education, setEducations }: any) {
   
@@ -9,8 +11,11 @@ function EducationCard({ education, setEducations }: any) {
       setEducations((arr: any) => {
         return arr.filter((edu: any) => edu.id !== id)
       })
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   }
 

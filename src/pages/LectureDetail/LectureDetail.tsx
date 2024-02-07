@@ -11,6 +11,7 @@ import { selectStudent } from "../../store/slices/studentSlice";
 import { useNavigate } from "react-router-dom";
 import { clearContent } from "../../store/slices/contentSlice";
 import { GetByLoggedStudentCompletionConditionResponse } from "../../models/responses/LectureCompletionDetailResponse";
+import exceptionService from "../../utils/exceptionService";
 
 function LectureDetail() {
   const [liked, setLiked] = useState(false);
@@ -33,10 +34,11 @@ function LectureDetail() {
       );
       if (likedLecture.isLiked == true) setLiked(likedLecture.isLiked);
       setNumberOfLikes(lectureNumberOfLikes.count);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      toast.error("Bir Sorun Oluştu...");
-      navigate("/login");
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 
@@ -47,10 +49,11 @@ function LectureDetail() {
       ).data;
       setLectureCompletionDetail(completionDetail);
       setCompletionControl(true);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      toast.error("Bir Sorun Oluştu...");
-      navigate("/login");
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 
@@ -59,9 +62,11 @@ function LectureDetail() {
       await lectureService.setLectureLiked(student.id, lecture.id);
       getLectureLikeInfo();
       setLiked(!liked)
-    } catch (error) {
-      toast.error("Bir sorun oluştu...");
-      navigate("/login");
+    } catch (error: any) {
+      console.log(error);
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 
@@ -158,7 +163,6 @@ function LectureDetail() {
           lectureId={lecture.id}
         />
       )}
-      <ToastContainer position="bottom-right" theme="light" />
     </div>
   );
 }

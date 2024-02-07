@@ -10,7 +10,11 @@ import { CreateStudentRequest } from "../../../models/requests/StudentRequests";
 import AuthService from "../../../services/authService/authService";
 import { passwordValidator } from "../../../utils/customValidations";
 import { useDispatch } from "react-redux";
-import { activeLoading, clearLoading } from "../../../store/slices/loadingSlice";
+import {
+  activeLoading,
+  clearLoading,
+} from "../../../store/slices/loadingSlice";
+import exceptionService from "../../../utils/exceptionService";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -32,6 +36,7 @@ const Signup = () => {
       .required("Doldurulması zorunlu alan*"),
     password: string()
       .required("Doldurulması zorunlu alan*")
+      .min(6, "Sifreniz 6 karakterden uzun olmalidir")
       .test(
         "buyuk-kucuk-sayi",
         "En Az 1 Büyük Harf, 1 Küçük Harf ve 1 Sayı Giriniz!",
@@ -48,8 +53,10 @@ const Signup = () => {
       await AuthService.register(values);
       toast.success("Kayıt Başarılı.");
       navigate("/login");
-    } catch (error) {
-      toast.error("Bu E-Postaya Sahip Bir Kullanıcı Zaten Mevcut");
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     } finally {
       dispatch(clearLoading());
     }
@@ -73,10 +80,10 @@ const Signup = () => {
                 src="https://tobeto.com/_next/static/media/tobeto-logo.29b55e1c.svg"
               />
             </div>
-            <div>
-              <h1>Hemen Kayıt Ol</h1>
-            </div>
             <div className="register-events">
+              <div>
+                <h1>Hemen Kayıt Ol</h1>
+              </div>
               <FormikInput
                 name="firstName"
                 className="register-input"
@@ -109,14 +116,14 @@ const Signup = () => {
               </button>
             </div>
             <div className="d-flex align-items-center justify-content-center mt-2">
-              <small>
-                Zaten bir hesabın var mı? <Link to="/login">Giriş Yap</Link>
-              </small>
+              <small className="small-text">Zaten bir hesabın var mı?</small>
+              <Link className="signup-link" to="/login">
+                Giriş Yap
+              </Link>
             </div>
           </Form>
         </Formik>
       </div>
-      <ToastContainer position="bottom-right" theme="light"></ToastContainer>
     </div>
   );
 };

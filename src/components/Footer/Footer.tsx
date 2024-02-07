@@ -1,9 +1,9 @@
 import React from "react";
 import "./Footer.css";
 
-function Footer() {
+function Footer({ backgroundColor }: any) {
   return (
-    <section className="bg-secondaryy py-55">
+    <section className={`bg-secondaryy py-55 ${backgroundColor}`}>
       <div className="container">
         <div className="row justify-content-between align-items-center">
           <div className="col-6 col-lg-4 mb-lg-0 my-4">
@@ -12,7 +12,10 @@ function Footer() {
                 <span>
                   <img src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg'%20version='1.1'%20width='100'%20height='21'/>" />
                 </span>
-                <img src="images/Tobeto-logo-yatay-beyaz.png" className="footer-logo" />
+                <img
+                  src="images/Tobeto-logo-yatay-beyaz.png"
+                  className="footer-logo"
+                />
               </span>
             </a>
           </div>

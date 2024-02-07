@@ -20,7 +20,6 @@ const Home = () => {
           </span>
           <span className="sub-text-name">{student.firstName}</span>
         </h3>
-        <img className="dot-img" src="/icons/dot-purple.home.svg" />
         <div className="mt-5 mb-5">
           <h4>
             <p className="alt-text">
@@ -30,6 +29,7 @@ const Home = () => {
           </h4>
         </div>
       </div>
+      <img className="dot-img" src="/icons/dot-purple.home.svg" />
       <MainSection />
       <section>
         <div className="container d-flex align-items-center justify-content-center">

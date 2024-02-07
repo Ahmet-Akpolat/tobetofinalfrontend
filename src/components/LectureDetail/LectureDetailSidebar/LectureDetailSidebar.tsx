@@ -5,6 +5,7 @@ import { selectContent } from "../../../store/slices/contentSlice";
 import { GUID } from "../../../models/abstracts/GuidModel";
 import lectureService from "../../../services/lectureService";
 import { toast } from "react-toastify";
+import exceptionService from "../../../utils/exceptionService";
 
 interface Props {
   setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,9 +25,11 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: Props) {
         await lectureService.getContentLikeCount(content.id)
       ).data;
       setContentCountLike(contentLikeCount.count);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      toast.error("Bir Sorun Oluştu...");
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
   const likeContent = async () => {
@@ -35,9 +38,11 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: Props) {
         getContentLikeCount();
         contentIsLiked();
       });
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      toast.error("Bir Sorun Oluştu...");
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
   const contentIsLiked = async () => {
@@ -46,9 +51,11 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: Props) {
         .data;
       if (likedLecture) 
         setLiked(likedLecture.isLiked);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      toast.error("Bir Sorun Oluştu...");
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
   const getContentViewers = async () => {
@@ -57,9 +64,11 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: Props) {
         await lectureService.getLectureViewCount(lectureId, content.id)
       ).data;
       setViewersCount(lectureViewersCount.count);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      toast.error("Bir Sorun Oluştu...");
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 

@@ -71,9 +71,9 @@
 
 .authnav-section {
   display: flex;
-  list-style: none; /* Liste işaretlerini kaldır */
-  padding: 0; /* Varsayılan padding'i kaldır */
-  margin: 0; /* Varsayılan margin'i kaldır */
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
   gap: 65px;
 }
 

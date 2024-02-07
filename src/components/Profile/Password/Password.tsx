@@ -3,6 +3,8 @@ import FormikInput from "../../FormikInput/FormikInput";
 import * as Yup from "yup";
 import authService from "../../../services/authService/authService";
 import { ToastContainer, toast } from "react-toastify";
+import exceptionService from "../../../utils/exceptionService";
+import { passwordValidator } from "../../../utils/customValidations";
 
 function Password() {
   const validationSchema = Yup.object({
@@ -10,10 +12,11 @@ function Password() {
     newPassword: Yup.string()
       .min(6, "Sifreniz 6 karakterden uzun olmalidir")
       .required("Doldurulmasi zorunlu alan*")
-      .matches(/[0-9]/, "Sifreniz rakam icermelidir")
-      .matches(/[a-z]/, "Sifreniz kucuk karakter icermelidir")
-      .matches(/[A-Z]/, "Sifreniz buyuk karakter icermelidir")
-      .matches(/[^\w]/, "Sifreniz ozel karakter icermelidir")
+      .test(
+        "buyuk-kucuk-sayi",
+        "En Az 1 Büyük Harf, 1 Küçük Harf ve 1 Sayı Giriniz!",
+        passwordValidator
+      )
       .notOneOf(
         [Yup.ref("lastPassword")],
         "Yeni sifreniz eskisiyle ayni olamaz"
@@ -28,8 +31,10 @@ function Password() {
     try {
       await authService.changePassword(data);
       toast.success("Sifreniz basariyla degistirildi");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 
@@ -81,7 +86,6 @@ function Password() {
           </div>
         </Form>
       </Formik>
-      <ToastContainer position="bottom-right" />
     </div>
   );
 }

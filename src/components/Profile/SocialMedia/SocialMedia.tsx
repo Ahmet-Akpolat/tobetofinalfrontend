@@ -10,6 +10,7 @@ import { AxiosError } from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { error } from "console";
 import exceptionService from "../../../utils/exceptionService";
+import * as Yup from "yup";
 
 function SocialMedia() {
   const [socialMedias, setSocialMedias] = useState([]);
@@ -20,6 +21,11 @@ function SocialMedia() {
     mediaAccountUrl: null,
   };
 
+  const validationSchema = Yup.object({
+    socialMediaId: Yup.string().required("Doldurulması zorunlu alan*"),
+    mediaAccountUrl: Yup.string().required("Doldurulması zorunlu alan*"),
+  });
+
   const addStudentSocialMedia = async (
     data: CreateStudentSocialMediaRequest
   ) => {
@@ -29,9 +35,6 @@ function SocialMedia() {
         getStudentSocialMedias();
       })
       .catch((error: any) => {
-        alert(
-          exceptionService.errorSelector(JSON.stringify(error.response.data))
-        );
         toast.error(
           exceptionService.errorSelector(JSON.stringify(error.response.data))
         );
@@ -43,9 +46,6 @@ function SocialMedia() {
       const data = await socialMediaService.getAll();
       setSocialMediaOptions(data);
     } catch (error: any) {
-      alert(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
       toast.error(
         exceptionService.errorSelector(JSON.stringify(error.response.data))
       );
@@ -57,9 +57,6 @@ function SocialMedia() {
       const data = (await socialMediaService.getForLoggedStudent()).data.items;
       setSocialMedias(data);
     } catch (error: any) {
-      alert(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
       toast.error(
         exceptionService.errorSelector(JSON.stringify(error.response.data))
       );
@@ -75,6 +72,7 @@ function SocialMedia() {
     <div className="social-media">
       <Formik
         initialValues={initialValues}
+        validationSchema={validationSchema}
         onSubmit={(initialValues: any) => {
           console.log(initialValues);
           addStudentSocialMedia(initialValues);
@@ -108,7 +106,6 @@ function SocialMedia() {
           </div>
         </Form>
       </Formik>
-      <ToastContainer position="bottom-right" />
     </div>
   );
 }

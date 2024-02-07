@@ -3,6 +3,7 @@
 }
 
 .register {
+  margin-top: 150px;
   font-family: "Poppins", sans-serif;
   font-weight: bold;
   justify-content: center;
@@ -16,6 +17,7 @@
   place-items: center;
   border: 5px solid transparent;
   background: #fff;
+  animation: fadein 0.5s ease-in-out;
 }
 
 .register::before {
@@ -56,16 +58,11 @@
   border-radius: 1em;
 }
 
-@keyframes rotate {
-  to {
-    --angle: 360deg;
-  }
-}
-
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
+.register-events {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .register-img {
@@ -74,24 +71,41 @@
 }
 
 .register-input {
-  width: 300px;
-  height: 35px;
+  width: 380px;
+  height: 45px;
   border-radius: 5px;
-  margin-top: 20px;
+  margin-top: 25px;
   border: 1px solid grey;
+  border-color: #e3e3e3;
+  transition: box-shadow 0.2s; /* Gölge animasyonu için geçiş efekti ekleyin */
 }
 
 .register-btn {
   width: 100%;
-  margin-top: 10px;
+  height: 40px;
+  margin-top: 20px;
   cursor: pointer;
   color: white;
   background-color: #93f;
   padding: 10px 20px;
   border-radius: 20px;
   border: none;
+  transition: transform 0.2s;
 }
 
-.h1 {
-  width: 100px;
+.register-btn:hover {
+  transform: scale(1.05);
+}
+
+.login > h1 {
+  color: #505050 !important;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

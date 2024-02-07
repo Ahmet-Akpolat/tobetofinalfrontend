@@ -1,5 +1,7 @@
+import { toast } from "react-toastify";
 import socialMediaService from "../../../../services/StudentProfileSettingsServices/socialMediaService";
 import "./SocialMediaCard.css";
+import exceptionService from "../../../../utils/exceptionService";
 
 function SocialMediaCard({ socialMedia, setSocialMedias }: any) {
   
@@ -9,8 +11,10 @@ function SocialMediaCard({ socialMedia, setSocialMedias }: any) {
       setSocialMedias((arr: any) => {
         return arr.filter((sc: any) => sc.id !== id);
       });
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 
