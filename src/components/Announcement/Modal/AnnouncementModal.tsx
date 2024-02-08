@@ -2,13 +2,11 @@ import Modal from "react-bootstrap/Modal";
 import { selectAnnouncement } from "../../../store/slices/announcementSlice";
 import { useSelector } from "react-redux";
 
-function AnnouncementModal(props) {
-
-  const announcements = useSelector(selectAnnouncement)
-
+function AnnouncementModal({ announcement, show, onHide }: any) {
   return (
     <Modal
-    {...props}
+      show={show}
+      onHide={onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -19,7 +17,7 @@ function AnnouncementModal(props) {
             <div className="modal-hea">
               <div className="d-flex flex-column modal-header-text">
                 <span className="text-dark">
-                  <b>{announcements[props.index].announcementName}</b>
+                  <b>{announcement.announcementName}</b>
                 </span>
               </div>
             </div>
@@ -28,7 +26,7 @@ function AnnouncementModal(props) {
             <p>
               Merhabalar,
               <br /> <br />
-              {announcements[props.index].announcementDescription}
+              {announcement.announcementDescription}
             </p>
           </Modal.Body>
         </div>

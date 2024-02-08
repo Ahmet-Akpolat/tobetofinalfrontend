@@ -9,20 +9,18 @@ import { CreatedStudentAnnouncementRequest } from "../../models/requests/Student
 import { toast } from "react-toastify";
 import exceptionService from "../../utils/exceptionService";
 
-function Announcement({index}:any) {
+function Announcement({ announcement }: any) {
   const [modalShow, setModalShow] = useState(false);
-  const announcements = useSelector(selectAnnouncement)
 
-  const readAnnouncement =async(announcementId:string)=> {
-
-    await announcementService.readTheAnnouncement(announcementId).catch((error)=>{
-    toast.error(
-      exceptionService.errorSelector(JSON.stringify(error.response.data))
-    );
-  });
- 
-    
-  }
+  const readAnnouncement = async (announcementId: string) => {
+    try {
+      await announcementService.readTheAnnouncement(announcementId)
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
+    }
+  };
 
   return (
     <div className="col-md-4 col-12 my-4">
@@ -35,19 +33,19 @@ function Announcement({index}:any) {
             </span>
           </div>
           <span className="header ">
-          {announcements[index].announcementName}
+          {announcement.announcementName}
           </span>
         </div>
         <div className="d-flex justify-content-between">
-          <span className="date">{formatDate(announcements[index].announcementCreatedDate)}</span>
+          <span className="date">{formatDate(announcement.announcementCreatedDate)}</span>
           <span className="read-more" onClick={() => {
-            readAnnouncement(announcements[index].announcementId)
+            readAnnouncement(announcement.announcementId)
             setModalShow(true)}}>
             Devamını oku
           </span>
         </div>
       </div>
-      <AnnouncementModal index={index} show={modalShow} onHide={() => setModalShow(false)} />
+      <AnnouncementModal announcement={announcement} show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );
 }

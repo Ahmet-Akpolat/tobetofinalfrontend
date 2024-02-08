@@ -10,6 +10,7 @@ import { clearAnnouncement } from "../../store/slices/announcementSlice";
 import { clearLecture } from "../../store/slices/lectureSlice";
 import { clearSurvey } from "../../store/slices/surveySlice";
 import { clearExams } from "../../store/slices/examSlice";
+import { Logout } from "../../utils/logout";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -22,15 +23,8 @@ const Navbar = () => {
     setSelectedItemId(itemId);
   };
 
-  const handleLogOut = async () => {
-    dispatch(clearAuth());
-    dispatch(clearStudent());
-    dispatch(clearAppeal());
-    dispatch(clearAnnouncement());
-    dispatch(clearLecture());
-    dispatch(clearSurvey());
-    dispatch(clearExams());
-    navigate("/login");
+  const handleLogOut = () => {
+    Logout(navigate, dispatch);
   };
 
   return (

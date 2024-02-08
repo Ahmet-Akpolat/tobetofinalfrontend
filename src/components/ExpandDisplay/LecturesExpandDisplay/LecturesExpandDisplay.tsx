@@ -4,11 +4,11 @@ import { useLocation } from "react-router-dom";
 import { Announcement } from "@mui/icons-material";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import exceptionService from "../../utils/exceptionService";
-import lectureService from "../../services/lectureService";
-import Lecture from "../../components/Lecture/Lecture";
-import { LectureResponse } from "../../models/responses/LectureResponses";
-import removeTurkishChars from "../../utils/removeTurkishChars";
+import exceptionService from "../../../utils/exceptionService";
+import lectureService from "../../../services/lectureService";
+import Lecture from "../../Lecture/Lecture";
+import { LectureResponse } from "../../../models/responses/LectureResponses";
+import removeTurkishChars from "../../../utils/removeTurkishChars";
 
 function LecturesExpandDisplay() {
   const [pageSize, setPageSize] = useState(0);
@@ -57,21 +57,19 @@ function LecturesExpandDisplay() {
       );
     }
   };
+
   const getAllDatas = async (allDataCount: number) => {
     await lectureService.getAll(0, allDataCount).then((r) => setAllData(r));
-    console.log(allData);
+  };
 
-  }
   const getForSearchedValue = async (value: string) => {
-
-
     const lectures = allData.filter((lecture: any) =>
-      removeTurkishChars(lecture.lectureName.toLowerCase()).includes(removeTurkishChars(value.toLowerCase()))
+      removeTurkishChars(lecture.lectureName.toLowerCase()).includes(
+        removeTurkishChars(value.toLowerCase())
+      )
     );
     setLectures(lectures);
-    console.log(lectures);
-
-  }
+  };
 
   useEffect(() => {
     getLectures(0);
@@ -88,49 +86,59 @@ function LecturesExpandDisplay() {
           </div>
         </div>
       </div>
-      <div className="col-12 d-flex justify-content-center filters">
-        <ul className="nav nav-tabs mainTablist" role="tablist">
-          <li className={`nav-item `}>
-            <input type="text"
-              onChange={handleInputChange} />
-
-          </li>
-          <li className={`nav-item ${clicked === 0 && "is-selectedd"}`}>
-            <button
-              className="filters-link"
-              onClick={() => {
-                setIsSelected(0);
-                setClicked(0);
-                getLectures(0);
-              }}
-            >
-              Tüm Eğitimlerim
-            </button>
-          </li>
-          <li className={`nav-item ${clicked === 1 && "is-selectedd"}`}>
-            <button
-              className="filters-link"
-              onClick={() => {
-                setIsSelected(0);
-                setClicked(1);
-                getContinuedLectures(0);
-              }}
-            >
-              Devam Ettiklerim
-            </button>
-          </li>
-          <li className={`nav-item ${clicked === 2 && "is-selectedd"}`}>
-            <button
-              className="filters-link"
-              onClick={() => {
-                setIsSelected(0);
-                setClicked(2);
-                getComplatedLectures(0);
-              }}
-            >
-              Tamamladıklarım
-            </button>
-          </li>
+      <div className="container filters">
+        <ul
+          className="nav nav-tabs mainTablist d-flex justify-content-around"
+          role="tablist"
+        >
+          <div className="search-area">
+            <li className={`nav-item`}>
+              <input
+                type="text"
+                placeholder="Ara"
+                className="nav-item-search-area"
+                onChange={handleInputChange}
+              />
+            </li>
+          </div>
+          <div className="d-flex justify-content-center">
+            <li className={`nav-item ${clicked === 0 && "is-selectedd"}`}>
+              <button
+                className="filters-link"
+                onClick={() => {
+                  setIsSelected(0);
+                  setClicked(0);
+                  getLectures(0);
+                }}
+              >
+                Tüm Eğitimlerim
+              </button>
+            </li>
+            <li className={`nav-item ${clicked === 1 && "is-selectedd"}`}>
+              <button
+                className="filters-link"
+                onClick={() => {
+                  setIsSelected(0);
+                  setClicked(1);
+                  getContinuedLectures(0);
+                }}
+              >
+                Devam Ettiklerim
+              </button>
+            </li>
+            <li className={`nav-item ${clicked === 2 && "is-selectedd"}`}>
+              <button
+                className="filters-link"
+                onClick={() => {
+                  setIsSelected(0);
+                  setClicked(2);
+                  getComplatedLectures(0);
+                }}
+              >
+                Tamamladıklarım
+              </button>
+            </li>
+          </div>
         </ul>
       </div>
       <div className="container">

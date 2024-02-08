@@ -1,27 +1,40 @@
-import { BaseService } from './baseService';
-import { AppealResponses, CreatedAppealResponse, GetListAppealResponse, UpdatedAppealResponse } from "../models/responses/AppealResponses"
-import { CreateAppealRequest, UpdateAppealRequest } from '../models/requests/AppealRequests';
-import axios from 'axios';
-import axiosInstance from '../utils/axiosInterceptors';
-import { CreatedStudentAnnouncementRequest } from '../models/requests/StudentAnnouncementRequests';
+import { BaseService } from "./baseService";
+import axiosInstance from "../utils/axiosInterceptors";
+import {
+  AnnouncementResponse,
+  CreatedAnnouncementResponse,
+  GetListAnnouncementResponse,
+  UpdatedAnnouncementResponse,
+} from "../models/responses/AnnouncementResponses";
+import {
+  CreateAnnouncementRequest,
+  UpdateAnnouncementRequest,
+} from "../models/requests/AnnouncementRequests";
 
-class AppealService extends BaseService<
-  GetListAppealResponse,
-	AppealResponses,
-	CreateAppealRequest,
-	CreatedAppealResponse,
-	UpdateAppealRequest,
-	UpdatedAppealResponse
+class AnnouncementService extends BaseService<
+  GetListAnnouncementResponse,
+  AnnouncementResponse,
+  CreateAnnouncementRequest,
+  CreatedAnnouncementResponse,
+  UpdateAnnouncementRequest,
+  UpdatedAnnouncementResponse
 > {
   constructor() {
-    super()
-    this.apiUrl = "ClassAnnouncements"
-  }
-  async readTheAnnouncement(announcementId:string){
-    await axiosInstance.post("StudentAnnouncements",{announcementId:announcementId});
+    super();
+    this.apiUrl = "ClassAnnouncements";
   }
 
+  async readTheAnnouncement(announcementId: string) {
+    await axiosInstance.post("StudentAnnouncements", {
+      announcementId: announcementId,
+    });
+  }
 
+  async getReadedAnnouncement(pageIndex: number, pageSize: number) {
+    return await axiosInstance.get(
+      `StudentAnnouncements/getListForLoggedStudent?PageIndex=${pageIndex}&PageSize=${pageSize}`
+    );
+  }
 }
 
-export default new AppealService();
+export default new AnnouncementService();

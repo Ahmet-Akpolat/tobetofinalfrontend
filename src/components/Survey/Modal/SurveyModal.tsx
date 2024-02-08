@@ -2,12 +2,12 @@ import Modal from "react-bootstrap/Modal";
 import { selectSurvey } from "../../../store/slices/surveySlice";
 import { useSelector } from "react-redux";
 
-function SurveyModal(props: any) {
-  const surveys = useSelector(selectSurvey);
+function SurveyModal({ survey, show, onHide }: any) {
 
   return (
     <Modal
-      {...props}
+      show={show}
+      onHide={onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -18,7 +18,7 @@ function SurveyModal(props: any) {
             <div className="modal-hea">
               <div className="d-flex flex-column modal-header-text">
                 <span className="text-dark">
-                  <b>{surveys[props.index].surveyName}</b>
+                  <b>{survey.surveyName}</b>
                 </span>
               </div>
             </div>
@@ -26,14 +26,14 @@ function SurveyModal(props: any) {
           <Modal.Body>
             <p>
               <a
-                href={surveys[props.index].surveyUrl}
+                href={survey.surveyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Ankete Git
               </a>
               <br /> <br />
-              {surveys[props.index].surveyDescription}
+              {survey.surveyDescription}
             </p>
           </Modal.Body>
         </div>

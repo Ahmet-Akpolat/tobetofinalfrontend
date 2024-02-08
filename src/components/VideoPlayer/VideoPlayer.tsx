@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import lectureService from "../../services/lectureService";
 import { selectLectureDetail } from "../../store/slices/lectureDetailSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import exceptionService from "../../utils/exceptionService";
 
 function VideoPlayer({ setContentsViews }: any) {
   const navigate = useNavigate();
@@ -15,9 +17,10 @@ function VideoPlayer({ setContentsViews }: any) {
     try {
       await lectureService.setContentIsWatched(lecture.id, content.id);
       window.location.reload();
-    } catch (error) {
-      console.log(error);
-      navigate("/login");
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 

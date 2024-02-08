@@ -19,14 +19,12 @@ main {
   display: flex;
   align-items: center;
 }
+
 .page-banner-card strong {
-  color: #fff;
+  color: #d60e0e;
   font-size: 5vw;
   font-family: "Poppins", sans-serif;
-}
-
-.justify-content-center {
-  justify-content: center !important;
+  font-weight: bold !important;
 }
 
 .page-item .page-link {
@@ -83,4 +81,15 @@ main {
 
 .list {
   animation: fadein 1.2s ease-in-out;
+}
+
+.search-area {
+}
+
+.nav-item-search-area {
+  min-width: 275px;
+  padding: 8px;
+  border: 1px solid grey;
+  border-radius: 20px;
+  outline: none;
 }

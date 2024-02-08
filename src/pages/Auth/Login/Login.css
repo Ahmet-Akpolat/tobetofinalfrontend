@@ -76,7 +76,7 @@
 
 .login-input {
   width: 380px;
-  height: 45px;
+  padding: 10px;
   border-radius: 5px;
   margin-top: 25px;
   border: 1px solid grey;

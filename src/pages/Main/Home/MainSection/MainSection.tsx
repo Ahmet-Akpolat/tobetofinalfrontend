@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./MainSection.css";
 import Appeal from "../../../../components/Appeal/Appeal";
@@ -13,6 +13,7 @@ import { selectExams } from "../../../../store/slices/examSlice";
 import NoContent from "../../../../components/NoContent/NoContent";
 import { selectSurvey } from "../../../../store/slices/surveySlice";
 import Survey from "../../../../components/Survey/Survey";
+import examService from "../../../../services/examService";
 
 const MainSection = () => {
   const [section, setSection] = useState(0);
@@ -21,12 +22,25 @@ const MainSection = () => {
   const announcements = useSelector(selectAnnouncement);
   const lectures = useSelector(selectLecture);
   const exams = useSelector(selectExams);
+  const [joinedExams, setJoinedExams] = useState([] as any);
   const surveys = useSelector(selectSurvey);
 
   const [activeNavLink, setActiveNavLink] = useState("appeals");
   const handleNavLinkClick = (navLinkId: any) => {
     setActiveNavLink(navLinkId);
   };
+
+  const getJoinedExams = async () => {
+    try {
+      const data = (await examService.getJoinedExams()).data.items;
+      setJoinedExams(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }; // buradan kaldir
+  useEffect(() => {
+    getJoinedExams();
+  }, []);
 
   const MAX_ITEMS_DISPLAY = {
     appeals: 2,
@@ -121,9 +135,7 @@ const MainSection = () => {
                     ) : (
                       appeals
                         .slice(0, MAX_ITEMS_DISPLAY.appeals)
-                        .map((_: any, index: any) => (
-                          <Appeal key={index} index={index} />
-                        ))
+                        .map((appeal: any) => <Appeal appeal={appeal} />)
                     )}
                   </div>
                   {appeals.length > MAX_ITEMS_DISPLAY.appeals && (
@@ -142,14 +154,12 @@ const MainSection = () => {
               {section == 1 && (
                 <div className="tab-pane fade show active">
                   <div className="row">
-                    {announcements.length === 0 ? (
+                    {lectures.length === 0 ? (
                       <NoContent content="eğitiminiz" />
                     ) : (
                       lectures
                         .slice(0, MAX_ITEMS_DISPLAY.lectures)
-                        .map((lecture: any) => (
-                          <Lecture lecture={lecture} />
-                        ))
+                        .map((lecture: any) => <Lecture lecture={lecture} />)
                     )}
                   </div>
                   {lectures.length > MAX_ITEMS_DISPLAY.lectures && (
@@ -172,8 +182,8 @@ const MainSection = () => {
                     ) : (
                       announcements
                         .slice(0, MAX_ITEMS_DISPLAY.announcements)
-                        .map((_: any, index: any) => (
-                          <Announcement key={index} index={index} />
+                        .map((announcement: any) => (
+                          <Announcement announcement={announcement} />
                         ))
                     )}
                   </div>
@@ -197,9 +207,7 @@ const MainSection = () => {
                     ) : (
                       surveys
                         .slice(0, MAX_ITEMS_DISPLAY.surveys)
-                        .map((survey: any, index: any) => (
-                          <Survey key={index} index={index} />
-                        ))
+                        .map((survey: any) => <Survey survey={survey} />)
                     )}
                   </div>
                   {surveys.length > MAX_ITEMS_DISPLAY.surveys && (
@@ -229,9 +237,7 @@ const MainSection = () => {
                 ) : (
                   exams
                     .slice(0, MAX_ITEMS_DISPLAY.exams)
-                    .map((_: any, index: any) => (
-                      <Exam key={index} index={index} />
-                    ))
+                    .map((exam: any) => <Exam exam={exam} joinedExams={joinedExams} />)
                 )}
               </div>
               {exams.length > MAX_ITEMS_DISPLAY.exams && (
