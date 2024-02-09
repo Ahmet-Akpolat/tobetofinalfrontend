@@ -44,7 +44,6 @@ function Password() {
         initialValues={{}}
         validationSchema={validationSchema}
         onSubmit={(updatedValues) => {
-          console.log(updatedValues);
           changePassword(updatedValues);
         }}
       >

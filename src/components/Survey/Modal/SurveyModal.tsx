@@ -3,7 +3,6 @@ import { selectSurvey } from "../../../store/slices/surveySlice";
 import { useSelector } from "react-redux";
 
 function SurveyModal({ survey, show, onHide }: any) {
-
   return (
     <Modal
       show={show}
@@ -24,17 +23,15 @@ function SurveyModal({ survey, show, onHide }: any) {
             </div>
           </Modal.Header>
           <Modal.Body>
-            <p>
-              <a
-                href={survey.surveyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ankete Git
-              </a>
-              <br /> <br />
-              {survey.surveyDescription}
-            </p>
+            <p>{survey.surveyDescription}</p>
+            <button
+              className="save-button"
+              onClick={() =>
+                window.open(survey.surveyUrl, "_blank", "noreferrer")
+              }
+            >
+              Ankete Git
+            </button>
           </Modal.Body>
         </div>
       </div>

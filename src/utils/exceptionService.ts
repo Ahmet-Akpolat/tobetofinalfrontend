@@ -25,7 +25,7 @@ const ExceptionService = () => {
   };
 
   const AuthorizationExceptionOperations = () => {
-    var extractedError = "Oturumunuzun Suresi Doldu Lutfen Tekrar Giris Yapiniz";
+    var extractedError = "Oturumunuzun süresi doldu lütfen tekrar giriş yapınız";
     return extractedError;
   };
 

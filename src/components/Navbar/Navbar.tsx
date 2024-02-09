@@ -41,10 +41,13 @@ const Navbar = () => {
           />
         </span>
       </Link>
-      <ul className="d-none d-xxl-flex navbar-nav gap-3">
+      <ul className="d-none d-xxl-flex navbar-nav gap-4">
         <li
           className={`nav-item ${selectedItemId === "home" ? "selected" : ""}`}
-          onClick={() => handleItemClick("home")}
+          onClick={() => {
+            navigate("/");
+            setSelectedItemId("home");
+          }}
         >
           <a className="nav-link">Ana Sayfa</a>
         </li>
@@ -52,41 +55,45 @@ const Navbar = () => {
           className={`nav-item ${
             selectedItemId === "profile" ? "selected" : ""
           }`}
-          onClick={() => handleItemClick("profile")}
+          onClick={() => {
+            navigate("/profil-detay");
+            setSelectedItemId("profile");
+          }}
         >
           <a className="nav-link">Profilim</a>
         </li>
         <li
           className={`nav-item ${
-            selectedItemId === "reviews" ? "selected" : ""
+            selectedItemId === "educations" ? "selected" : ""
           }`}
-          onClick={() => handleItemClick("reviews")}
+          onClick={() => {
+            navigate("/egitimlerim");
+            setSelectedItemId("educations");
+          }}
         >
-          <a className="nav-link">Değerlendirmeler</a>
+          <a className="nav-link">Eğitimlerim</a>
         </li>
         <li
           className={`nav-item ${
-            selectedItemId === "catalog" ? "selected" : ""
+            selectedItemId === "announcements" ? "selected" : ""
           }`}
-          onClick={() => handleItemClick("catalog")}
+          onClick={() => {
+            navigate("duyurularim");
+            setSelectedItemId("announcements");
+          }}
         >
-          <a className="nav-link">Katalog</a>
+          <a className="nav-link">Duyuru ve Haberler</a>
         </li>
         <li
           className={`nav-item ${
-            selectedItemId === "calendar" ? "selected" : ""
+            selectedItemId === "surveys" ? "selected" : ""
           }`}
-          onClick={() => handleItemClick("calendar")}
+          onClick={() => {
+            handleItemClick("calendar");
+            setSelectedItemId("surveys");
+          }}
         >
-          <a className="nav-link">Takvim</a>
-        </li>
-        <li
-          className={`nav-item ${
-            selectedItemId === "kodluyor" ? "selected" : ""
-          }`}
-          onClick={() => handleItemClick("kodluyor")}
-        >
-          <a className="nav-link">İstanbul Kodluyor</a>
+          <a className="nav-link">Anketler</a>
         </li>
       </ul>
       <div className="navbar-sec">

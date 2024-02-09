@@ -51,14 +51,17 @@ class LectureService extends BaseService<
       lectureId: lectureId,
     });
   }
-  async getListForSearch(searchedValue: string,pageIndex: number, pageSize: number) {
+  async getListForSearch(
+    searchedValue: string,
+    pageIndex: number,
+    pageSize: number
+  ) {
     const response = await axiosInstance.get(
       `ClassLectures/GetListForSearch${searchedValue}?PageIndex=${pageIndex}&PageSize=${pageSize}`
     );
     return response.data;
   }
 
-  
   async getLectureNumberOfLikes(lectureId: string) {
     const response = await axiosInstance.get(
       `LectureLikes/GetCount${lectureId}`
@@ -108,6 +111,10 @@ class LectureService extends BaseService<
     return await axiosInstance.get<GetByContentIdContentLikeResponse>(
       `ContentLikes/getByContentId${contentId}`
     );
+  }
+
+  async getAllLectureViews() {
+    return await axiosInstance.get(`LectureViews?PageIndex=0&PageSize=10000`);
   }
 
   async getLectureViewCount(lectureId: string, contentId: string) {

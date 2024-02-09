@@ -45,7 +45,6 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   cursor: default;
-  font-family: "Poppins", sans-serif;
 }
 .notfy-card.notify.survey .type {
   color: #82f;
@@ -53,7 +52,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  font-family: "Poppins", sans-serif;
   cursor: default;
 }
 .notfy-card .date {
@@ -64,12 +62,10 @@
   line-height: normal;
   display: flex;
   align-items: center;
-  font-family: "Poppins", sans-serif;
   cursor: default;
 }
 .notfy-card span.read-more {
   cursor: pointer !important;
-  font-family: "Poppins", sans-serif;
 }
 
 .notfy-card span {
@@ -105,5 +101,4 @@
   height: 4em;
   display: block;
   font-size: 12px;
-  font-family: "Poppins", sans-serif;
 }

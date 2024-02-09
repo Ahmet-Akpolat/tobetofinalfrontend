@@ -5,9 +5,7 @@ import { toast } from "react-toastify";
 import ExceptionService from "../../../utils/exceptionService";
 import examService from "../../../services/examService";
 
-function ExamModal({ exam, joinedExams, show, onHide }: any) {
-  console.log(joinedExams);
-
+function ExamModal({ exam, isJoined, show, onHide }: any) {
   const joinTheExam = async () => {
     try {
       await examService.joinTheExam(exam.examId);
@@ -27,7 +25,7 @@ function ExamModal({ exam, joinedExams, show, onHide }: any) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <div className="">
+      <div>
         <div className="modal-content">
           <Modal.Header closeButton>
             <div className="modal-hea">
@@ -41,12 +39,12 @@ function ExamModal({ exam, joinedExams, show, onHide }: any) {
             </div>
           </Modal.Header>
           <Modal.Body>
-            {exam.examIsActive === true ? (
+            {exam.examIsActive === true && isJoined === false ? (
               <button className="save-button" onClick={joinTheExam}>
-                Sinava Basla
+                Sınava başla
               </button>
             ) : (
-              <p>Sinav Artik Aktif Degil</p>
+              <p>Bu Sınav artık aktif değil.</p>
             )}
           </Modal.Body>
         </div>

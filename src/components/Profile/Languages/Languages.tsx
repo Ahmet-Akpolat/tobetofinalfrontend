@@ -80,7 +80,6 @@ function Languages() {
         }}
         validationSchema={validationSchema}
         onSubmit={(updatedValues: any) => {
-          console.log(updatedValues);
           addStudentLanguage(updatedValues);
         }}
       >

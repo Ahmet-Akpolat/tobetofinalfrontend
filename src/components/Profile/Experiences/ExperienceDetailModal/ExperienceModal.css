@@ -67,7 +67,6 @@
     color: rgba(var(--bs-dark-rgb), var(--bs-text-opacity)) !important;
     font-size: 1em;
     font-weight: 600;
-    font-family: "Poppins", sans-serif;
   }
   .modal-header .btn-close {
     padding: calc(var(--bs-modal-header-padding-y) 0.5)

@@ -74,7 +74,6 @@ function SocialMedia() {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(initialValues: any) => {
-          console.log(initialValues);
           addStudentSocialMedia(initialValues);
         }}
       >

@@ -14,6 +14,7 @@ import NoContent from "../../../../components/NoContent/NoContent";
 import { selectSurvey } from "../../../../store/slices/surveySlice";
 import Survey from "../../../../components/Survey/Survey";
 import examService from "../../../../services/examService";
+import ExamSection from "../../../../components/ExamSection/ExamSection";
 
 const MainSection = () => {
   const [section, setSection] = useState(0);
@@ -29,18 +30,6 @@ const MainSection = () => {
   const handleNavLinkClick = (navLinkId: any) => {
     setActiveNavLink(navLinkId);
   };
-
-  const getJoinedExams = async () => {
-    try {
-      const data = (await examService.getJoinedExams()).data.items;
-      setJoinedExams(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }; // buradan kaldir
-  useEffect(() => {
-    getJoinedExams();
-  }, []);
 
   const MAX_ITEMS_DISPLAY = {
     appeals: 2,
@@ -226,34 +215,7 @@ const MainSection = () => {
           </div>
         </div>
       </div>
-      <div className="container main-section d-flex align-items-center justify-content-center">
-        <div className="exam cv-box cv-padding display-flex mmt-n-4 main-section">
-          <span className="exam-header">Sınavlarım</span>
-          <div className="col-12 mt-3 mb-3">
-            <div className="tab-pane fade show active">
-              <div className="row p-2">
-                {exams.length === 0 ? (
-                  <NoContent content="sınavınız" />
-                ) : (
-                  exams
-                    .slice(0, MAX_ITEMS_DISPLAY.exams)
-                    .map((exam: any) => <Exam exam={exam} joinedExams={joinedExams} />)
-                )}
-              </div>
-              {exams.length > MAX_ITEMS_DISPLAY.exams && (
-                <a
-                  className="showMoreBtn"
-                  onClick={() => {
-                    navigate("/sınavlarım");
-                  }}
-                >
-                  Daha Fazla Göster
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
+      <ExamSection />
     </section>
   );
 };

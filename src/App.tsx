@@ -13,6 +13,7 @@ import Profile from "./pages/Profile/Profile";
 import { ToastContainer } from "react-toastify";
 import LecturesExpandDisplay from "./components/ExpandDisplay/LecturesExpandDisplay/LecturesExpandDisplay";
 import AnnouncementExpandDisplay from "./components/ExpandDisplay/AnnouncementsExpandDisplay/AnnouncementsExpandDisplay";
+import ProfileDetail from "./pages/ProfileDetail/ProfileDetail";
 
 function App() {
   const isAuth = useSelector(selectIsAuthenticated);
@@ -44,7 +45,11 @@ function App() {
         </Route>
 
         <Route element={<MainLayout />}>
-          <Route path="profilim" element={<Profile />} />
+          <Route path="/profil-detay" element={<ProfileDetail />} />
+        </Route>
+
+        <Route element={<MainLayout />}>
+          <Route path="/profilim" element={<Profile />} />
         </Route>
       </Routes>
       <OverlayLoader />

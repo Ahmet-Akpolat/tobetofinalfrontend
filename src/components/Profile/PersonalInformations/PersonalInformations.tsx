@@ -138,7 +138,6 @@ function PersonalInformations() {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(updatedValues) => {
-          console.log(updatedValues);
           updateStudent(updatedValues);
         }}
       >

@@ -7,7 +7,7 @@
   cursor: pointer;
 }
 
-.exam-card::after {
+.is-joined::after {
   content: "";
   position: absolute;
   background-image: url(https://tobeto.com/_next/static/media/done-purple.b4443456.svg);
