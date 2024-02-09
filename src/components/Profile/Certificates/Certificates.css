@@ -7,8 +7,7 @@
   background-color: #f8f8f8;
   border: 2px dashed #a486c3;
   border-radius: 20px;
-  height: 125%;
-  cursor: pointer;
+  height: 100%;
 }
 
 .upload-img {
@@ -19,4 +18,5 @@
   background-color: #efdfff;
   height: 60px;
   width: 60px;
+  cursor: pointer;
 }

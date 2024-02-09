@@ -156,7 +156,7 @@ function Experiences() {
           <button className="save-button" type="submit">
             Kaydet
           </button>
-          <div className="col-12 mt-5">
+          <div className="anim-fadein col-12 mt-5">
             {experiences != null &&
               experiences.map((experience: any) => (
                 <ExperiencesCard

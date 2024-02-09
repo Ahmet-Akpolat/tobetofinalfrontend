@@ -125,7 +125,7 @@ function Education() {
           <button className="save-button" type="submit">
             Kaydet
           </button>
-          <div className="col-12 mt-5">
+          <div className="anim-fadein col-12 mt-5">
             {educations != null &&
               educations.map((education) => (
                 <EducationCard

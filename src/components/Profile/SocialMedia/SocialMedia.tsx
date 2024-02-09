@@ -94,7 +94,7 @@ function SocialMedia() {
           <button className="save-button" type="submit">
             Kaydet
           </button>
-          <div className="col-12 mt-5">
+          <div className="anim-fadein col-12 mt-5">
             {socialMedias !== null &&
               socialMedias.map((socialMedia) => (
                 <SocialMediaCard

@@ -43,7 +43,15 @@ export class BaseService<
   }
 
   async add(request: AddRequestType) {
-    return axiosInstance.post<AddResponseType>(this.apiUrl, request);
+    console.log(request)
+    return (
+      axiosInstance.post<AddResponseType>(this.apiUrl, request,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    ));
   }
 
   update(

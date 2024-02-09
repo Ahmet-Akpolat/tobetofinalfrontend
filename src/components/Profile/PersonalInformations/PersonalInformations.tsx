@@ -142,7 +142,7 @@ function PersonalInformations() {
         }}
       >
         <Form>
-          <div className="personal-informations row">
+          <div className="anim-fadein personal-informations row">
             <div className="col-12 mb-5 text-center">
               <div className="profile-photo">
                 <img

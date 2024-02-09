@@ -109,7 +109,7 @@ function Languages() {
             <button className="save-button mb-5" type="submit">
               Kaydet
             </button>
-            <div className="languages-list row gap-3">
+            <div className="anim-fadein languages-list row gap-3">
               {languages.map((language: any) => (
                 <LanguageCard language={language} setLanguages={setLanguages} />
               ))}

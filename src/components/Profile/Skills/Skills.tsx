@@ -76,7 +76,7 @@ function Skills() {
         }}
       >
         <Form>
-          <div className="skills">
+          <div>
             <div className="row">
               <div className="profile-input col-12 mb-4">
                 <label>Yetkinlik</label>
@@ -91,7 +91,7 @@ function Skills() {
             <button className="save-button" type="submit">
               Kaydet
             </button>
-            <div className="col-12 mt-5">
+            <div className="anim-fadein col-12 mt-5">
               {skills !== null &&
                 skills.map((skill: any) => (
                   <div className="skill-card">
