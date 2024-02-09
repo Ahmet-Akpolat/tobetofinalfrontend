@@ -9,7 +9,6 @@ import { clearSurvey } from "../store/slices/surveySlice";
 import { clearExams } from "../store/slices/examSlice";
 
 export const Logout = (navigate :any, dispatch: any) => {
-
   dispatch(clearAuth());
   dispatch(clearStudent());
   dispatch(clearAppeal());
@@ -17,6 +16,4 @@ export const Logout = (navigate :any, dispatch: any) => {
   dispatch(clearLecture());
   dispatch(clearSurvey());
   dispatch(clearExams());
-
-  navigate("/login");
 };

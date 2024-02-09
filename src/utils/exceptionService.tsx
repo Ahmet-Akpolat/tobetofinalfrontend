@@ -1,15 +1,17 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Dispatch } from "redux";
+import { Logout } from "./logout";
 
 const ExceptionService = () => {
-
   const errorSelector = (errorMessage: string) => {
     if (errorMessage.includes("ValidationException")) {
       return "yapılacak";
     } else if (errorMessage.includes("BusinessException:")) {
       return BusinessExceptionOperations(errorMessage);
     } else if (errorMessage.includes("AuthorizationException:")) {
-      return AuthorizationExceptionOperations();
+      AuthorizationExceptionOperations();
+      // Oturumun süresi dolduğunda burada yönlendirme yapacağız
     } else {
       return "Bir Sorun Oluştu";
     }
@@ -25,8 +27,9 @@ const ExceptionService = () => {
   };
 
   const AuthorizationExceptionOperations = () => {
-    var extractedError = "Oturumunuzun süresi doldu lütfen tekrar giriş yapınız";
-    return extractedError;
+    var extractedError =
+      "Oturumunuzun süresi doldu lütfen tekrar giriş yapınız";
+    // Kullanıcıyı login sayfasına yönlendir
   };
 
   return { errorSelector };

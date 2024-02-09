@@ -55,8 +55,8 @@ function Certificates() {
                 <img src="icons/cloud_upload_FILL0.svg"></img>
                 <input
                   id="file-upload"
-                  type="file"
-                  accept="application/pdf"
+                  type="file" 
+                  accept=".pdf"
                   style={{ display: "none" }}
                   onChange={addCertificates}
                 />

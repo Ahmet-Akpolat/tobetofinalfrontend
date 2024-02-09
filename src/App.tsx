@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import LecturesExpandDisplay from "./components/ExpandDisplay/LecturesExpandDisplay/LecturesExpandDisplay";
 import AnnouncementExpandDisplay from "./components/ExpandDisplay/AnnouncementsExpandDisplay/AnnouncementsExpandDisplay";
 import ProfileDetail from "./pages/ProfileDetail/ProfileDetail";
+import { Logout } from "./utils/logout";
 
 function App() {
   const isAuth = useSelector(selectIsAuthenticated);

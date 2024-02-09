@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-xxl navbar-custom py-4 mb-4 bg-white justify-content-between">
-      <Link to="/">
+      <Link to="/" onClick={() => setSelectedItemId("home")}>
         <span className="tobetoImage">
           <span>
             <img src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg'%20version='1.1'%20width='170'%20height='35'/>" />
