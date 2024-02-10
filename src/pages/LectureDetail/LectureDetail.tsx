@@ -12,8 +12,12 @@ import { useNavigate } from "react-router-dom";
 import { clearContent } from "../../store/slices/contentSlice";
 import { GetByLoggedStudentCompletionConditionResponse } from "../../models/responses/LectureCompletionDetailResponse";
 import exceptionService from "../../utils/exceptionService";
+import { formatDate } from "../../utils/formatDate";
+import { selectContentViews } from "../../store/slices/contenViewsSlice";
 
 function LectureDetail() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
   const [numberOfLikes, setNumberOfLikes] = useState(0);
   const [section, setSection] = useState(0);
@@ -22,9 +26,8 @@ function LectureDetail() {
   const [showDetail, setShowDetail] = useState(false);
   const [lectureCompletionDetail, setLectureCompletionDetail] =
     useState<GetByLoggedStudentCompletionConditionResponse>();
-  const [completionControl, setCompletionControl] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const contentViews = useSelector(selectContentViews);
 
   const getLectureLikeInfo = async () => {
     try {
@@ -48,7 +51,6 @@ function LectureDetail() {
         await lectureService.getLectureCompletionDetails(lecture.id)
       ).data;
       setLectureCompletionDetail(completionDetail);
-      setCompletionControl(true);
     } catch (error: any) {
       console.log(error);
       toast.error(
@@ -78,7 +80,7 @@ function LectureDetail() {
   useEffect(() => {
     getLectureLikeInfo();
     getLectureCompletionDetails();
-  }, []);
+  }, [contentViews]);
 
   return (
     <div className="lecture">
@@ -96,9 +98,8 @@ function LectureDetail() {
                     <h3>{lecture.name}</h3>
                   </div>
                   <div className="date-info text-dark-blue">
-                    <span>{`${lecture.endDate.replace(
-                      "T",
-                      " "
+                    <span>{`${formatDate(
+                      lecture.endDate
                     )} tarihine kadar bitirebilirsin`}</span>
                   </div>
                 </div>
@@ -114,13 +115,28 @@ function LectureDetail() {
                       ></img>
                     </div>
                   </div>
-                  <span className="number-of-likes">{numberOfLikes}</span>
+                  <span
+                    className={`number-of-likes ${
+                      liked != false && "text-red"
+                    }`}
+                  >
+                    {numberOfLikes}
+                  </span>
                 </div>
               </div>
               <div className="lecture-status mt-2">
-                <span
-                  style={{ color: "gray" }}
-                >{`${lectureCompletionDetail?.totalWatchedCount}/${lectureCompletionDetail?.totalContentCount}`}</span>
+                <div className="d-flex gap-2">
+                  {lectureCompletionDetail?.completionPercentage === 100 && (
+                    <span className="completion-message">Tamamladın</span>
+                  )}
+                  <span
+                    className={`${
+                      lectureCompletionDetail?.completionPercentage === 100 &&
+                      "completion-message"
+                    }`}
+                    style={{ color: "gray" }}
+                  >{`${lectureCompletionDetail?.totalWatchedCount}/${lectureCompletionDetail?.totalContentCount}`}</span>
+                </div>
                 <div className="d-flex align-items-center gap-2">
                   <div className="status-bar" id="status-bar">
                     <div

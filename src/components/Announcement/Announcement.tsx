@@ -14,7 +14,7 @@ function Announcement({ announcement }: any) {
 
   const readAnnouncement = async (announcementId: string) => {
     try {
-      await announcementService.readTheAnnouncement(announcementId)
+      await announcementService.readTheAnnouncement(announcementId);
     } catch (error: any) {
       toast.error(
         exceptionService.errorSelector(JSON.stringify(error.response.data))
@@ -28,24 +28,30 @@ function Announcement({ announcement }: any) {
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between mb-4">
             <span className="type">Duyuru</span>
-            <span className="corp-names type">
-              İstanbul Kodluyor
-            </span>
+            <span className="corp-names type">İstanbul Kodluyor</span>
           </div>
-          <span className="header ">
-          {announcement.announcementName}
-          </span>
+          <span className="header ">{announcement.announcementName}</span>
         </div>
         <div className="d-flex justify-content-between">
-          <span className="date">{formatDate(announcement.announcementCreatedDate)}</span>
-          <span className="read-more" onClick={() => {
-            readAnnouncement(announcement.announcementId)
-            setModalShow(true)}}>
+          <span className="date">
+            {formatDate(announcement.announcementCreatedDate)}
+          </span>
+          <span
+            className="read-more"
+            onClick={() => {
+              readAnnouncement(announcement.announcementId);
+              setModalShow(true);
+            }}
+          >
             Devamını oku
           </span>
         </div>
       </div>
-      <AnnouncementModal announcement={announcement} show={modalShow} onHide={() => setModalShow(false)} />
+      <AnnouncementModal
+        announcement={announcement}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
     </div>
   );
 }

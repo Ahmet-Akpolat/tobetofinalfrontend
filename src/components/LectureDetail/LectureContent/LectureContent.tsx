@@ -6,26 +6,31 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
 import NoContent from "../../NoContent/NoContent";
-import { setContent } from "../../../store/slices/contentSlice";
 import lectureService from "../../../services/lectureService";
+import {
+  clearContentViews,
+  selectContentViews,
+  setContentViews,
+} from "../../../store/slices/contenViewsSlice";
 
 interface Props {
   setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function LectureContent({ setShowDetail }: Props) {
+  const dispatch = useDispatch();
   const lecture = useSelector(selectLectureDetail);
-  const [contentsViews, setContentsViews] = useState([] as any);
 
   async function getContentsIsWatched() {
     try {
-      const contentViews = await lectureService.getContentsIsWatched(
+      const lectureContentViews = await lectureService.getContentsIsWatched(
         lecture.id
       );
-      setContentsViews([]);
-      contentViews.data.forEach((content: any) => {
+      const contentsViews = [] as any;
+      lectureContentViews.data.forEach((content: any) => {
         contentsViews.push(content.contentId);
       });
+      dispatch(setContentViews(contentsViews));
     } catch (error) {
       console.log(error);
     }
@@ -46,20 +51,12 @@ function LectureContent({ setShowDetail }: Props) {
           <div className="col-lg-5 col-sm-12 col-xs-12">
             <Scrollbar style={{ minHeight: "500px" }}>
               {lecture.courses.map((_: any, index: any) => (
-                <LectureContentHeader
-                  key={index}
-                  index={index}
-                  contentsViews={contentsViews}
-                />
+                <LectureContentHeader key={index} index={index} />
               ))}
             </Scrollbar>
           </div>
           <div className="col-lg-7 col-sm-12 col-xs-12">
-            <LectureVideo
-              setShowDetail={setShowDetail}
-              setContentsViews={setContentsViews}
-              lectureId={lecture.id}
-            />
+            <LectureVideo setShowDetail={setShowDetail} />
           </div>
         </div>
       )}

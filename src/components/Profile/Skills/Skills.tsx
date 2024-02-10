@@ -39,7 +39,6 @@ function Skills() {
 
   const addStudentSkills = async (data: CreateStudentSkillRequest) => {
     try {
-      console.log(data);
       await studentService.addStudentSkills(data);
       getStudentSkills();
     } catch (error: any) {

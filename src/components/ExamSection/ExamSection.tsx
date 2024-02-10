@@ -4,6 +4,8 @@ import { selectExams } from "../../store/slices/examSlice";
 import NoContent from "../NoContent/NoContent";
 import Exam from "../Exam/Exam";
 import examService from "../../services/examService";
+import { toast } from "react-toastify";
+import exceptionService from "../../utils/exceptionService";
 
 function ExamSection() {
   const exams = useSelector(selectExams);
@@ -13,8 +15,11 @@ function ExamSection() {
     try {
       const data = (await examService.getJoinedExams()).data.items;
       setJoinedExams(data);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 

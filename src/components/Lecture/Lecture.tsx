@@ -8,6 +8,7 @@ import { clearAuth, selectToken } from "../../store/slices/authSlice";
 import { setLectureDetail } from "../../store/slices/lectureDetailSlice";
 import { activeLoading, clearLoading } from "../../store/slices/loadingSlice";
 import { toast } from "react-toastify";
+import exceptionService from "../../utils/exceptionService";
 
 const Lecture = ({ lecture }: any) => {
   const navigate = useNavigate();
@@ -20,9 +21,10 @@ const Lecture = ({ lecture }: any) => {
       const response = await LectureService.getWithDetails(lecture.lectureId);
       dispatch(setLectureDetail(response));
       navigate("/ders-detay");
-    } catch (error) {
-      dispatch(clearAuth());
-      toast.error("Oturumunuzun süresi doldu lütfen tekrar giriş yapın..");
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
     dispatch(clearLoading());
   };

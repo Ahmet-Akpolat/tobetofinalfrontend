@@ -1,49 +1,21 @@
 import React, { useState } from "react";
-import "./LecturesExpandDisplay.css";
-import { useLocation } from "react-router-dom";
-import { Announcement } from "@mui/icons-material";
+import "./SurveyExpandDisplay.css";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import exceptionService from "../../../utils/exceptionService";
-import lectureService from "../../../services/lectureService";
-import Lecture from "../../Lecture/Lecture";
-import { LectureResponse } from "../../../models/responses/LectureResponses";
-import removeTurkishChars from "../../../utils/removeTurkishChars";
+import surveyService from "../../../services/surveyService";
+import Survey from "../../Survey/Survey";
 
-function LecturesExpandDisplay() {
+function SurveysExpandDisplay() {
   const [pageSize, setPageSize] = useState(0);
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
-  const [lectures, setLectures] = useState([] as any);
+  const [surveys, setSurveys] = useState([] as any);
 
-  const getContinuedLectures = async (pageNumber: number) => {
+  const getSurveys = async (pageNumber: any) => {
     try {
-      const data = await lectureService.getAllLectureContinued(pageNumber, 12);
-      setLectures(data.data.items);
-      setPageSize(data.data.pages);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
-  };
-
-  const getComplatedLectures = async (pageNumber: number) => {
-    try {
-      const data = await lectureService.getAllLectureCompletion(pageNumber, 12);
-      setLectures(data.data.items);
-      setPageSize(data.data.pages);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
-  };
-
-  const getLectures = async (pageNumber: number) => {
-    try {
-      const data = await lectureService.getAllWithData(pageNumber, 12);
-      setLectures(data.items);
+      const data = await surveyService.getAllWithData(pageNumber, 12);
+      setSurveys(data.items);
       setPageSize(data.pages);
     } catch (error: any) {
       toast.error(
@@ -52,8 +24,20 @@ function LecturesExpandDisplay() {
     }
   };
 
+  const getReadedSurveys = async (pageNumber: any) => {
+    try {
+      const data = await surveyService.getJoinedSurveys(pageNumber, 12);
+      setSurveys(data.data.items);
+      setPageSize(data.data.pages);
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
+    }
+  };
+  
   useEffect(() => {
-    getLectures(0);
+    getSurveys(0);
   }, []);
 
   return (
@@ -62,7 +46,7 @@ function LecturesExpandDisplay() {
         <div className="page-banner-card">
           <div className="container">
             <div className="row">
-              <strong>Eğitimlerim</strong>
+              <strong>Anketlerim</strong>
             </div>
           </div>
         </div>
@@ -79,10 +63,10 @@ function LecturesExpandDisplay() {
                 onClick={() => {
                   setIsSelected(0);
                   setClicked(0);
-                  getLectures(0);
+                  getSurveys(0);
                 }}
               >
-                Tüm Eğitimlerim
+                Tüm Anketler
               </button>
             </li>
             <li className={`nav-item ${clicked === 1 && "is-selectedd"}`}>
@@ -91,32 +75,20 @@ function LecturesExpandDisplay() {
                 onClick={() => {
                   setIsSelected(0);
                   setClicked(1);
-                  getContinuedLectures(0);
+                  getReadedSurveys(0);
                 }}
               >
-                Devam Ettiklerim
-              </button>
-            </li>
-            <li className={`nav-item ${clicked === 2 && "is-selectedd"}`}>
-              <button
-                className="filters-link"
-                onClick={() => {
-                  setIsSelected(0);
-                  setClicked(2);
-                  getComplatedLectures(0);
-                }}
-              >
-                Tamamladıklarım
+                Katildiklarim
               </button>
             </li>
           </div>
         </ul>
       </div>
       <div className="container">
-        {lectures !== null && (
+        {surveys !== null && (
           <div className="row list">
-            {lectures.map((lecture: any) => {
-              return <Lecture lecture={lecture} />;
+            {surveys.map((survey: any) => {
+              return <Survey survey={survey} />;
             })}
           </div>
         )}
@@ -136,9 +108,8 @@ function LecturesExpandDisplay() {
                 }
                 onClick={() => {
                   setIsSelected(page);
-                  if (clicked === 0) getLectures(page);
-                  else if (clicked === 1) getContinuedLectures(page);
-                  else getComplatedLectures(page);
+                  if (clicked === 0) getSurveys(page);
+                  //else if (clicked === 1) getReadedAnnouncements(page);
                 }}
               >
                 <a
@@ -158,4 +129,4 @@ function LecturesExpandDisplay() {
   );
 }
 
-export default LecturesExpandDisplay;
+export default SurveysExpandDisplay;

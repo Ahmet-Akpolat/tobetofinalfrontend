@@ -22,8 +22,6 @@ const MainSection = () => {
   const appeals = useSelector(selectAppeal);
   const announcements = useSelector(selectAnnouncement);
   const lectures = useSelector(selectLecture);
-  const exams = useSelector(selectExams);
-  const [joinedExams, setJoinedExams] = useState([] as any);
   const surveys = useSelector(selectSurvey);
 
   const [activeNavLink, setActiveNavLink] = useState("appeals");

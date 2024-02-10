@@ -1,17 +1,14 @@
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { Dispatch } from "redux";
+import { store } from "../store/configureStore";
 import { Logout } from "./logout";
 
 const ExceptionService = () => {
   const errorSelector = (errorMessage: string) => {
     if (errorMessage.includes("ValidationException")) {
-      return "yapılacak";
+      return ValidationExceptionOperations(errorMessage);
     } else if (errorMessage.includes("BusinessException:")) {
       return BusinessExceptionOperations(errorMessage);
     } else if (errorMessage.includes("AuthorizationException:")) {
-      AuthorizationExceptionOperations();
-      // Oturumun süresi dolduğunda burada yönlendirme yapacağız
+      return AuthorizationExceptionOperations();
     } else {
       return "Bir Sorun Oluştu";
     }
@@ -29,7 +26,26 @@ const ExceptionService = () => {
   const AuthorizationExceptionOperations = () => {
     var extractedError =
       "Oturumunuzun süresi doldu lütfen tekrar giriş yapınız";
-    // Kullanıcıyı login sayfasına yönlendir
+    Logout(store.dispatch);
+    return extractedError;
+  };
+
+  const ValidationExceptionOperations = (message: string) => {
+    let desiredSubstring;
+    let validationFailedIndex = message.indexOf("Validation failed:");
+
+    if (validationFailedIndex !== -1) {
+      let thirdColonIndex = message.indexOf(
+        ":",
+        validationFailedIndex + "Validation failed:".length
+      );
+      if (thirdColonIndex !== -1) {
+        desiredSubstring = message.substring(thirdColonIndex + 1).trim();
+        var endIndex = desiredSubstring.indexOf("\\r");
+        desiredSubstring = desiredSubstring.substring(0, endIndex).trim();
+      }
+    }
+    return desiredSubstring;
   };
 
   return { errorSelector };

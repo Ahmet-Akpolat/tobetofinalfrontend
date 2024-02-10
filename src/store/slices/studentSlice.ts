@@ -13,7 +13,7 @@ const initialState = {
     description: null,
     country: null,
     socialMedias: null,
-    certificates: null,
+    studentPrivateCertificates: null,
     languageLevels: null,
     skills: null,
     studentEducations: null,

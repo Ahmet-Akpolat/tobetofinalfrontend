@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import "./LectureInfo.css";
 import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
+import { formatDate } from "../../../utils/formatDate";
 
 function LectureInfo({ lectureCompletionDetail }: any) {
   const lecture = useSelector(selectLectureDetail);
@@ -13,7 +14,7 @@ function LectureInfo({ lectureCompletionDetail }: any) {
             <img src="icons/event_note_FILL0.svg"></img>
             <strong> Başlangıç</strong>
           </div>
-          <text>{lecture.startDate.replace("T", " ")}</text>
+          <text>{formatDate(lecture.startDate)}</text>
         </div>
         <div
           className="d-flex justify-content-between"
@@ -22,7 +23,7 @@ function LectureInfo({ lectureCompletionDetail }: any) {
           <div>
             <strong> Bitiş</strong>
           </div>
-          <text>{lecture.endDate.replace("T", " ")}</text>
+          <text>{formatDate(lecture.endDate)}</text>
         </div>
       </div>
       <div className="info-section">

@@ -1,5 +1,7 @@
+import { toast } from "react-toastify";
 import languagesService from "../../../../services/StudentProfileSettingsServices/languagesService";
 import "./LanguageCard.css";
+import exceptionService from "../../../../utils/exceptionService";
 
 function LanguageCard({ language, setLanguages }: any) {
   
@@ -9,8 +11,11 @@ function LanguageCard({ language, setLanguages }: any) {
       setLanguages((arr: any) => {
         return arr.filter((lang: any) => lang.id !== id);
       });
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
     }
   };
 

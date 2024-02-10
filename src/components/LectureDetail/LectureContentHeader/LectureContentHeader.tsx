@@ -3,17 +3,17 @@ import "./LectureContentHeader.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
 import { setContent } from "../../../store/slices/contentSlice";
+import { selectContentViews } from "../../../store/slices/contenViewsSlice";
 
-function LectureContentHeader({ index, contentsViews }: any) {
+function LectureContentHeader({ index }: any) {
   const dispatch = useDispatch();
   const [expand, setExpand] = useState(false);
   const lecture = useSelector(selectLectureDetail);
-  const [contentViews, setContentViews] = useState([] as any);
+  const contentViews = useSelector(selectContentViews);
 
   const lectureContents = lecture.courses;
 
   useEffect(() => {
-    setContentViews(contentsViews);
     dispatch(setContent(lectureContents[0].contents[0]));
   }, []);
 

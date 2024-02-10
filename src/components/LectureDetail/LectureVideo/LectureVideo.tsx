@@ -4,19 +4,13 @@ import "./LectureVideo.css";
 import { useSelector } from "react-redux";
 import { selectContent } from "../../../store/slices/contentSlice";
 
-interface Props {
-  lectureId: string;
-  setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
-  setContentsViews: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function LectureVideo({ setShowDetail, lectureId, setContentsViews }: Props) {
+function LectureVideo({ setShowDetail }: any) {
   const content = useSelector(selectContent);
 
   return (
     <div className="lecture-video align-content-center">
       <div className="video-player">
-        <VideoPlayer setContentsViews={setContentsViews} />
+        <VideoPlayer/>
       </div>
       <div className="lecture-video-detail d-flex align-items-center">
         <div

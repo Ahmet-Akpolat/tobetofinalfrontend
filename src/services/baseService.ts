@@ -43,7 +43,6 @@ export class BaseService<
   }
 
   async add(request: AddRequestType) {
-    console.log(request)
     return (
       axiosInstance.post<AddResponseType>(this.apiUrl, request,
       {

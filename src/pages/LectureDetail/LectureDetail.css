@@ -80,8 +80,12 @@
 }
 
 .number-of-likes {
-  color: #ff4757;
+  color: #949494;
   font-size: 30px;
+}
+
+.text-red {
+  color: #ff4757;
 }
 
 .back-button {
@@ -113,4 +117,20 @@
   background-image: linear-gradient(to right, #2ddfff, #b7df2d);
   height: 8px;
   border-radius: 10px;
+  width: 0%;
+  transition: width 1.2s ease-in-out;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.completion-message {
+  color: #3dcb79 !important;
+  font-weight: bold;
 }

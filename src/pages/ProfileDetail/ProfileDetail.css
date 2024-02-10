@@ -213,11 +213,6 @@ ul {
   margin-right: 0.5rem !important;
 }
 
-.text-truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 .png_icon:before {
   background-image: url("https://tobeto.com/png.png");
   background-size: 20px 20px;
@@ -485,11 +480,7 @@ ul {
 .timeline .line .circle .before .content ul li {
   font-size: 12px;
 }
-.text-truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+
 .timeline .line .circle:first-child .before .content ul li {
   font-size: 12px;
   text-align: left;
@@ -534,6 +525,15 @@ ul {
   font-size: 12px;
   text-align: right;
 }
+
+.link-span-area {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 80%;
+  color: black;
+}
+
 @media (min-width: 768px) {
   .col-md-6 {
     flex: 0 0 auto;

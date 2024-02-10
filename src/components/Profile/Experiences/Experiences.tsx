@@ -56,7 +56,6 @@ function Experiences() {
   const addStudentExperiences = async (data: any) => {
     try {
       if (!endDateControl) data.endDate = null;
-      console.log(data);
       await studentService.addStudentExperiences(data);
       getStudentExperiences();
     } catch (error: any) {

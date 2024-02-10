@@ -8,14 +8,13 @@ import exceptionService from "../../utils/exceptionService";
 import HeatMap from "@uiw/react-heat-map";
 import lectureService from "../../services/lectureService";
 import Tooltip from "@uiw/react-tooltip";
+import { Link } from "react-router-dom";
 
 const ProfileDetail = () => {
   const activityDates = [] as any;
   const student = useSelector(selectStudent);
   const [languages, setLanguages] = useState([] as any);
   const [test, setTest] = useState([] as any);
-
-  console.log(student);
 
   const getStudentActivites = async () => {
     try {
@@ -167,17 +166,22 @@ const ProfileDetail = () => {
                   </div>
                   <div className="row">
                     <div className="skills">
-                      {student.certificates.map((certificate: any) => (
-                        <span
-                          id="certificate_name"
-                          className="skill d-flex justify-content-between"
-                        >
-                          <span className="me-2 text-truncate ">
-                            {certificate.certificateImageUrl}
+                      {student.studentPrivateCertificates.map(
+                        (certificate: any) => (
+                          <span
+                            id="certificate_name"
+                            className="skill d-flex justify-content-between"
+                          >
+                            <Link
+                              className="link-span-area"
+                              to={certificate.certificateUrl}
+                            >
+                              {certificate.certificateName}
+                            </Link>
+                            <span className="me-0 png_icon text - center"></span>
                           </span>
-                          <span className="me-0 png_icon text - center"></span>
-                        </span>
-                      ))}
+                        )
+                      )}
                     </div>
                   </div>
                 </div>
@@ -389,7 +393,7 @@ const ProfileDetail = () => {
                   <hr />
                   <HeatMap
                     value={test}
-                    width={800}
+                    style={{ width: "100%" }}
                     startDate={new Date("2024/01/01")}
                     panelColors={{
                       0: "#EBEDF0",

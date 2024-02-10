@@ -19,12 +19,9 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const [selectedItemId, setSelectedItemId] = useState("home");
-  const handleItemClick = (itemId: any) => {
-    setSelectedItemId(itemId);
-  };
 
-  const handleLogOut = () => {
-    Logout(navigate, dispatch);
+  const handleLogout = () => {
+    Logout(dispatch);
   };
 
   return (
@@ -78,7 +75,7 @@ const Navbar = () => {
             selectedItemId === "announcements" ? "selected" : ""
           }`}
           onClick={() => {
-            navigate("duyurularim");
+            navigate("/duyurularim");
             setSelectedItemId("announcements");
           }}
         >
@@ -89,7 +86,7 @@ const Navbar = () => {
             selectedItemId === "surveys" ? "selected" : ""
           }`}
           onClick={() => {
-            handleItemClick("calendar");
+            navigate("/anketlerim");
             setSelectedItemId("surveys");
           }}
         >
@@ -141,7 +138,7 @@ const Navbar = () => {
                   </Dropdown.Item>
                   <Dropdown.Item
                     className="dropdown-item"
-                    onClick={handleLogOut}
+                    onClick={handleLogout}
                   >
                     Oturumu Kapat
                   </Dropdown.Item>

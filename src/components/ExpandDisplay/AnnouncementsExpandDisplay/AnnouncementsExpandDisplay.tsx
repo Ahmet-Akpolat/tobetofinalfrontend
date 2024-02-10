@@ -57,16 +57,6 @@ function AnnouncementExpandDisplay() {
           className="nav nav-tabs mainTablist d-flex justify-content-around"
           role="tablist"
         >
-          <div className="search-area">
-            <li className={`nav-item`}>
-              <input
-                type="text"
-                placeholder="Ara"
-                className="nav-item-search-area"
-                onChange={() => ""}
-              />
-            </li>
-          </div>
           <div className="d-flex justify-content-center">
             <li className={`nav-item ${clicked === 0 && "is-selectedd"}`}>
               <button

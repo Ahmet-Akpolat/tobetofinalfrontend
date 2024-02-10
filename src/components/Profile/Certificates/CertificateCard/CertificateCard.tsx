@@ -20,7 +20,7 @@ function CertificateCard({ certificate, setCertificates }: any) {
   return (
     <div className="certificate-card col-12 d-flex flex-column mt-3">
       <div className="certificate-header p-2 d-flex justify-content-between">
-        <span>Sertifika Linki</span>
+        <span>Sertifika Ismi</span>
         <div className="wid-40 gap-3 d-flex justify-content-between">
           <span>Dosya Turu</span>
           <span>Tarih</span>
@@ -29,7 +29,7 @@ function CertificateCard({ certificate, setCertificates }: any) {
       </div>
       <div className="contents p-3 d-flex justify-content-between">
         <Link className="certificate-link" to={certificate.certificateUrl}>
-          {certificate.certificateUrl}
+          {certificate.certificateName}
         </Link>
 
         <div className="wid-35 gap-3 d-flex justify-content-between">

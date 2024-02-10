@@ -87,7 +87,7 @@ function Languages() {
           <div className="student-languages">
             <div className="row mb-4">
               <div className="profile-input col-6">
-                <select onChange={(e) => setSelectLanguage(e.target.value)}>
+                <select onChange={(e: any) => setSelectLanguage(e.target.value)}>
                   <option>Seciniz</option>
                   {languageOptions.map((lang: any) => (
                     <option value={lang.id}>{lang.name}</option>

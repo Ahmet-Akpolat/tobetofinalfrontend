@@ -8,7 +8,7 @@ import { clearLecture } from "../store/slices/lectureSlice";
 import { clearSurvey } from "../store/slices/surveySlice";
 import { clearExams } from "../store/slices/examSlice";
 
-export const Logout = (navigate :any, dispatch: any) => {
+export const Logout = (dispatch: any) => {
   dispatch(clearAuth());
   dispatch(clearStudent());
   dispatch(clearAppeal());

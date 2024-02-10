@@ -18,6 +18,7 @@ function PersonalInformations() {
   const [districts, setDistricts] = useState([]);
   const student = useSelector(selectStudent);
   const [loading, setLoading] = useState(false);
+  const [cityId, setCityId] = useState(student.cityId);
 
   const initialValues = {
     cityId: student.cityId || null,
@@ -85,7 +86,7 @@ function PersonalInformations() {
       await studentService.update(updatedValues);
       const newStudent = await studentService.getByToken();
       dispatch(setStudent(newStudent));
-      toast.success("Degisikler Kaydedildi!");
+      toast.success("Değişiklikler Kaydedildi!");
     } catch (error: any) {
       console.log(error);
       exceptionService.errorSelector(JSON.stringify(error.response.data));
@@ -103,7 +104,7 @@ function PersonalInformations() {
       await studentService.update(updatedValues);
       const newStudent = await studentService.getByToken();
       dispatch(setStudent(newStudent));
-      toast.success("Degisikler Kaydedildi!");
+      toast.success("Değişiklikler Kaydedildi!");
     } catch (error: any) {
       console.log(error);
       exceptionService.errorSelector(JSON.stringify(error.response.data));
@@ -115,10 +116,11 @@ function PersonalInformations() {
   const updateStudent = async (updatedValues: any) => {
     try {
       updatedValues.profilePhotoPath = initialValues.profilePhotoPath;
+      updatedValues.cityId = cityId;
       await studentService.update(updatedValues);
       const newStudent = await studentService.getByToken();
       dispatch(setStudent(newStudent));
-      toast.success("Degisikler Kaydedildi!");
+      toast.success("Değişiklikler Kaydedildi!");
     } catch (error: any) {
       console.log(error);
       toast.error(
@@ -207,19 +209,23 @@ function PersonalInformations() {
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
               <label>İl*</label>
-              <Field as="select" name={"cityId"}>
+              <select
+                value={cityId}
+                onChange={(e: any) => setCityId(e.target.value)}
+              >
                 {cities.map((city: any) => (
                   <option value={city.id}>{city.name}</option>
                 ))}
-              </Field>
+              </select>
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
               <label>İlçe*</label>
               <Field as="select" name={"districtId"}>
                 <option>Seciniz</option>
-                {districts.map((district: any) => (
-                  <option value={district.id}>{district.name}</option>
-                ))}
+                {districts.map((district: any) => {
+                  if (district.cityId == cityId)
+                    return <option value={district.id}>{district.name}</option>;
+                })}
               </Field>
             </div>
             <div className="big-profile-input col-12 mb-4">

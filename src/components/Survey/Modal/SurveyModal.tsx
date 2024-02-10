@@ -1,8 +1,21 @@
 import Modal from "react-bootstrap/Modal";
 import { selectSurvey } from "../../../store/slices/surveySlice";
 import { useSelector } from "react-redux";
+import surveyService from "../../../services/surveyService";
+import { toast } from "react-toastify";
+import exceptionService from "../../../utils/exceptionService";
 
 function SurveyModal({ survey, show, onHide }: any) {
+  const readSurvey = async () => {
+    try {
+      await surveyService.joinTheSurvey(survey.surveyId);
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
+    }
+  };
+
   return (
     <Modal
       show={show}
@@ -26,9 +39,10 @@ function SurveyModal({ survey, show, onHide }: any) {
             <p>{survey.surveyDescription}</p>
             <button
               className="save-button"
-              onClick={() =>
-                window.open(survey.surveyUrl, "_blank", "noreferrer")
-              }
+              onClick={() => {
+                window.open(survey.surveyUrl, "_blank", "noreferrer");
+                readSurvey();
+              }}
             >
               Ankete Git
             </button>

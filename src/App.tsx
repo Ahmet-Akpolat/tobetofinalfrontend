@@ -1,9 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./pages/Auth/Login/Login";
 import Signup from "./pages/Auth/Signup/Signup";
 import AuthLayout from "./pages/Auth/AuthLayout";
 import { selectIsAuthenticated } from "./store/slices/authSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MainLayout from "./pages/Main/MainLayout";
 import Home from "./pages/Main/Home/Home";
 import Footer from "./components/Footer/Footer";
@@ -14,11 +14,9 @@ import { ToastContainer } from "react-toastify";
 import LecturesExpandDisplay from "./components/ExpandDisplay/LecturesExpandDisplay/LecturesExpandDisplay";
 import AnnouncementExpandDisplay from "./components/ExpandDisplay/AnnouncementsExpandDisplay/AnnouncementsExpandDisplay";
 import ProfileDetail from "./pages/ProfileDetail/ProfileDetail";
-import { Logout } from "./utils/logout";
+import SurveysExpandDisplay from "./components/ExpandDisplay/SurveysExpandDisplay/SurveysExpandDisplay";
 
 function App() {
-  const isAuth = useSelector(selectIsAuthenticated);
-
   return (
     <div>
       <Routes>
@@ -46,6 +44,10 @@ function App() {
         </Route>
 
         <Route element={<MainLayout />}>
+          <Route path="/anketlerim" element={<SurveysExpandDisplay />} />
+        </Route>
+
+        <Route element={<MainLayout />}>
           <Route path="/profil-detay" element={<ProfileDetail />} />
         </Route>
 
@@ -54,7 +56,12 @@ function App() {
         </Route>
       </Routes>
       <OverlayLoader />
-      <ToastContainer position="bottom-right" />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000} // Mesajların 3 saniye sonra otomatik olarak kapanması
+        closeOnClick={true} // Mesajlara tıkladığınızda kapatılması
+        pauseOnFocusLoss={false} // Odak kaybolduğunda mesajların kapatılmaması
+      />
     </div>
   );
 }

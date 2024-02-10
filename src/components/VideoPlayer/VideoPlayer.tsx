@@ -1,5 +1,5 @@
 import ReactPlayer from "react-player";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectContent } from "../../store/slices/contentSlice";
 import { useEffect, useState } from "react";
 import lectureService from "../../services/lectureService";
@@ -7,16 +7,21 @@ import { selectLectureDetail } from "../../store/slices/lectureDetailSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import exceptionService from "../../utils/exceptionService";
+import {
+  selectContentViews,
+  setContentViews,
+} from "../../store/slices/contenViewsSlice";
 
-function VideoPlayer({ setContentsViews }: any) {
-  const navigate = useNavigate();
+function VideoPlayer() {
+  const dispatch = useDispatch();
+  const contentViews = useSelector(selectContentViews);
   const content = useSelector(selectContent);
   const lecture = useSelector(selectLectureDetail);
 
   const videoViewed = async () => {
     try {
       await lectureService.setContentIsWatched(lecture.id, content.id);
-      window.location.reload();
+      dispatch(setContentViews([...contentViews, content.id]));
     } catch (error: any) {
       toast.error(
         exceptionService.errorSelector(JSON.stringify(error.response.data))

@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 import "./LectureDetailSidebar.css";
 import { useEffect, useState } from "react";
 import { selectContent } from "../../../store/slices/contentSlice";
@@ -49,8 +49,7 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: Props) {
     try {
       const likedLecture = (await lectureService.getContentLiked(content.id))
         .data;
-      if (likedLecture) 
-        setLiked(likedLecture.isLiked);
+      if (likedLecture) setLiked(likedLecture.isLiked);
     } catch (error: any) {
       console.log(error);
       toast.error(
@@ -69,6 +68,7 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: Props) {
       toast.error(
         exceptionService.errorSelector(JSON.stringify(error.response.data))
       );
+
     }
   };
 
@@ -109,7 +109,7 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: Props) {
                       <strong>{allViewersCount}</strong>
                     </div>
                   </div>
-                  <div>
+                  <div className="mt-1">
                     <img
                       className="content-like"
                       src={
