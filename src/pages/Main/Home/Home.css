@@ -40,6 +40,13 @@
   }
 }
 
+@keyframes short-bounce {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+
 @keyframes bounce2 {
   0% {
     opacity: 0;

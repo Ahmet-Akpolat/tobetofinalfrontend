@@ -1,4 +1,3 @@
 .surveys-expand {
-    animation: bounce 0.8s;
-  }
-  
+  animation: short-bounce 0.8s;
+}

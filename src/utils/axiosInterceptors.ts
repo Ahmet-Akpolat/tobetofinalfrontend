@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import exceptionService from "./exceptionService";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:60805/api/",
+  baseURL: "http://localhost:5278/api/",
 });
 
 axiosInstance.interceptors.request.use(
@@ -32,6 +32,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
+    console.log(error);
     toast.error(
       exceptionService.errorSelector(JSON.stringify(error.response.data))
     );

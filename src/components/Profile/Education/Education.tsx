@@ -24,7 +24,7 @@ function Education() {
     educationStatus: "",
     schoolName: "",
     branch: "",
-    isContinued: "",
+    isContinued: null,
     startDate: "",
     graduationDate: "",
   };
@@ -35,6 +35,7 @@ function Education() {
   };
 
   const addStudentEducations = async (data: CreateStudentEducationRequest) => {
+    console.log(data);
     await studentService.addStudentEducations(data);
     getStudentEducations();
   };
@@ -78,12 +79,19 @@ function Education() {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(initialValues: any) => {
-          if (endDateControl === false && initialValues.graduationDate !== null) {
+        onSubmit={(initialValues: any, { resetForm }) => {
+          if (
+            endDateControl === false &&
+            initialValues.graduationDate !== null
+          ) {
             initialValues.graduationDate = null;
           }
-          addStudentEducations(initialValues);
-          initialValues = null;
+          addStudentEducations(initialValues).then(() => {
+            resetForm({
+              values: resetValues,
+            });
+            setEndDateControl(true);
+          });
         }}
       >
         <Form>
@@ -120,7 +128,6 @@ function Education() {
               <div
                 onClick={() => {
                   setEndDateControl(!endDateControl);
-                  initialValues.graduationDate = null;
                 }}
               >
                 <FormikInput type="checkbox" name="isContinued"></FormikInput>
