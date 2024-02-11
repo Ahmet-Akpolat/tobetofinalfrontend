@@ -6,10 +6,12 @@ import studentService from "../../../services/studentService";
 import { CreateStudentSkillRequest } from "../../../models/requests/StudentSkillRequests";
 import { ToastContainer, toast } from "react-toastify";
 import exceptionService from "../../../utils/exceptionService";
+import { StudentSkillResponse } from "../../../models/responses/StudentSkillResponses";
+import { SkillResponse } from "../../../models/responses/SkillResponses";
 
 function Skills() {
-  const [skills, setSkills] = useState([]);
-  const [skillOptions, setSkillOptions] = useState([]);
+  const [skillOptions, setSkillOptions] = useState<SkillResponse[]>([]);
+  const [skills, setSkills] = useState<StudentSkillResponse[]>([]);
 
   const initialValues = {
     skillId: null,
@@ -42,6 +44,10 @@ function Skills() {
     getSkills();
   }, []);
 
+  const filteredSkillOptions = skillOptions.filter(
+    (option) => !skills.some((skill) => skill.skillId === option.id)
+  );
+
   return (
     <div>
       <Formik
@@ -57,7 +63,7 @@ function Skills() {
                 <label>Yetkinlik</label>
                 <Field as="select" name={"skillId"}>
                   <option>Seciniz</option>
-                  {skillOptions.map((skill: any) => (
+                  {filteredSkillOptions.map((skill: any) => (
                     <option value={skill.id}>{skill.name}</option>
                   ))}
                 </Field>

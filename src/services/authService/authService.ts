@@ -12,7 +12,7 @@ class AuthService {
   public async login(data: AuthLoginRequest): Promise<TokenModel | null> {
     try {
       const response = await axios.post<LoginResponseModel>(
-        "http://localhost:5278/api/Auth/StudentLogin",
+        "http://localhost:60805/api/Auth/StudentLogin",
         data
       );
       const loginResponse = response.data;
@@ -31,6 +31,7 @@ class AuthService {
   }
 
   async register(data: CreateStudentRequest) {
+<<<<<<< HEAD
     try {
       await axios.post("http://localhost:5278/api/Students", data);
     } catch (error: any) {
@@ -51,6 +52,16 @@ class AuthService {
         exceptionService.errorSelector(JSON.stringify(error.response.data))
       );
     }
+=======
+    await axios.post("http://localhost:60805/api/Students", data);
+  }
+
+  async changePassword(data: any) {
+    await axiosInstance.put(
+      "http://localhost:60805/api/Students/forPassword",
+      data
+    );
+>>>>>>> 3824607a700893896b4daa9d3f8ad763cd361ac9
   }
 }
 

@@ -184,11 +184,20 @@ function PersonalInformations() {
                   setCityId(e.target.value);
                 }}
               >
+<<<<<<< HEAD
                 <option>Seçiniz</option>
+=======
+                <option value="">Seçiniz</option>
+>>>>>>> 3824607a700893896b4daa9d3f8ad763cd361ac9
                 {cities.map((city: any) => (
                   <option value={city.id}>{city.name}</option>
                 ))}
               </Field>
+<<<<<<< HEAD
+=======
+              formik.setFieldValue("cityId", e.target.value);
+              formik.setFieldValue("districtId", '');
+>>>>>>> 3824607a700893896b4daa9d3f8ad763cd361ac9
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
               <label>İlçe</label>
