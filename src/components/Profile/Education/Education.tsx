@@ -11,16 +11,7 @@ function Education() {
   const [educations, setEducations] = useState([]);
   const [endDateControl, setEndDateControl] = useState<boolean>(true);
 
-  interface FormValues {
-    educationStatus: null | string;
-    schoolName: null | string;
-    branch: null | string;
-    isContinued: null | string;
-    startDate: null | string;
-    graduationDate: null | string;
-  }
-
-  const initialValues: FormValues = {
+  const initialValues = {
     educationStatus: null,
     schoolName: null,
     branch: null,
