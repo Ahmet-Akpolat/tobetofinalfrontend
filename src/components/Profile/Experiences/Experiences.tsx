@@ -19,7 +19,17 @@ function Experiences() {
   const [cities, setCities] = useState([]);
   const [endDateControl, setEndDateControl] = useState<boolean>(true);
 
-  const initialValues = {
+  interface FormValues {
+    companyName: string | null;
+    sector: string | null;
+    position: string | null;
+    startDate: string | null;
+    endDate: string | null;
+    description: string | null;
+    cityId: string | null;
+  }
+
+  const initialValues: FormValues = {
     companyName: null,
     sector: null,
     position: null,
@@ -27,6 +37,16 @@ function Experiences() {
     endDate: null,
     description: null,
     cityId: null,
+  };
+
+  const resetValues = {
+    companyName: "",
+    sector: "",
+    position: "",
+    startDate: "",
+    endDate: "",
+    description: "",
+    cityId: "",
   };
 
   const getCities = async () => {
@@ -99,8 +119,12 @@ function Experiences() {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(initialValues: any) => {
-          addStudentExperiences(initialValues);
+        onSubmit={(values, actions) => {
+          addStudentExperiences(values).then(() => {
+            actions.resetForm({
+              values: resetValues,
+            });
+          });
         }}
       >
         <Form>

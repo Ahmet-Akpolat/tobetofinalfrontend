@@ -18,7 +18,7 @@ export class BaseService<
   }
 
   async refreshToken() {
-    await axiosInstance.get("http://localhost:5278/api/Auth/RefreshToken");
+    await axiosInstance.get("http://localhost:60805/api/Auth/RefreshToken");
   }
 
   async getAllWithData(PageIndex: number = 0, PageSize: number = 999) {

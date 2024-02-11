@@ -13,13 +13,31 @@ function Education() {
   const [educations, setEducations] = useState([]);
   const [endDateControl, setEndDateControl] = useState<boolean>(true);
 
-  const initialValues = {
+  interface FormValues {
+    educationStatus: null | string;
+    schoolName: null | string;
+    branch: null | string;
+    isContinued: null | string;
+    startDate: null | string;
+    graduationDate: null | string;
+  }
+
+  const initialValues: FormValues = {
     educationStatus: null,
     schoolName: null,
     branch: null,
     isContinued: null,
     startDate: null,
     graduationDate: null,
+  };
+
+  const resetValues = {
+    educationStatus: "",
+    schoolName: "",
+    branch: "",
+    isContinued: "",
+    startDate: "",
+    graduationDate: "",
   };
 
   const getStudentEducations = async () => {
@@ -77,12 +95,18 @@ function Education() {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(initialValues: any) => {
-          if (endDateControl === false && initialValues.graduationDate !== null) {
+        onSubmit={(initialValues: any, actions) => {
+          if (
+            endDateControl === false &&
+            initialValues.graduationDate !== null
+          ) {
             initialValues.graduationDate = null;
           }
-          addStudentEducations(initialValues);
-          initialValues = null;
+          addStudentEducations(initialValues).then(() => {
+            actions.resetForm({
+              values: resetValues,
+            });
+          });
         }}
       >
         <Form>

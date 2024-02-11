@@ -41,8 +41,6 @@ function PersonalInformations() {
     lastName: Yup.string().required("Doldurulması zorunlu alan*"),
     birthDate: Yup.string().required("Doldurulması zorunlu alan*"),
     country: Yup.string().required("Doldurulması zorunlu alan*"),
-    cityId: Yup.string().required("Doldurulması zorunlu alan*"),
-    districtId: Yup.string().required("Doldurulması zorunlu alan*"),
     email: Yup.string()
       .email("Lutfen Gecerli Bir E-Posta Adresi Giriniz")
       .required("Doldurulması zorunlu alan*"),
@@ -208,18 +206,24 @@ function PersonalInformations() {
               <FormikInput name="country" />
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
-              <label>İl*</label>
-              <select
-                value={cityId}
-                onChange={(e: any) => setCityId(e.target.value)}
+              <label>İl</label>
+              <Field
+                as="select"
+                name="cityId"
+                onChange={(e: any) => {
+                  setCityId(e.target.value);
+                }}
               >
+                <option value="">Seçiniz</option>
                 {cities.map((city: any) => (
                   <option value={city.id}>{city.name}</option>
                 ))}
-              </select>
+              </Field>
+              formik.setFieldValue("cityId", e.target.value);
+              formik.setFieldValue("districtId", '');
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
-              <label>İlçe*</label>
+              <label>İlçe</label>
               <Field as="select" name={"districtId"}>
                 <option>Seciniz</option>
                 {districts.map((district: any) => {
