@@ -3,6 +3,10 @@ main {
   min-height: 70vh;
 }
 
+.lectures-expand {
+  animation: bounce 0.8s;
+}
+
 .page-banner-card {
   background-image: url("https://tobeto.com/_next/static/media/edu-banner3.d7dc50ac.svg");
   background-position: 50%;

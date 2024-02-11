@@ -4,28 +4,28 @@ import "./EducationCard.css";
 import exceptionService from "../../../../utils/exceptionService";
 
 function EducationCard({ education, setEducations }: any) {
-  
-  async function deleteStudentEducation(id:any) {
-    try {
-      await educationService.delete(id)
-      setEducations((arr: any) => {
-        return arr.filter((edu: any) => edu.id !== id)
-      })
-    } catch (error: any) {
-      console.log(error)
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+  async function deleteStudentEducation(id: any) {
+    await educationService.delete(id);
+    setEducations((arr: any) => {
+      return arr.filter((edu: any) => edu.id !== id);
+    });
   }
 
   return (
     <div className="education-card mb-4">
       <div className="education-card-header d-flex justify-content-between">
         <div className="date">
-        {education.graduationDate === "0001-01-01T00:00:00" ? (
-            <span>{`${education.startDate.substring(0, 4)}  -  Devam Ediyor`}</span>
-          ) : (<span>{`${education.startDate.substring(0, 10)}  -  ${education.graduationDate.substring(0, 10)}`}</span>)}
+          {education.graduationDate === "0001-01-01T00:00:00" ? (
+            <span>{`${education.startDate.substring(
+              0,
+              4
+            )}  -  Devam Ediyor`}</span>
+          ) : (
+            <span>{`${education.startDate.substring(
+              0,
+              10
+            )}  -  ${education.graduationDate.substring(0, 10)}`}</span>
+          )}
         </div>
         <span>{education.educationStatus}</span>
       </div>
@@ -43,7 +43,10 @@ function EducationCard({ education, setEducations }: any) {
           </span>
         </div>
       </div>
-      <div className="education-card-delete-button" onClick={() => deleteStudentEducation(education.id)}></div>
+      <div
+        className="education-card-delete-button"
+        onClick={() => deleteStudentEducation(education.id)}
+      ></div>
     </div>
   );
 }

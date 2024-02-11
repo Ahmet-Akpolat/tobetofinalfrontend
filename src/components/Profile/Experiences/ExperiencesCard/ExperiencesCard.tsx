@@ -9,16 +9,10 @@ function ExperiencesCard({ experience, setExperiences }: any) {
   const [modalShow, setModalShow] = useState(false);
 
   async function deleteStudentExperience(id: any): Promise<void> {
-    try {
-      await experienceService.delete(id);
-      setExperiences((arr: any) => {
-        return arr.filter((exp: any) => exp.id !== id);
-      });
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await experienceService.delete(id);
+    setExperiences((arr: any) => {
+      return arr.filter((exp: any) => exp.id !== id);
+    });
   }
 
   return (
@@ -26,8 +20,16 @@ function ExperiencesCard({ experience, setExperiences }: any) {
       <div className="experiences-card-header d-flex justify-content-between">
         <div className="date">
           {experience.endDate === "0001-01-01T00:00:00" ? (
-            <span>{`${experience.startDate.substring(0, 4)}  -  Devam Ediyor`}</span>
-          ) : (<span>{`${experience.startDate.substring(0, 10)}  -  ${experience.endDate.substring(0, 10)}`}</span>)}
+            <span>{`${experience.startDate.substring(
+              0,
+              4
+            )}  -  Devam Ediyor`}</span>
+          ) : (
+            <span>{`${experience.startDate.substring(
+              0,
+              10
+            )}  -  ${experience.endDate.substring(0, 10)}`}</span>
+          )}
         </div>
       </div>
       <div className="experiences-card-detail d-flex col-11 justify-content-between">

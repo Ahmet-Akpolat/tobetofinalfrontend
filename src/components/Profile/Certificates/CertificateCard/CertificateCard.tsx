@@ -5,16 +5,11 @@ import exceptionService from "../../../../utils/exceptionService";
 import { Link } from "react-router-dom";
 
 function CertificateCard({ certificate, setCertificates }: any) {
+  
   const deleteCertificates = async () => {
-    try {
-      await certificateService.deleteStudentCertificate(certificate.id);
-      const data = (await certificateService.getForLoggedStudent()).data.items;
-      setCertificates(data);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await certificateService.deleteStudentCertificate(certificate.id);
+    const data = (await certificateService.getForLoggedStudent()).data.items;
+    setCertificates(data);
   };
 
   return (

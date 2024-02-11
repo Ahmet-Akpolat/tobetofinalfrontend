@@ -25,7 +25,9 @@ const Login = () => {
 
   const validationSchema = Yup.object({
     email: Yup.string().required("Doldurulması zorunlu alan*"),
-    password: Yup.string().required("Doldurulması zorunlu alan*").min(6, "Sifreniz 6 karakterden fazla olmalidir"),
+    password: Yup.string()
+      .required("Doldurulması zorunlu alan*")
+      .min(1, "Sifreniz 6 karakterden fazla olmalidir"),
   });
 
   const handleLogin = async (values: AuthLoginRequest) => {

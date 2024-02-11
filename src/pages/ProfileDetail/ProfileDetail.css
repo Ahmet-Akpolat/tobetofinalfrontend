@@ -1,3 +1,7 @@
+.profil-detail {
+  animation: bounce 0.8s;
+}
+
 .cv-box .cv-pp {
   display: flex;
   align-items: center;

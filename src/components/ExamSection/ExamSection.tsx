@@ -12,15 +12,8 @@ function ExamSection() {
   const [joinedExams, setJoinedExams] = useState([] as any);
 
   const getJoinedExams = async () => {
-    try {
-      const data = (await examService.getJoinedExams()).data.items;
-      setJoinedExams(data);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = (await examService.getJoinedExams()).data.items;
+    setJoinedExams(data);
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import "./LectureDetailSidebar.css";
 import { useEffect, useState } from "react";
 import { selectContent } from "../../../store/slices/contentSlice";
@@ -20,56 +20,30 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: Props) {
   const [reloadFlag, setReloadFlag] = useState<boolean>(true);
 
   const getContentLikeCount = async () => {
-    try {
-      const contentLikeCount = (
-        await lectureService.getContentLikeCount(content.id)
-      ).data;
-      setContentCountLike(contentLikeCount.count);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const contentLikeCount = (
+      await lectureService.getContentLikeCount(content.id)
+    ).data;
+    setContentCountLike(contentLikeCount.count);
   };
-  const likeContent = async () => {
-    try {
-      await lectureService.setContentLiked(content.id).then(() => {
-        getContentLikeCount();
-        contentIsLiked();
-      });
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
-  };
-  const contentIsLiked = async () => {
-    try {
-      const likedLecture = (await lectureService.getContentLiked(content.id))
-        .data;
-      if (likedLecture) setLiked(likedLecture.isLiked);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
-  };
-  const getContentViewers = async () => {
-    try {
-      const lectureViewersCount = (
-        await lectureService.getLectureViewCount(lectureId, content.id)
-      ).data;
-      setViewersCount(lectureViewersCount.count);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
 
-    }
+  const likeContent = async () => {
+    await lectureService.setContentLiked(content.id).then(() => {
+      getContentLikeCount();
+      contentIsLiked();
+    });
+  };
+
+  const contentIsLiked = async () => {
+    const likedLecture = (await lectureService.getContentLiked(content.id))
+      .data;
+    if (likedLecture) setLiked(likedLecture.isLiked);
+  };
+
+  const getContentViewers = async () => {
+    const lectureViewersCount = (
+      await lectureService.getLectureViewCount(lectureId, content.id)
+    ).data;
+    setViewersCount(lectureViewersCount.count);
   };
 
   useEffect(() => {

@@ -6,14 +6,9 @@ import { toast } from "react-toastify";
 import exceptionService from "../../../utils/exceptionService";
 
 function SurveyModal({ survey, show, onHide }: any) {
+  
   const readSurvey = async () => {
-    try {
-      await surveyService.joinTheSurvey(survey.surveyId);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await surveyService.joinTheSurvey(survey.surveyId);
   };
 
   return (

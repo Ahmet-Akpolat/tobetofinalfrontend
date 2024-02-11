@@ -15,30 +15,15 @@ function Certificates() {
   } as any;
 
   const getCertificates = async () => {
-    try {
-      const data = (await certificateService.getForLoggedStudent()).data.items;
-      setCertificates(data);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = (await certificateService.getForLoggedStudent()).data.items;
+    setCertificates(data);
   };
 
   const addCertificates = async (file: any) => {
-    try {
-      updatedValues.certificateUrlTemp = file.target.files[0];
-      await certificateService.add(updatedValues);
-      getCertificates();
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    updatedValues.certificateUrlTemp = file.target.files[0];
+    await certificateService.add(updatedValues);
+    getCertificates();
   };
-  //backend cloud bozuk
 
   useEffect(() => {
     getCertificates();
@@ -55,7 +40,7 @@ function Certificates() {
                 <img src="icons/cloud_upload_FILL0.svg"></img>
                 <input
                   id="file-upload"
-                  type="file" 
+                  type="file"
                   accept=".pdf"
                   style={{ display: "none" }}
                   onChange={addCertificates}

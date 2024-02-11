@@ -29,38 +29,18 @@ function SocialMedia() {
   const addStudentSocialMedia = async (
     data: CreateStudentSocialMediaRequest
   ) => {
-    await studentService
-      .addStudentSocialMedias(data)
-      .then(() => {
-        getStudentSocialMedias();
-      })
-      .catch((error: any) => {
-        toast.error(
-          exceptionService.errorSelector(JSON.stringify(error.response.data))
-        );
-      });
+    await studentService.addStudentSocialMedias(data);
+    getStudentSocialMedias();
   };
 
   const getSocialMedias = async () => {
-    try {
-      const data = await socialMediaService.getAll();
-      setSocialMediaOptions(data);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = await socialMediaService.getAll();
+    setSocialMediaOptions(data);
   };
 
   const getStudentSocialMedias = async () => {
-    try {
-      const data = (await socialMediaService.getForLoggedStudent()).data.items;
-      setSocialMedias(data);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = (await socialMediaService.getForLoggedStudent()).data.items;
+    setSocialMedias(data);
   };
 
   useEffect(() => {

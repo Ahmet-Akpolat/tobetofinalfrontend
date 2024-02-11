@@ -22,18 +22,14 @@ function LectureContent({ setShowDetail }: Props) {
   const lecture = useSelector(selectLectureDetail);
 
   async function getContentsIsWatched() {
-    try {
-      const lectureContentViews = await lectureService.getContentsIsWatched(
-        lecture.id
-      );
-      const contentsViews = [] as any;
-      lectureContentViews.data.forEach((content: any) => {
-        contentsViews.push(content.contentId);
-      });
-      dispatch(setContentViews(contentsViews));
-    } catch (error) {
-      console.log(error);
-    }
+    const lectureContentViews = await lectureService.getContentsIsWatched(
+      lecture.id
+    );
+    const contentsViews = [] as any;
+    lectureContentViews.data.forEach((content: any) => {
+      contentsViews.push(content.contentId);
+    });
+    dispatch(setContentViews(contentsViews));
   }
 
   useEffect(() => {

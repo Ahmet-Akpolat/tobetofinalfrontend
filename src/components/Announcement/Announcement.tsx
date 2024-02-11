@@ -13,13 +13,7 @@ function Announcement({ announcement }: any) {
   const [modalShow, setModalShow] = useState(false);
 
   const readAnnouncement = async (announcementId: string) => {
-    try {
-      await announcementService.readTheAnnouncement(announcementId);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await announcementService.readTheAnnouncement(announcementId + "aaa");
   };
 
   return (

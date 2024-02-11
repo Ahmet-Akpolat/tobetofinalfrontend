@@ -16,49 +16,25 @@ function Skills() {
   };
 
   const getSkills = async () => {
-    try {
-      const data = await skillService.getAll();
-      setSkillOptions(data);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = await skillService.getAll();
+    setSkillOptions(data);
   };
 
   const getStudentSkills = async () => {
-    try {
-      const data = (await skillService.getForLoggedStudent()).data.items;
-      setSkills(data);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = (await skillService.getForLoggedStudent()).data.items;
+    setSkills(data);
   };
 
   const addStudentSkills = async (data: CreateStudentSkillRequest) => {
-    try {
-      await studentService.addStudentSkills(data);
-      getStudentSkills();
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await studentService.addStudentSkills(data);
+    getStudentSkills();
   };
 
   const deleteStudentSkills = async (id: any) => {
-    try {
-      await skillService.deleteStudentSkill(id);
-      setSkills((arr: any) => {
-        return arr.filter((skill: any) => skill.id !== id);
-      });
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await skillService.deleteStudentSkill(id);
+    setSkills((arr: any) => {
+      return arr.filter((skill: any) => skill.id !== id);
+    });
   };
 
   useEffect(() => {

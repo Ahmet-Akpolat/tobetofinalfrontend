@@ -1,16 +1,12 @@
 import ExperiencesCard from "./ExperiencesCard/ExperiencesCard";
 import { Field, Form, Formik } from "formik";
 import FormikInput from "../../FormikInput/FormikInput";
-import { useSelector } from "react-redux";
-import { selectStudent } from "../../../store/slices/studentSlice";
 import * as Yup from "yup";
 import studentService from "../../../services/studentService";
 import { CreateStudentExperienceRequest } from "../../../models/requests/StudentExperienceRequests";
 import { useEffect, useState } from "react";
 import cityService from "../../../services/StudentProfileSettingsServices/cityService";
 import experienceService from "../../../services/StudentProfileSettingsServices/experienceService";
-import { toast } from "react-toastify";
-import exceptionService from "../../../utils/exceptionService";
 
 function Experiences() {
   const [experiences, setExperiences] = useState<
@@ -27,42 +23,34 @@ function Experiences() {
     endDate: null,
     description: null,
     cityId: null,
+    isContinued: null,
+  };
+
+  const resetValues = {
+    companyName: "",
+    sector: "",
+    position: "",
+    startDate: "",
+    endDate: "",
+    description: "",
+    cityId: "",
+    isContinued: "",
   };
 
   const getCities = async () => {
-    try {
-      const response = await cityService.getAll();
-      setCities(response);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const response = await cityService.getAll();
+    setCities(response);
   };
 
   const getStudentExperiences = async () => {
-    try {
-      const data = (await experienceService.getForLoggedStudent()).data.items;
-      setExperiences(data);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = (await experienceService.getForLoggedStudent()).data.items;
+    setExperiences(data);
   };
 
   const addStudentExperiences = async (data: any) => {
-    try {
-      if (!endDateControl) data.endDate = null;
-      await studentService.addStudentExperiences(data);
-      getStudentExperiences();
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    if (!endDateControl) data.endDate = null;
+    await studentService.addStudentExperiences(data);
+    getStudentExperiences();
   };
 
   useEffect(() => {
@@ -81,17 +69,22 @@ function Experiences() {
       .max(50, "En fazla 50 karakter olmalı"),
     sector: Yup.string().required("Doldurulması zorunlu alan*"),
     cityId: Yup.string().required("Doldurulması zorunlu alan*"),
+    description: Yup.string().required("Doldurulması zorunlu alan*"),
     startDate: Yup.string().required("Doldurulması zorunlu alan*"),
-    endDate: Yup.string()
-      .required("Doldurulması zorunlu alan*")
-      .test(
-        "start-before-end",
-        "Bitiş tarihi, başlangıç tarihinden sonra olmalıdır.",
-        function (endDate) {
-          const { startDate } = this.parent;
-          return new Date(endDate) > new Date(startDate);
-        }
-      ),
+    endDate: Yup.string().when("isContinued", ([isContinued], schema) => {
+      return !isContinued
+        ? schema
+            .required("Doldurulması zorunlu alan*")
+            .test(
+              "start-before-end",
+              "Mezuniyet tarihi, başlangıç tarihinden sonra olmalıdır.",
+              function (endDate) {
+                const { startDate } = this.parent;
+                return new Date(endDate) > new Date(startDate);
+              }
+            )
+        : schema.nullable();
+    }),
   });
 
   return (
@@ -99,8 +92,13 @@ function Experiences() {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(initialValues: any) => {
-          addStudentExperiences(initialValues);
+        onSubmit={(initialValues: any, { resetForm }) => {
+          addStudentExperiences(initialValues).then(() =>
+            resetForm({
+              values: resetValues,
+            })
+          );
+          setEndDateControl(true);
         }}
       >
         <Form>
@@ -149,7 +147,7 @@ function Experiences() {
             </div>
           </div>
           <div className="big-profile-input col-12 mb-4">
-            <label>İş Açıklaması</label>
+            <label>İş Açıklaması*</label>
             <FormikInput name="description" as="textarea" rows={4} />
           </div>
           <button className="save-button" type="submit">

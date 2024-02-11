@@ -30,46 +30,25 @@ function LectureDetail() {
   const contentViews = useSelector(selectContentViews);
 
   const getLectureLikeInfo = async () => {
-    try {
-      const likedLecture = await lectureService.getLectureLiked(lecture.id);
-      const lectureNumberOfLikes = await lectureService.getLectureNumberOfLikes(
-        lecture.id
-      );
-      if (likedLecture.isLiked == true) setLiked(likedLecture.isLiked);
-      setNumberOfLikes(lectureNumberOfLikes.count);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const likedLecture = await lectureService.getLectureLiked(lecture.id);
+    const lectureNumberOfLikes = await lectureService.getLectureNumberOfLikes(
+      lecture.id
+    );
+    if (likedLecture.isLiked == true) setLiked(likedLecture.isLiked);
+    setNumberOfLikes(lectureNumberOfLikes.count);
   };
 
   const getLectureCompletionDetails = async () => {
-    try {
-      const completionDetail = (
-        await lectureService.getLectureCompletionDetails(lecture.id)
-      ).data;
-      setLectureCompletionDetail(completionDetail);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const completionDetail = (
+      await lectureService.getLectureCompletionDetails(lecture.id)
+    ).data;
+    setLectureCompletionDetail(completionDetail);
   };
 
   const setLectureLiked = async () => {
-    try {
-      await lectureService.setLectureLiked(student.id, lecture.id);
-      getLectureLikeInfo();
-      setLiked(!liked);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await lectureService.setLectureLiked(student.id, lecture.id);
+    getLectureLikeInfo();
+    setLiked(!liked);
   };
 
   const handleBackButton = () => {

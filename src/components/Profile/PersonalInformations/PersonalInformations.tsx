@@ -41,13 +41,12 @@ function PersonalInformations() {
     lastName: Yup.string().required("Doldurulması zorunlu alan*"),
     birthDate: Yup.string().required("Doldurulması zorunlu alan*"),
     country: Yup.string().required("Doldurulması zorunlu alan*"),
-    cityId: Yup.string().required("Doldurulması zorunlu alan*"),
-    districtId: Yup.string().required("Doldurulması zorunlu alan*"),
     email: Yup.string()
       .email("Lutfen Gecerli Bir E-Posta Adresi Giriniz")
       .required("Doldurulması zorunlu alan*"),
     phone: Yup.string()
       .phone("TR", "Lutfen Gecerli Bir Telefon Numarasi Giriniz")
+      .min(11, "Lutfen Gecerli Bir Telefon Numarasi Giriniz")
       .required("Doldurulması zorunlu alan*"),
     nationalIdentity: Yup.string()
       .required("Aboneliklerde fatura için doldurulması zorunlu alan*")
@@ -56,77 +55,46 @@ function PersonalInformations() {
   });
 
   const getCities = async () => {
-    try {
-      const response = await cityService.getAll();
-      setCities(response);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const response = await cityService.getAll();
+    setCities(response);
   };
 
   const getDistricts = async () => {
-    try {
-      const response = await cityService.getAllDistricts();
-      setDistricts(response);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const response = await cityService.getAllDistricts();
+    setDistricts(response);
   };
 
   const fileDelete = async () => {
-    try {
-      const updatedValues: any = {
-        ...initialValues,
-        profilePhotoPath: null,
-      };
-      await studentService.update(updatedValues);
-      const newStudent = await studentService.getByToken();
-      dispatch(setStudent(newStudent));
-      toast.success("Değişiklikler Kaydedildi!");
-    } catch (error: any) {
-      console.log(error);
-      exceptionService.errorSelector(JSON.stringify(error.response.data));
-    }
+    const updatedValues: any = {
+      ...initialValues,
+      profilePhotoPath: null,
+    };
+    await studentService.update(updatedValues);
+    const newStudent = await studentService.getByToken();
+    dispatch(setStudent(newStudent));
+    toast.success("Değişiklikler Kaydedildi!");
   };
 
   const fileUpload = async (file: any) => {
     setLoading(true);
-    try {
-      const updatedValues: any = {
-        ...initialValues,
-        profilePhotoPathTemp: file.target.files[0],
-      };
-      updatedValues.profilePhotoPath = "unused";
-      await studentService.update(updatedValues);
-      const newStudent = await studentService.getByToken();
-      dispatch(setStudent(newStudent));
-      toast.success("Değişiklikler Kaydedildi!");
-    } catch (error: any) {
-      console.log(error);
-      exceptionService.errorSelector(JSON.stringify(error.response.data));
-    } finally {
-      setLoading(false);
-    }
+    const updatedValues: any = {
+      ...initialValues,
+      profilePhotoPathTemp: file.target.files[0],
+    };
+    updatedValues.profilePhotoPath = "unused";
+    await studentService.update(updatedValues).finally(() => setLoading(false));
+    const newStudent = await studentService.getByToken();
+    dispatch(setStudent(newStudent));
+    toast.success("Değişiklikler Kaydedildi!");
   };
 
   const updateStudent = async (updatedValues: any) => {
-    try {
-      updatedValues.profilePhotoPath = initialValues.profilePhotoPath;
-      updatedValues.cityId = cityId;
-      await studentService.update(updatedValues);
-      const newStudent = await studentService.getByToken();
-      dispatch(setStudent(newStudent));
-      toast.success("Değişiklikler Kaydedildi!");
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    updatedValues.profilePhotoPath = initialValues.profilePhotoPath;
+    updatedValues.cityId = cityId;
+    await studentService.update(updatedValues);
+    const newStudent = await studentService.getByToken();
+    dispatch(setStudent(newStudent));
+    toast.success("Değişiklikler Kaydedildi!");
   };
 
   useEffect(() => {
@@ -208,18 +176,22 @@ function PersonalInformations() {
               <FormikInput name="country" />
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
-              <label>İl*</label>
-              <select
-                value={cityId}
-                onChange={(e: any) => setCityId(e.target.value)}
+              <label>İl</label>
+              <Field
+                as="select"
+                name="cityId"
+                onChange={(e: any) => {
+                  setCityId(e.target.value);
+                }}
               >
+                <option>Seçiniz</option>
                 {cities.map((city: any) => (
                   <option value={city.id}>{city.name}</option>
                 ))}
-              </select>
+              </Field>
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
-              <label>İlçe*</label>
+              <label>İlçe</label>
               <Field as="select" name={"districtId"}>
                 <option>Seciniz</option>
                 {districts.map((district: any) => {

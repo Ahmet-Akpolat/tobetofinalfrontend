@@ -6,8 +6,6 @@ import educationService from "../../../services/StudentProfileSettingsServices/e
 import studentService from "../../../services/studentService";
 import { CreateStudentEducationRequest } from "../../../models/requests/StudentEducationRequest";
 import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
-import exceptionService from "../../../utils/exceptionService";
 
 function Education() {
   const [educations, setEducations] = useState([]);
@@ -22,28 +20,23 @@ function Education() {
     graduationDate: null,
   };
 
+  const resetValues = {
+    educationStatus: "",
+    schoolName: "",
+    branch: "",
+    isContinued: "",
+    startDate: "",
+    graduationDate: "",
+  };
+
   const getStudentEducations = async () => {
-    try {
-      const data = (await educationService.getForLoggedStudent()).data.items;
-      setEducations(data);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = (await educationService.getForLoggedStudent()).data.items;
+    setEducations(data);
   };
 
   const addStudentEducations = async (data: CreateStudentEducationRequest) => {
-    try {
-      await studentService.addStudentEducations(data);
-      getStudentEducations();
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await studentService.addStudentEducations(data);
+    getStudentEducations();
   };
 
   useEffect(() => {
@@ -60,16 +53,24 @@ function Education() {
       .min(5, "En az 5 karakter olmalı")
       .max(50, "En fazla 50 karakter olmalı"),
     startDate: Yup.string().required("Doldurulması zorunlu alan*"),
-    graduationDate: Yup.string()
-      .required("Doldurulması zorunlu alan*")
-      .test(
-        "start-before-end",
-        "Mezuniyet tarihi, başlangıç tarihinden sonra olmalıdır.",
-        function (graduationDate) {
-          const { startDate } = this.parent;
-          return new Date(graduationDate) > new Date(startDate);
-        }
-      ),
+    isContinued: Yup.boolean().nullable(),
+    graduationDate: Yup.string().when(
+      "isContinued",
+      ([isContinued], schema) => {
+        return !isContinued
+          ? schema
+              .required("Doldurulması zorunlu alan*")
+              .test(
+                "start-before-end",
+                "Mezuniyet tarihi, başlangıç tarihinden sonra olmalıdır.",
+                function (graduationDate) {
+                  const { startDate } = this.parent;
+                  return new Date(graduationDate) > new Date(startDate);
+                }
+              )
+          : schema.nullable();
+      }
+    ),
   });
 
   return (
@@ -77,12 +78,19 @@ function Education() {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(initialValues: any) => {
-          if (endDateControl === false && initialValues.graduationDate !== null) {
+        onSubmit={(initialValues: any, { resetForm }) => {
+          if (
+            endDateControl === false &&
+            initialValues.graduationDate !== null
+          ) {
             initialValues.graduationDate = null;
           }
-          addStudentEducations(initialValues);
-          initialValues = null;
+          addStudentEducations(initialValues).then(() =>
+            resetForm({
+              values: resetValues,
+            })
+          );
+          setEndDateControl(true);
         }}
       >
         <Form>
@@ -116,7 +124,12 @@ function Education() {
               </div>
             )}
             <div className="d-flex gap-2 mb-4">
-              <div onClick={() => setEndDateControl(!endDateControl)}>
+              <div
+                onClick={() => {
+                  setEndDateControl(!endDateControl);
+                  initialValues.graduationDate = null;
+                }}
+              >
                 <FormikInput type="checkbox" name="isContinued"></FormikInput>
               </div>
               <small>Okumaya Devam Ediyorum</small>

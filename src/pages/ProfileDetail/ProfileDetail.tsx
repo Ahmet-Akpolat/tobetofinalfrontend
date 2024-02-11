@@ -17,36 +17,22 @@ const ProfileDetail = () => {
   const [test, setTest] = useState([] as any);
 
   const getStudentActivites = async () => {
-    try {
-      const data = (await lectureService.getAllLectureViews()).data.items;
-      data.forEach((element: any) => {
-        const date = element.lectureViewCreatedDate.substring(0, 10);
-        if (activityDates.some((obj: any) => obj.date == date)) {
-          activityDates[
-            activityDates.findIndex((obj: any) => obj.date === date)
-          ].count++;
-        } else {
-          activityDates.push({ date: date, count: 1 });
-        }
-      });
-      setTest(activityDates);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = (await lectureService.getAllLectureViews()).data.items;
+    data.forEach((element: any) => {
+      const date = element.lectureViewCreatedDate.substring(0, 10);
+      if (activityDates.some((obj: any) => obj.date == date)) {
+        activityDates[activityDates.findIndex((obj: any) => obj.date === date)]
+          .count++;
+      } else {
+        activityDates.push({ date: date, count: 1 });
+      }
+    });
+    setTest(activityDates);
   };
 
   const getStudentLanguages = async () => {
-    try {
-      const data = (await languagesService.getForLoggedStudent()).data.items;
-      setLanguages(data);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = (await languagesService.getForLoggedStudent()).data.items;
+    setLanguages(data);
   };
 
   useEffect(() => {
@@ -56,7 +42,7 @@ const ProfileDetail = () => {
 
   return (
     <main>
-      <div className="container">
+      <div className="container profil-detail">
         <div className="row">
           <div className="col-md-4 col-12">
             <div className="row">

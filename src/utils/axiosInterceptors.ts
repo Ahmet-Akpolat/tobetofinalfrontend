@@ -1,6 +1,8 @@
 import axios from "axios";
 import { selectToken } from "../store/slices/authSlice";
 import { store } from "../store/configureStore";
+import { toast } from "react-toastify";
+import exceptionService from "./exceptionService";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:5278/api/",
@@ -22,6 +24,18 @@ axiosInstance.interceptors.request.use(
   (error) => {
     // İstek yapılandırması sırasında bir hata olursa burada işlenir
     return Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    toast.error(
+      exceptionService.errorSelector(JSON.stringify(error.response.data))
+    );
+    return error;
   }
 );
 

@@ -6,16 +6,10 @@ import exceptionService from "../../../../utils/exceptionService";
 function SocialMediaCard({ socialMedia, setSocialMedias }: any) {
   
   const deleteSocialMedia = async (id: any) => {
-    try {
-      await socialMediaService.deleteStudentSocialMedias(id);
-      setSocialMedias((arr: any) => {
-        return arr.filter((sc: any) => sc.id !== id);
-      });
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await socialMediaService.deleteStudentSocialMedias(id);
+    setSocialMedias((arr: any) => {
+      return arr.filter((sc: any) => sc.id !== id);
+    });
   };
 
   return (

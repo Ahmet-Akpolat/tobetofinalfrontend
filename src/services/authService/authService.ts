@@ -23,7 +23,6 @@ class AuthService {
         return null;
       }
     } catch (error: any) {
-      console.log(error);
       toast.error(
         exceptionService.errorSelector(JSON.stringify(error.response.data))
       );
@@ -32,14 +31,26 @@ class AuthService {
   }
 
   async register(data: CreateStudentRequest) {
-    await axios.post("http://localhost:5278/api/Students", data);
+    try {
+      await axios.post("http://localhost:5278/api/Students", data);
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
+    }
   }
 
   async changePassword(data: any) {
-    await axiosInstance.put(
-      "http://localhost:5278/api/Students/forPassword",
-      data
-    );
+    try {
+      await axiosInstance.put(
+        "http://localhost:5278/api/Students/forPassword",
+        data
+      );
+    } catch (error: any) {
+      toast.error(
+        exceptionService.errorSelector(JSON.stringify(error.response.data))
+      );
+    }
   }
 }
 

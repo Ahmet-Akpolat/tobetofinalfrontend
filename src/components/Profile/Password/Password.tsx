@@ -7,6 +7,7 @@ import exceptionService from "../../../utils/exceptionService";
 import { passwordValidator } from "../../../utils/customValidations";
 
 function Password() {
+  
   const validationSchema = Yup.object({
     lastPassword: Yup.string().required("Doldurulmasi zorunlu alan*"),
     newPassword: Yup.string()
@@ -28,14 +29,8 @@ function Password() {
   });
 
   const changePassword = async (data: any) => {
-    try {
-      await authService.changePassword(data);
-      toast.success("Sifreniz basariyla degistirildi");
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await authService.changePassword(data);
+    toast.success("Sifreniz basariyla degistirildi");
   };
 
   return (

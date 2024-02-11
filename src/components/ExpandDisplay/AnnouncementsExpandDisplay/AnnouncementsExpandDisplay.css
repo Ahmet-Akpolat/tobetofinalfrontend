@@ -1,5 +1,5 @@
-main {
-  display: block;
+.announcements-expand {
+  animation: bounce 0.8s;
 }
 
 .page-banner-card {

@@ -20,50 +20,26 @@ function Languages() {
   });
 
   const getLanguages = async () => {
-    try {
-      const data = await languagesService.getAll();
-      setLanguageOptions(data);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = await languagesService.getAll();
+    setLanguageOptions(data);
   };
 
   const getLanguagesLevels = async () => {
-    try {
-      const data = (await languagesService.getLanguagesLevels()).data.items;
-      setLanguageLevels(data);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = (await languagesService.getLanguagesLevels()).data.items;
+    setLanguageLevels(data);
   };
 
   const getStudentLanguages = async () => {
-    try {
-      const data = (await languagesService.getForLoggedStudent()).data.items;
-      setLanguages(data);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    const data = (await languagesService.getForLoggedStudent()).data.items;
+    setLanguages(data);
   };
 
   const addStudentLanguage = async (
     data: CreateStudentLanguageLevelRequest
   ) => {
-    try {
-      await studentService.addStudentLanguages(data);
-      const newData = (await languagesService.getForLoggedStudent()).data.items;
-      setLanguages(newData);
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await studentService.addStudentLanguages(data);
+    const newData = (await languagesService.getForLoggedStudent()).data.items;
+    setLanguages(newData);
   };
 
   useEffect(() => {
@@ -87,7 +63,9 @@ function Languages() {
           <div className="student-languages">
             <div className="row mb-4">
               <div className="profile-input col-6">
-                <select onChange={(e: any) => setSelectLanguage(e.target.value)}>
+                <select
+                  onChange={(e: any) => setSelectLanguage(e.target.value)}
+                >
                   <option>Seciniz</option>
                   {languageOptions.map((lang: any) => (
                     <option value={lang.id}>{lang.name}</option>

@@ -15,35 +15,28 @@ import { setSurvey } from "../store/slices/surveySlice";
 import exceptionService from "./exceptionService";
 
 const fetchAllData = async (dispatch: Dispatch) => {
-  try {
-    // Appeal
-    const appeal = await appealService.getAll(0, 3);
-    dispatch(setAppeal(appeal));
+  // Appeal
+  const appeal = await appealService.getAll(0, 3);
+  dispatch(setAppeal(appeal));
 
-    // Lecture
-    const lecture = await lectureService.getAll(0, 5);
-    dispatch(setLecture(lecture));
+  // Lecture
+  const lecture = await lectureService.getAll(0, 5);
+  dispatch(setLecture(lecture));
 
-    const exams = await examService.getAll(0, 3);
-    dispatch(setExams(exams));
+  const exams = await examService.getAll(0, 3);
+  dispatch(setExams(exams));
 
-    // Announcement
-    const announcement = await announcementService.getAll(0, 4);
-    dispatch(setAnnouncement(announcement));
+  // Announcement
+  const announcement = await announcementService.getAll(0, 4);
+  dispatch(setAnnouncement(announcement));
 
-    // Survey
-    const survey = await surveyService.getAll(0, 4);
-    dispatch(setSurvey(survey));
+  // Survey
+  const survey = await surveyService.getAll(0, 4);
+  dispatch(setSurvey(survey));
 
-    // Student
-    const student = await studentService.getByToken();
-    dispatch(setStudent(student));
-  } catch (error: any) {
-    console.log(error);
-    toast.error(
-      exceptionService.errorSelector(JSON.stringify(error.response.data))
-    );
-  }
+  // Student
+  const student = await studentService.getByToken();
+  dispatch(setStudent(student));
 };
 
 export default fetchAllData;

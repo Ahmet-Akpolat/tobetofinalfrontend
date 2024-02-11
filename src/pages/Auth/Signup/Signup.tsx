@@ -48,18 +48,10 @@ const Signup = () => {
   });
 
   const submit = async (values: CreateStudentRequest) => {
-    try {
-      dispatch(activeLoading());
-      await AuthService.register(values);
-      toast.success("Kayıt Başarılı.");
-      navigate("/login");
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    } finally {
-      dispatch(clearLoading());
-    }
+    dispatch(activeLoading());
+    await AuthService.register(values).finally(() => dispatch(clearLoading()));
+    toast.success("Kayıt Başarılı.");
+    navigate("/login");
   };
 
   return (

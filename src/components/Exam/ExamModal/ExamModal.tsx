@@ -6,15 +6,10 @@ import ExceptionService from "../../../utils/exceptionService";
 import examService from "../../../services/examService";
 
 function ExamModal({ exam, isJoined, show, onHide }: any) {
+  
   const joinTheExam = async () => {
-    try {
-      await examService.joinTheExam(exam.examId);
-      window.open(exam.examExamUrl, "_blank", "noreferrer");
-    } catch (error: any) {
-      toast.error(
-        ExceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await examService.joinTheExam(exam.examId);
+    window.open(exam.examExamUrl, "_blank", "noreferrer");
   };
 
   return (

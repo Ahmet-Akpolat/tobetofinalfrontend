@@ -19,14 +19,8 @@ function VideoPlayer() {
   const lecture = useSelector(selectLectureDetail);
 
   const videoViewed = async () => {
-    try {
-      await lectureService.setContentIsWatched(lecture.id, content.id);
-      dispatch(setContentViews([...contentViews, content.id]));
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await lectureService.setContentIsWatched(lecture.id, content.id);
+    dispatch(setContentViews([...contentViews, content.id]));
   };
 
   return (

@@ -16,16 +16,10 @@ const Lecture = ({ lecture }: any) => {
   const token = useSelector(selectToken);
 
   const handleClick = async () => {
-    try {
-      dispatch(activeLoading());
-      const response = await LectureService.getWithDetails(lecture.lectureId);
-      dispatch(setLectureDetail(response));
-      navigate("/ders-detay");
-    } catch (error: any) {
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    dispatch(activeLoading());
+    const response = await LectureService.getWithDetails(lecture.lectureId);
+    dispatch(setLectureDetail(response));
+    navigate("/ders-detay");
     dispatch(clearLoading());
   };
 

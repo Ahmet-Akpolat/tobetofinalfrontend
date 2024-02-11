@@ -4,19 +4,12 @@ import "./LanguageCard.css";
 import exceptionService from "../../../../utils/exceptionService";
 
 function LanguageCard({ language, setLanguages }: any) {
-  
+
   const deleteStudentSkills = async (id: any) => {
-    try {
-      await languagesService.deleteStudentLanguage(id);
-      setLanguages((arr: any) => {
-        return arr.filter((lang: any) => lang.id !== id);
-      });
-    } catch (error: any) {
-      console.log(error);
-      toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
-      );
-    }
+    await languagesService.deleteStudentLanguage(id);
+    setLanguages((arr: any) => {
+      return arr.filter((lang: any) => lang.id !== id);
+    });
   };
 
   return (
