@@ -12,12 +12,16 @@ class AuthService {
   public async login(data: AuthLoginRequest): Promise<TokenModel | null> {
     try {
       const response = await axios.post<LoginResponseModel>(
-        "http://localhost:5278/api/Auth/StudentLogin",
+        "http://localhost:60805/api/Auth/StudentLogin",
         data
       );
       const loginResponse = response.data;
 
       if (loginResponse && loginResponse.accessToken?.token) {
+        localStorage.setItem("RefreshToken",loginResponse.refreshToken)
+        localStorage.setItem("Token",loginResponse.accessToken.token)
+        console.log(loginResponse);
+        
         return loginResponse.accessToken;
       } else {
         return null;

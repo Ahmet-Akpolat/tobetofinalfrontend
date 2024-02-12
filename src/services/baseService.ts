@@ -14,12 +14,9 @@ export class BaseService<
 
   constructor() {
     this.apiUrl = "";
-    // this.refreshToken();
   }
 
-  async refreshToken() {
-    await axiosInstance.get("http://localhost:5278/api/Auth/RefreshToken");
-  }
+
 
   async getAllWithData(PageIndex: number = 0, PageSize: number = 999) {
     const response = await axiosInstance.get<any>(
@@ -27,7 +24,13 @@ export class BaseService<
     );
     return response.data;
   }
-
+  async refreshToken() {
+    var refreshTokenData = localStorage.getItem("RefreshToken");
+    await axiosInstance.get("http://localhost:60805/api/Auth/RefreshForValue?refreshToken="+refreshTokenData).then((r:any)=>{
+      localStorage.setItem("RefreshToken",r.data.refreshTokenValue);
+      localStorage.setItem("Token",r.data.accessToken.token);
+    }); 
+  }
   async getAll(PageIndex: number = 0, PageSize: number = 999) {
     const response = await axiosInstance.get<any>(
       `${this.apiUrl}?PageIndex=${PageIndex}&PageSize=${PageSize}`

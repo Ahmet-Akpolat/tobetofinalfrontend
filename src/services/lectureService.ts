@@ -18,6 +18,8 @@ import axiosInstance from "../utils/axiosInterceptors";
 import { GetByLoggedStudentCompletionConditionResponse } from "../models/responses/LectureCompletionDetailResponse";
 import { GetContentLikeCountResponse } from "../models/responses/ContentLikeCountRespose";
 import { GetByContentIdContentLikeResponse } from "../models/responses/ContentLikeResponse";
+import { store } from "../store/configureStore";
+import { setToken } from "../store/slices/authSlice";
 
 class LectureService extends BaseService<
   GetListLectureResponse,
@@ -34,9 +36,17 @@ class LectureService extends BaseService<
 
   async getWithDetails(id: string) {
     const response = await axiosInstance.get<LectureResponse>(`Lectures/${id}`);
+    await this.refreshToken();
     return response.data;
   }
-
+  async refreshToken() {
+    var refreshTokenData = localStorage.getItem("RefreshToken");
+    await axiosInstance.get("http://localhost:60805/api/Auth/RefreshForValue?refreshToken="+refreshTokenData).then((r:any)=>{
+      console.log(r.data.refreshTokenValue);
+      localStorage.setItem("RefreshToken",r.data.refreshTokenValue);
+      localStorage.setItem("Token",r.data.accessToken.token);
+    }); 
+  }
   async getLectureLiked(lectureId: string) {
     const response = await axiosInstance.get<LectureLikeResponse>(
       `LectureLikes/getByLectureId${lectureId}`
