@@ -183,6 +183,7 @@ function PersonalInformations() {
                 onChange={(e: any) => {
                   setCityId(e.target.value);
                 }}
+                value={cityId}
               >
                 <option>Seçiniz</option>
                 {cities.map((city: any) => (
