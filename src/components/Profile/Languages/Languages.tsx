@@ -87,11 +87,18 @@ function Languages() {
             <button className="save-button mb-5" type="submit">
               Kaydet
             </button>
-            <div className="anim-fadein languages-list row gap-3">
-              {languages.map((language: any) => (
-                <LanguageCard language={language} setLanguages={setLanguages} />
-              ))}
-            </div>
+            {languages !== null && (
+              <div className="anim-fadein languages-list row gap-3">
+                {languages.map((language: any) => {
+                  return (
+                    <LanguageCard
+                      language={language}
+                      setLanguages={setLanguages}
+                    />
+                  );
+                })}
+              </div>
+            )}
           </div>
         </Form>
       </Formik>

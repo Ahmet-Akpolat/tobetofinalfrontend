@@ -152,15 +152,18 @@ function Experiences() {
           <button className="save-button" type="submit">
             Kaydet
           </button>
-          <div className="anim-fadein col-12 mt-5">
-            {experiences != null &&
-              experiences.map((experience: any) => (
-                <ExperiencesCard
-                  experience={experience}
-                  setExperiences={setExperiences}
-                />
-              ))}
-          </div>
+          {experiences != null && (
+            <div className="anim-fadein col-12 mt-5">
+              {experiences.map((experience: any) => {
+                return (
+                  <ExperiencesCard
+                    experience={experience}
+                    setExperiences={setExperiences}
+                  />
+                );
+              })}
+            </div>
+          )}
         </Form>
       </Formik>
     </div>

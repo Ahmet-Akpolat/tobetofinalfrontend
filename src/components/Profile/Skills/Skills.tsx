@@ -72,9 +72,9 @@ function Skills() {
             <button className="save-button" type="submit">
               Kaydet
             </button>
-            <div className="anim-fadein col-12 mt-5">
-              {skills !== null &&
-                skills.map((skill: any) => (
+            {skills !== null && (
+              <div className="anim-fadein col-12 mt-5">
+                {skills.map((skill: any) => (
                   <div className="skill-card">
                     <strong>{skill.skillName}</strong>
                     <div
@@ -83,7 +83,8 @@ function Skills() {
                     ></div>
                   </div>
                 ))}
-            </div>
+              </div>
+            )}
           </div>
         </Form>
       </Formik>

@@ -75,7 +75,7 @@ function AnnouncementExpandDisplay() {
             </div>
           </ul>
         </div>
-        <div className="container">
+        <div className="container mt-4">
           {announcements !== null && (
             <div className="row list">
               {announcements.map((announcement: any) => {

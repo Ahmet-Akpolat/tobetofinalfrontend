@@ -51,15 +51,18 @@ function Certificates() {
           </div>
         </div>
       </div>
-      <div className="anim-fadein col-12 mt-5 pb-3">
-        {certificates !== null &&
-          certificates.map((certificate: any) => (
-            <CertificateCard
-              certificate={certificate}
-              setCertificates={setCertificates}
-            />
-          ))}
-      </div>
+      {certificates !== null && (
+        <div className="anim-fadein col-12 mt-5 pb-3">
+          {certificates.map((certificate: any) => {
+            return (
+              <CertificateCard
+                certificate={certificate}
+                setCertificates={setCertificates}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

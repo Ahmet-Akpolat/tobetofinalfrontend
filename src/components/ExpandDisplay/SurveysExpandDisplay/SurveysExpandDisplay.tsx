@@ -71,7 +71,7 @@ function SurveysExpandDisplay() {
             </div>
           </ul>
         </div>
-        <div className="container">
+        <div className="container mt-4">
           {surveys !== null && (
             <div className="row list">
               {surveys.map((survey: any) => {

@@ -41,11 +41,16 @@ class LectureService extends BaseService<
   }
   async refreshToken() {
     var refreshTokenData = localStorage.getItem("RefreshToken");
-    await axiosInstance.get("http://localhost:60805/api/Auth/RefreshForValue?refreshToken="+refreshTokenData).then((r:any)=>{
-      console.log(r.data.refreshTokenValue);
-      localStorage.setItem("RefreshToken",r.data.refreshTokenValue);
-      localStorage.setItem("Token",r.data.accessToken.token);
-    }); 
+    await axiosInstance
+      .get(
+        "https://tobeto.azurewebsites.net/apiAuth/RefreshForValue?refreshToken=" +
+          refreshTokenData
+      )
+      .then((r: any) => {
+        console.log(r.data.refreshTokenValue);
+        localStorage.setItem("RefreshToken", r.data.refreshTokenValue);
+        localStorage.setItem("Token", r.data.accessToken.token);
+      });
   }
   async getLectureLiked(lectureId: string) {
     const response = await axiosInstance.get<LectureLikeResponse>(

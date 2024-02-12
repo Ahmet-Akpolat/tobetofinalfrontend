@@ -74,15 +74,17 @@ function SocialMedia() {
           <button className="save-button" type="submit">
             Kaydet
           </button>
-          <div className="anim-fadein col-12 mt-5">
-            {socialMedias !== null &&
-              socialMedias.map((socialMedia) => (
-                <SocialMediaCard
-                  socialMedia={socialMedia}
-                  setSocialMedias={setSocialMedias}
-                />
-              ))}
-          </div>
+          {socialMedias !== null && (
+            <div className="anim-fadein col-12 mt-5">
+              {socialMedias !== null &&
+                socialMedias.map((socialMedia) => (
+                  <SocialMediaCard
+                    socialMedia={socialMedia}
+                    setSocialMedias={setSocialMedias}
+                  />
+                ))}
+            </div>
+          )}
         </Form>
       </Formik>
     </div>

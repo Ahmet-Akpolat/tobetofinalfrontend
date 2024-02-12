@@ -138,15 +138,18 @@ function Education() {
           <button className="save-button" type="submit">
             Kaydet
           </button>
-          <div className="anim-fadein col-12 mt-5">
-            {educations != null &&
-              educations.map((education) => (
-                <EducationCard
-                  education={education}
-                  setEducations={setEducations}
-                />
-              ))}
-          </div>
+          {educations != null && (
+            <div className="anim-fadein col-12 mt-5">
+              {educations.map((education) => {
+                return (
+                  <EducationCard
+                    education={education}
+                    setEducations={setEducations}
+                  />
+                );
+              })}
+            </div>
+          )}
         </Form>
       </Formik>
     </div>

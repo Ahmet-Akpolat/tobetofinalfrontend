@@ -16,8 +16,6 @@ export class BaseService<
     this.apiUrl = "";
   }
 
-
-
   async getAllWithData(PageIndex: number = 0, PageSize: number = 999) {
     const response = await axiosInstance.get<any>(
       `${this.apiUrl}?PageIndex=${PageIndex}&PageSize=${PageSize}`
@@ -26,10 +24,15 @@ export class BaseService<
   }
   async refreshToken() {
     var refreshTokenData = localStorage.getItem("RefreshToken");
-    await axiosInstance.get("http://localhost:60805/api/Auth/RefreshForValue?refreshToken="+refreshTokenData).then((r:any)=>{
-      localStorage.setItem("RefreshToken",r.data.refreshTokenValue);
-      localStorage.setItem("Token",r.data.accessToken.token);
-    }); 
+    await axiosInstance
+      .get(
+        "https://tobeto.azurewebsites.net/apiAuth/RefreshForValue?refreshToken=" +
+          refreshTokenData
+      )
+      .then((r: any) => {
+        localStorage.setItem("RefreshToken", r.data.refreshTokenValue);
+        localStorage.setItem("Token", r.data.accessToken.token);
+      });
   }
   async getAll(PageIndex: number = 0, PageSize: number = 999) {
     const response = await axiosInstance.get<any>(
