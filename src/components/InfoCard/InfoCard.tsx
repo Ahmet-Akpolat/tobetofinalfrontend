@@ -1,17 +1,11 @@
 import "./InfoCard.css";
 
-interface Props {
-  background: string;
-  header: string;
-  onClick?: () => void;
-}
-
-function InfoCard({ background, header, onClick }: Props) {
+function InfoCard({ background, header, onClick }: any) {
   return (
     <div className={`info-card ${background} col-12 col-md-4`}>
       <div>
         <h1 className="mt-5">{header}</h1>
-        <button className="save-button w-100" onClick={onClick}>
+        <button className="link-button w-100" onClick={onClick}>
           <strong>Basla</strong>
         </button>
       </div>
