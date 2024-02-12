@@ -26,11 +26,6 @@ function Footer({ backgroundColor }: any) {
               </li>
             </ul>
           </div>
-          <div className="col-12">
-            <p className="d-lg-none small text-white text-center">
-              © 2022 Tobeto
-            </p>
-          </div>
         </div>
       </div>
     </section>
