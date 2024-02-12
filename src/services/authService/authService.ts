@@ -27,7 +27,7 @@ class AuthService {
       }
     } catch (error: any) {
       toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
+        error.response.data.detail
       );
       return null;
     }
@@ -38,7 +38,7 @@ class AuthService {
       await axios.post("https://tobeto.azurewebsites.net/api/Students", data);
     } catch (error: any) {
       toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
+        error.response.data.detail
       );
     }
   }
@@ -51,7 +51,7 @@ class AuthService {
       );
     } catch (error: any) {
       toast.error(
-        exceptionService.errorSelector(JSON.stringify(error.response.data))
+        error.response.data.detail
       );
     }
   }

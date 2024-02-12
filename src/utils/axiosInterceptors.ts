@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
   (error) => {
     console.log(error);
     toast.error(
-      exceptionService.errorSelector(JSON.stringify(error.response.data))
+      error.response.data.detail
     );
     return error;
   }
