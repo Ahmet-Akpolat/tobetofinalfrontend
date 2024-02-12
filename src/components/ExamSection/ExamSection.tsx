@@ -12,7 +12,7 @@ function ExamSection() {
   const [joinedExams, setJoinedExams] = useState([] as any);
 
   const getJoinedExams = async () => {
-    const data = (await examService.getJoinedExams()).data.items;
+    const data = (await examService.getJoinedExams()).data?.items;
     setJoinedExams(data);
   };
 
