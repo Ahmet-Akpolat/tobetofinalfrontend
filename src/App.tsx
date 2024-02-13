@@ -12,14 +12,20 @@ import LecturesExpandDisplay from "./components/ExpandDisplay/LecturesExpandDisp
 import AnnouncementExpandDisplay from "./components/ExpandDisplay/AnnouncementsExpandDisplay/AnnouncementsExpandDisplay";
 import ProfileDetail from "./pages/ProfileDetail/ProfileDetail";
 import SurveysExpandDisplay from "./components/ExpandDisplay/SurveysExpandDisplay/SurveysExpandDisplay";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import authService from "./services/authService/authService";
 
 function App() {
   const location = useLocation();
 
   useEffect(() => {
-    authService.refreshToken();
+    const timer = setTimeout(() => {
+      if (location.pathname !== "/login" && location.pathname !== "/signup") {
+        authService.refreshToken();
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer);
   }, [location]);
 
   return (
