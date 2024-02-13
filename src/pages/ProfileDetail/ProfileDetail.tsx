@@ -21,7 +21,6 @@ const ProfileDetail = () => {
 
   const getStudentActivites = async () => {
     const data = await lectureService.getAllLectureViews();
-    console.log(data);
     setTotalContents(data?.data.totalContentCountForClass);
     data?.data.lectureViewCreatedDates.forEach((element: any) => {
       const date = element.substring(0, 10);

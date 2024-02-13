@@ -35,7 +35,6 @@ function Education() {
   };
 
   const addStudentEducations = async (data: CreateStudentEducationRequest) => {
-    console.log(data);
     await studentService.addStudentEducations(data);
     getStudentEducations();
   };

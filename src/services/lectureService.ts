@@ -35,22 +35,9 @@ class LectureService extends BaseService<
 
   async getWithDetails(id: string) {
     const response = await axiosInstance.get<LectureResponse>(`Lectures/${id}`);
-    await this.refreshToken();
     return response.data;
   }
-  async refreshToken() {
-    var refreshTokenData = localStorage.getItem("RefreshToken");
-    await axiosInstance
-      .get(
-        `${baseUrl}/Auth/RefreshForValue?refreshToken=` +
-          refreshTokenData
-      )
-      .then((r: any) => {
-        console.log(r.data.refreshTokenValue);
-        localStorage.setItem("RefreshToken", r.data.refreshTokenValue);
-        localStorage.setItem("Token", r.data.accessToken.token);
-      });
-  }
+
   async getLectureLiked(lectureId: string) {
     const response = await axiosInstance.get<LectureLikeResponse>(
       `LectureLikes/getByLectureId${lectureId}`

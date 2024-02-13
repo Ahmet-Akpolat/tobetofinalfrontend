@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Login from "./pages/Auth/Login/Login";
 import Signup from "./pages/Auth/Signup/Signup";
 import AuthLayout from "./pages/Auth/AuthLayout";
@@ -12,8 +12,16 @@ import LecturesExpandDisplay from "./components/ExpandDisplay/LecturesExpandDisp
 import AnnouncementExpandDisplay from "./components/ExpandDisplay/AnnouncementsExpandDisplay/AnnouncementsExpandDisplay";
 import ProfileDetail from "./pages/ProfileDetail/ProfileDetail";
 import SurveysExpandDisplay from "./components/ExpandDisplay/SurveysExpandDisplay/SurveysExpandDisplay";
+import { useEffect } from "react";
+import authService from "./services/authService/authService";
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    authService.refreshToken();
+  }, [location]);
+
   return (
     <div>
       <Routes>
@@ -55,9 +63,9 @@ function App() {
       <OverlayLoader />
       <ToastContainer
         position="bottom-right"
-        autoClose={3000} // Mesajların 3 saniye sonra otomatik olarak kapanması
-        closeOnClick={true} // Mesajlara tıkladığınızda kapatılması
-        pauseOnFocusLoss={false} // Odak kaybolduğunda mesajların kapatılmaması
+        autoClose={5000}
+        closeOnClick={true}
+        pauseOnFocusLoss={true}
       />
     </div>
   );

@@ -27,7 +27,6 @@ const fetchAllData = async (dispatch: Dispatch) => {
 
   // Announcement
   const announcement = await announcementService.getAll(0, 4);
-  console.log(announcement)
   dispatch(setAnnouncement(announcement));
 
   // Survey
