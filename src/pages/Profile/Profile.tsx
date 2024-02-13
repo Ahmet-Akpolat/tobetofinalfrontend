@@ -1,5 +1,5 @@
 import "./Profile.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileSidebarElement from "../../components/ProfileSidebarElement/ProfileSidebarElement";
 import PersonalInformations from "../../components/Profile/PersonalInformations/PersonalInformations";
 import Experiences from "../../components/Profile/Experiences/Experiences";
@@ -14,8 +14,12 @@ function Profile() {
   const [section, setSection] = useState(1);
   const [isSelected, setIsSelected] = useState(1);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 profile-settings">
       <div className="row">
         <div className="col-12 col-lg-3 mb-8 mb-lg-0">
           <div className="side-menu">

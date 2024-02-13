@@ -35,6 +35,7 @@ function LecturesExpandDisplay() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getLectures(0);
   }, []);
 

@@ -1,12 +1,9 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Auth/Login/Login";
 import Signup from "./pages/Auth/Signup/Signup";
 import AuthLayout from "./pages/Auth/AuthLayout";
-import { selectIsAuthenticated } from "./store/slices/authSlice";
-import { useDispatch, useSelector } from "react-redux";
 import MainLayout from "./pages/Main/MainLayout";
 import Home from "./pages/Main/Home/Home";
-import Footer from "./components/Footer/Footer";
 import LectureDetail from "./pages/LectureDetail/LectureDetail";
 import { OverlayLoader } from "./components/OverlayLoader/OverlayLoader";
 import Profile from "./pages/Profile/Profile";

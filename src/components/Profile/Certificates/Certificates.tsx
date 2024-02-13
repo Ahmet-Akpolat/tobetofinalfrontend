@@ -5,8 +5,12 @@ import exceptionService from "../../../utils/exceptionService";
 import certificateService from "../../../services/StudentProfileSettingsServices/certificateService";
 import { Form } from "react-router-dom";
 import CertificateCard from "./CertificateCard/CertificateCard";
+import { useDispatch } from "react-redux";
+import studentService from "../../../services/studentService";
+import { setStudent } from "../../../store/slices/studentSlice";
 
 function Certificates() {
+  const dispatch = useDispatch()
   const [certificates, setCertificates] = useState([] as any);
 
   const updatedValues = {
@@ -15,13 +19,15 @@ function Certificates() {
   } as any;
 
   const getCertificates = async () => {
-    const data = (await certificateService.getForLoggedStudent()).data.items;
+    const data = (await certificateService.getForLoggedStudent()).data?.items;
     setCertificates(data);
   };
 
   const addCertificates = async (file: any) => {
     updatedValues.certificateUrlTemp = file.target.files[0];
     await certificateService.add(updatedValues);
+    const newStudent = await studentService.getByToken();
+    dispatch(setStudent(newStudent));
     getCertificates();
   };
 

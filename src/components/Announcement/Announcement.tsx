@@ -1,19 +1,14 @@
 import { useState } from "react";
 import "./Announcement.css";
 import AnnouncementModal from "./Modal/AnnouncementModal";
-import { useSelector } from "react-redux";
-import { selectAnnouncement } from "../../store/slices/announcementSlice";
 import { formatDate } from "../../utils/formatDate";
 import announcementService from "../../services/announcementService";
-import { CreatedStudentAnnouncementRequest } from "../../models/requests/StudentAnnouncementRequests";
-import { toast } from "react-toastify";
-import exceptionService from "../../utils/exceptionService";
 
 function Announcement({ announcement }: any) {
   const [modalShow, setModalShow] = useState(false);
 
   const readAnnouncement = async (announcementId: string) => {
-    await announcementService.readTheAnnouncement(announcementId + "aaa");
+    await announcementService.readTheAnnouncement(announcementId);
   };
 
   return (
@@ -21,7 +16,12 @@ function Announcement({ announcement }: any) {
       <div className="notfy-card notify">
         <div className="d-flex flex-column">
           <div className="d-flex justify-content-between mb-4">
-            <span className="type">Duyuru</span>
+            <div className="d-flex justify-content-between c">
+              {announcement.isRead === false && (
+                <div className="unreaded-notify"></div>
+              )}
+              <span className="type">Duyuru</span>
+            </div>
             <span className="corp-names type">İstanbul Kodluyor</span>
           </div>
           <span className="header ">{announcement.announcementName}</span>

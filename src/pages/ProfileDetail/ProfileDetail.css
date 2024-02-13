@@ -27,7 +27,7 @@
 }
 .area {
   background: hsla(20, 1%, 59%, 0.5);
-  background: -webkit-linear-gradient(270deg, #8f94fb, #4e54c8);
+  background: -webkit-linear-gradient(270deg, #d9b2ff, #9933ff);
   height: inherit;
   border-radius: 12px;
 }
@@ -229,7 +229,7 @@ ul {
 .cv-box .cv-social-media {
   display: flex;
   align-items: start;
-  gap: calc((100% - 320px) / 2);
+  gap: calc((80% - 600px));
   margin-top: 1em;
 }
 .cv-box .cv-social-media .cv-LinkedIn:after {

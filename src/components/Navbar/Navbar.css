@@ -1,3 +1,14 @@
+@media (max-width: 992px) {
+  .navbar-nav {
+    flex-wrap: wrap; /* Üst menü seçeneklerini yeni satırlara yerleştir */
+  }
+  .navbar-nav .nav-item {
+    width: 100%; /* Her bir menü seçeneğinin genişliğini %100 yap */
+    text-align: center; /* Metinleri merkezle */
+    margin-bottom: 10px; /* Seçenekler arasına boşluk ekle */
+  }
+}
+
 .navbar-custom {
   padding: 20px;
   border: 1px solid rgb(245, 245, 245);
@@ -188,22 +199,6 @@
   border-width: 1px;
   border-color: #fff;
   width: 100%;
-}
-.dropdown-menu.show {
-  display: block;
-}
-.rounded-circle {
-  border-radius: 50% !important;
-}
-
-@media (min-width: 1400px) {
-  .navbar-expand-xxl .navbar-nav .nav-link {
-    padding-right: var(--bs-navbar-nav-link-padding-x);
-    padding-left: var(--bs-navbar-nav-link-padding-x);
-  }
-  .d-xxl-block {
-    display: block !important;
-  }
 }
 
 .header-avatar {

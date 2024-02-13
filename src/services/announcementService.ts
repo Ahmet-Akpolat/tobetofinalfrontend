@@ -21,7 +21,7 @@ class AnnouncementService extends BaseService<
 > {
   constructor() {
     super();
-    this.apiUrl = "ClassAnnouncements";
+    this.apiUrl = "ClassAnnouncements/getListForLoggedStudent";
   }
 
   async readTheAnnouncement(announcementId: string) {

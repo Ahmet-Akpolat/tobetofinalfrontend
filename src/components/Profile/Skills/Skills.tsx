@@ -8,8 +8,11 @@ import { ToastContainer, toast } from "react-toastify";
 import exceptionService from "../../../utils/exceptionService";
 import { StudentSkillResponse } from "../../../models/responses/StudentSkillResponses";
 import { SkillResponse } from "../../../models/responses/SkillResponses";
+import { useDispatch } from "react-redux";
+import { setStudent } from "../../../store/slices/studentSlice";
 
 function Skills() {
+  const dispatch = useDispatch();
   const [skillOptions, setSkillOptions] = useState<SkillResponse[]>([]);
   const [skills, setSkills] = useState<StudentSkillResponse[]>([]);
 
@@ -23,13 +26,15 @@ function Skills() {
   };
 
   const getStudentSkills = async () => {
-    const data = (await skillService.getForLoggedStudent()).data.items;
+    const data = (await skillService.getForLoggedStudent()).data?.items;
     setSkills(data);
   };
 
   const addStudentSkills = async (data: CreateStudentSkillRequest) => {
     await studentService.addStudentSkills(data);
     getStudentSkills();
+    const newStudent = await studentService.getByToken();
+    dispatch(setStudent(newStudent));
   };
 
   const deleteStudentSkills = async (id: any) => {
@@ -37,6 +42,8 @@ function Skills() {
     setSkills((arr: any) => {
       return arr.filter((skill: any) => skill.id !== id);
     });
+    const newStudent = await studentService.getByToken();
+    dispatch(setStudent(newStudent));
   };
 
   useEffect(() => {

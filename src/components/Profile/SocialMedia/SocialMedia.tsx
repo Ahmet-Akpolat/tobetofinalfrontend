@@ -11,8 +11,11 @@ import { ToastContainer, toast } from "react-toastify";
 import { error } from "console";
 import exceptionService from "../../../utils/exceptionService";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { setStudent } from "../../../store/slices/studentSlice";
 
 function SocialMedia() {
+  const dispatch = useDispatch()
   const [socialMedias, setSocialMedias] = useState([]);
   const [socialMediaOptions, setSocialMediaOptions] = useState([]);
 
@@ -31,6 +34,8 @@ function SocialMedia() {
   ) => {
     await studentService.addStudentSocialMedias(data);
     getStudentSocialMedias();
+    const newStudent = await studentService.getByToken();
+    dispatch(setStudent(newStudent));
   };
 
   const getSocialMedias = async () => {
@@ -39,7 +44,7 @@ function SocialMedia() {
   };
 
   const getStudentSocialMedias = async () => {
-    const data = (await socialMediaService.getForLoggedStudent()).data.items;
+    const data = (await socialMediaService.getForLoggedStudent()).data?.items;
     setSocialMedias(data);
   };
 

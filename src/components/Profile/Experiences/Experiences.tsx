@@ -42,7 +42,7 @@ function Experiences() {
   };
 
   const getStudentExperiences = async () => {
-    const data = (await experienceService.getForLoggedStudent()).data.items;
+    const data = (await experienceService.getForLoggedStudent()).data?.items;
     setExperiences(data);
   };
 
@@ -87,7 +87,7 @@ function Experiences() {
   });
 
   return (
-    <div>
+    <div className="anim-fadein">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -144,16 +144,16 @@ function Experiences() {
               </div>
               <small>Calışmaya Devam Ediyorum</small>
             </div>
-          </div>
           <div className="big-profile-input col-12 mb-4">
             <label>İş Açıklaması*</label>
             <FormikInput name="description" as="textarea" rows={4} />
+          </div>
           </div>
           <button className="save-button" type="submit">
             Kaydet
           </button>
           {experiences != null && (
-            <div className="anim-fadein col-12 mt-5">
+            <div className="col-12 mt-5">
               {experiences.map((experience: any) => {
                 return (
                   <ExperiencesCard

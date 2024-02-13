@@ -9,36 +9,67 @@ import HeatMap from "@uiw/react-heat-map";
 import lectureService from "../../services/lectureService";
 import Tooltip from "@uiw/react-tooltip";
 import { Link } from "react-router-dom";
+import { Bar, Doughnut, Line } from "react-chartjs-2";
+import "chart.js/auto";
 
 const ProfileDetail = () => {
-  const activityDates = [] as any;
+  const activityDatesTemp = [] as any;
   const student = useSelector(selectStudent);
   const [languages, setLanguages] = useState([] as any);
-  const [test, setTest] = useState([] as any);
+  const [activityDates, setActivityDates] = useState([] as any);
+  const [totalContents, setTotalContents] = useState(0);
 
   const getStudentActivites = async () => {
-    const data = (await lectureService.getAllLectureViews()).data.items;
-    data.forEach((element: any) => {
-      const date = element.lectureViewCreatedDate.substring(0, 10);
-      if (activityDates.some((obj: any) => obj.date == date)) {
-        activityDates[activityDates.findIndex((obj: any) => obj.date === date)]
-          .count++;
+    const data = await lectureService.getAllLectureViews();
+    console.log(data);
+    setTotalContents(data?.data.totalContentCountForClass);
+    data?.data.lectureViewCreatedDates.forEach((element: any) => {
+      const date = element.substring(0, 10);
+      if (activityDatesTemp.some((obj: any) => obj.date == date)) {
+        activityDatesTemp[
+          activityDatesTemp.findIndex((obj: any) => obj.date === date)
+        ].count++;
       } else {
-        activityDates.push({ date: date, count: 1 });
+        activityDatesTemp.push({ date: date, count: 1 });
       }
     });
-    setTest(activityDates);
+    const sortedActivityDatesTemp = activityDatesTemp.sort((a: any, b: any) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+
+      if (dateA < dateB) {
+        return -1;
+      }
+      if (dateA > dateB) {
+        return 1;
+      }
+      return 0;
+    });
+    setActivityDates(sortedActivityDatesTemp);
   };
 
   const getStudentLanguages = async () => {
-    const data = (await languagesService.getForLoggedStudent()).data.items;
+    const data = (await languagesService.getForLoggedStudent()).data?.items;
     setLanguages(data);
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     getStudentLanguages();
     getStudentActivites();
   }, []);
+
+  const data = [
+    {
+      label: "Izlenilen Icerik Sayisi",
+      value: activityDates.reduce(
+        (accumulator: any, currentValue: any) =>
+          accumulator + currentValue.count,
+        0
+      ),
+    },
+    { label: "Toplam Icerik Sayisi", value: totalContents },
+  ];
 
   return (
     <main>
@@ -144,6 +175,143 @@ const ProfileDetail = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="col-md-8 col-12">
+            <div className="row">
+              <div className="col-12">
+                <div className="cv-box cv-padding">
+                  <div className="cv-box-header">
+                    <div className="d-flex justify-content-between">
+                      <span>Izlenilen Icerik Analizi</span>
+                    </div>
+                    <hr />
+                  </div>
+                  <div
+                    className="row justify-content-center"
+                    style={{ fontWeight: "900" }}
+                  >
+                    <div
+                      className="col-12 col-md-5"
+                      style={{ height: "240px" }}
+                    >
+                      <Doughnut
+                        data={{
+                          labels: data.map((data) => data.label),
+                          datasets: [
+                            {
+                              data: data.map((data) => data.value),
+                              backgroundColor: ["#9933ff", "#cccccc"],
+                              borderColor: ["#9933ff", "#cccccc"],
+                              borderRadius: 5,
+                            },
+                          ],
+                        }}
+                        options={{
+                          plugins: {
+                            legend: {
+                              labels: {
+                                font: {
+                                  family: "Poppins, sans-serif",
+                                  size: 12,
+                                },
+                                boxWidth: 12,
+                                boxHeight: 12,
+                                borderRadius: 5,
+                              },
+                            },
+                          },
+                        }}
+                      />
+                    </div>
+                    <div
+                      className="col-12 col-md-7"
+                      style={{ height: "240px" }}
+                    >
+                      <Bar
+                        data={{
+                          labels: activityDates.map((data: any) => data.date),
+                          datasets: [
+                            {
+                              label: "Tarihlere Gore Izlenen Icerik",
+                              data: activityDates.map(
+                                (data: any) => data.count
+                              ),
+                              backgroundColor: "#9933ff",
+                              borderColor: "#9933ff",
+                              barThickness: 50,
+                            },
+                          ],
+                        }}
+                        options={{
+                          indexAxis: "x",
+                          elements: {
+                            bar: {
+                              borderRadius: 10,
+                            },
+                          },
+                          plugins: {
+                            legend: {
+                              labels: {
+                                font: {
+                                  family: "Poppins, sans-serif",
+                                  size: 12,
+                                },
+                                boxWidth: 12,
+                                boxHeight: 12,
+                                borderRadius: 5,
+                              },
+                            },
+                          },
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="cv-box cv-padding">
+                  <div className="cv-box-header">
+                    <span>Aktivite Haritam </span>
+                  </div>
+                  <hr />
+                  <HeatMap
+                    value={activityDates}
+                    style={{ width: "100%" }}
+                    startDate={new Date("2024/01/01")}
+                    panelColors={{
+                      0: "#EBEDF0",
+                      8: "#93f",
+                      4: "#b6f",
+                      12: "#5c1f99",
+                      32: "##361259",
+                    }}
+                    legendRender={(props: any) => (
+                      <rect {...props} y={props.y + 10} rx={5} />
+                    )}
+                    rectProps={{
+                      rx: 5,
+                    }}
+                    rectRender={(props, data) => {
+                      return (
+                        <Tooltip
+                          placement="top"
+                          content={
+                            <>
+                              <div>
+                                İzlenen içerik sayısı: {data.count || 0}
+                              </div>
+                              <div>{data.date}</div>
+                            </>
+                          }
+                        >
+                          <rect {...props} />
+                        </Tooltip>
+                      );
+                    }}
+                  />
+                </div>
+              </div>
               <div className="col-12">
                 <div className="cv-box cv-padding">
                   <div className="cv-box-header">
@@ -187,231 +355,6 @@ const ProfileDetail = () => {
                       ></a>
                     ))}
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-8 col-12">
-            <div className="row">
-              <div className="col-12">
-                <div className="cv-box cv-padding">
-                  <div className="cv-box-header">
-                    <div className="d-flex justify-content-between">
-                      <span>Tobeto Seviye Testlerim</span>
-                      <span className="cv-see-icon"></span>
-                    </div>
-                    <hr />
-                  </div>
-                  <div className="row g-4">
-                    <div className="envantoryList">
-                      <div className=" envantory-result">
-                        <div className="d-flex justify-content-between w-100">
-                          <span className="examName">Full Stack</span>
-                          <span className="examTime">03-09-2023</span>
-                        </div>
-                        <span className="examResult">48.00</span>
-                      </div>
-                      <div className=" envantory-result">
-                        <div className="d-flex justify-content-between w-100">
-                          <span className="examName">Microsoft SQL Server</span>
-                          <span className="examTime">03-09-2023</span>
-                        </div>
-                        <span className="examResult">48.00</span>
-                      </div>
-                      <div className=" envantory-result">
-                        <div className="d-flex justify-content-between w-100">
-                          <span className="examName">
-                            Herkes için Kodlama 1D Değerlendirme Sınavı
-                          </span>
-                          <span className="examTime">11-10-2023</span>
-                        </div>
-                        <span className="examResult">100.00</span>
-                      </div>
-                      <div className=" envantory-result">
-                        <div className="d-flex justify-content-between w-100">
-                          <span className="examName">Back End</span>
-                          <span className="examTime">03-09-2023</span>
-                        </div>
-                        <span className="examResult">48.00</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-12">
-                <div className="cv-box cv-padding">
-                  <div className="cv-box-header">
-                    <div className="d-flex justify-content-between">
-                      <span>Yetkinlik Rozetlerim</span>
-                    </div>
-                    <hr />
-                  </div>
-                  <div>
-                    <div className="row d-flex justify-content-start badge-container">
-                      <div className="badge-card">
-                        <img
-                          className="img-fluid"
-                          src="https://tobeto.s3.cloud.ngn.com.tr/45_23798aabf0.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="badge-card">
-                        <img
-                          className="img-fluid"
-                          src="https://tobeto.s3.cloud.ngn.com.tr/47_7fc3123c74.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="badge-card">
-                        <img
-                          className="img-fluid"
-                          src="https://tobeto.s3.cloud.ngn.com.tr/49_31ca0e6d26.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="badge-card">
-                        <img
-                          className="img-fluid"
-                          src="https://tobeto.s3.cloud.ngn.com.tr/52_50dc83ca9c.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="badge-card">
-                        <img
-                          className="img-fluid"
-                          src="https://tobeto.s3.cloud.ngn.com.tr/53_21d7233b37.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="badge-card">
-                        <img
-                          className="img-fluid"
-                          src="https://tobeto.s3.cloud.ngn.com.tr/54_0cc26693aa.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="badge-card">
-                        <img
-                          className="img-fluid"
-                          src="https://tobeto.s3.cloud.ngn.com.tr/55_039e2cd2b7.jpg"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-12">
-                <div className="cv-box cv-padding">
-                  <div className="cv-box-header">
-                    <div className="d-flex justify-content-between">
-                      <span>Eğitim Hayatım ve Deneyimlerim</span>
-                    </div>
-                    <hr />
-                  </div>
-                  <div className="timeline">
-                    <div className="line">
-                      <div className="circle">
-                        <div className=" before">
-                          <div className="content">
-                            <ul>
-                              <li>2020/2022</li>
-                              <li className="text-truncate">
-                                Sakarya Üniversitesi
-                              </li>
-                              <li className="text-truncate">
-                                İnternet ve Ağ Teknolojileri
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="circle2 ">
-                        <div className=" after">
-                          <div className="content">
-                            <ul>
-                              <li>2020/2023</li>
-                              <li className="text-truncate">Sinaps Akademi</li>
-                              <li className="text-truncate">
-                                Matematik Asistanı
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="circle2 ">
-                        <div className=" after">
-                          <div className="content">
-                            <ul>
-                              <li>2020/2023</li>
-                              <li className="text-truncate">Sinaps Akademi</li>
-                              <li className="text-truncate">
-                                Matematik Asistanı
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="circle">
-                        <div className=" before">
-                          <div className="content">
-                            <ul>
-                              <li>2020/2022</li>
-                              <li className="text-truncate">
-                                Sakarya Üniversitesi
-                              </li>
-                              <li className="text-truncate">
-                                İnternet ve Ağ Teknolojileri
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-12">
-                <div className="cv-box cv-padding">
-                  <div className="cv-box-header">
-                    <span>Aktivite Haritam </span>
-                  </div>
-                  <hr />
-                  <HeatMap
-                    value={test}
-                    style={{ width: "100%" }}
-                    startDate={new Date("2024/01/01")}
-                    panelColors={{
-                      0: "#EBEDF0",
-                      8: "#93f",
-                      4: "#b6f",
-                      12: "#5c1f99",
-                      32: "##361259",
-                    }}
-                    legendRender={(props: any) => (
-                      <rect {...props} y={props.y + 10} rx={5} />
-                    )}
-                    rectProps={{
-                      rx: 5,
-                    }}
-                    rectRender={(props, data) => {
-                      return (
-                        <Tooltip
-                          placement="top"
-                          content={
-                            <>
-                              <div>
-                                İzlenen içerik sayısı: {data.count || 0}
-                              </div>
-                              <div>{data.date}</div>
-                            </>
-                          }
-                        >
-                          <rect {...props} />
-                        </Tooltip>
-                      );
-                    }}
-                  />
                 </div>
               </div>
             </div>

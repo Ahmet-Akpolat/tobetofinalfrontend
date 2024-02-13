@@ -9,7 +9,6 @@ function AnnouncementExpandDisplay() {
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
   const [announcements, setAnnouncements] = useState([] as any);
-  const [allData, setAllData] = useState<any>([]);
 
   const getAnnouncements = async (pageNumber: any) => {
     const data = await announcementService.getAllWithData(pageNumber, 12);

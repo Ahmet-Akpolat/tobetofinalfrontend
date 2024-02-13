@@ -38,7 +38,7 @@ const Navbar = () => {
           />
         </span>
       </Link>
-      <ul className="d-none d-xxl-flex navbar-nav gap-4">
+      <ul className="d-xxl-flex navbar-nav gap-4">
         <li
           className={`nav-item ${selectedItemId === "home" ? "selected" : ""}`}
           onClick={() => {

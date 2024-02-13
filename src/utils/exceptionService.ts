@@ -3,15 +3,11 @@ import { Logout } from "./logout";
 
 const ExceptionService = () => {
   const errorSelector = (errorMessage: string) => {
-    console.log(errorMessage);
     if (errorMessage.includes("ValidationException")) {
       return ValidationExceptionOperations(errorMessage);
     } else if (errorMessage.includes("BusinessException:")) {
       return BusinessExceptionOperations(errorMessage);
-    } else if (
-      errorMessage.includes("AuthorizationException:") ||
-      JSON.parse(errorMessage).title == "Authorization error"
-    ) {
+    } else if (errorMessage.includes("Authorization error")) {
       return AuthorizationExceptionOperations();
     } else {
       return "Bir Sorun Oluştu";
@@ -30,7 +26,6 @@ const ExceptionService = () => {
   const AuthorizationExceptionOperations = () => {
     var extractedError =
       "Oturumunuzun süresi doldu lütfen tekrar giriş yapınız";
-    console.log("GIRDIM BURAYA!!!!!!!!!!!!");
     Logout(store.dispatch);
     return extractedError;
   };

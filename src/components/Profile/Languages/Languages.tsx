@@ -25,12 +25,12 @@ function Languages() {
   };
 
   const getLanguagesLevels = async () => {
-    const data = (await languagesService.getLanguagesLevels()).data.items;
+    const data = (await languagesService.getLanguagesLevels()).data?.items;
     setLanguageLevels(data);
   };
 
   const getStudentLanguages = async () => {
-    const data = (await languagesService.getForLoggedStudent()).data.items;
+    const data = (await languagesService.getForLoggedStudent()).data?.items;
     setLanguages(data);
   };
 
@@ -38,7 +38,7 @@ function Languages() {
     data: CreateStudentLanguageLevelRequest
   ) => {
     await studentService.addStudentLanguages(data);
-    const newData = (await languagesService.getForLoggedStudent()).data.items;
+    const newData = (await languagesService.getForLoggedStudent()).data?.items;
     setLanguages(newData);
   };
 

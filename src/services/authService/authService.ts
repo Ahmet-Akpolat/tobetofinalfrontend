@@ -12,7 +12,7 @@ class AuthService {
   public async login(data: AuthLoginRequest): Promise<TokenModel | null> {
     try {
       const response = await axios.post<LoginResponseModel>(
-        "https://tobeto.azurewebsites.net/api/Auth/StudentLogin",
+        "http://localhost:5278/api/Auth/StudentLogin",
         data
       );
       const loginResponse = response?.data;
@@ -35,7 +35,7 @@ class AuthService {
 
   async register(data: CreateStudentRequest) {
     try {
-      await axios.post("https://tobeto.azurewebsites.net/api/Students", data);
+      await axios.post("http://localhost:5278/api//Students", data);
     } catch (error: any) {
       toast.error(
         error.response.data.detail
@@ -46,7 +46,7 @@ class AuthService {
   async changePassword(data: any) {
     try {
       await axiosInstance.put(
-        "https://tobeto.azurewebsites.net/api/Students/forPassword",
+        "http://localhost:5278/api/Students/forPassword",
         data
       );
     } catch (error: any) {

@@ -1,15 +1,20 @@
 import { toast } from "react-toastify";
 import socialMediaService from "../../../../services/StudentProfileSettingsServices/socialMediaService";
 import "./SocialMediaCard.css";
-import exceptionService from "../../../../utils/exceptionService";
+import { setStudent } from "../../../../store/slices/studentSlice";
+import { useDispatch } from "react-redux";
+import studentService from "../../../../services/studentService";
 
 function SocialMediaCard({ socialMedia, setSocialMedias }: any) {
-  
+  const dispatch = useDispatch();
+
   const deleteSocialMedia = async (id: any) => {
     await socialMediaService.deleteStudentSocialMedias(id);
     setSocialMedias((arr: any) => {
       return arr.filter((sc: any) => sc.id !== id);
     });
+    const newStudent = await studentService.getByToken();
+    dispatch(setStudent(newStudent));
   };
 
   return (

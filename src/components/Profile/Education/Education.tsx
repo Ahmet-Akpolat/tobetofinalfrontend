@@ -30,7 +30,7 @@ function Education() {
   };
 
   const getStudentEducations = async () => {
-    const data = (await educationService.getForLoggedStudent()).data.items;
+    const data = (await educationService.getForLoggedStudent()).data?.items;
     setEducations(data);
   };
 

@@ -2,12 +2,14 @@
   margin-top: 1rem !important;
   margin-bottom: 1rem !important;
 }
+
 @media (min-width: 768px) {
   .col-md-4 {
     flex: 0 0 auto;
     width: 33.33333333%;
   }
 }
+
 .notfy-card.notify {
   border-left: 6px solid #00956e;
 }
@@ -20,6 +22,7 @@
   justify-content: space-between;
   flex-direction: column;
   padding: 14px;
+  position: relative;
 }
 .flex-column {
   flex-direction: column !important;
@@ -101,4 +104,23 @@
   height: 4em;
   display: block;
   font-size: 12px;
+}
+
+.unreaded-notify {
+  min-width: 20px;
+}
+
+.unreaded-notify::after {
+  content: "";
+  background-color: #fc6d6d;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  padding-top: 6px;
+  left: 10px;
+  top: 14px;
 }

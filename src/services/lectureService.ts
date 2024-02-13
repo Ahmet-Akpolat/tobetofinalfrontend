@@ -18,8 +18,6 @@ import axiosInstance from "../utils/axiosInterceptors";
 import { GetByLoggedStudentCompletionConditionResponse } from "../models/responses/LectureCompletionDetailResponse";
 import { GetContentLikeCountResponse } from "../models/responses/ContentLikeCountRespose";
 import { GetByContentIdContentLikeResponse } from "../models/responses/ContentLikeResponse";
-import { store } from "../store/configureStore";
-import { setToken } from "../store/slices/authSlice";
 
 class LectureService extends BaseService<
   GetListLectureResponse,
@@ -43,7 +41,7 @@ class LectureService extends BaseService<
     var refreshTokenData = localStorage.getItem("RefreshToken");
     await axiosInstance
       .get(
-        "https://tobeto.azurewebsites.net/apiAuth/RefreshForValue?refreshToken=" +
+        "http://localhost:5278/api/Auth/RefreshForValue?refreshToken=" +
           refreshTokenData
       )
       .then((r: any) => {
@@ -129,7 +127,7 @@ class LectureService extends BaseService<
   }
 
   async getAllLectureViews() {
-    return await axiosInstance.get(`LectureViews?PageIndex=0&PageSize=10000`);
+    return await axiosInstance.get(`LectureViews/getAllForLoggedStudent`);
   }
 
   async getLectureViewCount(lectureId: string, contentId: string) {
@@ -140,12 +138,12 @@ class LectureService extends BaseService<
 
   async getContentsIsWatched(lectureId: string) {
     return await axiosInstance.get(
-      `/LectureViews/getForLoggedStudent${lectureId}`
+      `LectureViews/getForLoggedStudent${lectureId}`
     );
   }
 
   async setContentIsWatched(lectureId: string, contentId: string) {
-    await axiosInstance.post(`/LectureViews`, {
+    await axiosInstance.post(`LectureViews`, {
       lectureId: lectureId,
       contentId: contentId,
     });

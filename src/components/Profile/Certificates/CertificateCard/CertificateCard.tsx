@@ -3,13 +3,19 @@ import certificateService from "../../../../services/StudentProfileSettingsServi
 import "./CertificateCard.css";
 import exceptionService from "../../../../utils/exceptionService";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import studentService from "../../../../services/studentService";
+import { setStudent } from "../../../../store/slices/studentSlice";
 
 function CertificateCard({ certificate, setCertificates }: any) {
-  
+  const dispatch = useDispatch();
+
   const deleteCertificates = async () => {
     await certificateService.deleteStudentCertificate(certificate.id);
-    const data = (await certificateService.getForLoggedStudent()).data.items;
+    const data = (await certificateService.getForLoggedStudent()).data?.items;
     setCertificates(data);
+    const newStudent = await studentService.getByToken();
+    dispatch(setStudent(newStudent));
   };
 
   return (

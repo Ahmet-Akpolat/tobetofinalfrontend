@@ -26,7 +26,7 @@ export class BaseService<
     var refreshTokenData = localStorage.getItem("RefreshToken");
     await axiosInstance
       .get(
-        "https://tobeto.azurewebsites.net/apiAuth/RefreshForValue?refreshToken=" +
+        "http://tobeto.azurewebsites.net/api/Auth/RefreshForValue?refreshToken=" +
           refreshTokenData
       )
       .then((r: any) => {

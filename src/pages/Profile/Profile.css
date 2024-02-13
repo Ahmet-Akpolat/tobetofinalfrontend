@@ -1,3 +1,7 @@
+.profile-settings {
+  min-height: 82vh;
+}
+
 .profile-input label,
 .big-profile-input label {
   font-size: 16px;

@@ -1,11 +1,10 @@
 import { toast } from "react-toastify";
 import languagesService from "../../../../services/StudentProfileSettingsServices/languagesService";
 import "./LanguageCard.css";
-import exceptionService from "../../../../utils/exceptionService";
 
 function LanguageCard({ language, setLanguages }: any) {
 
-  const deleteStudentSkills = async (id: any) => {
+  const deleteStudentLanguage = async (id: any) => {
     await languagesService.deleteStudentLanguage(id);
     setLanguages((arr: any) => {
       return arr.filter((lang: any) => lang.id !== id);
@@ -20,7 +19,7 @@ function LanguageCard({ language, setLanguages }: any) {
       </div>
       <div
         className="language-card-delete"
-        onClick={() => deleteStudentSkills(language.id)}
+        onClick={() => deleteStudentLanguage(language.id)}
       ></div>
     </div>
   );

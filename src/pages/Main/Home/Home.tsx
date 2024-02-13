@@ -39,7 +39,11 @@ const Home = () => {
               header="Profilini oluştur"
               onClick={() => navigate("/profilim")}
             />
-            <InfoCard background="background-2" header="Kendini değerlendir" />
+            <InfoCard
+              background="background-2"
+              header="Kendini değerlendir"
+              onClick={() => navigate("/profil-detay")}
+            />
             <InfoCard
               background="background-3"
               header="Öğrenmeye başla"
