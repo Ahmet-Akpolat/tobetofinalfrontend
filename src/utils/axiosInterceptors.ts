@@ -3,9 +3,10 @@ import { selectToken } from "../store/slices/authSlice";
 import { store } from "../store/configureStore";
 import { toast } from "react-toastify";
 import exceptionService from "./exceptionService";
+import { baseUrl } from "../env/env";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5278/api/",
+  baseURL: `${baseUrl}`,
 });
 
 axiosInstance.interceptors.request.use(

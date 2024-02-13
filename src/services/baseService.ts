@@ -1,6 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
 import axiosInstance from "../utils/axiosInterceptors";
 import ExceptionService from "../utils/exceptionService";
+import { baseUrl } from "../env/env";
 
 export class BaseService<
   GetAllType,
@@ -26,7 +27,7 @@ export class BaseService<
     var refreshTokenData = localStorage.getItem("RefreshToken");
     await axiosInstance
       .get(
-        "http://tobeto.azurewebsites.net/api/Auth/RefreshForValue?refreshToken=" +
+        `${baseUrl}/Auth/RefreshForValue?refreshToken=` +
           refreshTokenData
       )
       .then((r: any) => {

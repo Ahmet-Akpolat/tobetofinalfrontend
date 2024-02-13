@@ -18,6 +18,7 @@ import axiosInstance from "../utils/axiosInterceptors";
 import { GetByLoggedStudentCompletionConditionResponse } from "../models/responses/LectureCompletionDetailResponse";
 import { GetContentLikeCountResponse } from "../models/responses/ContentLikeCountRespose";
 import { GetByContentIdContentLikeResponse } from "../models/responses/ContentLikeResponse";
+import { baseUrl } from "../env/env";
 
 class LectureService extends BaseService<
   GetListLectureResponse,
@@ -41,7 +42,7 @@ class LectureService extends BaseService<
     var refreshTokenData = localStorage.getItem("RefreshToken");
     await axiosInstance
       .get(
-        "http://localhost:5278/api/Auth/RefreshForValue?refreshToken=" +
+        `${baseUrl}/Auth/RefreshForValue?refreshToken=` +
           refreshTokenData
       )
       .then((r: any) => {
