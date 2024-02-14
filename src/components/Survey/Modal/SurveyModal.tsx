@@ -1,9 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import { selectSurvey } from "../../../store/slices/surveySlice";
-import { useSelector } from "react-redux";
 import surveyService from "../../../services/surveyService";
-import { toast } from "react-toastify";
-import exceptionService from "../../../utils/exceptionService";
 
 function SurveyModal({ survey, show, onHide }: any) {
   

@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Exam.css";
-import { useSelector } from "react-redux";
-import { selectExams } from "../../store/slices/examSlice";
 import ExamModal from "./ExamModal/ExamModal";
 
 const Exam = ({ exam, joinedExams }: any) => {

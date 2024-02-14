@@ -1,24 +1,20 @@
-import { BaseService } from "./baseService";
+import { AxiosResponse } from "axios";
+import {
+  CreateLectureRequest,
+  UpdateLectureRequest,
+} from "../models/requests/LectureRequests";
+import { GetContentLikeCountResponse } from "../models/responses/ContentLikeCountRespose";
+import { GetByContentIdContentLikeResponse } from "../models/responses/ContentLikeResponse";
+import { GetByLoggedStudentCompletionConditionResponse } from "../models/responses/LectureCompletionDetailResponse";
+import { LectureLikeResponse } from "../models/responses/LectureLikeResponses";
 import {
   CreatedLectureResponse,
   GetListLectureResponse,
   LectureResponse,
   UpdatedLectureResponse,
 } from "../models/responses/LectureResponses";
-import axios, { AxiosPromise, AxiosResponse } from "axios";
-import {
-  CreateLectureRequest,
-  UpdateLectureRequest,
-} from "../models/requests/LectureRequests";
-import {
-  GetLectureLikeCountResponse,
-  LectureLikeResponse,
-} from "../models/responses/LectureLikeResponses";
 import axiosInstance from "../utils/axiosInterceptors";
-import { GetByLoggedStudentCompletionConditionResponse } from "../models/responses/LectureCompletionDetailResponse";
-import { GetContentLikeCountResponse } from "../models/responses/ContentLikeCountRespose";
-import { GetByContentIdContentLikeResponse } from "../models/responses/ContentLikeResponse";
-import { baseUrl } from "../env/env";
+import { BaseService } from "./baseService";
 
 class LectureService extends BaseService<
   GetListLectureResponse,

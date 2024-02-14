@@ -1,14 +1,14 @@
-import "./Profile.css";
 import { useEffect, useState } from "react";
-import ProfileSidebarElement from "../../components/ProfileSidebarElement/ProfileSidebarElement";
-import PersonalInformations from "../../components/Profile/PersonalInformations/PersonalInformations";
-import Experiences from "../../components/Profile/Experiences/Experiences";
-import Education from "../../components/Profile/Education/Education";
-import Skills from "../../components/Profile/Skills/Skills";
 import Certificates from "../../components/Profile/Certificates/Certificates";
-import SocialMedia from "../../components/Profile/SocialMedia/SocialMedia";
+import Education from "../../components/Profile/Education/Education";
+import Experiences from "../../components/Profile/Experiences/Experiences";
 import Languages from "../../components/Profile/Languages/Languages";
 import Password from "../../components/Profile/Password/Password";
+import PersonalInformations from "../../components/Profile/PersonalInformations/PersonalInformations";
+import Skills from "../../components/Profile/Skills/Skills";
+import SocialMedia from "../../components/Profile/SocialMedia/SocialMedia";
+import ProfileSidebarElement from "../../components/ProfileSidebarElement/ProfileSidebarElement";
+import "./Profile.css";
 
 function Profile() {
   const [section, setSection] = useState(1);

@@ -8,7 +8,6 @@ import {
   GetListCityResponse,
   UpdatedCityResponse,
 } from "../../models/responses/CityResponses";
-import { GetListDistrictResponse } from "../../models/responses/DistrictResponses";
 import axiosInstance from "../../utils/axiosInterceptors";
 import { BaseService } from "../baseService";
 

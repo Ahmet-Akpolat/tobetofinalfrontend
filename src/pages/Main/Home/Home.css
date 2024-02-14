@@ -59,13 +59,13 @@
 }
 
 .welcome-message {
-  animation: bounce2 1.2s;
+  animation: bounce2 1.5s;
 }
 
 .main-section {
-  animation: bounce 1.2s;
+  animation: bounce 1.5s;
 }
 
 .info-card-list {
-  animation: bounce 1.2s;
+  animation: bounce 1.5s;
 }

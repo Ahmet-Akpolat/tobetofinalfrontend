@@ -1,14 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import "./Lecture.css";
-import { Link, useNavigate } from "react-router-dom";
-import { selectLecture } from "../../store/slices/lectureSlice";
-import { formatDate } from "../../utils/formatDate";
+import { useNavigate } from "react-router-dom";
 import LectureService from "../../services/lectureService";
-import { clearAuth, selectToken } from "../../store/slices/authSlice";
+import { selectToken } from "../../store/slices/authSlice";
 import { setLectureDetail } from "../../store/slices/lectureDetailSlice";
 import { activeLoading, clearLoading } from "../../store/slices/loadingSlice";
-import { toast } from "react-toastify";
-import exceptionService from "../../utils/exceptionService";
+import { formatDate } from "../../utils/formatDate";
+import "./Lecture.css";
 
 const Lecture = ({ lecture }: any) => {
   const navigate = useNavigate();

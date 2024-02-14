@@ -1,17 +1,13 @@
-import "./LectureContent.css";
-import LectureContentHeader from "../LectureContentHeader/LectureContentHeader";
-import { Scrollbar } from "react-scrollbars-custom";
-import LectureVideo from "../LectureVideo/LectureVideo";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Scrollbar } from "react-scrollbars-custom";
+import lectureService from "../../../services/lectureService";
+import { setContentViews } from "../../../store/slices/contenViewsSlice";
 import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
 import NoContent from "../../NoContent/NoContent";
-import lectureService from "../../../services/lectureService";
-import {
-  clearContentViews,
-  selectContentViews,
-  setContentViews,
-} from "../../../store/slices/contenViewsSlice";
+import LectureContentHeader from "../LectureContentHeader/LectureContentHeader";
+import LectureVideo from "../LectureVideo/LectureVideo";
+import "./LectureContent.css";
 
 interface Props {
   setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,7 +1,5 @@
-import { toast } from "react-toastify";
 import educationService from "../../../../services/StudentProfileSettingsServices/educationService";
 import "./EducationCard.css";
-import exceptionService from "../../../../utils/exceptionService";
 
 function EducationCard({ education, setEducations }: any) {
   async function deleteStudentEducation(id: any) {

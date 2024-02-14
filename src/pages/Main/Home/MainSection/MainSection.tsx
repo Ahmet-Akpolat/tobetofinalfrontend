@@ -1,20 +1,17 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./MainSection.css";
-import Appeal from "../../../../components/Appeal/Appeal";
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import { selectAppeal } from "../../../../store/slices/appealSlice";
+import { useNavigate } from "react-router-dom";
 import Announcement from "../../../../components/Announcement/Announcement";
-import { selectAnnouncement } from "../../../../store/slices/announcementSlice";
-import { selectLecture } from "../../../../store/slices/lectureSlice";
-import Lecture from "../../../../components/Lecture/Lecture";
-import Exam from "../../../../components/Exam/Exam";
-import { selectExams } from "../../../../store/slices/examSlice";
-import NoContent from "../../../../components/NoContent/NoContent";
-import { selectSurvey } from "../../../../store/slices/surveySlice";
-import Survey from "../../../../components/Survey/Survey";
-import examService from "../../../../services/examService";
+import Appeal from "../../../../components/Appeal/Appeal";
 import ExamSection from "../../../../components/ExamSection/ExamSection";
+import Lecture from "../../../../components/Lecture/Lecture";
+import NoContent from "../../../../components/NoContent/NoContent";
+import Survey from "../../../../components/Survey/Survey";
+import { selectAnnouncement } from "../../../../store/slices/announcementSlice";
+import { selectAppeal } from "../../../../store/slices/appealSlice";
+import { selectLecture } from "../../../../store/slices/lectureSlice";
+import { selectSurvey } from "../../../../store/slices/surveySlice";
+import "./MainSection.css";
 
 const MainSection = () => {
   const [section, setSection] = useState(0);
@@ -213,7 +210,6 @@ const MainSection = () => {
           </div>
         </div>
       </div>
-      <ExamSection />
     </section>
   );
 };

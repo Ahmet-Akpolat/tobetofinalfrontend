@@ -1,16 +1,10 @@
-import { clearAuth, selectIsAuthenticated } from "../../store/slices/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { clearStudent, selectStudent } from "../../store/slices/studentSlice";
-import { Link, useNavigate } from "react-router-dom";
-import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
-import "./Navbar.css";
-import { clearAppeal } from "../../store/slices/appealSlice";
-import { clearAnnouncement } from "../../store/slices/announcementSlice";
-import { clearLecture } from "../../store/slices/lectureSlice";
-import { clearSurvey } from "../../store/slices/surveySlice";
-import { clearExams } from "../../store/slices/examSlice";
+import { Dropdown } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { selectStudent } from "../../store/slices/studentSlice";
 import { Logout } from "../../utils/logout";
+import "./Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();

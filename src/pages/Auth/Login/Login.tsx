@@ -1,19 +1,17 @@
 import { Form, Formik } from "formik";
-import { AuthLoginRequest } from "../../../models/requests/auth/AuthLoginRequest";
-import FormikInput from "../../../components/FormikInput/FormikInput";
-import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import * as Yup from "yup";
-import { useState } from "react";
-import "./Login.css";
 import { useDispatch } from "react-redux";
-import fetchAllData from "../../../utils/fetchalldata";
+import { Link } from "react-router-dom";
+import * as Yup from "yup";
+import FormikInput from "../../../components/FormikInput/FormikInput";
+import { AuthLoginRequest } from "../../../models/requests/auth/AuthLoginRequest";
 import authService from "../../../services/authService/authService";
 import { setToken } from "../../../store/slices/authSlice";
 import {
   activeLoading,
   clearLoading,
 } from "../../../store/slices/loadingSlice";
+import fetchAllData from "../../../utils/fetchalldata";
+import "./Login.css";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -42,7 +40,7 @@ const Login = () => {
       dispatch(clearLoading());
     }
   };
-
+  
   return (
     <div className="login-base">
       <div className="login col-12 col-md-6 mt-5">

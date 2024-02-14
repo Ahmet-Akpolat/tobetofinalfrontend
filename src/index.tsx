@@ -1,11 +1,11 @@
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import { PersistGate } from "redux-persist/integration/react";
+import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { persistor, store } from "./store/configureStore";
+import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
+import App from "./App";
 import "./index.css";
+import { persistor, store } from "./store/configureStore";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

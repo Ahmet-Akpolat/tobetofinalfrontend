@@ -1,16 +1,12 @@
 import ReactPlayer from "react-player";
 import { useDispatch, useSelector } from "react-redux";
-import { selectContent } from "../../store/slices/contentSlice";
-import { useEffect, useState } from "react";
 import lectureService from "../../services/lectureService";
-import { selectLectureDetail } from "../../store/slices/lectureDetailSlice";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import exceptionService from "../../utils/exceptionService";
 import {
   selectContentViews,
   setContentViews,
 } from "../../store/slices/contenViewsSlice";
+import { selectContent } from "../../store/slices/contentSlice";
+import { selectLectureDetail } from "../../store/slices/lectureDetailSlice";
 
 function VideoPlayer() {
   const dispatch = useDispatch();

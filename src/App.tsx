@@ -1,18 +1,18 @@
+import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import AnnouncementExpandDisplay from "./components/ExpandDisplay/AnnouncementsExpandDisplay/AnnouncementsExpandDisplay";
+import LecturesExpandDisplay from "./components/ExpandDisplay/LecturesExpandDisplay/LecturesExpandDisplay";
+import SurveysExpandDisplay from "./components/ExpandDisplay/SurveysExpandDisplay/SurveysExpandDisplay";
+import { OverlayLoader } from "./components/OverlayLoader/OverlayLoader";
+import AuthLayout from "./pages/Auth/AuthLayout";
 import Login from "./pages/Auth/Login/Login";
 import Signup from "./pages/Auth/Signup/Signup";
-import AuthLayout from "./pages/Auth/AuthLayout";
-import MainLayout from "./pages/Main/MainLayout";
-import Home from "./pages/Main/Home/Home";
 import LectureDetail from "./pages/LectureDetail/LectureDetail";
-import { OverlayLoader } from "./components/OverlayLoader/OverlayLoader";
+import Home from "./pages/Main/Home/Home";
+import MainLayout from "./pages/Main/MainLayout";
 import Profile from "./pages/Profile/Profile";
-import { ToastContainer } from "react-toastify";
-import LecturesExpandDisplay from "./components/ExpandDisplay/LecturesExpandDisplay/LecturesExpandDisplay";
-import AnnouncementExpandDisplay from "./components/ExpandDisplay/AnnouncementsExpandDisplay/AnnouncementsExpandDisplay";
 import ProfileDetail from "./pages/ProfileDetail/ProfileDetail";
-import SurveysExpandDisplay from "./components/ExpandDisplay/SurveysExpandDisplay/SurveysExpandDisplay";
-import { useEffect, useState } from "react";
 import authService from "./services/authService/authService";
 
 function App() {

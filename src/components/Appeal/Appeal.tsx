@@ -1,8 +1,6 @@
-import "./Appeal.css";
-import { useSelector } from "react-redux";
-import { selectAppeal } from "../../store/slices/appealSlice";
 import { Check } from "@mui/icons-material";
 import { green } from "@mui/material/colors";
+import "./Appeal.css";
 
 const Appeal = ({ appeal }: any) => {
   return (

@@ -1,6 +1,4 @@
 import Modal from "react-bootstrap/Modal";
-import { selectAnnouncement } from "../../../store/slices/announcementSlice";
-import { useSelector } from "react-redux";
 
 function AnnouncementModal({ announcement, show, onHide }: any) {
   return (

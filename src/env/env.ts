@@ -1,1 +1,1 @@
-export const baseUrl = "http://localhost:5278/api";
+export const baseUrl = "https://tobeto.azurewebsites.net/api";

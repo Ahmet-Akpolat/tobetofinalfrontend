@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { StudentExperienceResponse } from "../../../../models/responses/StudentExperienceResponses";
-import experienceService from "../../../../services/StudentProfileSettingsServices/experienceService";
 
 type Props = {
   studentExperience: StudentExperienceResponse;

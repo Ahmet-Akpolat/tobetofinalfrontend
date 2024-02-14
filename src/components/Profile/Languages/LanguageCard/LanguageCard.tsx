@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import languagesService from "../../../../services/StudentProfileSettingsServices/languagesService";
 import "./LanguageCard.css";
 

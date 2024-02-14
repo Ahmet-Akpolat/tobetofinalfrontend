@@ -1,15 +1,15 @@
 import {
-    CreateSocialMediaRequest,
-    UpdateSocialMediaRequest,
-  } from "../../models/requests/SocialMediaRequests";
-  import {
-    SocialMediaResponse,
-    CreatedSocialMediaResponse,
-    GetListSocialMediaResponse,
-    UpdatedSocialMediaResponse,
-  } from "../../models/responses/SocialMediaResponses";
+  CreateSocialMediaRequest,
+  UpdateSocialMediaRequest,
+} from "../../models/requests/SocialMediaRequests";
+import {
+  CreatedSocialMediaResponse,
+  GetListSocialMediaResponse,
+  SocialMediaResponse,
+  UpdatedSocialMediaResponse,
+} from "../../models/responses/SocialMediaResponses";
 import axiosInstance from "../../utils/axiosInterceptors";
-  import { BaseService } from "../baseService";
+import { BaseService } from "../baseService";
   
   class SocialMediaService extends BaseService<
     GetListSocialMediaResponse,

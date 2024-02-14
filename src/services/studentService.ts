@@ -1,7 +1,13 @@
+import { CreateStudentEducationRequest } from "../models/requests/StudentEducationRequest";
+import { CreateStudentExperienceRequest } from "../models/requests/StudentExperienceRequests";
+import { CreateStudentLanguageLevelRequest } from "../models/requests/StudentLanguageLevelRequests";
 import {
   CreateStudentRequest,
   UpdateStudentRequest,
 } from "../models/requests/StudentRequests";
+import { CreateStudentSkillRequest } from "../models/requests/StudentSkillRequests";
+import { CreateStudentSocialMediaRequest } from "../models/requests/StudentSocialMediaRequests";
+import axiosInstance from "../utils/axiosInterceptors";
 import {
   CreatedStudentResponse,
   GetListStudentResponse,
@@ -9,12 +15,6 @@ import {
   UpdatedStudentResponse,
 } from "./../models/responses/StudentResponses";
 import { BaseService } from "./baseService";
-import { CreateStudentExperienceRequest } from "../models/requests/StudentExperienceRequests";
-import axiosInstance from "../utils/axiosInterceptors";
-import { CreateStudentEducationRequest } from "../models/requests/StudentEducationRequest";
-import { CreateStudentSkillRequest } from "../models/requests/StudentSkillRequests";
-import { CreateStudentSocialMediaRequest } from "../models/requests/StudentSocialMediaRequests";
-import { CreateStudentLanguageLevelRequest } from "../models/requests/StudentLanguageLevelRequests";
 
 class StudentService extends BaseService<
   GetListStudentResponse,

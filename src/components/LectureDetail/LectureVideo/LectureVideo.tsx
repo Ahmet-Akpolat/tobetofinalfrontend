@@ -1,8 +1,7 @@
-import { useState } from "react";
-import VideoPlayer from "../../VideoPlayer/VideoPlayer";
-import "./LectureVideo.css";
 import { useSelector } from "react-redux";
 import { selectContent } from "../../../store/slices/contentSlice";
+import VideoPlayer from "../../VideoPlayer/VideoPlayer";
+import "./LectureVideo.css";
 
 function LectureVideo({ setShowDetail }: any) {
   const content = useSelector(selectContent);

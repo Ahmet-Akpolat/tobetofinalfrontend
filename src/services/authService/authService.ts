@@ -1,17 +1,20 @@
-import { LoginResponseModel } from "./../../models/responses/AuthResponses/LoginResponseModel";
-import axios, { AxiosError } from "axios";
-import { AuthLoginRequest } from "../../models/requests/auth/AuthLoginRequest";
-import { CreateStudentRequest } from "../../models/requests/StudentRequests";
-import { TokenModel } from "../../models/responses/AuthResponses/TokenModel";
+import axios from "axios";
 import { toast } from "react-toastify";
-import axiosInstance from "../../utils/axiosInterceptors";
 import { baseUrl } from "../../env/env";
+import { CreateStudentRequest } from "../../models/requests/StudentRequests";
+import { AuthLoginRequest } from "../../models/requests/auth/AuthLoginRequest";
+import { TokenModel } from "../../models/responses/AuthResponses/TokenModel";
+import { store } from "../../store/configureStore";
+import axiosInstance from "../../utils/axiosInterceptors";
+import ExceptionService from "../../utils/exceptionService";
+import { Logout } from "../../utils/logout";
+import { LoginResponseModel } from "./../../models/responses/AuthResponses/LoginResponseModel";
 
 class AuthService {
   public async login(data: AuthLoginRequest): Promise<TokenModel | null> {
     try {
       const response = await axios.post<LoginResponseModel>(
-        `${baseUrl}/Auth/StudentLogin`,
+        `https://tobeto.azurewebsites.net/api/Auth/StudentLogin`,
         data
       );
       const loginResponse = response?.data;
@@ -25,7 +28,7 @@ class AuthService {
         return null;
       }
     } catch (error: any) {
-      toast.error(error.response.data.detail);
+      toast.error(ExceptionService.errorSelector(error.response.data));
       return null;
     }
   }
@@ -34,18 +37,19 @@ class AuthService {
     try {
       await axios.post(`${baseUrl}/Students`, data);
     } catch (error: any) {
-      toast.error(error.response.data.detail);
+      toast.error(ExceptionService.errorSelector(error.response.data));
     }
   }
 
   async changePassword(data: any) {
     try {
-      await axiosInstance.put(`${baseUrl}/Students/forPassword`, data);
+      await axiosInstance.put(`/Students/forPassword`, data);
+      Logout(store.dispatch);
     } catch (error: any) {
-      toast.error(error.response.data.detail);
+      toast.error(ExceptionService.errorSelector(error.response.data));
     }
   }
-  
+
   async refreshToken() {
     var refreshTokenData = localStorage.getItem("RefreshToken");
     await axiosInstance

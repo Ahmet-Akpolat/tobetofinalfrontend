@@ -1,11 +1,11 @@
 import "./NoContent.css";
 
-const NoContent = (props: any) => {
+const NoContent = ({ content }: any) => {
   return (
     <div className="no-content-main">
       <img className="no-content-img" src="/icons/notFound.svg" />
       <p className="no-content-message">
-        Atanmış herhangi bir {props.content} bulunmamaktadır
+        Atanmış herhangi bir {content} bulunmamaktadır
       </p>
     </div>
   );

@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import "./Certificates.css";
-import { toast } from "react-toastify";
-import exceptionService from "../../../utils/exceptionService";
-import certificateService from "../../../services/StudentProfileSettingsServices/certificateService";
-import { Form } from "react-router-dom";
-import CertificateCard from "./CertificateCard/CertificateCard";
 import { useDispatch } from "react-redux";
+import certificateService from "../../../services/StudentProfileSettingsServices/certificateService";
 import studentService from "../../../services/studentService";
 import { setStudent } from "../../../store/slices/studentSlice";
+import CertificateCard from "./CertificateCard/CertificateCard";
+import "./Certificates.css";
 
 function Certificates() {
   const dispatch = useDispatch()

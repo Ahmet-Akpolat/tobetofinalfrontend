@@ -1,5 +1,4 @@
 import { ErrorMessage, Field } from "formik";
-import React from "react";
 
 function FormikInput({ name, type, className, placeholder, as, rows }:any) {
   return (

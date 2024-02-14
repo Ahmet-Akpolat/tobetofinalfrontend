@@ -1,25 +1,24 @@
-import FormikInput from "../../FormikInput/FormikInput";
-import "./PersonalInformations.css";
-import * as Yup from "yup";
-import "yup-phone-lite";
 import { Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectStudent, setStudent } from "../../../store/slices/studentSlice";
-import studentService from "../../../services/studentService";
-import { ToastContainer, toast } from "react-toastify";
-import exceptionService from "../../../utils/exceptionService";
-import cityService from "../../../services/StudentProfileSettingsServices/cityService";
 import { PulseLoader } from "react-spinners";
+import { toast } from "react-toastify";
+import * as Yup from "yup";
+import "yup-phone-lite";
+import cityService from "../../../services/StudentProfileSettingsServices/cityService";
+import studentService from "../../../services/studentService";
+import { selectStudent, setStudent } from "../../../store/slices/studentSlice";
+import FormikInput from "../../FormikInput/FormikInput";
+import "./PersonalInformations.css";
 
 function PersonalInformations() {
   const dispatch = useDispatch();
+  const student = useSelector(selectStudent);
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
-  const student = useSelector(selectStudent);
   const [loading, setLoading] = useState(false);
   const [cityId, setCityId] = useState(student.cityId);
-
+  
   const initialValues = {
     cityId: student.cityId || null,
     districtId: student.districtId || null,

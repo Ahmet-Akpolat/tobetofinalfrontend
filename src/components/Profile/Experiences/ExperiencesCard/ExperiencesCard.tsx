@@ -1,9 +1,7 @@
 import { useState } from "react";
 import experienceService from "../../../../services/StudentProfileSettingsServices/experienceService";
-import "./ExperiencesCard.css";
 import ExperienceModal from "../ExperienceDetailModal/ExperienceModal";
-import { toast } from "react-toastify";
-import exceptionService from "../../../../utils/exceptionService";
+import "./ExperiencesCard.css";
 
 function ExperiencesCard({ experience, setExperiences }: any) {
   const [modalShow, setModalShow] = useState(false);

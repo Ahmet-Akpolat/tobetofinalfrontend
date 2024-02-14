@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
-import "./ProfileDetail.css";
-import { useSelector } from "react-redux";
-import { selectStudent } from "../../store/slices/studentSlice";
-import languagesService from "../../services/StudentProfileSettingsServices/languagesService";
-import { toast } from "react-toastify";
-import exceptionService from "../../utils/exceptionService";
 import HeatMap from "@uiw/react-heat-map";
-import lectureService from "../../services/lectureService";
 import Tooltip from "@uiw/react-tooltip";
-import { Link } from "react-router-dom";
-import { Bar, Doughnut, Line } from "react-chartjs-2";
 import "chart.js/auto";
+import { useEffect, useState } from "react";
+import { Bar, Doughnut } from "react-chartjs-2";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import languagesService from "../../services/StudentProfileSettingsServices/languagesService";
+import lectureService from "../../services/lectureService";
+import { selectStudent } from "../../store/slices/studentSlice";
+import "./ProfileDetail.css";
 
 const ProfileDetail = () => {
   const activityDatesTemp = [] as any;
@@ -53,7 +51,7 @@ const ProfileDetail = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     getStudentLanguages();
     getStudentActivites();
   }, []);
@@ -81,7 +79,11 @@ const ProfileDetail = () => {
                   <div className="cv-pp">
                     <div className="area">
                       <img
-                        src={student.profilePhotoPath}
+                        src={`${
+                          student.profilePhotoPath
+                            ? student.profilePhotoPath
+                            : "https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png"
+                        }`}
                         className="cv-pp-img rounded-circle"
                       />
                     </div>

@@ -1,19 +1,17 @@
-import "./LectureDetail.css";
 import { useEffect, useState } from "react";
-import LectureDetailSidebar from "../../components/LectureDetail/LectureDetailSidebar/LectureDetailSidebar";
-import LectureContent from "../../components/LectureDetail/LectureContent/LectureContent";
-import LectureInfo from "../../components/LectureDetail/LectureInfo/LectureInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { selectLectureDetail } from "../../store/slices/lectureDetailSlice";
-import lectureService from "../../services/lectureService";
-import { ToastContainer, toast } from "react-toastify";
-import { selectStudent } from "../../store/slices/studentSlice";
 import { useNavigate } from "react-router-dom";
-import { clearContent } from "../../store/slices/contentSlice";
+import LectureContent from "../../components/LectureDetail/LectureContent/LectureContent";
+import LectureDetailSidebar from "../../components/LectureDetail/LectureDetailSidebar/LectureDetailSidebar";
+import LectureInfo from "../../components/LectureDetail/LectureInfo/LectureInfo";
 import { GetByLoggedStudentCompletionConditionResponse } from "../../models/responses/LectureCompletionDetailResponse";
-import exceptionService from "../../utils/exceptionService";
-import { formatDate } from "../../utils/formatDate";
+import lectureService from "../../services/lectureService";
 import { selectContentViews } from "../../store/slices/contenViewsSlice";
+import { clearContent } from "../../store/slices/contentSlice";
+import { selectLectureDetail } from "../../store/slices/lectureDetailSlice";
+import { selectStudent } from "../../store/slices/studentSlice";
+import { formatDate } from "../../utils/formatDate";
+import "./LectureDetail.css";
 
 function LectureDetail() {
   const navigate = useNavigate();

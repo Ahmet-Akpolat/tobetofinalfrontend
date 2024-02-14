@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import "./Home.css";
-import { useDispatch, useSelector } from "react-redux";
-import { selectStudent } from "../../../store/slices/studentSlice";
-import MainSection from "./MainSection/MainSection";
-import InfoCard from "../../../components/InfoCard/InfoCard";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import InfoCard from "../../../components/InfoCard/InfoCard";
+import { selectStudent } from "../../../store/slices/studentSlice";
+import "./Home.css";
+import MainSection from "./MainSection/MainSection";
+import ExamSection from "../../../components/ExamSection/ExamSection";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -31,6 +31,7 @@ const Home = () => {
       </div>
       <img className="dot-img" src="/icons/dot-purple.home.svg" />
       <MainSection />
+      <ExamSection />
       <section>
         <div className="container d-flex align-items-center justify-content-center">
           <div className="info-card-list col-12 row d-flex align-items-center justify-content-center mt-5 mb-5">

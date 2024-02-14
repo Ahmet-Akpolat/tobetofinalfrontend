@@ -1,11 +1,9 @@
-import { toast } from "react-toastify";
-import certificateService from "../../../../services/StudentProfileSettingsServices/certificateService";
-import "./CertificateCard.css";
-import exceptionService from "../../../../utils/exceptionService";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import certificateService from "../../../../services/StudentProfileSettingsServices/certificateService";
 import studentService from "../../../../services/studentService";
 import { setStudent } from "../../../../store/slices/studentSlice";
+import "./CertificateCard.css";
 
 function CertificateCard({ certificate, setCertificates }: any) {
   const dispatch = useDispatch();

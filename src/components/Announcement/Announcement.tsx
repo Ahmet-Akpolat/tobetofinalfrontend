@@ -1,8 +1,8 @@
 import { useState } from "react";
+import announcementService from "../../services/announcementService";
+import { formatDate } from "../../utils/formatDate";
 import "./Announcement.css";
 import AnnouncementModal from "./Modal/AnnouncementModal";
-import { formatDate } from "../../utils/formatDate";
-import announcementService from "../../services/announcementService";
 
 function Announcement({ announcement }: any) {
   const [modalShow, setModalShow] = useState(false);

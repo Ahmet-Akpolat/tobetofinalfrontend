@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./SurveyExpandDisplay.css";
-import { useEffect } from "react";
 import surveyService from "../../../services/surveyService";
 import Survey from "../../Survey/Survey";
+import NoContent from "../../NoContent/NoContent";
+import { useSelector } from "react-redux";
+import { selectSurvey } from "../../../store/slices/surveySlice";
 
 function SurveysExpandDisplay() {
   const [pageSize, setPageSize] = useState(0);
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
-  const [surveys, setSurveys] = useState([] as any);
+  const [surveys, setSurveys] = useState(useSelector(selectSurvey));
 
   const getSurveys = async (pageNumber: any) => {
     const data = await surveyService.getAllWithData(pageNumber, 12);
@@ -22,10 +24,6 @@ function SurveysExpandDisplay() {
     setPageSize(data.data.pages);
   };
 
-  useEffect(() => {
-    getSurveys(0);
-  }, []);
-
   return (
     <main>
       <div className="surveys-expand">
@@ -38,80 +36,88 @@ function SurveysExpandDisplay() {
             </div>
           </div>
         </div>
-        <div className="container filters">
-          <ul
-            className="nav nav-tabs mainTablist d-flex justify-content-around"
-            role="tablist"
-          >
-            <div className="d-flex justify-content-center">
-              <li className={`nav-item ${clicked === 0 && "is-selectedd"}`}>
-                <button
-                  className="filters-link"
-                  onClick={() => {
-                    setIsSelected(0);
-                    setClicked(0);
-                    getSurveys(0);
-                  }}
-                >
-                  Tüm Anketler
-                </button>
-              </li>
-              <li className={`nav-item ${clicked === 1 && "is-selectedd"}`}>
-                <button
-                  className="filters-link"
-                  onClick={() => {
-                    setIsSelected(0);
-                    setClicked(1);
-                    getReadedSurveys(0);
-                  }}
-                >
-                  Katildiklarim
-                </button>
-              </li>
-            </div>
-          </ul>
-        </div>
-        <div className="container mt-4">
-          {surveys !== null && (
-            <div className="row list">
-              {surveys.map((survey: any) => {
-                return <Survey survey={survey} />;
-              })}
-            </div>
-          )}
-
-          <div className="pages-control">
-            <ul
-              className="pagination justify-content-center gap-2"
-              role="navigation"
-              aria-label="Pagination"
-            >
-              {Array.from(Array(pageSize).keys()).map((page) => (
-                <li
-                  className={
-                    isSelected == page
-                      ? "li-selected page-item selected-hover"
-                      : "page-item item-hover"
-                  }
-                  onClick={() => {
-                    setIsSelected(page);
-                    if (clicked === 0) getSurveys(page);
-                    //else if (clicked === 1) getReadedAnnouncements(page);
-                  }}
-                >
-                  <a
-                    rel="canonical"
-                    role="button"
-                    className="page-link"
-                    aria-current="page"
-                  >
-                    {page + 1}
-                  </a>
-                </li>
-              ))}
-            </ul>
+        {!surveys.length ? (
+          <div className="container-fluid">
+            <NoContent content="basvurunuz" />
           </div>
-        </div>
+        ) : (
+          <div className="container-fluid">
+            <div className="container filters">
+              <ul
+                className="nav nav-tabs mainTablist d-flex justify-content-around"
+                role="tablist"
+              >
+                <div className="d-flex justify-content-center">
+                  <li className={`nav-item ${clicked === 0 && "is-selectedd"}`}>
+                    <button
+                      className="filters-link"
+                      onClick={() => {
+                        setIsSelected(0);
+                        setClicked(0);
+                        getSurveys(0);
+                      }}
+                    >
+                      Tüm Anketler
+                    </button>
+                  </li>
+                  <li className={`nav-item ${clicked === 1 && "is-selectedd"}`}>
+                    <button
+                      className="filters-link"
+                      onClick={() => {
+                        setIsSelected(0);
+                        setClicked(1);
+                        getReadedSurveys(0);
+                      }}
+                    >
+                      Katildiklarim
+                    </button>
+                  </li>
+                </div>
+              </ul>
+            </div>
+            <div className="container mt-4">
+              {surveys !== null && (
+                <div className="row list">
+                  {surveys.map((survey: any) => {
+                    return <Survey survey={survey} />;
+                  })}
+                </div>
+              )}
+
+              <div className="pages-control">
+                <ul
+                  className="pagination justify-content-center gap-2"
+                  role="navigation"
+                  aria-label="Pagination"
+                >
+                  {Array.from(Array(pageSize).keys()).map((page) => (
+                    <li
+                      className={
+                        isSelected == page
+                          ? "li-selected page-item selected-hover"
+                          : "page-item item-hover"
+                      }
+                      onClick={() => {
+                        setIsSelected(page);
+                        if (clicked === 0) getSurveys(page);
+                        //else if (clicked === 1) getReadedAnnouncements(page);
+                      }}
+                    >
+                      <a
+                        rel="canonical"
+                        role="button"
+                        className="page-link"
+                        aria-current="page"
+                      >
+                        {page + 1}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </main>
   );

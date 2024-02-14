@@ -1,9 +1,7 @@
-import "./Survey.css";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { formatDate } from "../../utils/formatDate";
 import SurveyModal from "./Modal/SurveyModal";
-import { selectSurvey } from "../../store/slices/surveySlice";
+import "./Survey.css";
 
 function Survey({ survey }: any) {
   const [modalShow, setModalShow] = useState(false);

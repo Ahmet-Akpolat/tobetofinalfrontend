@@ -1,13 +1,11 @@
 import { Form, Formik } from "formik";
-import FormikInput from "../../FormikInput/FormikInput";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import authService from "../../../services/authService/authService";
-import { ToastContainer, toast } from "react-toastify";
-import exceptionService from "../../../utils/exceptionService";
 import { passwordValidator } from "../../../utils/customValidations";
+import FormikInput from "../../FormikInput/FormikInput";
 
 function Password() {
-  
   const validationSchema = Yup.object({
     lastPassword: Yup.string().required("Doldurulmasi zorunlu alan*"),
     newPassword: Yup.string()
@@ -30,7 +28,7 @@ function Password() {
 
   const changePassword = async (data: any) => {
     await authService.changePassword(data);
-    toast.success("Sifreniz basariyla degistirildi");
+    toast.success("Sifreniz basariyla degistirildi. Lutfen tekrar giris yapiniz");
   };
 
   return (

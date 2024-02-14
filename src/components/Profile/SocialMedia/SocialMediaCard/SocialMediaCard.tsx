@@ -1,9 +1,8 @@
-import { toast } from "react-toastify";
-import socialMediaService from "../../../../services/StudentProfileSettingsServices/socialMediaService";
-import "./SocialMediaCard.css";
-import { setStudent } from "../../../../store/slices/studentSlice";
 import { useDispatch } from "react-redux";
+import socialMediaService from "../../../../services/StudentProfileSettingsServices/socialMediaService";
 import studentService from "../../../../services/studentService";
+import { setStudent } from "../../../../store/slices/studentSlice";
+import "./SocialMediaCard.css";
 
 function SocialMediaCard({ socialMedia, setSocialMedias }: any) {
   const dispatch = useDispatch();

@@ -29,8 +29,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error);
-    toast.error(exceptionService.errorSelector(error.response.data.title));
+    toast.error(exceptionService.errorSelector(error.response.data));
     return error;
   }
 );

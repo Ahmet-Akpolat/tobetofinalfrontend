@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import "./LectureContentHeader.css";
 import { useDispatch, useSelector } from "react-redux";
-import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
-import { setContent } from "../../../store/slices/contentSlice";
 import { selectContentViews } from "../../../store/slices/contenViewsSlice";
+import { setContent } from "../../../store/slices/contentSlice";
+import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
+import "./LectureContentHeader.css";
 
 function LectureContentHeader({ index }: any) {
   const dispatch = useDispatch();

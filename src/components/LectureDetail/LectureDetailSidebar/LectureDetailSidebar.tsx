@@ -1,11 +1,9 @@
-import { useSelector, useDispatch } from "react-redux";
-import "./LectureDetailSidebar.css";
 import { useEffect, useState } from "react";
-import { selectContent } from "../../../store/slices/contentSlice";
+import { useSelector } from "react-redux";
 import { GUID } from "../../../models/abstracts/GuidModel";
 import lectureService from "../../../services/lectureService";
-import { toast } from "react-toastify";
-import exceptionService from "../../../utils/exceptionService";
+import { selectContent } from "../../../store/slices/contentSlice";
+import "./LectureDetailSidebar.css";
 
 interface Props {
   setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;

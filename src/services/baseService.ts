@@ -1,7 +1,5 @@
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import axiosInstance from "../utils/axiosInterceptors";
-import ExceptionService from "../utils/exceptionService";
-import { baseUrl } from "../env/env";
 
 export class BaseService<
   GetAllType,

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import "./LectureInfo.css";
 import { selectLectureDetail } from "../../../store/slices/lectureDetailSlice";
 import { formatDate } from "../../../utils/formatDate";
+import "./LectureInfo.css";
 
 function LectureInfo({ lectureCompletionDetail }: any) {
   const lecture = useSelector(selectLectureDetail);
