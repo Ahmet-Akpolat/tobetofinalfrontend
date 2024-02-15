@@ -13,8 +13,8 @@ const Home = () => {
   const student = useSelector(selectStudent);
 
   window.onload = async () => {
-    await fetchAllData(dispatch)
-  }
+    await fetchAllData(dispatch);
+  };
 
   return (
     <div className="home">
