@@ -13,12 +13,30 @@ import { setStudent } from "../store/slices/studentSlice";
 import { setSurvey } from "../store/slices/surveySlice";
 
 const fetchAllData = async (dispatch: Dispatch) => {
-  await fetchAppeals(dispatch)
-  await fetchLectures(dispatch)
-  await fetchAnnouncements(dispatch)
-  await fetchSurveys(dispatch)
-  await fetchExams(dispatch)
+  // Appeal
+  const appeal = await appealService.getAll(0, 12);
+  dispatch(setAppeal(appeal));
+
+  // Lecture
+  const lecture = await lectureService.getAll(0, 12);
+  dispatch(setLecture(lecture));
+
+  // Announcement
+  const announcement = await announcementService.getAll(0, 12);
+  dispatch(setAnnouncement(announcement));
+
+  // Survey
+  const survey = await surveyService.getAll(0, 12);
+  dispatch(setSurvey(survey));
+
+  const exams = await examService.getAll();
+  dispatch(setExams(exams));
+
+  // Student
+  const student = await studentService.getByToken();
+  dispatch(setStudent(student));
 };
+
 
 export const fetchAppeals = async (dispatch: Dispatch) => {
   const appeals = await appealService.getAll(0, 12);
