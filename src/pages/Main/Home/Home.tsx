@@ -1,14 +1,20 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import InfoCard from "../../../components/InfoCard/InfoCard";
 import { selectStudent } from "../../../store/slices/studentSlice";
 import "./Home.css";
 import MainSection from "./MainSection/MainSection";
 import ExamSection from "../../../components/ExamSection/ExamSection";
+import fetchAllData from "../../../utils/fetchalldata";
 
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const student = useSelector(selectStudent);
+
+  window.onload = async () => {
+    await fetchAllData(dispatch)
+  }
 
   return (
     <div className="home">

@@ -1,13 +1,17 @@
+import { useDispatch } from "react-redux";
 import languagesService from "../../../../services/StudentProfileSettingsServices/languagesService";
+import studentService from "../../../../services/studentService";
 import "./LanguageCard.css";
+import { setStudent } from "../../../../store/slices/studentSlice";
 
 function LanguageCard({ language, setLanguages }: any) {
+  const dispatch = useDispatch();
 
   const deleteStudentLanguage = async (id: any) => {
     await languagesService.deleteStudentLanguage(id);
-    setLanguages((arr: any) => {
-      return arr.filter((lang: any) => lang.id !== id);
-    });
+    const newStudent = await studentService.getByToken() as any;
+    setLanguages(newStudent.languageLevels);
+    dispatch(setStudent(newStudent));
   };
 
   return (

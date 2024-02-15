@@ -2,7 +2,6 @@ import Modal from "react-bootstrap/Modal";
 import surveyService from "../../../services/surveyService";
 
 function SurveyModal({ survey, show, onHide }: any) {
-  
   const readSurvey = async () => {
     await surveyService.joinTheSurvey(survey.surveyId);
   };
@@ -27,7 +26,13 @@ function SurveyModal({ survey, show, onHide }: any) {
             </div>
           </Modal.Header>
           <Modal.Body>
-            <p>{survey.surveyDescription}</p>
+            <p>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: survey.surveyDescription,
+                }}
+              />
+            </p>
             <button
               className="save-button"
               onClick={() => {

@@ -3,12 +3,17 @@ import announcementService from "../../services/announcementService";
 import { formatDate } from "../../utils/formatDate";
 import "./Announcement.css";
 import AnnouncementModal from "./Modal/AnnouncementModal";
+import { useDispatch } from "react-redux";
+import { setAnnouncement } from "../../store/slices/announcementSlice";
 
 function Announcement({ announcement }: any) {
+  const dispatch = useDispatch();
   const [modalShow, setModalShow] = useState(false);
 
   const readAnnouncement = async (announcementId: string) => {
     await announcementService.readTheAnnouncement(announcementId);
+    const newAnnouncements = await announcementService.getAll(0, 12);
+    dispatch(setAnnouncement(newAnnouncements));
   };
 
   return (

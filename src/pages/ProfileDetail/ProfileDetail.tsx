@@ -142,7 +142,7 @@ const ProfileDetail = () => {
                   <div>
                     <div className="skills w-100">
                       {student.skills.map((skill: any) => (
-                        <span className="skill">{skill.name}</span>
+                        <span className="skill">{skill.skillName}</span>
                       ))}
                     </div>
                   </div>
@@ -347,13 +347,14 @@ const ProfileDetail = () => {
                     <span>Medya Hesaplarım</span>
                     <hr />
                   </div>
-                  <div className="cv-social-media">
+                  <div className="cv-social-media gap-3">
                     {student.socialMedias.map((socialMedia: any) => (
-                      <a
-                        className={`cv-${socialMedia.name.replace(" ", "")}`}
-                        target="_blank"
-                        href="https://www.linkedin.com/in/metin-koyuncu-718281260/"
-                      ></a>
+                      <Link target="_blank" to={socialMedia.mediaAccountUrl}>
+                        <img
+                          className="cv-social-media"
+                          src={socialMedia.socialMediaLogoUrl}
+                        ></img>
+                      </Link>
                     ))}
                   </div>
                 </div>

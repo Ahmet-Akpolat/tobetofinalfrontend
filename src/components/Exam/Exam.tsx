@@ -4,7 +4,7 @@ import ExamModal from "./ExamModal/ExamModal";
 
 const Exam = ({ exam, joinedExams }: any) => {
   const [modalShow, setModalShow] = useState(false);
-  const isJoined = joinedExams.some(
+  const isJoined = joinedExams?.some(
     (joinedExam: any) => joinedExam.examId === exam.examId
   );
 

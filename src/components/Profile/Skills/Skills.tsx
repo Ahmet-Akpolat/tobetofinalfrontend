@@ -4,17 +4,15 @@ import skillService from "../../../services/StudentProfileSettingsServices/skill
 import { Field, Formik, Form } from "formik";
 import studentService from "../../../services/studentService";
 import { CreateStudentSkillRequest } from "../../../models/requests/StudentSkillRequests";
-import { ToastContainer, toast } from "react-toastify";
-import exceptionService from "../../../utils/exceptionService";
-import { StudentSkillResponse } from "../../../models/responses/StudentSkillResponses";
+
 import { SkillResponse } from "../../../models/responses/SkillResponses";
-import { useDispatch } from "react-redux";
-import { setStudent } from "../../../store/slices/studentSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectStudent, setStudent } from "../../../store/slices/studentSlice";
 
 function Skills() {
   const dispatch = useDispatch();
   const [skillOptions, setSkillOptions] = useState<SkillResponse[]>([]);
-  const [skills, setSkills] = useState<StudentSkillResponse[]>([]);
+  const [skills, setSkills] = useState(useSelector(selectStudent).skills);
 
   const initialValues = {
     skillId: null,
@@ -25,34 +23,26 @@ function Skills() {
     setSkillOptions(data);
   };
 
-  const getStudentSkills = async () => {
-    const data = (await skillService.getForLoggedStudent()).data?.items;
-    setSkills(data);
-  };
-
   const addStudentSkills = async (data: CreateStudentSkillRequest) => {
     await studentService.addStudentSkills(data);
-    getStudentSkills();
     const newStudent = await studentService.getByToken();
+    setSkills(newStudent.skills);
     dispatch(setStudent(newStudent));
   };
 
   const deleteStudentSkills = async (id: any) => {
     await skillService.deleteStudentSkill(id);
-    setSkills((arr: any) => {
-      return arr.filter((skill: any) => skill.id !== id);
-    });
     const newStudent = await studentService.getByToken();
+    setSkills(newStudent.skills);
     dispatch(setStudent(newStudent));
   };
 
   useEffect(() => {
-    getStudentSkills();
     getSkills();
   }, []);
 
   const filteredSkillOptions = skillOptions.filter(
-    (option) => !skills.some((skill) => skill.skillId === option.id)
+    (option) => !skills.some((skill: any) => skill.skillId === option.id)
   );
 
   return (
@@ -81,7 +71,7 @@ function Skills() {
             </button>
             {skills !== null && (
               <div className="anim-fadein col-12 mt-5">
-                {skills.map((skill: any) => (
+                {[...skills].reverse().map((skill: any) => (
                   <div className="skill-card">
                     <strong>{skill.skillName}</strong>
                     <div

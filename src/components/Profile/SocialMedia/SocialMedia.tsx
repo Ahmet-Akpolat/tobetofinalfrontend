@@ -1,17 +1,19 @@
 import { Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { CreateStudentSocialMediaRequest } from "../../../models/requests/StudentSocialMediaRequests";
 import socialMediaService from "../../../services/StudentProfileSettingsServices/socialMediaService";
 import studentService from "../../../services/studentService";
-import { setStudent } from "../../../store/slices/studentSlice";
+import { selectStudent, setStudent } from "../../../store/slices/studentSlice";
 import FormikInput from "../../FormikInput/FormikInput";
 import SocialMediaCard from "./SocialMediaCard/SocialMediaCard";
 
 function SocialMedia() {
-  const dispatch = useDispatch()
-  const [socialMedias, setSocialMedias] = useState([]);
+  const dispatch = useDispatch();
+  const [socialMedias, setSocialMedias] = useState(
+    useSelector(selectStudent).socialMedias
+  );
   const [socialMediaOptions, setSocialMediaOptions] = useState([]);
 
   const initialValues = {
@@ -28,24 +30,18 @@ function SocialMedia() {
     data: CreateStudentSocialMediaRequest
   ) => {
     await studentService.addStudentSocialMedias(data);
-    getStudentSocialMedias();
     const newStudent = await studentService.getByToken();
+    setSocialMedias(newStudent.socialMedias);
     dispatch(setStudent(newStudent));
   };
 
-  const getSocialMedias = async () => {
+  const getSocialMediaOptions = async () => {
     const data = await socialMediaService.getAll();
     setSocialMediaOptions(data);
   };
 
-  const getStudentSocialMedias = async () => {
-    const data = (await socialMediaService.getForLoggedStudent()).data?.items;
-    setSocialMedias(data);
-  };
-
   useEffect(() => {
-    getStudentSocialMedias();
-    getSocialMedias();
+    getSocialMediaOptions();
   }, []);
 
   return (
@@ -77,12 +73,14 @@ function SocialMedia() {
           {socialMedias !== null && (
             <div className="anim-fadein col-12 mt-5">
               {socialMedias !== null &&
-                socialMedias.map((socialMedia) => (
-                  <SocialMediaCard
-                    socialMedia={socialMedia}
-                    setSocialMedias={setSocialMedias}
-                  />
-                ))}
+                [...socialMedias]
+                  .reverse()
+                  .map((socialMedia: any) => (
+                    <SocialMediaCard
+                      socialMedia={socialMedia}
+                      setSocialMedias={setSocialMedias}
+                    />
+                  ))}
             </div>
           )}
         </Form>

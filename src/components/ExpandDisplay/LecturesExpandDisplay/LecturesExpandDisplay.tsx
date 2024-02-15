@@ -5,9 +5,11 @@ import lectureService from "../../../services/lectureService";
 import Lecture from "../../Lecture/Lecture";
 import NoContent from "../../NoContent/NoContent";
 import { selectLecture } from "../../../store/slices/lectureSlice";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchLectures } from "../../../utils/fetchalldata";
 
 function LecturesExpandDisplay() {
+  const dispatch = useDispatch()
   const [pageSize, setPageSize] = useState(0);
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
@@ -29,6 +31,10 @@ function LecturesExpandDisplay() {
     const data = await lectureService.getAllWithData(pageNumber, 12);
     setLectures(data.items);
     setPageSize(data.pages);
+  };
+
+  window.onload = async () => {
+    await fetchLectures(dispatch);
   };
 
   useEffect(() => {

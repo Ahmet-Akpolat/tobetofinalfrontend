@@ -232,18 +232,10 @@ ul {
   gap: calc((80% - 600px));
   margin-top: 1em;
 }
-.cv-box .cv-social-media .cv-LinkedIn:after {
-  content: url("https://tobeto.com/cv-linkedn.svg");
-  display: block;
-  background: no-repeat scroll 7px 10px;
-  background-size: 1.5em 1.5em;
+.cv-social-media {
+  width: 3.4rem;
 }
-.cv-box .cv-social-media .cv-GitHub:after {
-  content: url("https://tobeto.com/cv-github.svg");
-  display: block;
-  background: no-repeat scroll 7px 10px;
-  background-size: 1.5em 1.5em;
-}
+
 .model-padding {
   padding: 1em 0;
 }

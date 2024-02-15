@@ -6,9 +6,14 @@ import educationService from "../../../services/StudentProfileSettingsServices/e
 import studentService from "../../../services/studentService";
 import { CreateStudentEducationRequest } from "../../../models/requests/StudentEducationRequest";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { selectStudent, setStudent } from "../../../store/slices/studentSlice";
 
 function Education() {
-  const [educations, setEducations] = useState([]);
+  const dispatch = useDispatch();
+  const [educations, setEducations] = useState(
+    useSelector(selectStudent).studentEducations
+  );
   const [endDateControl, setEndDateControl] = useState<boolean>(true);
 
   const initialValues = {
@@ -29,19 +34,12 @@ function Education() {
     graduationDate: "",
   };
 
-  const getStudentEducations = async () => {
-    const data = (await educationService.getForLoggedStudent()).data?.items;
-    setEducations(data);
-  };
-
   const addStudentEducations = async (data: CreateStudentEducationRequest) => {
     await studentService.addStudentEducations(data);
-    getStudentEducations();
+    const newStudent = await studentService.getByToken();
+    setEducations(newStudent.studentEducations);
+    dispatch(setStudent(newStudent));
   };
-
-  useEffect(() => {
-    getStudentEducations();
-  }, []);
 
   const validationSchema = Yup.object({
     educationStatus: Yup.string().required("Doldurulması zorunlu alan*"),
@@ -139,7 +137,7 @@ function Education() {
           </button>
           {educations != null && (
             <div className="anim-fadein col-12 mt-5">
-              {educations.map((education) => {
+              {[...educations].reverse().map((education: any) => {
                 return (
                   <EducationCard
                     education={education}

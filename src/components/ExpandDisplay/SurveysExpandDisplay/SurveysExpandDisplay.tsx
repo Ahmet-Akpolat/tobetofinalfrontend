@@ -3,10 +3,12 @@ import "./SurveyExpandDisplay.css";
 import surveyService from "../../../services/surveyService";
 import Survey from "../../Survey/Survey";
 import NoContent from "../../NoContent/NoContent";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectSurvey } from "../../../store/slices/surveySlice";
+import { fetchSurveys } from "../../../utils/fetchalldata";
 
 function SurveysExpandDisplay() {
+  const dispatch = useDispatch();
   const [pageSize, setPageSize] = useState(0);
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
@@ -22,6 +24,10 @@ function SurveysExpandDisplay() {
     const data = await surveyService.getJoinedSurveys(pageNumber, 12);
     setSurveys(data.data.items);
     setPageSize(data.data.pages);
+  };
+
+  window.onload = async () => {
+    await fetchSurveys(dispatch);
   };
 
   return (

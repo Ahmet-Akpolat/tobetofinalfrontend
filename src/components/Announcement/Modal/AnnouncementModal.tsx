@@ -24,7 +24,11 @@ function AnnouncementModal({ announcement, show, onHide }: any) {
             <p>
               Merhabalar,
               <br /> <br />
-              {announcement.announcementDescription}
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: announcement.announcementDescription,
+                }}
+              />
             </p>
           </Modal.Body>
         </div>
