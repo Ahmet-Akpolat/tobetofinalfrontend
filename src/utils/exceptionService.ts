@@ -6,10 +6,13 @@ const ExceptionService = () => {
     if (
       (errorData.type.includes("validation") ||
         errorData.type.includes("business")) &&
-        errorData.title !== "Validation error(s)"
+      errorData.title !== "Validation error(s)"
     ) {
       return errorData.detail;
-    } else if (errorData.title.includes("authorization")) {
+    } else if (
+      errorData.title.includes("authorization") ||
+      errorData.title.includes("Authorization")
+    ) {
       return AuthorizationExceptionOperations();
     } else {
       return "Bir Sorun Oluştu";

@@ -1,36 +1,29 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import certificateService from "../../../services/StudentProfileSettingsServices/certificateService";
 import studentService from "../../../services/studentService";
-import { setStudent } from "../../../store/slices/studentSlice";
+import { selectStudent, setStudent } from "../../../store/slices/studentSlice";
 import CertificateCard from "./CertificateCard/CertificateCard";
 import "./Certificates.css";
 
 function Certificates() {
-  const dispatch = useDispatch()
-  const [certificates, setCertificates] = useState([] as any);
+  const dispatch = useDispatch();
+  const [certificates, setCertificates] = useState(
+    useSelector(selectStudent).certificates
+  );
 
   const updatedValues = {
     certificateUrl: null,
     certificateUrlTemp: null,
   } as any;
 
-  const getCertificates = async () => {
-    const data = (await certificateService.getForLoggedStudent()).data?.items;
-    setCertificates(data);
-  };
-
   const addCertificates = async (file: any) => {
     updatedValues.certificateUrlTemp = file.target.files[0];
     await certificateService.add(updatedValues);
     const newStudent = await studentService.getByToken();
+    setCertificates(newStudent.certificates);
     dispatch(setStudent(newStudent));
-    getCertificates();
   };
-
-  useEffect(() => {
-    getCertificates();
-  }, []);
 
   return (
     <div className="d-flex flex-column">
@@ -56,7 +49,7 @@ function Certificates() {
       </div>
       {certificates !== null && (
         <div className="anim-fadein col-12 mt-5 pb-3">
-          {certificates.map((certificate: any) => {
+          {[...certificates].reverse().map((certificate: any) => {
             return (
               <CertificateCard
                 certificate={certificate}

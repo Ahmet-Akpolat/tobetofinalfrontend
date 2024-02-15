@@ -1,12 +1,17 @@
+import { useDispatch } from "react-redux";
 import educationService from "../../../../services/StudentProfileSettingsServices/educationService";
 import "./EducationCard.css";
+import studentService from "../../../../services/studentService";
+import { setStudent } from "../../../../store/slices/studentSlice";
 
 function EducationCard({ education, setEducations }: any) {
+  const dispatch = useDispatch();
+
   async function deleteStudentEducation(id: any) {
     await educationService.delete(id);
-    setEducations((arr: any) => {
-      return arr.filter((edu: any) => edu.id !== id);
-    });
+    const newStudent = await studentService.getByToken();
+    setEducations(newStudent.studentEducations);
+    dispatch(setStudent(newStudent));
   }
 
   return (
@@ -17,12 +22,12 @@ function EducationCard({ education, setEducations }: any) {
             <span>{`${education.startDate.substring(
               0,
               4
-            )}  -  Devam Ediyor`}</span>
+            )} / Devam Ediyor`}</span>
           ) : (
             <span>{`${education.startDate.substring(
               0,
               10
-            )}  -  ${education.graduationDate.substring(0, 10)}`}</span>
+            )} / ${education.graduationDate.substring(0, 10)}`}</span>
           )}
         </div>
         <span>{education.educationStatus}</span>

@@ -10,10 +10,9 @@ function CertificateCard({ certificate, setCertificates }: any) {
 
   const deleteCertificates = async () => {
     await certificateService.deleteStudentCertificate(certificate.id);
-    const data = (await certificateService.getForLoggedStudent()).data?.items;
-    setCertificates(data);
     const newStudent = await studentService.getByToken();
-    dispatch(setStudent(newStudent));
+    setCertificates(newStudent);
+    dispatch(setStudent(newStudent.certificates));
   };
 
   return (

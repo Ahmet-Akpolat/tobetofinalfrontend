@@ -9,10 +9,8 @@ function SocialMediaCard({ socialMedia, setSocialMedias }: any) {
 
   const deleteSocialMedia = async (id: any) => {
     await socialMediaService.deleteStudentSocialMedias(id);
-    setSocialMedias((arr: any) => {
-      return arr.filter((sc: any) => sc.id !== id);
-    });
     const newStudent = await studentService.getByToken();
+    setSocialMedias(newStudent.socialMedias);
     dispatch(setStudent(newStudent));
   };
 

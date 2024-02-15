@@ -7,13 +7,16 @@ import { CreateStudentExperienceRequest } from "../../../models/requests/Student
 import { useEffect, useState } from "react";
 import cityService from "../../../services/StudentProfileSettingsServices/cityService";
 import experienceService from "../../../services/StudentProfileSettingsServices/experienceService";
+import { useDispatch, useSelector } from "react-redux";
+import { selectStudent, setStudent } from "../../../store/slices/studentSlice";
 
 function Experiences() {
-  const [experiences, setExperiences] = useState<
-    CreateStudentExperienceRequest[]
-  >([]);
+  const [experiences, setExperiences] = useState(
+    useSelector(selectStudent).studentExperiences
+  );
   const [cities, setCities] = useState([]);
   const [endDateControl, setEndDateControl] = useState<boolean>(true);
+  const dispatch = useDispatch();
 
   const initialValues = {
     companyName: null,
@@ -41,19 +44,15 @@ function Experiences() {
     setCities(response);
   };
 
-  const getStudentExperiences = async () => {
-    const data = (await experienceService.getForLoggedStudent()).data?.items;
-    setExperiences(data);
-  };
-
   const addStudentExperiences = async (data: any) => {
     if (!endDateControl) data.endDate = null;
     await studentService.addStudentExperiences(data);
-    getStudentExperiences();
+    const newStudent = (await studentService.getByToken()) as any;
+    setExperiences(newStudent.studentExperiences);
+    dispatch(setStudent(newStudent));
   };
 
   useEffect(() => {
-    getStudentExperiences();
     getCities();
   }, []);
 
@@ -87,7 +86,7 @@ function Experiences() {
   });
 
   return (
-    <div className="anim-fadein">
+    <div>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -144,17 +143,17 @@ function Experiences() {
               </div>
               <small>Calışmaya Devam Ediyorum</small>
             </div>
-          <div className="big-profile-input col-12 mb-4">
-            <label>İş Açıklaması*</label>
-            <FormikInput name="description" as="textarea" rows={4} />
-          </div>
+            <div className="big-profile-input col-12 mb-4">
+              <label>İş Açıklaması*</label>
+              <FormikInput name="description" as="textarea" rows={4} />
+            </div>
           </div>
           <button className="save-button" type="submit">
             Kaydet
           </button>
           {experiences != null && (
-            <div className="col-12 mt-5">
-              {experiences.map((experience: any) => {
+            <div className="anim-fadein col-12 mt-5">
+              {[...experiences].reverse().map((experience: any) => {
                 return (
                   <ExperiencesCard
                     experience={experience}

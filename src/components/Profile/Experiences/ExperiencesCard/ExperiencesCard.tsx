@@ -2,15 +2,19 @@ import { useState } from "react";
 import experienceService from "../../../../services/StudentProfileSettingsServices/experienceService";
 import ExperienceModal from "../ExperienceDetailModal/ExperienceModal";
 import "./ExperiencesCard.css";
+import studentService from "../../../../services/studentService";
+import { setStudent } from "../../../../store/slices/studentSlice";
+import { useDispatch } from "react-redux";
 
 function ExperiencesCard({ experience, setExperiences }: any) {
+  const dispatch = useDispatch();
   const [modalShow, setModalShow] = useState(false);
 
   async function deleteStudentExperience(id: any): Promise<void> {
     await experienceService.delete(id);
-    setExperiences((arr: any) => {
-      return arr.filter((exp: any) => exp.id !== id);
-    });
+    const newStudent = await studentService.getByToken();
+    setExperiences(newStudent.studentExperiences.reverse())
+    dispatch(setStudent(newStudent));
   }
 
   return (

@@ -3,10 +3,12 @@ import "./AnnouncementsExpandDisplay.css";
 import Announcement from "../../Announcement/Announcement";
 import announcementService from "../../../services/announcementService";
 import NoContent from "../../NoContent/NoContent";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectAnnouncement } from "../../../store/slices/announcementSlice";
+import { fetchAnnouncements } from "../../../utils/fetchalldata";
 
 function AnnouncementExpandDisplay() {
+  const dispatch = useDispatch();
   const [pageSize, setPageSize] = useState(0);
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
@@ -27,6 +29,10 @@ function AnnouncementExpandDisplay() {
     );
     setAnnouncements(data.data.items);
     setPageSize(data.data.pages);
+  };
+
+  window.onload = async () => {
+    await fetchAnnouncements(dispatch);
   };
 
   return (

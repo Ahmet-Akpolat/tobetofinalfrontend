@@ -23,7 +23,7 @@ function App() {
       if (location.pathname !== "/login" && location.pathname !== "/signup") {
         authService.refreshToken();
       }
-    }, 3000);
+    }, 10000);
 
     return () => clearTimeout(timer);
   }, [location]);
