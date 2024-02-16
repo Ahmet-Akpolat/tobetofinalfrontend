@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
   exams: examSlice,
   loading: loadingSlice,
   survey: surveySlice,
-  contentViews: contentViewsSlice,
+  contentViews: contentViewsSlice
 });
 
 const persistConfig = {
