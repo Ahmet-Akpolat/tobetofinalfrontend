@@ -116,14 +116,14 @@ function Experiences() {
             <div className="profile-input col-12 col-md-6 mb-4">
               <label>İl*</label>
               <Field as="select" name={"cityId"}>
-                <option>Seciniz</option>
+                <option>Seçiniz</option>
                 {cities.map((city: any) => (
                   <option value={city.id}>{city.name}</option>
                 ))}
               </Field>
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
-              <label>İş Baslangıç Tarihi</label>
+              <label>İş Başlangıç Tarihi</label>
               <FormikInput name="startDate" type="date" />
             </div>
             {endDateControl && (
@@ -141,7 +141,7 @@ function Experiences() {
               >
                 <FormikInput type="checkbox" name="isContinued"></FormikInput>
               </div>
-              <small>Calışmaya Devam Ediyorum</small>
+              <small>Çalışmaya Devam Ediyorum</small>
             </div>
             <div className="big-profile-input col-12 mb-4">
               <label>İş Açıklaması*</label>

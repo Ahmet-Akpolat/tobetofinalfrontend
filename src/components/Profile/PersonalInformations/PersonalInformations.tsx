@@ -193,7 +193,7 @@ function PersonalInformations() {
             <div className="profile-input col-12 col-md-6 mb-4">
               <label>İlçe</label>
               <Field as="select" name={"districtId"}>
-                <option>Seciniz</option>
+                <option>Seçiniz</option>
                 {districts.map((district: any) => {
                   if (district.cityId == cityId)
                     return <option value={district.id}>{district.name}</option>;

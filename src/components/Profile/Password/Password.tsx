@@ -43,7 +43,7 @@ function Password() {
         <Form>
           <div className="row">
             <div className="profile-input col-12 col-md-4 mb-4">
-              <label>Eski Sifre*</label>
+              <label>Eski Şifre*</label>
               <FormikInput
                 name="lastPassword"
                 type="password"
@@ -51,7 +51,7 @@ function Password() {
               />
             </div>
             <div className="profile-input col-12 col-md-4 mb-4">
-              <label>Yeni Sifre*</label>
+              <label>Yeni Şifre*</label>
               <FormikInput
                 name="newPassword"
                 type="password"
@@ -59,7 +59,7 @@ function Password() {
               />
             </div>
             <div className="profile-input col-12 col-md-4 mb-4">
-              <label>Yeni Sifre Tekrar*</label>
+              <label>Yeni Şifre Tekrar*</label>
               <FormikInput
                 name="checkNewPassword"
                 type="password"
@@ -73,7 +73,7 @@ function Password() {
               className="save-button"
               style={{ width: "300px" }}
             >
-              Sifre Degistir
+              Şifre Değiştir
             </button>
           </div>
         </Form>

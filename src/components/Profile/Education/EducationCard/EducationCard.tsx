@@ -34,13 +34,13 @@ function EducationCard({ education, setEducations }: any) {
       </div>
       <div className="education-card-detail d-flex justify-content-between col-11 col-lg-7">
         <div className="education-card-detail-col">
-          <span className="education-card-detail-header">Universite</span>
+          <span className="education-card-detail-header">Üniversite</span>
           <span className="education-card-detail-content">
             {education.schoolName}
           </span>
         </div>
         <div className="education-card-detail-col">
-          <span className="education-card-detail-header">Bolum</span>
+          <span className="education-card-detail-header">Bölüm</span>
           <span className="education-card-detail-content">
             {education.branch}
           </span>

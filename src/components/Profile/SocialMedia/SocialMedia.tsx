@@ -57,7 +57,7 @@ function SocialMedia() {
           <div className="row">
             <div className="profile-input col-6">
               <Field as="select" name={"socialMediaId"}>
-                <option>Seciniz</option>
+                <option>Seçiniz</option>
                 {socialMediaOptions.map((sc: any) => (
                   <option value={sc.id}>{sc.name}</option>
                 ))}
