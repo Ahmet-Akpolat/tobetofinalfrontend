@@ -59,7 +59,7 @@ function Skills() {
               <div className="profile-input col-12 mb-4">
                 <label>Yetkinlik</label>
                 <Field as="select" name={"skillId"}>
-                  <option>Seciniz</option>
+                  <option>Seçiniz</option>
                   {filteredSkillOptions.map((skill: any) => (
                     <option value={skill.id}>{skill.name}</option>
                   ))}

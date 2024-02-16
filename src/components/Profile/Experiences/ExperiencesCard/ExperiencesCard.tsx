@@ -48,13 +48,13 @@ function ExperiencesCard({ experience, setExperiences }: any) {
           </span>
         </div>
         <div className="experiences-card-detail-col">
-          <span className="experiences-card-detail-header">Sektor</span>
+          <span className="experiences-card-detail-header">Sektör</span>
           <span className="experiences-card-detail-content">
             {experience.sector}
           </span>
         </div>
         <div className="experiences-card-detail-col">
-          <span className="experiences-card-detail-header">Sehir</span>
+          <span className="experiences-card-detail-header">Şehir</span>
           <span className="experiences-card-detail-content">
             {experience.cityName}
           </span>
