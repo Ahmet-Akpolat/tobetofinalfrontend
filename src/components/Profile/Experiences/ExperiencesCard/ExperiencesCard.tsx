@@ -13,7 +13,7 @@ function ExperiencesCard({ experience, setExperiences }: any) {
   async function deleteStudentExperience(id: any): Promise<void> {
     await experienceService.delete(id);
     const newStudent = await studentService.getByToken();
-    setExperiences(newStudent.studentExperiences.reverse())
+    setExperiences(newStudent.studentExperiences)
     dispatch(setStudent(newStudent));
   }
 

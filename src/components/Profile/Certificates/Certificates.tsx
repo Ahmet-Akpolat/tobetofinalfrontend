@@ -9,8 +9,10 @@ import "./Certificates.css";
 function Certificates() {
   const dispatch = useDispatch();
   const [certificates, setCertificates] = useState(
-    useSelector(selectStudent).certificates
+    useSelector(selectStudent).studentPrivateCertificates
   );
+
+  console.log(certificates);
 
   const updatedValues = {
     certificateUrl: null,
@@ -21,7 +23,7 @@ function Certificates() {
     updatedValues.certificateUrlTemp = file.target.files[0];
     await certificateService.add(updatedValues);
     const newStudent = await studentService.getByToken();
-    setCertificates(newStudent.certificates);
+    setCertificates(newStudent.studentPrivateCertificates);
     dispatch(setStudent(newStudent));
   };
 
