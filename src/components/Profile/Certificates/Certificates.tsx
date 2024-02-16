@@ -32,7 +32,7 @@ function Certificates() {
       <div className="certificates">
         <div className="row">
           <div className="col-12 mb-6">
-            <h5>Sertifikalarim</h5>
+            <h5>Sertifikalarım</h5>
             <div className="upload-area d-flex  flex-column align-items-center justify-content-center gap-3">
               <label id="file-upload" className="upload-img">
                 <img src="icons/cloud_upload_FILL0.svg"></img>
@@ -44,7 +44,7 @@ function Certificates() {
                   onChange={addCertificates}
                 />
               </label>
-              <span>Dosya Yukle</span>
+              <span>Dosya YÜkle</span>
             </div>
           </div>
         </div>

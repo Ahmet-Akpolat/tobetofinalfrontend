@@ -94,30 +94,30 @@ function Education() {
         <Form>
           <div className="row">
             <div className="profile-input col-12 col-md-6 mb-4">
-              <label>Egitim Durumu</label>
+              <label>Eğitim Durumu</label>
               <Field as="select" name={"educationStatus"}>
-                <option>Seviye Seciniz</option>
+                <option>Seviye Seçiniz</option>
                 <option>Lisans</option>
-                <option>On Lisans</option>
-                <option>Yuksek Lisans</option>
+                <option>Ön Lisans</option>
+                <option>Yüksek Lisans</option>
                 <option>Doktora</option>
               </Field>
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
-              <label>Universite*</label>
+              <label>Üniversite*</label>
               <FormikInput name="schoolName" />
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
-              <label>Bolum*</label>
+              <label>Bölüm*</label>
               <FormikInput name="branch" />
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
-              <label>Baslangic Yili*</label>
+              <label>Başlangic Yılı*</label>
               <FormikInput name="startDate" type="date" />
             </div>
             {endDateControl && (
               <div className="profile-input col-12 col-md-6 mb-4">
-                <label>Mezunuyet Yili*</label>
+                <label>Mezuniyet Yılı*</label>
                 <FormikInput name="graduationDate" type="date" />
               </div>
             )}
