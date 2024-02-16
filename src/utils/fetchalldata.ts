@@ -37,7 +37,6 @@ const fetchAllData = async (dispatch: Dispatch) => {
   dispatch(setStudent(student));
 };
 
-
 export const fetchAppeals = async (dispatch: Dispatch) => {
   const appeals = await appealService.getAll(0, 12);
   dispatch(setAppeal(appeals));

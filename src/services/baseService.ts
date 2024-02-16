@@ -26,7 +26,7 @@ export class BaseService<
     const response = await axiosInstance.get<any>(
       `${this.apiUrl}?PageIndex=${PageIndex}&PageSize=${PageSize}`
     );
-    return response.data.items;
+    return response.data?.items;
   }
 
   async getById(id: string) {

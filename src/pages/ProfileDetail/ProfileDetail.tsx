@@ -52,8 +52,8 @@ const ProfileDetail = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    getStudentLanguages();
     getStudentActivites();
+    getStudentLanguages();
   }, []);
 
   const data = [
