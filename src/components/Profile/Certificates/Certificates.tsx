@@ -12,8 +12,6 @@ function Certificates() {
     useSelector(selectStudent).studentPrivateCertificates
   );
 
-  console.log(certificates);
-
   const updatedValues = {
     certificateUrl: null,
     certificateUrlTemp: null,

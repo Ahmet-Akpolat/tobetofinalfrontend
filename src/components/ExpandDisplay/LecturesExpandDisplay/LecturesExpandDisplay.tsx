@@ -5,11 +5,11 @@ import lectureService from "../../../services/lectureService";
 import Lecture from "../../Lecture/Lecture";
 import NoContent from "../../NoContent/NoContent";
 import { selectLecture } from "../../../store/slices/lectureSlice";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { fetchLectures } from "../../../utils/fetchalldata";
 
 function LecturesExpandDisplay() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [pageSize, setPageSize] = useState(0);
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
@@ -64,7 +64,7 @@ function LecturesExpandDisplay() {
                 className="nav nav-tabs mainTablist d-flex justify-content-around"
                 role="tablist"
               >
-                <div className="d-flex justify-content-center">
+                <div className="d-flex flex-wrap justify-content-center">
                   <li className={`nav-item ${clicked === 0 && "is-selectedd"}`}>
                     <button
                       className="filters-link"

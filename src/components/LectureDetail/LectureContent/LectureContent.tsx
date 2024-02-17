@@ -41,7 +41,7 @@ function LectureContent({ setShowDetail }: Props) {
       ) : (
         <div className="row">
           <div className="col-lg-5 col-sm-12 col-xs-12">
-            <Scrollbar style={{ minHeight: "500px" }}>
+            <Scrollbar style={{ minHeight: "400px" }}>
               {lecture.courses.map((_: any, index: any) => (
                 <LectureContentHeader key={index} index={index} />
               ))}
