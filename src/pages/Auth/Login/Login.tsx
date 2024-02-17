@@ -38,8 +38,8 @@ const Login = () => {
       if (login?.token) {
         await fetchAllData(dispatch);
       }
-    } catch (error: any) {
-      toast.error(exceptionService.errorSelector(error.response.data))
+    } finally {
+      dispatch(clearLoading());
     }
   };
 
