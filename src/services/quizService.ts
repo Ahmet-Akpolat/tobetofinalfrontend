@@ -2,11 +2,13 @@ import { BaseService } from "./baseService";
 import axiosInstance from "../utils/axiosInterceptors";
 import { GetByIdQuizResponse, GetListQuizListItemDto } from "../models/responses/QuizResponses";
 import { AxiosResponse } from "axios";
+import { CreateStudentQuizOptionRequest } from "../models/requests/StudentQuizOptionRequest";
+import { CreateStudentQuizResultRequest } from "../models/requests/StudentQuizResultRequests";
 
 class QuizService  {
 
   async GetForAllStudent() {
-    const response =await axiosInstance.get<GetListQuizListItemDto>("Quizs/GetListForAllStudent");
+    const response =await axiosInstance.get("GeneralQuizs"+"?PageIndex="+0+"&PageSize="+5);
     return response.data;
   }  
   async getById(id: number) {
@@ -21,7 +23,12 @@ class QuizService  {
     );
     return response; 
   }
-
+  async addQuizOption(request: CreateStudentQuizOptionRequest) {
+    return axiosInstance.post("StudentQuizOptions", request);
+  }
+  async addQuizResultTable(request: CreateStudentQuizResultRequest) {
+    return axiosInstance.post("StudentQuizResults", request);
+  }
 
 
   
