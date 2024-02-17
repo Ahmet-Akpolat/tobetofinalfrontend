@@ -14,6 +14,7 @@ import MainLayout from "./pages/Main/MainLayout";
 import Profile from "./pages/Profile/Profile";
 import ProfileDetail from "./pages/ProfileDetail/ProfileDetail";
 import authService from "./services/authService/authService";
+import Reviews from "./pages/Reviews/Reviews";
 
 function App() {
   const location = useLocation();
@@ -64,6 +65,10 @@ function App() {
 
         <Route element={<MainLayout />}>
           <Route path="/profilim" element={<Profile />} />
+        </Route>
+   
+        <Route element={<MainLayout />}>
+          <Route path="/degerlendirmeler" element={<Reviews />} />
         </Route>
       </Routes>
       <OverlayLoader />

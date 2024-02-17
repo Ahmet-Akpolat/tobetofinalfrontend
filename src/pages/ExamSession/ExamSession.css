@@ -1,0 +1,23 @@
+.join-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 30vh;
+    position: relative;
+}.join-screen p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #828282;
+}.join-screen div span {
+    font-size: 18px;
+    font-weight: 600;
+    color: #181818;
+}.join-screen div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}.quiz-details-header {
+    font-size: 24px;
+    font-weight: 600;
+    color: #181818;
+}

@@ -14,7 +14,7 @@ class AuthService {
   public async login(data: AuthLoginRequest): Promise<TokenModel | null> {
     try {
       const response = await axios.post<LoginResponseModel>(
-        `https://tobeto.azurewebsites.net/api/Auth/StudentLogin`,
+        `http://localhost:60805/api/Auth/StudentLogin`,
         data
       );
       const loginResponse = response?.data;
