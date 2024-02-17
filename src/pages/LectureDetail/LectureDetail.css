@@ -58,9 +58,9 @@
   margin-top: 25px;
 }
 
-@media screen and (min-width: 150px) and (max-width: 600px) {
+@media screen and (min-width: 150px) and (max-width: 900px) {
   .lecture-detail {
-    width: calc(100% - 70px);
+    width: 95%;
   }
 }
 

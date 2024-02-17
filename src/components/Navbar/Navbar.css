@@ -1,17 +1,6 @@
-@media (max-width: 992px) {
-  .navbar-nav {
-    flex-wrap: wrap; /* Üst menü seçeneklerini yeni satırlara yerleştir */
-  }
-  .navbar-nav .nav-item {
-    width: 100%; /* Her bir menü seçeneğinin genişliğini %100 yap */
-    text-align: center; /* Metinleri merkezle */
-    margin-bottom: 10px; /* Seçenekler arasına boşluk ekle */
-  }
-}
-
 .navbar-custom {
-  padding: 20px;
   border: 1px solid rgb(245, 245, 245);
+  padding: 8px;
 }
 
 .tobetoImage {
@@ -201,10 +190,6 @@
   width: 100%;
 }
 
-.header-avatar {
-  margin-right: 20px;
-}
-
 .navbar-sec {
   border-radius: 50px;
   display: flex;
@@ -259,4 +244,10 @@
 ul.navbar-nav > li.nav-item.selected a {
   font-weight: bold;
   color: #93f;
+}
+
+@media (max-width: 768px) {
+  .studentName {
+    display: none;
+  }
 }

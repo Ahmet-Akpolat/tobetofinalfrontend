@@ -14,7 +14,7 @@ class AuthService {
   public async login(data: AuthLoginRequest): Promise<TokenModel | null> {
     try {
       const response = await axios.post<LoginResponseModel>(
-        `http://localhost:60805/api/Auth/StudentLogin`,
+        `${baseUrl}/Auth/StudentLogin`,
         data
       );
       const loginResponse = response?.data;
