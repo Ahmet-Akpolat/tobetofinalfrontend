@@ -19,9 +19,9 @@
 
 .dot-img {
   position: absolute;
-  right: 100px;
+  right: 6%;
+  top: 1%;
   width: 150px;
-  top: 0;
 }
 
 .tobeto-text-welcome {
@@ -69,5 +69,3 @@
 .info-card-list {
   animation: bounce 1.5s;
 }
-
-

@@ -7,15 +7,12 @@ function LectureVideo({ setShowDetail }: any) {
   const content = useSelector(selectContent);
 
   return (
-    <div className="lecture-video align-content-center">
+    <div className="lecture-video d-flex flex-column align-content-center">
       <div className="video-player">
-        <VideoPlayer/>
+        <VideoPlayer />
       </div>
-      <div className="lecture-video-detail d-flex align-items-center">
-        <div
-          className="col-lg-9 col-md-8 col-sm-9 col-xs-12"
-          style={{ flex: "1" }}
-        >
+      <div className="lecture-video-detail d-flex flex-wrap col-12 gap-2">
+        <div className="col-12 col-md-8">
           <div className="video-title">
             <strong>{content.name}</strong>
           </div>
@@ -23,7 +20,7 @@ function LectureVideo({ setShowDetail }: any) {
             <text style={{ color: "grey" }}>Video - {content.duration} dk</text>
           </div>
         </div>
-        <div>
+        <div className="col-12 col-md-4">
           <button className="detail-button" onClick={() => setShowDetail(true)}>
             <strong>DETAY</strong>
           </button>

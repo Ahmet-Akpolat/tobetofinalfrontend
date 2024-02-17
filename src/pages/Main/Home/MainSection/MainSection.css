@@ -3,6 +3,12 @@
   margin: auto;
 }
 
+@media (max-width: 768px) {
+  .main-section {
+    width: 99%;
+  }
+}
+
 .my-2 {
   margin-top: 0.5rem !important;
   margin-bottom: 0.5rem !important;
@@ -121,11 +127,6 @@
 
 .nav-tabs {
   border: none !important;
-}
-
-li {
-  display: list-item;
-  text-align: -webkit-match-parent;
 }
 
 .mainTablist .nav-item .nav-link {

@@ -64,11 +64,11 @@ function LectureDetail() {
       <div className={`lecture-detail  ${showDetail && "blur"}`}>
         <div className="back-button" onClick={handleBackButton}></div>
         <div className="lecture-activity">
-          <div className="d-flex">
-            <div className="col-lg-2 col-sm-2 col-12">
+          <div className="row">
+            <div className="col-lg-2 col-sm-2 col-12 d-flex justify-content-center mb-2">
               <img className="lecture-img" src={lecture.imageUrl}></img>
             </div>
-            <div className="col-lg-10 col-md-11 col-sm-10 col-xs-12">
+            <div className="col-lg-10  col-sm-10 col-xs-12 col-12">
               <div className="d-flex justify-content-between">
                 <div>
                   <div className="lecture-info">

@@ -15,7 +15,7 @@ function SocialMedia() {
     useSelector(selectStudent).socialMedias
   );
   const [socialMediaOptions, setSocialMediaOptions] = useState([]);
-
+  
   const initialValues = {
     socialMediaId: null,
     mediaAccountUrl: null,
