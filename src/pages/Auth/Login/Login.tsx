@@ -12,6 +12,8 @@ import {
 } from "../../../store/slices/loadingSlice";
 import fetchAllData from "../../../utils/fetchalldata";
 import "./Login.css";
+import { toast } from "react-toastify";
+import exceptionService from "../../../utils/exceptionService";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -25,7 +27,7 @@ const Login = () => {
     email: Yup.string().required("Doldurulması zorunlu alan*"),
     password: Yup.string()
       .required("Doldurulması zorunlu alan*")
-      .min(1, "Sifreniz 6 karakterden fazla olmalidir"),
+      .min(6, "Sifreniz 6 karakterden fazla olmalidir"),
   });
 
   const handleLogin = async (values: AuthLoginRequest) => {
@@ -36,11 +38,11 @@ const Login = () => {
       if (login?.token) {
         await fetchAllData(dispatch);
       }
-    } finally {
-      dispatch(clearLoading());
+    } catch (error: any) {
+      toast.error(exceptionService.errorSelector(error.response.data))
     }
   };
-  
+
   return (
     <div className="login-base">
       <div className="login col-12 col-md-6 mt-5">

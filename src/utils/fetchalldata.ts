@@ -13,6 +13,7 @@ import { setStudent } from "../store/slices/studentSlice";
 import { setSurvey } from "../store/slices/surveySlice";
 
 const fetchAllData = async (dispatch: Dispatch) => {
+
   // Appeal
   const appeal = await appealService.getAll(0, 12);
   dispatch(setAppeal(appeal));
