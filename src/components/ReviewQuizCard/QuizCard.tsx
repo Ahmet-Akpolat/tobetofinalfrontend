@@ -3,29 +3,30 @@ import './QuizCard.css'
 import { GetByIdQuizResponse } from '../../models/responses/QuizResponses'
 import ExamSession from '../../pages/ExamSession/ExamSession'
 type Props = {
-    quizs:GetByIdQuizResponse[]|undefined
+    quizs:any
 }
 
 
 const QuizCard = (props: Props) => {
   const [modalShow, setModalShow] = useState(false);
   const[selectedQuiz,setSelectedQuiz]=useState<GetByIdQuizResponse>();
-
-  const openExamModal = (quiz:GetByIdQuizResponse)=>{
+  console.log(props.quizs);
+  
+  const openExamModal = (quiz:any)=>{
     setSelectedQuiz(quiz);
     setModalShow(true)
   }
 
 return (
     <>
-    {props.quizs?.map((quiz:GetByIdQuizResponse)=>(
+    {props.quizs?.map((quiz:any)=>(
       <div className="dashboard-card-slim">
         <div className="d-flex align-items-center" style={{gap:"14px"}}>
           <div className="platformIcon"></div>
-          <span>{quiz.name}</span>
+          <span>{quiz.quiz.name}</span>
           
       </div>
-      <button className="btn btn-light" onClick={()=>openExamModal(quiz)}>Başla</button>
+      <button className="btn btn-light" onClick={()=>openExamModal(quiz.quiz)}>Başla</button>
      </div>
       )
   )}

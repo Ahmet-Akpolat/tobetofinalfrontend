@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => {
+  (config: any) => {
     const state = store.getState();
     const token = selectToken(state);
     const localToken = localStorage.getItem("Token");
@@ -19,19 +19,19 @@ axiosInstance.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
+  (error: any) => {
     return Promise.reject(error);
   }
 );
 
 axiosInstance.interceptors.response.use(
-  (response) => {
+  (response: any) => {
     return response;
   },
-  (error) => {
-    console.log(error)
+  (error: any) => {
+    console.log(error);
     toast.error(exceptionService.errorSelector(error.response.data));
-    return error;
+    return Promise.reject(error);
   }
 );
 

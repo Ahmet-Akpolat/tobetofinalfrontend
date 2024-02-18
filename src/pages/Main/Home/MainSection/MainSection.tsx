@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Announcement from "../../../../components/Announcement/Announcement";
 import Appeal from "../../../../components/Appeal/Appeal";
-import ExamSection from "../../../../components/ExamSection/ExamSection";
 import Lecture from "../../../../components/Lecture/Lecture";
 import NoContent from "../../../../components/NoContent/NoContent";
 import Survey from "../../../../components/Survey/Survey";
@@ -57,8 +56,11 @@ const MainSection = () => {
               </span>
             </div>
           </div>
-          <div className="col-12 mb-4">
-            <ul className="nav nav-tabs mainTablist" role="tablist">
+          <div className="col-12">
+            <ul
+              className="nav nav-tabs mainTablist d-flex flex-wrap justify-content-center"
+              role="tablist"
+            >
               <li className="nav-item">
                 <button
                   id="appeals-nav-link"

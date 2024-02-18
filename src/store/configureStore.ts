@@ -13,6 +13,7 @@ import loadingSlice from "./slices/loadingSlice";
 import surveySlice from "./slices/surveySlice";
 import contentViewsSlice from "./slices/contenViewsSlice";
 
+
 const rootReducer = combineReducers({
   lecture: lectureSlice,
   appeal: appealSlice,

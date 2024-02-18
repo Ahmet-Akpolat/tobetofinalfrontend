@@ -12,6 +12,7 @@ const Reviews = (props: Props) => {
 
   const getQuizs=async  () => {
     const response = await quizService.GetForAllStudent();
+    
     setQuizs(response.items)
   }
   
