@@ -2,13 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   exams: {
-    examExamUrl: null,
-    examId: null,
-    examIsActive: null,
-    examName: null,
+    quizId: null,
     id: null,
-    studentClassId: null,
-    studentClassName: null,
+    quiz: null,
   },
 };
 

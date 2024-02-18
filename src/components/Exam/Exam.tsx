@@ -15,7 +15,7 @@ const Exam = ({ exam, joinedExams }: any) => {
         onClick={() => setModalShow(true)}
       >
         <div className="exam-content">
-          <span className="exam-name">{exam.examName}</span>
+          <span className="exam-name">{exam.name}</span>
           <span className="lesson-name">{exam.studentClassName}</span>
         </div>
       </div>

@@ -4,18 +4,15 @@ import examService from "../../services/examService";
 import { selectExams } from "../../store/slices/examSlice";
 import Exam from "../Exam/Exam";
 import NoContent from "../NoContent/NoContent";
+import quizService from "../../services/quizService";
+import QuizCard from "../ReviewQuizCard/QuizCard";
 
 function ExamSection() {
   const exams = useSelector(selectExams);
-  const [joinedExams, setJoinedExams] = useState([] as any);
-
-  const getJoinedExams = async () => {
-    const data = (await examService.getJoinedExams()).data?.items;
-    setJoinedExams(data);
-  };
 
   useEffect(() => {
-    getJoinedExams();
+   console.log(exams);
+   
   }, []);
 
   return (
@@ -27,11 +24,10 @@ function ExamSection() {
             <div className="row p-2">
               {exams.length === 0 ? (
                 <NoContent content="sınavınız" />
-              ) : (
-                exams.map((exam: any) => (
-                  <Exam exam={exam} joinedExams={joinedExams} />
-                ))
-              )}
+              ) : <>
+                  <QuizCard quizs={exams}/>
+                  </>
+              }
             </div>
           </div>
         </div>

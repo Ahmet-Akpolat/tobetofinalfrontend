@@ -11,6 +11,10 @@ class QuizService  {
     const response =await axiosInstance.get("GeneralQuizs"+"?PageIndex="+0+"&PageSize="+5);
     return response.data;
   }  
+  async GetForClassStudent() {
+    const response =await axiosInstance.get("ClassQuizs"+"?PageIndex="+0+"&PageSize="+100);
+    return response.data;
+  }  
   async getById(id: number) {
     const response = await axiosInstance.get<GetByIdQuizResponse>(
       `Quizs/${id}`

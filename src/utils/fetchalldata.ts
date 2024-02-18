@@ -11,6 +11,7 @@ import { setExams } from "../store/slices/examSlice";
 import { setLecture } from "../store/slices/lectureSlice";
 import { setStudent } from "../store/slices/studentSlice";
 import { setSurvey } from "../store/slices/surveySlice";
+import quizService from "../services/quizService";
 
 const fetchAllData = async (dispatch: Dispatch) => {
 
@@ -30,9 +31,8 @@ const fetchAllData = async (dispatch: Dispatch) => {
   const survey = await surveyService.getAll(0, 12);
   dispatch(setSurvey(survey));
 
-  const exams = await examService.getAll();
-  dispatch(setExams(exams));
-
+  const exams = await quizService.GetForClassStudent();
+  dispatch(setExams(exams.items))
   // Student
   const student = await studentService.getByToken();
   dispatch(setStudent(student));
@@ -59,7 +59,9 @@ export const fetchSurveys = async (dispatch: Dispatch) => {
 }
 
 export const fetchExams = async (dispatch: Dispatch) => {
-  const exams = await examService.getAll(0, 12);
+  const exams = await quizService.GetForClassStudent();
+  console.log(exams);
+  
   dispatch(setExams(exams));
 }
 
