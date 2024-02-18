@@ -1,30 +1,26 @@
 .register-base {
-  min-height: 98.2vh;
+  min-height: 80.2vh;
 }
 
 .register {
-  margin-top: 150px;
   font-weight: bold;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 100px 200px;
+  position: relative;
   display: grid;
   place-items: center;
   border: 5px solid transparent;
   background: #fff;
   animation: fadein 0.5s ease-in-out;
+  position: sticky;
 }
 
 .register::before {
-  z-index: -1;
   content: "";
   position: absolute;
-  width: 100%;
-  height: 100%;
+  z-index: -1;
+  border-radius: 1em;
+  animation: rainbow-border 4s linear infinite;
   background: conic-gradient(
     from var(--angle),
     #0ebeff,
@@ -37,16 +33,17 @@
     #47cf73,
     #0ebeff
   );
-  border-image-slice: 1;
-  border-radius: 1em;
-  animation: 4s rotate linear infinite;
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  top: 0;
+  left: 0;
 }
 
 .register::after {
   bottom: 2px;
   top: 2px;
-  left: 2px;
-  right: 2px;
+  left: 1px;
+  right: 1px;
   height: auto;
   width: auto;
   margin: 3px;
@@ -70,17 +67,17 @@
 }
 
 .register-input {
-  width: 380px;
+  padding: 10px;
+  width: 100%;
   height: 45px;
   border-radius: 5px;
   margin-top: 25px;
   border: 1px solid grey;
   border-color: #e3e3e3;
-  transition: box-shadow 0.2s; /* Gölge animasyonu için geçiş efekti ekleyin */
 }
 
 .register-btn {
-  width: 100%;
+  width: 75%;
   height: 40px;
   margin-top: 20px;
   cursor: pointer;
@@ -107,4 +104,14 @@
   to {
     opacity: 1;
   }
+}
+
+@media (max-width: 600px) {
+  .register {
+    padding: 100px;
+  }
+}
+
+.form {
+  width: 140%;
 }

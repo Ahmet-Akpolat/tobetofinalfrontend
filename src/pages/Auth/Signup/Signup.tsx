@@ -55,8 +55,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="register-base">
-      <div className="register col-12 col-md-5">
+    <div className="container register-base d-flex justify-content-center">
+      <div className="register col-12 col-md-7">
         <Formik
           initialValues={initialValues}
           onSubmit={(initialValues) => {
@@ -65,7 +65,7 @@ const Signup = () => {
           }}
           validationSchema={validationSchema}
         >
-          <Form>
+          <Form className="form">
             <div className="d-flex align-items-center justify-content-center">
               <img
                 className="register-img"
