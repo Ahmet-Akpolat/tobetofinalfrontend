@@ -44,8 +44,8 @@ const Login = () => {
   };
 
   return (
-    <div className="login-base">
-      <div className="login col-12 col-md-6 mt-5">
+    <div className="container login-base d-flex justify-content-center">
+      <div className="login col-12 col-md-7">
         <Formik
           initialValues={initialValues}
           onSubmit={(values: AuthLoginRequest) => {
@@ -53,14 +53,14 @@ const Login = () => {
           }}
           validationSchema={validationSchema}
         >
-          <Form>
+          <Form className="form">
             <div className="d-flex align-items-center justify-content-center">
               <img
                 className="login-img"
                 src="https://tobeto.com/_next/static/media/tobeto-logo.29b55e1c.svg"
               />
             </div>
-            <div className="login-events ">
+            <div className="login-events d-flex flex-column align-items-center justify-content-center">
               <FormikInput
                 name="email"
                 className="login-input"

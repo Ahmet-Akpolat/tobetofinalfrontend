@@ -19,7 +19,7 @@ const AuthLayout = () => {
             <section>
               <AuthNav />
               <Outlet />
-              <Footer backgroundColor="black"/>
+              <Footer backgroundColor="black" />
             </section>
           </>
         )}

@@ -1,89 +1,248 @@
-.authnav-istkodluyor {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #1e0f41;
-  height: 9.5vh;
+.navbar-custom {
+  border-bottom: 1px solid rgb(245, 245, 245);
+  padding: 8px;
 }
 
-.istkodluyor-banner {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 13vw 0 16vw;
+.auth-navbar a {
+  color: white !important;
 }
 
-.ik-authnav-text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-weight: 700;
-  font-size: 20pt;
+.tobetoImagee {
+  box-sizing: border-box;
+  display: inline-block;
+  overflow: hidden;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  padding: 0px;
+  position: relative;
+  max-width: 100%;
+  margin-right: 50px;
 }
 
-.authnav-istkodluyor-img {
-  height: 42px;
-}
-
-.appeal-button {
-  display: flex;
-  cursor: pointer;
-  color: #1e0f41;
-  background-color: #08b47c;
-  padding: 6px 45px;
-  border-radius: 20px;
+.logo-auth {
+  position: absolute;
+  inset: 0px;
+  box-sizing: border-box;
+  padding: 0px;
   border: none;
-  font-weight: 700;
+  margin: auto;
+  display: block;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+.tobetoImage span {
+  box-sizing: border-box;
+  display: block;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  max-width: 100%;
 }
 
-.quot1 {
-  color: #08b47c;
-  margin-left: 0.3em;
+.nav-link {
+  display: block;
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+  text-decoration: none;
+  background: none;
+  border: 0;
+  outline: none;
+  outline-width: 0;
 }
 
-.quot2 {
-  color: #08b47c;
-  margin-right: 0.3em;
+.d-flex {
+  display: flex !important;
 }
-
-.authnav-tobeto {
-  display: flex;
+.align-items-center {
+  align-items: center !important;
+}
+.mx-3 {
+  margin-right: 0.75rem !important;
+  margin-left: 0.75rem !important;
+  gap: 1em;
+}
+.btn-group {
+  border-radius: 25px;
+}
+.header-avatar {
+  background: #fff;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-radius: 35px;
+  padding: 7px 10px;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: #181717;
-  height: 10.7vh;
 }
 
-.authnav-tobeto-banner {
-  justify-content: space-between;
+.btn-group,
+.btn-group-vertical {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
+.text-end {
+  text-align: right !important;
+}
+.p-0 {
+  padding: 0 !important;
+}
+.me-2 {
+  margin-right: 0.5rem !important;
+}
+.me-2 span {
+  box-sizing: border-box;
+  display: inline-block;
+  overflow: hidden;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  max-width: 100%;
+}
+.me-2 span span {
+  box-sizing: border-box;
+  display: block;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  max-width: 100%;
+}
+
+.me-2 span span img {
+  display: block;
+  max-width: 100%;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.cv-pp-img {
+  inset: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+  border: none;
+  display: block;
+  margin: auto;
+  width: 10%;
+  height: 10% !important;
+}
+.header-avatar .name {
+  font-size: 14px;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.me-3 {
+  margin-right: 0.75rem !important;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.profil-dropdown {
+  font-size: 14px !important;
+  color: black !important;
+}
+.dropdown-item {
+  display: block;
   width: 100%;
-  display: flex;
-  align-items: center;
-  margin: 0 2vw 0 2vw;
+  padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+  clear: both;
+  font-weight: 400;
+  color: var(--bs-dropdown-link-color);
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  border-radius: var(--bs-dropdown-item-border-radius, 0);
+}
+.dropdown-menu.show.profile {
+  background-color: #93f !important;
+  border-width: 1px;
+  border-color: #fff;
+  width: 100%;
 }
 
-.authnav-tobeto-logo {
-  width: 165px;
+.navbar-sec {
+  border-radius: 50px;
+  display: flex;
+}
+
+.navbar-tobeto-icon {
+  width: 25px;
   cursor: pointer;
 }
 
-.authnav-section {
-  display: flex;
-  list-style: none; 
-  padding: 0; 
-  margin: 0; 
-  gap: 65px;
+.navbar-profile-photo {
+  border-radius: 30px;
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  background-color: black;
 }
 
-.authnav-buttons {
-  display: flex;
-  gap: 30px;
+.dropdown-item {
+  color: white !important;
+  font-weight: 400 !important;
+}
+
+.dropdown-item:hover {
+  color: black !important;
+}
+
+.studentName {
+  color: gray !important;
+  font-weight: 500 !important;
+}
+
+.student-menu {
+  background-color: #93f !important;
+}
+
+.nav-item {
+  font-weight: 500;
+}
+
+.nav-item a:hover,
+.nav-link:hover {
+  color: #93f !important;
+  cursor: pointer;
+}
+
+ul.navbar-nav > li.nav-item.selected a {
+  font-weight: bold;
+  color: #93f !important;
+}
+
+@media (max-width: 1399px) {
+  .media-width {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 1399px) {
+  .tobetoImagee {
+    margin-left: 50px;
+  }
 }
 
 .authnav-login {
-  display: flex;
   cursor: pointer;
   color: white;
   background-color: #181717;
@@ -97,39 +256,59 @@
 }
 
 .authnav-signup {
-  display: flex;
   cursor: pointer;
   color: white;
   background-color: #181717;
-  padding: 4px 12px 0px 12px;
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-radius: 20px;
-  border: 3px solid;
-  border-color: white;
   font-weight: 800;
   text-align: center;
   font-size: 11pt;
 }
 
-.auth-nav-link {
-  text-decoration: none;
-  font-weight: 600;
-  color: white;
-  font-size: 13pt;
-  transition: color 0.2s ease;
+.btn-rainbow {
+  position: sticky;
+  background: #181717;
+  color: #fff;
 }
 
-.auth-nav-link:hover {
-  color: #93f;
-  cursor: pointer;
+.btn-rainbow:after {
+  content: "";
+  position: absolute;
+  border-radius: 50px;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  bottom: 0;
+  right: 0;
+  height: auto;
+  width: auto;
+  margin: 3px;
+  background: inherit;
 }
 
-.auth-nav-item.selected .auth-nav-link {
-  color: #93f;
-  font-weight: 700;
-}
-
-.button {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.btn-rainbow:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 1em;
+  animation: rainbow-border 4s linear infinite;
+  background: conic-gradient(
+    from var(--angle),
+    #0ebeff,
+    #ffdd40,
+    #ae63e4,
+    #47cf73,
+    #0ebeff,
+    #ffdd40,
+    #ae63e4,
+    #47cf73,
+    #0ebeff
+  );
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  top: 0;
+  left: 0;
 }
