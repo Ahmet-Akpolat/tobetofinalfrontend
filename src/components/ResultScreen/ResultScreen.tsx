@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import './ResultScreen.css'
+import quizService from '../../services/quizService'
 type Props = {
     show:boolean
     quizId:number|undefined
@@ -8,13 +9,30 @@ type Props = {
 }
 
 const ResultScreen = (props: Props) => {
+  const [results,setResults]=useState<any>();
+
+  const getResult = async()=>{
+    if (props.quizId!=undefined) {
+      await quizService.getByQuizId(props.quizId).then((response)=>{
+        console.log(response);
+        
+        setResults(response)
+      })
+    }
+    console.log(props.quizId);
+    
+  }
+
+  useEffect(()=>{
+    getResult();
+  },[])
   return (
     <>
     <Modal
       show={props.show}
+      onHide={props.onHide}
       size='xl'
       aria-labelledby="contained-modal-title-vcenter"
-      className='modal-dialog modal-xl modal-dialog-centered modal-fullscreen-sm-down'
       centered
     >
       
@@ -25,12 +43,11 @@ const ResultScreen = (props: Props) => {
                 <div className="result-screen">
                     <span className="result-title">Test Sonucu</span>
                     <div className="result-items">
-                        <span className="d-flex flex-column">19 <a> Doğru</a> </span>
-                        <span className="d-flex flex-column">6<a>Yanlış</a></span>
-                        <span className="d-flex flex-column">0<a>Boş</a></span>
-                        <span className="d-flex flex-column">76 <a>Puan</a></span>
+                        <span className="d-flex flex-column">{results?.correctAnswerCount}<a> Doğru</a> </span>
+                        <span className="d-flex flex-column">{results?.wrongAnswerCount}<a>Yanlış</a></span>
+                        <span className="d-flex flex-column">{results?.emptyAnswerCount}<a>Boş</a></span>
+                        <span className="d-flex flex-column">{results?.point} <a>Puan</a></span>
                     </div>
-                    <button className="btn btn-primary mt-8 ms-auto me-auto" style={{width:'max-content'}}>Kapat</button>
                 </div>        
             </div>   
 

@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './QuizCard.css'
 import { GetByIdQuizResponse } from '../../models/responses/QuizResponses'
 import ExamSession from '../../pages/ExamSession/ExamSession'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectStudent } from '../../store/slices/studentSlice'
+import ResultScreen from '../ResultScreen/ResultScreen'
 type Props = {
     quizs:any
 }
@@ -10,15 +13,31 @@ type Props = {
 const QuizCard = (props: Props) => {
   const [modalShow, setModalShow] = useState(false);
   const[selectedQuiz,setSelectedQuiz]=useState<GetByIdQuizResponse>();
-  console.log(props.quizs);
+  const dispatch = useDispatch();
+  const [resultShow,setResultShow]=useState<boolean>(false);
+  const [quizs, setQuizs] = useState(
+    useSelector(selectStudent).studentQuizResults
+  );
+ 
   
   const openExamModal = (quiz:any)=>{
     setSelectedQuiz(quiz);
     setModalShow(true)
+ 
   }
+  const openResultModal = (quiz:any)=>{
+    setSelectedQuiz(quiz);
+    setResultShow(true)
+ 
+  }
+  useEffect(()=>{
+    console.log(quizs);
+    
+  },[])
 
 return (
     <>
+    
     {props.quizs?.map((quiz:any)=>(
       <div className="dashboard-card-slim">
         <div className="d-flex align-items-center" style={{gap:"14px"}}>
@@ -26,12 +45,16 @@ return (
           <span>{quiz.quiz.name}</span>
           
       </div>
-      <button className="btn btn-light" onClick={()=>openExamModal(quiz.quiz)}>Başla</button>
+      {quizs.some((joined:any)=>quiz.id===joined.quizId) ?
+      (<button className="btn btn-light" onClick={()=>openResultModal(quiz.quiz)}>Raporu Görüntüle</button>):(
+      <button className="btn btn-light" onClick={()=>openExamModal(quiz.quiz)}>Başla</button>  
+      )}
+      
      </div>
       )
   )}
     { modalShow &&(<ExamSession show={modalShow}  onHide={() => setModalShow(false)} quizId={selectedQuiz?.id}/>)} 
-   
+    {resultShow&&(<ResultScreen show={resultShow} quizId={selectedQuiz?.id} onHide={() => setResultShow(false)}></ResultScreen>)}
     </>
 )
 }

@@ -29,7 +29,12 @@ class QuizService  {
   async addQuizResultTable(request: CreateStudentQuizResultRequest) {
     return axiosInstance.post("StudentQuizResults", request);
   }
-
+  async getByQuizId(quizId: number) {
+    const response = await axiosInstance.get(
+      `StudentQuizResults/${quizId}`
+    );
+    return response.data; // Directly returning the data part of the response
+  }
 
   
 }

@@ -4,8 +4,8 @@ import { Modal } from 'react-bootstrap'
 import quizService from '../../services/quizService'
 import { CreateStudentQuizOptionRequest } from '../../models/requests/StudentQuizOptionRequest'
 import ReactLoading from 'react-loading'
-import { useStopwatch, useTimer } from 'react-timer-hook'
 import { toast } from 'react-toastify'
+import Checkmark from './CheckMark/Checkmark'
 import ResultScreen from '../ResultScreen/ResultScreen'
 
 type Props = {
@@ -20,6 +20,7 @@ const ExamModal = (props: Props) => {
     const [quizQuestionCount,setQuizQuestionCount]=useState(0);
     const [choosenOption,setChoosenOption]=useState();
     const [loadingControl,setLoadingControl]=useState(false);
+    const[examModalControl,setExamModalControl]=useState<boolean>();
     const [minute,setMinute]=useState<number>(0);
     const [showMinute,setShowMinute]=useState(0);
     const [showSecond,setShowSecond]=useState(0);
@@ -72,7 +73,11 @@ const ExamModal = (props: Props) => {
            await quizService.addQuizOption(quizOption).then(()=>{
             setLoadingControl(false)
             setChoosenOption(undefined)
-            setModalShow(true)
+            setModalShow(true);
+            setMinute(0)
+            setTimeout(() => {
+              window.location.reload();
+          }, 2000);
           });
         }
         }
@@ -80,6 +85,7 @@ const ExamModal = (props: Props) => {
   
     useEffect(()=>{
         getQuizQuestions();
+        setExamModalControl(props.show);
         if (props.expiryTimeStamp!=undefined) {
           setMinute(props.expiryTimeStamp*60)
         }
@@ -95,7 +101,8 @@ const ExamModal = (props: Props) => {
                 setMinuteControl(false)
               }else if(newMinute==0){
                 toast.error("Süreniz Bittiği İçin Sınav Kapanacak")
-                // window.location.reload();
+                clearInterval(interval);
+                window.location.reload();
               }
               console.log(newMinute);
               
@@ -108,12 +115,12 @@ const ExamModal = (props: Props) => {
     },[])
   return (
     <>
-  
+
     <Modal
-      show={props.show}
-      onHide={props.onHide}
+      show={examModalControl}
       size='xl'
-      aria-labelledby="contained-modal-title-vcenter"
+      aria-labelledby="static"
+      data-backdrop="static"
       centered
     >
       
@@ -121,11 +128,9 @@ const ExamModal = (props: Props) => {
         <div className="modal-content">
           <Modal.Header>{quizQuestions?.name}</Modal.Header>
           <Modal.Body>
-                    
-            
             <div className="quiz-screen">
               {loadingControl&&(<><ReactLoading type='spin' color='purple' width={"40%"} height={"10%"}></ReactLoading></>)  }
-              {!loadingControl&&(
+              {!loadingControl&&!show&&(
                 <><div className="question">
                 <div className="d-flex justify-content-between">
                     <div className="question-count">
@@ -164,15 +169,20 @@ const ExamModal = (props: Props) => {
            </div></>
                 
               )}
-               
+               {show&&(<div className="column">
+                    <div className="row">
+                      <Checkmark  size={"40%"} color={'green'}  />
+                      <span className='d-flex align-items-center justify-content-center text-success'>Testiniz Gönderildi 2 Saniye İçerisinde Sayfa Yenilendiğinde Görebileceksiniz.</span>
+                  </div>
+                </div>)}
+                
             </div>
           </Modal.Body>
         </div>
       </div>
     </Modal>
-    <ResultScreen show={show} quizId={props.quizId} onHide={() => setModalShow(false)}/>
-
-
+    
+  
     </>
   )
 }
