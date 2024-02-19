@@ -111,3 +111,7 @@
 .small-text {
   font-weight: lighter;
 }
+
+.w-90 {
+  width: 90%;
+}

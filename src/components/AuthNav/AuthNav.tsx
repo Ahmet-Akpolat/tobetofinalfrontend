@@ -8,15 +8,7 @@ import "./AuthNav.css";
 
 const AuthNav = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const student = useSelector(selectStudent);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const [selectedItemId, setSelectedItemId] = useState("home");
-
-  const handleLogout = () => {
-    Logout(dispatch);
-  };
 
   return (
     <nav className="auth-navbar navbar navbar-expand-xxl navbar-custom py-4 mb-4 navbar-dark bg-dark">

@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { GUID } from "../../../models/abstracts/GuidModel";
 import lectureService from "../../../services/lectureService";
 import { selectContent } from "../../../store/slices/contentSlice";
 import "./LectureDetailSidebar.css";
 
-interface Props {
-  setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
-  lectureId: GUID;
-}
-
-function LectureDetailSidebar({ setShowDetail, lectureId }: Props) {
+function LectureDetailSidebar({ setShowDetail, lectureId }: any) {
   const [liked, setLiked] = useState(false);
   const [contentLikeCount, setContentCountLike] = useState<number>(0);
   const content = useSelector(selectContent);

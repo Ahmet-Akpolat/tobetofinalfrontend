@@ -18,6 +18,7 @@ const initialState = {
     skills: null,
     studentEducations: null,
     studentExperiences: null,
+    studentQuizResults:null,
     studentClasses: null,
     firstName: null,
     lastName: null,

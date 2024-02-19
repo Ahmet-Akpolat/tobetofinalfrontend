@@ -11,8 +11,8 @@ function LectureVideo({ setShowDetail }: any) {
       <div className="video-player">
         <VideoPlayer />
       </div>
-      <div className="lecture-video-detail d-flex flex-wrap col-12 gap-2">
-        <div className="col-12 col-md-8">
+      <div className="lecture-video-detail d-flex justify-content-between col-12 gap-2">
+        <div className="col-12 col-md-7">
           <div className="video-title">
             <strong>{content.name}</strong>
           </div>
@@ -20,7 +20,7 @@ function LectureVideo({ setShowDetail }: any) {
             <text style={{ color: "grey" }}>Video - {content.duration} dk</text>
           </div>
         </div>
-        <div className="col-12 col-md-4">
+        <div className="col-4 col-md-4">
           <button className="detail-button" onClick={() => setShowDetail(true)}>
             <strong>DETAY</strong>
           </button>

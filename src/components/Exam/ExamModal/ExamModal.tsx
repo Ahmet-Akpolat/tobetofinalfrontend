@@ -6,7 +6,6 @@ import ExceptionService from "../../../utils/exceptionService";
 import examService from "../../../services/examService";
 
 function ExamModal({ exam, isJoined, show, onHide }: any) {
-  
   const joinTheExam = async () => {
     await examService.joinTheExam(exam.examId);
     window.open(exam.examExamUrl, "_blank", "noreferrer");
@@ -27,13 +26,14 @@ function ExamModal({ exam, isJoined, show, onHide }: any) {
               <div className="d-flex flex-column modal-header-text">
                 <span className="text-dark">
                   <b>
-                    {exam.examName} | {exam.studentClassName}
+                    {exam.name} | {exam.studentClassName}
                   </b>
                 </span>
               </div>
             </div>
           </Modal.Header>
           <Modal.Body>
+            {exam.description}
             {exam.examIsActive === true && isJoined === false ? (
               <button className="save-button" onClick={joinTheExam}>
                 Sınava başla

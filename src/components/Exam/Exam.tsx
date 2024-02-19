@@ -4,8 +4,9 @@ import ExamModal from "./ExamModal/ExamModal";
 
 const Exam = ({ exam, joinedExams }: any) => {
   const [modalShow, setModalShow] = useState(false);
+
   const isJoined = joinedExams?.some(
-    (joinedExam: any) => joinedExam.examId === exam.examId
+    (joinedExam: any) => joinedExam.quizId === exam.id
   );
 
   return (
@@ -15,8 +16,9 @@ const Exam = ({ exam, joinedExams }: any) => {
         onClick={() => setModalShow(true)}
       >
         <div className="exam-content">
-          <span className="exam-name">{exam.examName}</span>
+          <span className="exam-name">{exam.name}</span>
           <span className="lesson-name">{exam.studentClassName}</span>
+          <span className="exam-time">{exam.duration + " Dakika"}</span>
         </div>
       </div>
       <ExamModal

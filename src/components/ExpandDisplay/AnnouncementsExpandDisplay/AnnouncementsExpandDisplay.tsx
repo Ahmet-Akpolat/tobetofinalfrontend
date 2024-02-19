@@ -6,6 +6,7 @@ import NoContent from "../../NoContent/NoContent";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAnnouncement } from "../../../store/slices/announcementSlice";
 import { fetchAnnouncements } from "../../../utils/fetchalldata";
+import { PulseLoader } from "react-spinners";
 
 function AnnouncementExpandDisplay() {
   const dispatch = useDispatch();
@@ -15,18 +16,23 @@ function AnnouncementExpandDisplay() {
   const [announcements, setAnnouncements] = useState(
     useSelector(selectAnnouncement)
   );
+  const [loading, setLoading] = useState(false);
 
   const getAnnouncements = async (pageNumber: any) => {
+    setLoading(true);
     const data = await announcementService.getAllWithData(pageNumber, 12);
+    setLoading(false);
     setAnnouncements(data.items);
     setPageSize(data.pages);
   };
 
   const getReadedAnnouncements = async (pageNumber: any) => {
+    setLoading(true);
     const data = await announcementService.getReadedAnnouncement(
       pageNumber,
       12
     );
+    setLoading(false);
     setAnnouncements(data.data.items);
     setPageSize(data.data.pages);
   };
@@ -86,46 +92,56 @@ function AnnouncementExpandDisplay() {
                 </div>
               </ul>
             </div>
-            <div className="container mt-4">
-              {announcements !== null && (
-                <div className="row list">
-                  {announcements.map((announcement: any) => {
-                    return <Announcement announcement={announcement} />;
-                  })}
-                </div>
-              )}
-
-              <div className="pages-control">
-                <ul
-                  className="pagination justify-content-center gap-2"
-                  role="navigation"
-                  aria-label="Pagination"
-                >
-                  {Array.from(Array(pageSize).keys()).map((page) => (
-                    <li
-                      className={
-                        isSelected == page
-                          ? "li-selected page-item selected-hover"
-                          : "page-item item-hover"
-                      }
-                      onClick={() => {
-                        setIsSelected(page);
-                        if (clicked === 0) getAnnouncements(page);
-                        //else if (clicked === 1) getReadedAnnouncements(page);
-                      }}
+            <div className="list container mt-4">
+              {loading ? (
+                <label>
+                  <PulseLoader
+                    className="list-loading"
+                    color="#9933ff"
+                    size={16}
+                  />
+                </label>
+              ) : (
+                <>
+                  <div className="row list">
+                    {announcements.map((announcement: any) => {
+                      return <Announcement announcement={announcement} />;
+                    })}
+                  </div>
+                  <div className="pages-control">
+                    <ul
+                      className="pagination justify-content-center gap-2"
+                      role="navigation"
+                      aria-label="Pagination"
                     >
-                      <a
-                        rel="canonical"
-                        role="button"
-                        className="page-link"
-                        aria-current="page"
-                      >
-                        {page + 1}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                      {Array.from(Array(pageSize).keys()).map((page) => (
+                        <li
+                          className={
+                            isSelected == page
+                              ? "li-selected page-item selected-hover"
+                              : "page-item item-hover"
+                          }
+                          onClick={() => {
+                            setIsSelected(page);
+                            if (clicked === 0) getAnnouncements(page);
+                            else if (clicked === 1)
+                              getReadedAnnouncements(page);
+                          }}
+                        >
+                          <a
+                            rel="canonical"
+                            role="button"
+                            className="page-link"
+                            aria-current="page"
+                          >
+                            {page + 1}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         )}

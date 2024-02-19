@@ -7,6 +7,10 @@ main {
   animation: short-bounce 0.8s;
 }
 
+.list {
+  position: relative;
+}
+
 .page-banner-card {
   background-image: url("https://tobeto.com/_next/static/media/edu-banner3.d7dc50ac.svg");
   background-position: 50%;
@@ -86,4 +90,11 @@ main {
   border: 1px solid grey;
   border-radius: 20px;
   outline: none;
+}
+
+.list-loading {
+  position: absolute;
+  left: 50%;
+  top: 200%;
+  transform: translate(-50%, -50%);
 }

@@ -6,6 +6,7 @@ import NoContent from "../../NoContent/NoContent";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSurvey } from "../../../store/slices/surveySlice";
 import { fetchSurveys } from "../../../utils/fetchalldata";
+import { PulseLoader } from "react-spinners";
 
 function SurveysExpandDisplay() {
   const dispatch = useDispatch();
@@ -13,15 +14,20 @@ function SurveysExpandDisplay() {
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
   const [surveys, setSurveys] = useState(useSelector(selectSurvey));
+  const [loading, setLoading] = useState(false);
 
   const getSurveys = async (pageNumber: any) => {
+    setLoading(true);
     const data = await surveyService.getAllWithData(pageNumber, 12);
+    setLoading(false);
     setSurveys(data.items);
     setPageSize(data.pages);
   };
 
   const getReadedSurveys = async (pageNumber: any) => {
+    setLoading(true);
     const data = await surveyService.getJoinedSurveys(pageNumber, 12);
+    setLoading(false);
     setSurveys(data.data.items);
     setPageSize(data.data.pages);
   };
@@ -81,46 +87,55 @@ function SurveysExpandDisplay() {
                 </div>
               </ul>
             </div>
-            <div className="container mt-4">
-              {surveys !== null && (
-                <div className="row list">
-                  {surveys.map((survey: any) => {
-                    return <Survey survey={survey} />;
-                  })}
-                </div>
-              )}
-
-              <div className="pages-control">
-                <ul
-                  className="pagination justify-content-center gap-2"
-                  role="navigation"
-                  aria-label="Pagination"
-                >
-                  {Array.from(Array(pageSize).keys()).map((page) => (
-                    <li
-                      className={
-                        isSelected == page
-                          ? "li-selected page-item selected-hover"
-                          : "page-item item-hover"
-                      }
-                      onClick={() => {
-                        setIsSelected(page);
-                        if (clicked === 0) getSurveys(page);
-                        //else if (clicked === 1) getReadedAnnouncements(page);
-                      }}
+            <div className="list container mt-4">
+              {loading ? (
+                <label>
+                  <PulseLoader
+                    className="list-loading"
+                    color="#9933ff"
+                    size={16}
+                  />
+                </label>
+              ) : (
+                <>
+                  <div className="row list">
+                    {surveys.map((survey: any) => {
+                      return <Survey survey={survey} />;
+                    })}
+                  </div>
+                  <div className="pages-control">
+                    <ul
+                      className="pagination justify-content-center gap-2"
+                      role="navigation"
+                      aria-label="Pagination"
                     >
-                      <a
-                        rel="canonical"
-                        role="button"
-                        className="page-link"
-                        aria-current="page"
-                      >
-                        {page + 1}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                      {Array.from(Array(pageSize).keys()).map((page) => (
+                        <li
+                          className={
+                            isSelected == page
+                              ? "li-selected page-item selected-hover"
+                              : "page-item item-hover"
+                          }
+                          onClick={() => {
+                            setIsSelected(page);
+                            if (clicked === 0) getSurveys(page);
+                            else if (clicked === 1) getReadedSurveys(page);
+                          }}
+                        >
+                          <a
+                            rel="canonical"
+                            role="button"
+                            className="page-link"
+                            aria-current="page"
+                          >
+                            {page + 1}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         )}

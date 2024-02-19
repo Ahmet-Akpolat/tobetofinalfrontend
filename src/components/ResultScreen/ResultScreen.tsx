@@ -1,45 +1,67 @@
-import React from 'react'
-import { Modal } from 'react-bootstrap'
-import './ResultScreen.css'
+import React, { useEffect, useState } from "react";
+import { Modal } from "react-bootstrap";
+import "./ResultScreen.css";
+import quizService from "../../services/quizService";
 type Props = {
-    show:boolean
-    quizId:number|undefined
-    onHide:any
-}
+  show: boolean;
+  quizId: number | undefined;
+  onHide: any;
+};
 
 const ResultScreen = (props: Props) => {
+  const [results, setResults] = useState<any>();
+
+  const getResult = async () => {
+    if (props.quizId != undefined) {
+      await quizService.getByQuizId(props.quizId).then((response) => {
+        setResults(response);
+      });
+    }
+  };
+
+  useEffect(() => {
+    getResult();
+  }, []);
   return (
     <>
-    <Modal
-      show={props.show}
-      size='xl'
-      aria-labelledby="contained-modal-title-vcenter"
-      className='modal-dialog modal-xl modal-dialog-centered modal-fullscreen-sm-down'
-      centered
-    >
-      
-      <div className="">
-        <div className="modal-content">
-          <Modal.Body>
-            <div className="quiz-screen">
+      <Modal
+        show={props.show}
+        onHide={props.onHide}
+        size="xl"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <div className="">
+          <div className="modal-content">
+            <Modal.Body>
+              <div className="quiz-screen">
                 <div className="result-screen">
-                    <span className="result-title">Test Sonucu</span>
-                    <div className="result-items">
-                        <span className="d-flex flex-column">19 <a> Doğru</a> </span>
-                        <span className="d-flex flex-column">6<a>Yanlış</a></span>
-                        <span className="d-flex flex-column">0<a>Boş</a></span>
-                        <span className="d-flex flex-column">76 <a>Puan</a></span>
-                    </div>
-                    <button className="btn btn-primary mt-8 ms-auto me-auto" style={{width:'max-content'}}>Kapat</button>
-                </div>        
-            </div>   
-
-          </Modal.Body>
+                  <span className="result-title">Test Sonucu</span>
+                  <div className="result-items">
+                    <span className="d-flex flex-column">
+                      {results?.correctAnswerCount}
+                      <a> Doğru</a>{" "}
+                    </span>
+                    <span className="d-flex flex-column">
+                      {results?.wrongAnswerCount}
+                      <a>Yanlış</a>
+                    </span>
+                    <span className="d-flex flex-column">
+                      {results?.emptyAnswerCount}
+                      <a>Boş</a>
+                    </span>
+                    <span className="d-flex flex-column">
+                      {results?.point} <a>Puan</a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Modal.Body>
+          </div>
         </div>
-      </div>
-    </Modal>
+      </Modal>
     </>
-  )
-}
+  );
+};
 
-export default ResultScreen
+export default ResultScreen;

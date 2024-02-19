@@ -11,6 +11,10 @@ class QuizService  {
     const response =await axiosInstance.get("GeneralQuizs"+"?PageIndex="+0+"&PageSize="+5);
     return response.data;
   }  
+  async GetForClassStudent() {
+    const response =await axiosInstance.get("ClassQuizs"+"?PageIndex="+0+"&PageSize="+100);
+    return response.data;
+  }  
   async getById(id: number) {
     const response = await axiosInstance.get<GetByIdQuizResponse>(
       `Quizs/${id}`
@@ -29,7 +33,12 @@ class QuizService  {
   async addQuizResultTable(request: CreateStudentQuizResultRequest) {
     return axiosInstance.post("StudentQuizResults", request);
   }
-
+  async getByQuizId(quizId: number) {
+    const response = await axiosInstance.get(
+      `StudentQuizResults/${quizId}`
+    );
+    return response.data; // Directly returning the data part of the response
+  }
 
   
 }

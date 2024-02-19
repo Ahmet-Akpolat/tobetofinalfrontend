@@ -76,33 +76,43 @@ const Signup = () => {
               <div>
                 <h1>Hemen Kayıt Ol</h1>
               </div>
-              <FormikInput
-                name="firstName"
-                className="register-input"
-                placeholder="Ad"
-              />
-              <FormikInput
-                name="lastName"
-                className="register-input"
-                placeholder="Soyad"
-              />
-              <FormikInput
-                name="email"
-                className="register-input"
-                placeholder="E-Mail"
-              />
-              <FormikInput
-                name="password"
-                type="password"
-                className="register-input"
-                placeholder="Şifre"
-              />
-              <FormikInput
-                name="retypePassword"
-                type="password"
-                className="register-input"
-                placeholder="Şifre Tekrar"
-              />
+              <div className="w-90">
+                <FormikInput
+                  name="firstName"
+                  className="register-input"
+                  placeholder="Ad"
+                />
+              </div>
+              <div className="w-90">
+                <FormikInput
+                  name="lastName"
+                  className="register-input"
+                  placeholder="Soyad"
+                />
+              </div>
+              <div className="w-90">
+                <FormikInput
+                  name="email"
+                  className="register-input"
+                  placeholder="E-Mail"
+                />
+              </div>
+              <div className="w-90">
+                <FormikInput
+                  name="password"
+                  type="password"
+                  className="register-input"
+                  placeholder="Şifre"
+                />
+              </div>
+              <div className="w-90">
+                <FormikInput
+                  name="retypePassword"
+                  type="password"
+                  className="register-input"
+                  placeholder="Şifre Tekrar"
+                />
+              </div>
               <button className="register-btn" type="submit">
                 Kayıt Ol
               </button>

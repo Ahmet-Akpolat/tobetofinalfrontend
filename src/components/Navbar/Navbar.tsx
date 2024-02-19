@@ -72,6 +72,17 @@ const Navbar = () => {
           </li>
           <li
             className={`nav-item ${
+              selectedItemId === "review" ? "selected" : ""
+            }`}
+            onClick={() => {
+              navigate("/degerlendirmeler");
+              setSelectedItemId("review");
+            }}
+          >
+            <a className="nav-link">Değerlendirmeler</a>
+          </li>
+          <li
+            className={`nav-item ${
               selectedItemId === "educations" ? "selected" : ""
             }`}
             onClick={() => {

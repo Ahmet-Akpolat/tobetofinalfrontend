@@ -43,3 +43,9 @@
   scale: 1.05;
   transition: 0.5s;
 }
+
+@media (max-width: 800px) {
+  .lecture-video-detail {
+    flex-direction: column;
+  }
+}

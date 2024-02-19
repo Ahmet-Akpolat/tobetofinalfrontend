@@ -16,17 +16,20 @@ import ProfileDetail from "./pages/ProfileDetail/ProfileDetail";
 import authService from "./services/authService/authService";
 import Reviews from "./pages/Reviews/Reviews";
 
+let lastErrorTime = 0;
+const errorInterval = 3000;
+
 function App() {
   const location = useLocation();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const currentTime = new Date().getTime();
+    if (currentTime - lastErrorTime > errorInterval) {
+      lastErrorTime = currentTime;
       if (location.pathname !== "/login" && location.pathname !== "/signup") {
         authService.refreshToken();
       }
-    }, 10000);
-
-    return () => clearTimeout(timer);
+    }
   }, [location]);
 
   return (
@@ -66,7 +69,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/profilim" element={<Profile />} />
         </Route>
-   
+
         <Route element={<MainLayout />}>
           <Route path="/degerlendirmeler" element={<Reviews />} />
         </Route>
