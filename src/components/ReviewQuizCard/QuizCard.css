@@ -3,16 +3,10 @@
   max-height: 64px;
   padding: 8px 16px;
   border-radius: 50px;
-  background: rgba(31, 31, 71, 0.6);
+
   box-shadow: 0 40px 80px rgba(24, 32, 79, 0.25),
     inset 0 0 0 0.5px hsla(0, 0%, 100%, 0.5);
-
-  background: linear-gradient(
-    209.21deg,
-    #aa8cff 10.27%,
-    #1d0b8c 98.38%
-  ) !important;
-
+  background: linear-gradient(209.21deg, #e3a6fe 13.38%, #3c0b8c 78.57%);
   z-index: 1;
   border: none;
   display: flex;
@@ -41,6 +35,6 @@
   transition: 0.5s;
 }
 
-.btn:hover {
-  scale: 1.1;
+.quiz-btn:hover {
+  scale: 1.06;
 }

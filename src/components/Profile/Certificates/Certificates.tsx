@@ -51,7 +51,7 @@ function Certificates() {
                     <input
                       id="file-upload"
                       type="file"
-                      accept=".pdf"
+                      accept=".pdf, image/png, image/jpeg, image/jpg"
                       style={{ display: "none" }}
                       onChange={addCertificates}
                     />

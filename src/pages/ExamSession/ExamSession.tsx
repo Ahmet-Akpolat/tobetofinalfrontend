@@ -95,8 +95,14 @@ const ExamSession = (props: Props) => {
                   </div>
                   <div className="row ">
                     <button
-                      className="btn btn-primary mt-8 ms-auto me-auto"
-                      style={{ width: "max-content" }}
+                      className="quiz-btn btn btn-light ms-auto me-auto"
+                      style={{
+                        width: "max-content",
+                        borderRadius: "50px",
+                        background: "#9933ff",
+                        color: "white",
+                        transition: "0.5s",
+                      }}
                       onClick={() => {
                         joinExam();
                       }}
