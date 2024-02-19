@@ -40,14 +40,14 @@ const QuizCard = (props: Props) => {
           </div>
           {quizs.some((joined: any) => quiz.quiz.id === joined.quizId) ? (
             <button
-              className="btn btn-light"
+              className="quiz-btn btn btn-light"
               onClick={() => openResultModal(quiz.quiz)}
             >
               Raporu Görüntüle
             </button>
           ) : (
             <button
-              className="btn btn-light"
+              className="quiz-btn btn btn-light"
               onClick={() => openExamModal(quiz.quiz)}
             >
               Başla

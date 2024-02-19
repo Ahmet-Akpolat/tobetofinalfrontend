@@ -41,6 +41,6 @@
   transition: 0.5s;
 }
 
-.btn:hover {
+.quiz-btn:hover {
   scale: 1.1;
 }
