@@ -14,26 +14,15 @@ import { setSurvey } from "../store/slices/surveySlice";
 import quizService from "../services/quizService";
 
 const fetchAllData = async (dispatch: Dispatch) => {
+  const allData = (await studentService.getStudentAllData()).data as any;
+  dispatch(setAnnouncement(allData.classAnnouncements));
+  dispatch(setLecture(allData.classLectures));
+  dispatch(setSurvey(allData.classSurveys));
+  dispatch(setExams(allData.classQuizs));
 
-  // Appeal
   const appeal = await appealService.getAll(0, 12);
   dispatch(setAppeal(appeal));
 
-  // Lecture
-  const lecture = await lectureService.getAll(0, 12);
-  dispatch(setLecture(lecture));
-
-  // Announcement
-  const announcement = await announcementService.getAll(0, 12);
-  dispatch(setAnnouncement(announcement));
-
-  // Survey
-  const survey = await surveyService.getAll(0, 12);
-  dispatch(setSurvey(survey));
-
-  const exams = await quizService.GetForClassStudent();
-  dispatch(setExams(exams.items))
-  // Student
   const student = await studentService.getByToken();
   dispatch(setStudent(student));
 };
@@ -41,28 +30,26 @@ const fetchAllData = async (dispatch: Dispatch) => {
 export const fetchAppeals = async (dispatch: Dispatch) => {
   const appeals = await appealService.getAll(0, 12);
   dispatch(setAppeal(appeals));
-}
+};
 
 export const fetchLectures = async (dispatch: Dispatch) => {
   const lectures = await lectureService.getAll(0, 12);
   dispatch(setLecture(lectures));
-}
+};
 
 export const fetchAnnouncements = async (dispatch: Dispatch) => {
   const announcements = await announcementService.getAll(0, 12);
   dispatch(setAnnouncement(announcements));
-}
+};
 
 export const fetchSurveys = async (dispatch: Dispatch) => {
   const surveys = await surveyService.getAll(0, 12);
   dispatch(setSurvey(surveys));
-}
+};
 
 export const fetchExams = async (dispatch: Dispatch) => {
   const exams = await quizService.GetForClassStudent();
-  console.log(exams);
-  
   dispatch(setExams(exams));
-}
+};
 
 export default fetchAllData;

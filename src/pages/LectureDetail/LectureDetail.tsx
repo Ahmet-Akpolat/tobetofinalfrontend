@@ -4,49 +4,60 @@ import { useNavigate } from "react-router-dom";
 import LectureContent from "../../components/LectureDetail/LectureContent/LectureContent";
 import LectureDetailSidebar from "../../components/LectureDetail/LectureDetailSidebar/LectureDetailSidebar";
 import LectureInfo from "../../components/LectureDetail/LectureInfo/LectureInfo";
-import { GetByLoggedStudentCompletionConditionResponse } from "../../models/responses/LectureCompletionDetailResponse";
 import lectureService from "../../services/lectureService";
 import { selectContentViews } from "../../store/slices/contenViewsSlice";
 import { clearContent } from "../../store/slices/contentSlice";
-import { selectLectureDetail } from "../../store/slices/lectureDetailSlice";
+import {
+  selectLectureDetail,
+  setLectureDetail,
+} from "../../store/slices/lectureDetailSlice";
 import { selectStudent } from "../../store/slices/studentSlice";
 import { formatDate } from "../../utils/formatDate";
 import "./LectureDetail.css";
 
+let lastErrorTime = 0;
+const errorInterval = 3000;
+
 function LectureDetail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [liked, setLiked] = useState(false);
-  const [numberOfLikes, setNumberOfLikes] = useState(0);
   const [section, setSection] = useState(0);
   const lecture = useSelector(selectLectureDetail);
   const student = useSelector(selectStudent);
+  const [liked, setLiked] = useState(lecture?.isLiked);
+  const [numberOfLikes, setNumberOfLikes] = useState(lecture?.likeCount);
   const [showDetail, setShowDetail] = useState(false);
-  const [lectureCompletionDetail, setLectureCompletionDetail] =
-    useState<GetByLoggedStudentCompletionConditionResponse>();
-
+  const [lectureCompletionDetail, setLectureCompletionDetail] = useState({
+    completionPercentage: lecture?.completionPercentage,
+    totalContentCount: lecture?.totalContentCount,
+    totalWatchedCount: lecture?.totalWatchedCount,
+  });
   const contentViews = useSelector(selectContentViews);
 
-  const getLectureLikeInfo = async () => {
-    const likedLecture = await lectureService.getLectureLiked(lecture.id);
-    const lectureNumberOfLikes = await lectureService.getLectureNumberOfLikes(
-      lecture.id
-    );
-    if (likedLecture.isLiked == true) setLiked(likedLecture.isLiked);
-    setNumberOfLikes(lectureNumberOfLikes.count);
-  };
-
-  const getLectureCompletionDetails = async () => {
-    const completionDetail = (
-      await lectureService.getLectureCompletionDetails(lecture.id)
-    ).data;
-    setLectureCompletionDetail(completionDetail);
+  const getLectureDetails = async () => {
+    const newLecture = await lectureService.getWithDetails(lecture.id) as any;
+    setLectureCompletionDetail({
+      completionPercentage: newLecture?.completionPercentage,
+      totalContentCount: newLecture?.totalContentCount,
+      totalWatchedCount: newLecture?.totalWatchedCount,
+    });
   };
 
   const setLectureLiked = async () => {
-    await lectureService.setLectureLiked(student.id, lecture.id);
-    getLectureLikeInfo();
-    setLiked(!liked);
+    if (liked) {
+      setLiked(false);
+      setNumberOfLikes(numberOfLikes - 1);
+    } else {
+      setLiked(true);
+      setNumberOfLikes(numberOfLikes + 1);
+    }
+    const currentTime = new Date().getTime();
+    if (currentTime - lastErrorTime > errorInterval) {
+      lastErrorTime = currentTime;
+      await lectureService.setLectureLiked(student.id, lecture.id);
+      const newLecture = await lectureService.getWithDetails(lecture.id);
+      dispatch(setLectureDetail(newLecture));
+    }
   };
 
   const handleBackButton = () => {
@@ -55,8 +66,7 @@ function LectureDetail() {
   };
 
   useEffect(() => {
-    getLectureLikeInfo();
-    getLectureCompletionDetails();
+    getLectureDetails();
   }, [contentViews]);
 
   return (

@@ -15,7 +15,7 @@ function SocialMedia() {
     useSelector(selectStudent).socialMedias
   );
   const [socialMediaOptions, setSocialMediaOptions] = useState([]);
-  
+
   const initialValues = {
     socialMediaId: null,
     mediaAccountUrl: null,
@@ -55,7 +55,7 @@ function SocialMedia() {
       >
         <Form>
           <div className="row">
-            <div className="profile-input col-6">
+            <div className="profile-input col-12 col-md-6">
               <Field as="select" name={"socialMediaId"}>
                 <option>Seçiniz</option>
                 {socialMediaOptions.map((sc: any) => (

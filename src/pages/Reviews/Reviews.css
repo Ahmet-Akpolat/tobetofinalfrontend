@@ -28,11 +28,11 @@
 }
 .text-secondary {
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
+  color: #4d4d4d !important;
 }
 .text-info {
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-info-rgb), var(--bs-text-opacity)) !important;
+  color: #93f !important;
 }
 .fw-normal {
   font-weight: 400 !important;
@@ -61,8 +61,6 @@
 }
 .dashboard-card1 {
   min-height: 300px;
-  -webkit-backdrop-filter: blur(40px);
-  backdrop-filter: blur(40px);
   border-radius: 0 30px 40px 40px;
   padding: 2em 10%;
   background: rgba(31, 31, 71, 0.6);
@@ -164,8 +162,6 @@ h6 {
 }
 .dashboard-card4 {
   min-height: 300px;
-  -webkit-backdrop-filter: blur(40px);
-  backdrop-filter: blur(40px);
   border-radius: 0 30px 40px 40px;
   padding: 2em 0;
   background: rgba(31, 31, 71, 0.6);
@@ -202,4 +198,8 @@ h6 {
 .small,
 small {
   font-size: 0.875rem;
+}
+
+.reviews-page {
+  animation: short-bounce 0.8s;
 }

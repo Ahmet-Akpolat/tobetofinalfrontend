@@ -18,14 +18,17 @@ function PersonalInformations() {
   const [districts, setDistricts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cityId, setCityId] = useState(student.cityId);
-  
+
   const initialValues = {
     cityId: student.cityId || null,
     districtId: student.districtId || null,
     firstName: student.firstName || null,
     lastName: student.lastName || null,
     phone: student.phone || null,
-    birthDate: student.birthDate?.substring(0, 10) || null,
+    birthDate:
+      student.birthDate != "0001-01-01T00:00:00" ?
+        student.birthDate?.substring(0, 10) : null
+      ,
     nationalIdentity: student.nationalIdentity || null,
     email: student.email || null,
     country: student.country || null,

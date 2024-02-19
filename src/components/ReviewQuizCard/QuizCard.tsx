@@ -1,62 +1,76 @@
-import React, { useEffect, useState } from 'react'
-import './QuizCard.css'
-import { GetByIdQuizResponse } from '../../models/responses/QuizResponses'
-import ExamSession from '../../pages/ExamSession/ExamSession'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectStudent } from '../../store/slices/studentSlice'
-import ResultScreen from '../ResultScreen/ResultScreen'
+import React, { useEffect, useState } from "react";
+import "./QuizCard.css";
+import { GetByIdQuizResponse } from "../../models/responses/QuizResponses";
+import ExamSession from "../../pages/ExamSession/ExamSession";
+import { useDispatch, useSelector } from "react-redux";
+import { selectStudent } from "../../store/slices/studentSlice";
+import ResultScreen from "../ResultScreen/ResultScreen";
 type Props = {
-    quizs:any
-}
-
+  quizs: any;
+};
 
 const QuizCard = (props: Props) => {
   const [modalShow, setModalShow] = useState(false);
-  const[selectedQuiz,setSelectedQuiz]=useState<GetByIdQuizResponse>();
-  const dispatch = useDispatch();
-  const [resultShow,setResultShow]=useState<boolean>(false);
+  const [selectedQuiz, setSelectedQuiz] = useState<GetByIdQuizResponse>();
+  const [resultShow, setResultShow] = useState<boolean>(false);
   const [quizs, setQuizs] = useState(
     useSelector(selectStudent).studentQuizResults
   );
- 
-  
-  const openExamModal = (quiz:any)=>{
-    setSelectedQuiz(quiz);
-    setModalShow(true)
- 
-  }
-  const openResultModal = (quiz:any)=>{
-    setSelectedQuiz(quiz);
-    setResultShow(true)
- 
-  }
-  useEffect(()=>{
-    console.log(quizs);
-    
-  },[])
 
-return (
+  const openExamModal = (quiz: any) => {
+    setSelectedQuiz(quiz);
+    setModalShow(true);
+  };
+  const openResultModal = (quiz: any) => {
+    setSelectedQuiz(quiz);
+    setResultShow(true);
+  };
+
+  return (
     <>
-    
-    {props.quizs?.map((quiz:any)=>(
-      <div className="dashboard-card-slim">
-        <div className="d-flex align-items-center" style={{gap:"14px"}}>
-          <div className="platformIcon"></div>
-          <span>{quiz.quiz.name}</span>
-          
-      </div>
-      {quizs.some((joined:any)=>quiz.id===joined.quizId) ?
-      (<button className="btn btn-light" onClick={()=>openResultModal(quiz.quiz)}>Raporu Görüntüle</button>):(
-      <button className="btn btn-light" onClick={()=>openExamModal(quiz.quiz)}>Başla</button>  
+      {props.quizs?.map((quiz: any) => (
+        <div className="dashboard-card-slim w-100">
+          <div className="d-flex align-items-center" style={{ gap: "14px" }}>
+            <div className="platformIcon"></div>
+            <span>
+              {quiz.quiz.name}
+              <br></br>
+              {quiz.quiz.duration + " Dakika"}
+            </span>
+          </div>
+          {quizs.some((joined: any) => quiz.quiz.id === joined.quizId) ? (
+            <button
+              className="btn btn-light"
+              onClick={() => openResultModal(quiz.quiz)}
+            >
+              Raporu Görüntüle
+            </button>
+          ) : (
+            <button
+              className="btn btn-light"
+              onClick={() => openExamModal(quiz.quiz)}
+            >
+              Başla
+            </button>
+          )}
+        </div>
+      ))}
+      {modalShow && (
+        <ExamSession
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          quizId={selectedQuiz?.id}
+        />
       )}
-      
-     </div>
-      )
-  )}
-    { modalShow &&(<ExamSession show={modalShow}  onHide={() => setModalShow(false)} quizId={selectedQuiz?.id}/>)} 
-    {resultShow&&(<ResultScreen show={resultShow} quizId={selectedQuiz?.id} onHide={() => setResultShow(false)}></ResultScreen>)}
+      {resultShow && (
+        <ResultScreen
+          show={resultShow}
+          quizId={selectedQuiz?.id}
+          onHide={() => setResultShow(false)}
+        ></ResultScreen>
+      )}
     </>
-)
-}
+  );
+};
 
 export default QuizCard;

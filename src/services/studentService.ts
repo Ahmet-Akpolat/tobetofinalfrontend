@@ -48,6 +48,10 @@ class StudentService extends BaseService<
   async addStudentLanguages(data: CreateStudentLanguageLevelRequest) {
     await axiosInstance.post("StudentLanguageLevels", data);
   }
+
+  async getStudentAllData() {
+    return await axiosInstance.get("StudentClasses/GetListForLoggedStudent");
+  }
 }
 
 export default new StudentService();

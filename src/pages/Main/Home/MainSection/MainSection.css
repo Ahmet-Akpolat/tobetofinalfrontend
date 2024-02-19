@@ -194,3 +194,9 @@
 .tab-pane {
   animation: fadein 0.8s;
 }
+
+@media (max-width: 1100px) {
+  .exam-list {
+    flex-direction: column;
+  }
+}

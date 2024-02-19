@@ -7,6 +7,7 @@ import NoContent from "../../NoContent/NoContent";
 import { selectLecture } from "../../../store/slices/lectureSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLectures } from "../../../utils/fetchalldata";
+import { PulseLoader } from "react-spinners";
 
 function LecturesExpandDisplay() {
   const dispatch = useDispatch();
@@ -14,21 +15,28 @@ function LecturesExpandDisplay() {
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
   const [lectures, setLectures] = useState(useSelector(selectLecture));
+  const [loading, setLoading] = useState(false);
 
   const getContinuedLectures = async (pageNumber: number) => {
+    setLoading(true);
     const data = await lectureService.getAllLectureContinued(pageNumber, 12);
+    setLoading(false);
     setLectures(data.data.items);
     setPageSize(data.data.pages);
   };
 
   const getComplatedLectures = async (pageNumber: number) => {
+    setLoading(true);
     const data = await lectureService.getAllLectureCompletion(pageNumber, 12);
+    setLoading(false);
     setLectures(data.data.items);
     setPageSize(data.data.pages);
   };
 
   const getLectures = async (pageNumber: number) => {
+    setLoading(true);
     const data = await lectureService.getAllWithData(pageNumber, 12);
+    setLoading(false);
     setLectures(data.items);
     setPageSize(data.pages);
   };
@@ -104,47 +112,56 @@ function LecturesExpandDisplay() {
                 </div>
               </ul>
             </div>
-            <div className="container mt-4">
-              {lectures !== null && (
-                <div className="row list">
-                  {lectures.map((lecture: any) => {
-                    return <Lecture lecture={lecture} />;
-                  })}
-                </div>
-              )}
-
-              <div className="pages-control">
-                <ul
-                  className="pagination justify-content-center gap-2"
-                  role="navigation"
-                  aria-label="Pagination"
-                >
-                  {Array.from(Array(pageSize).keys()).map((page) => (
-                    <li
-                      className={
-                        isSelected == page
-                          ? "li-selected page-item selected-hover"
-                          : "page-item item-hover"
-                      }
-                      onClick={() => {
-                        setIsSelected(page);
-                        if (clicked === 0) getLectures(page);
-                        else if (clicked === 1) getContinuedLectures(page);
-                        else getComplatedLectures(page);
-                      }}
+            <div className="list container mt-4">
+              {loading ? (
+                <label>
+                  <PulseLoader
+                    className="list-loading"
+                    color="#9933ff"
+                    size={16}
+                  />
+                </label>
+              ) : (
+                <>
+                  <div className="row list">
+                    {lectures.map((lecture: any) => {
+                      return <Lecture lecture={lecture} />;
+                    })}
+                  </div>
+                  <div className="pages-control">
+                    <ul
+                      className="pagination justify-content-center gap-2"
+                      role="navigation"
+                      aria-label="Pagination"
                     >
-                      <a
-                        rel="canonical"
-                        role="button"
-                        className="page-link"
-                        aria-current="page"
-                      >
-                        {page + 1}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                      {Array.from(Array(pageSize).keys()).map((page) => (
+                        <li
+                          className={
+                            isSelected == page
+                              ? "li-selected page-item selected-hover"
+                              : "page-item item-hover"
+                          }
+                          onClick={() => {
+                            setIsSelected(page);
+                            if (clicked === 0) getLectures(page);
+                            else if (clicked === 1) getContinuedLectures(page);
+                            else getComplatedLectures(page);
+                          }}
+                        >
+                          <a
+                            rel="canonical"
+                            role="button"
+                            className="page-link"
+                            aria-current="page"
+                          >
+                            {page + 1}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         )}

@@ -2,7 +2,7 @@ import { ErrorMessage, Field } from "formik";
 
 function FormikInput({ name, type, className, placeholder, as, rows }: any) {
   return (
-    <div style={{ width: "80%" }}>
+    <div>
       <Field
         name={name}
         type={type || "text"}

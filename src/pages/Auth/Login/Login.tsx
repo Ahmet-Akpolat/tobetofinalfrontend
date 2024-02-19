@@ -44,7 +44,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container login-base d-flex justify-content-center">
+    <div className="container login-base d-flex justify-content-center align-items-center">
       <div className="login col-12 col-md-7">
         <Formik
           initialValues={initialValues}
@@ -61,17 +61,21 @@ const Login = () => {
               />
             </div>
             <div className="login-events d-flex flex-column align-items-center justify-content-center">
-              <FormikInput
-                name="email"
-                className="login-input"
-                placeholder="E-Mail"
-              />
-              <FormikInput
-                name="password"
-                type="password"
-                className="login-input"
-                placeholder="Şifre"
-              />
+              <div className="w-90">
+                <FormikInput
+                  name="email"
+                  className="login-input"
+                  placeholder="E-Mail"
+                />
+              </div>
+              <div className="w-90">
+                <FormikInput
+                  name="password"
+                  type="password"
+                  className="login-input"
+                  placeholder="Şifre"
+                />
+              </div>
               <button className="login-btn" type="submit">
                 Giriş Yap
               </button>
