@@ -26,9 +26,9 @@ function PersonalInformations() {
     lastName: student.lastName || null,
     phone: student.phone || null,
     birthDate:
-      student.birthDate != "0001-01-01T00:00:00" ?
-        student.birthDate?.substring(0, 10) : null
-      ,
+      student.birthDate != "0001-01-01T00:00:00"
+        ? student.birthDate?.substring(0, 10)
+        : null,
     nationalIdentity: student.nationalIdentity || null,
     email: student.email || null,
     country: student.country || null,
@@ -93,8 +93,11 @@ function PersonalInformations() {
   const updateStudent = async (updatedValues: any) => {
     updatedValues.profilePhotoPath = initialValues.profilePhotoPath;
     updatedValues.cityId = cityId;
+    console.log(updatedValues);
     await studentService.update(updatedValues);
     const newStudent = await studentService.getByToken();
+    console.log(newStudent);
+
     dispatch(setStudent(newStudent));
     toast.success("Değişiklikler Kaydedildi!");
   };

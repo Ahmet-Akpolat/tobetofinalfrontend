@@ -76,28 +76,28 @@ const Signup = () => {
               <div>
                 <h1>Hemen Kayıt Ol</h1>
               </div>
-              <div className="w-90">
+              <div className="w-80">
                 <FormikInput
                   name="firstName"
                   className="register-input"
                   placeholder="Ad"
                 />
               </div>
-              <div className="w-90">
+              <div className="w-80">
                 <FormikInput
                   name="lastName"
                   className="register-input"
                   placeholder="Soyad"
                 />
               </div>
-              <div className="w-90">
+              <div className="w-80">
                 <FormikInput
                   name="email"
                   className="register-input"
                   placeholder="E-Mail"
                 />
               </div>
-              <div className="w-90">
+              <div className="w-80">
                 <FormikInput
                   name="password"
                   type="password"
@@ -105,7 +105,7 @@ const Signup = () => {
                   placeholder="Şifre"
                 />
               </div>
-              <div className="w-90">
+              <div className="w-80">
                 <FormikInput
                   name="retypePassword"
                   type="password"

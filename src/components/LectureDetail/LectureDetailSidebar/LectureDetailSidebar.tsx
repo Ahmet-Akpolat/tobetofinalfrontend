@@ -44,6 +44,8 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: any) {
     getContentViewers();
   }, [reloadFlag]);
 
+  console.log(content);
+
   return (
     <div className="lecture-detail-sidebar">
       <div className="container">
@@ -148,6 +150,20 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: any) {
             </div>
             <text>{content.description}</text>
           </div>
+          {content.instructors.length && (
+            <div className="mt-3">
+              <div>
+                <strong>Egitmenler</strong>
+              </div>
+              {content.instructors?.map((instructor: any) => (
+                <div>
+                  <text>
+                    {instructor.firstName + " " + instructor.lastName} <br></br>
+                  </text>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <button className="close-button" onClick={() => setShowDetail(false)}>

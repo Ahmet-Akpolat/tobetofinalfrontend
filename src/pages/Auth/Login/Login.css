@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 100px 200px;
+  padding: 100px 30%;
   display: grid;
   place-items: center;
   border: 5px solid transparent;
@@ -112,6 +112,6 @@
   font-weight: lighter;
 }
 
-.w-90 {
-  width: 90%;
+.w-80 {
+  width: 80%;
 }

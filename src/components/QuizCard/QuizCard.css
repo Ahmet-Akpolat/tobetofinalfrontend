@@ -29,12 +29,21 @@
   color: #fff;
 }
 .dashboard-card-slim .btn {
-  width: -moz-max-content;
-  width: max-content;
   border-radius: 50px;
   transition: 0.5s;
+  word-wrap: break-word;
+  max-width: 100%;
 }
 
 .quiz-btn:hover {
-  scale: 1.06;
+  scale: 1.05;
+}
+
+@media (max-width: 1300px) {
+  .btn {
+    font-size: 10.2px;
+  }
+  .quiz-header {
+    font-size: 12.2px;
+  }
 }

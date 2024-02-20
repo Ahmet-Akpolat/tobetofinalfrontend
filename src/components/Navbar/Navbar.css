@@ -200,11 +200,6 @@
   display: flex;
 }
 
-.navbar-tobeto-icon {
-  width: 25px;
-  cursor: pointer;
-}
-
 .navbar-profile-photo {
   border-radius: 30px;
   width: 35px;

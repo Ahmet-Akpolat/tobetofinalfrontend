@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Reviews.css";
-import QuizCard from "../../components/ReviewQuizCard/QuizCard";
+import QuizCard from "../../components/QuizCard/QuizCard";
 import quizService from "../../services/quizService";
 import { GetByIdQuizResponse } from "../../models/responses/QuizResponses";
 

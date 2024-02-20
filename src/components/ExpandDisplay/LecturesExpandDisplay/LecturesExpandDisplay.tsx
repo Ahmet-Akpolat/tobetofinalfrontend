@@ -1,17 +1,16 @@
-import { useState } from "react";
-import "./LecturesExpandDisplay.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ClipLoader } from "react-spinners";
 import lectureService from "../../../services/lectureService";
+import { selectLecture } from "../../../store/slices/lectureSlice";
+import { fetchLectures } from "../../../utils/fetchalldata";
 import Lecture from "../../Lecture/Lecture";
 import NoContent from "../../NoContent/NoContent";
-import { selectLecture } from "../../../store/slices/lectureSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchLectures } from "../../../utils/fetchalldata";
-import { PulseLoader } from "react-spinners";
+import "./LecturesExpandDisplay.css";
 
 function LecturesExpandDisplay() {
   const dispatch = useDispatch();
-  const [pageSize, setPageSize] = useState(0);
+  const [pageSize, setPageSize] = useState(1);
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
   const [lectures, setLectures] = useState(useSelector(selectLecture));
@@ -61,7 +60,7 @@ function LecturesExpandDisplay() {
             </div>
           </div>
         </div>
-        {!lectures.length ? (
+        {!lectures.length && clicked != 1 && !loading ? (
           <div className="container-fluid">
             <NoContent content="ders" />
           </div>
@@ -115,10 +114,10 @@ function LecturesExpandDisplay() {
             <div className="list container mt-4">
               {loading ? (
                 <label>
-                  <PulseLoader
+                  <ClipLoader
                     className="list-loading"
                     color="#9933ff"
-                    size={16}
+                    size={50}
                   />
                 </label>
               ) : (
@@ -128,7 +127,7 @@ function LecturesExpandDisplay() {
                       return <Lecture lecture={lecture} />;
                     })}
                   </div>
-                  <div className="pages-control">
+                  <div className="pages-control anim-fadein">
                     <ul
                       className="pagination justify-content-center gap-2"
                       role="navigation"

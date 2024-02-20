@@ -1,16 +1,16 @@
 import { useState } from "react";
-import "./SurveyExpandDisplay.css";
-import surveyService from "../../../services/surveyService";
-import Survey from "../../Survey/Survey";
-import NoContent from "../../NoContent/NoContent";
 import { useDispatch, useSelector } from "react-redux";
+import { ClipLoader } from "react-spinners";
+import surveyService from "../../../services/surveyService";
 import { selectSurvey } from "../../../store/slices/surveySlice";
 import { fetchSurveys } from "../../../utils/fetchalldata";
-import { PulseLoader } from "react-spinners";
+import NoContent from "../../NoContent/NoContent";
+import Survey from "../../Survey/Survey";
+import "./SurveyExpandDisplay.css";
 
 function SurveysExpandDisplay() {
   const dispatch = useDispatch();
-  const [pageSize, setPageSize] = useState(0);
+  const [pageSize, setPageSize] = useState(1);
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
   const [surveys, setSurveys] = useState(useSelector(selectSurvey));
@@ -48,7 +48,7 @@ function SurveysExpandDisplay() {
             </div>
           </div>
         </div>
-        {!surveys.length ? (
+        {!surveys.length && clicked != 1 && !loading ? (
           <div className="container-fluid">
             <NoContent content="basvurunuz" />
           </div>
@@ -90,10 +90,10 @@ function SurveysExpandDisplay() {
             <div className="list container mt-4">
               {loading ? (
                 <label>
-                  <PulseLoader
+                  <ClipLoader
                     className="list-loading"
                     color="#9933ff"
-                    size={16}
+                    size={50}
                   />
                 </label>
               ) : (
@@ -103,7 +103,7 @@ function SurveysExpandDisplay() {
                       return <Survey survey={survey} />;
                     })}
                   </div>
-                  <div className="pages-control">
+                  <div className="pages-control anim-fadein">
                     <ul
                       className="pagination justify-content-center gap-2"
                       role="navigation"

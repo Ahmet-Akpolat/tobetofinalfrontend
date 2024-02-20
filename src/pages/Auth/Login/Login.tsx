@@ -31,16 +31,13 @@ const Login = () => {
   });
 
   const handleLogin = async (values: AuthLoginRequest) => {
-    try {
-      dispatch(activeLoading());
-      const login = await authService.login(values);
-      dispatch(setToken(login?.token));
-      if (login?.token) {
-        await fetchAllData(dispatch);
-      }
-    } finally {
-      dispatch(clearLoading());
+    dispatch(activeLoading());
+    const login = await authService.login(values);
+    dispatch(setToken(login?.token));
+    if (login?.token) {
+      await fetchAllData(dispatch);
     }
+    dispatch(clearLoading())
   };
 
   return (
@@ -61,14 +58,14 @@ const Login = () => {
               />
             </div>
             <div className="login-events d-flex flex-column align-items-center justify-content-center">
-              <div className="w-90">
+              <div className="w-80">
                 <FormikInput
                   name="email"
                   className="login-input"
                   placeholder="E-Mail"
                 />
               </div>
-              <div className="w-90">
+              <div className="w-80">
                 <FormikInput
                   name="password"
                   type="password"
