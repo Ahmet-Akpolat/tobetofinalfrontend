@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ClipLoader } from "react-spinners";
 import surveyService from "../../../services/surveyService";
@@ -35,6 +35,14 @@ function SurveysExpandDisplay() {
   window.onload = async () => {
     await fetchSurveys(dispatch);
   };
+
+  useEffect(() => {
+    async function getPageSize() {
+      const data = await surveyService.getAllWithData(0, 12);
+      setPageSize(data.pages);
+    }
+    getPageSize();
+  }, []);
 
   return (
     <main>

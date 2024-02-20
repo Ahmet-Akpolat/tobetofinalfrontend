@@ -45,7 +45,11 @@ function LecturesExpandDisplay() {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    async function getPageSize() {
+      const data = await lectureService.getAllWithData(0, 12);
+      setPageSize(data.pages);
+    }
+    getPageSize();
   }, []);
 
   return (
