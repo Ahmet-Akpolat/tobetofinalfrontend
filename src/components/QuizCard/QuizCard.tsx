@@ -32,7 +32,7 @@ const QuizCard = (props: Props) => {
         <div className="dashboard-card-slim w-100">
           <div className="d-flex align-items-center" style={{ gap: "14px" }}>
             <div className="platformIcon"></div>
-            <span>
+            <span className="quiz-header">
               {quiz.quiz.name}
               <br></br>
               {quiz.quiz.duration + " Dakika"}

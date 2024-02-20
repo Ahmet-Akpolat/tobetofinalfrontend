@@ -35,7 +35,7 @@ function LectureDetail() {
   const contentViews = useSelector(selectContentViews);
 
   const getLectureDetails = async () => {
-    const newLecture = await lectureService.getWithDetails(lecture.id) as any;
+    const newLecture = (await lectureService.getWithDetails(lecture.id)) as any;
     setLectureCompletionDetail({
       completionPercentage: newLecture?.completionPercentage,
       totalContentCount: newLecture?.totalContentCount,
@@ -62,7 +62,7 @@ function LectureDetail() {
 
   const handleBackButton = () => {
     dispatch(clearContent());
-    navigate("/");
+    navigate(-1);
   };
 
   useEffect(() => {

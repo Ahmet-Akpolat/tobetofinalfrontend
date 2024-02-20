@@ -20,6 +20,10 @@ const MainSection = () => {
   const lectures = useSelector(selectLecture);
   const surveys = useSelector(selectSurvey);
 
+  const readAnnouncementsCount = announcements.filter(
+    (announcement: any) => !announcement.isRead
+  ).length;
+
   const [activeNavLink, setActiveNavLink] = useState("appeals");
   const handleNavLinkClick = (navLinkId: any) => {
     setActiveNavLink(navLinkId);
@@ -97,6 +101,13 @@ const MainSection = () => {
                 >
                   Duyuru ve Haberlerim
                 </button>
+                {readAnnouncementsCount && (
+                  <div className="announcements-natification">
+                    <span className="announcements-count">
+                      {readAnnouncementsCount}
+                    </span>
+                  </div>
+                )}
               </li>
               <li className="nav-item">
                 <button

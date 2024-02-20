@@ -1,16 +1,16 @@
 import { useState } from "react";
-import "./AnnouncementsExpandDisplay.css";
-import Announcement from "../../Announcement/Announcement";
-import announcementService from "../../../services/announcementService";
-import NoContent from "../../NoContent/NoContent";
 import { useDispatch, useSelector } from "react-redux";
+import { ClipLoader } from "react-spinners";
+import announcementService from "../../../services/announcementService";
 import { selectAnnouncement } from "../../../store/slices/announcementSlice";
 import { fetchAnnouncements } from "../../../utils/fetchalldata";
-import { PulseLoader } from "react-spinners";
+import Announcement from "../../Announcement/Announcement";
+import NoContent from "../../NoContent/NoContent";
+import "./AnnouncementsExpandDisplay.css";
 
 function AnnouncementExpandDisplay() {
   const dispatch = useDispatch();
-  const [pageSize, setPageSize] = useState(0);
+  const [pageSize, setPageSize] = useState(1);
   const [isSelected, setIsSelected] = useState(0);
   const [clicked, setClicked] = useState(0);
   const [announcements, setAnnouncements] = useState(
@@ -53,7 +53,7 @@ function AnnouncementExpandDisplay() {
             </div>
           </div>
         </div>
-        {!announcements.length ? (
+        {!announcements.length && clicked != 1 && !loading ? (
           <div className="container-fluid">
             <NoContent content="ders" />
           </div>
@@ -95,10 +95,10 @@ function AnnouncementExpandDisplay() {
             <div className="list container mt-4">
               {loading ? (
                 <label>
-                  <PulseLoader
+                  <ClipLoader
                     className="list-loading"
                     color="#9933ff"
-                    size={16}
+                    size={50}
                   />
                 </label>
               ) : (
@@ -108,7 +108,7 @@ function AnnouncementExpandDisplay() {
                       return <Announcement announcement={announcement} />;
                     })}
                   </div>
-                  <div className="pages-control">
+                  <div className="pages-control anim-fadein">
                     <ul
                       className="pagination justify-content-center gap-2"
                       role="navigation"

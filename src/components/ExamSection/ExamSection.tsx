@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { selectExams } from "../../store/slices/examSlice";
 import NoContent from "../NoContent/NoContent";
-import QuizCard from "../ReviewQuizCard/QuizCard";
+import QuizCard from "../QuizCard/QuizCard";
 
 function ExamSection() {
   const quizs = useSelector(selectExams);

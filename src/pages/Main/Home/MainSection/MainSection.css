@@ -200,3 +200,29 @@
     flex-direction: column;
   }
 }
+
+.announcements-natification {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.announcements-natification::before {
+  content: "";
+  background-color: #fc6d6d;
+  position: absolute;
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+  padding-top: 6px;
+  top: -40px;
+  right: -10px;
+}
+
+.announcements-count {
+  color: white;
+  position: absolute;
+  top: -39px;
+  right: -5px;
+}

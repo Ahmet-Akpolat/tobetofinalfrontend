@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import "./ResultScreen.css";
 import quizService from "../../services/quizService";
+
 type Props = {
   show: boolean;
   quizId: number | undefined;
@@ -22,6 +23,7 @@ const ResultScreen = (props: Props) => {
   useEffect(() => {
     getResult();
   }, []);
+
   return (
     <>
       <Modal
@@ -35,22 +37,22 @@ const ResultScreen = (props: Props) => {
           <div className="modal-content">
             <Modal.Body>
               <div className="quiz-screen">
-                <div className="result-screen">
+                <div className="result-screen ">
                   <span className="result-title">Test Sonucu</span>
-                  <div className="result-items">
-                    <span className="d-flex flex-column">
+                  <div className="result-items col-15">
+                    <span className="d-flex flex-column col-md-2 h-50">
                       {results?.correctAnswerCount}
-                      <a> Doğru</a>{" "}
+                      <a> Doğru</a>
                     </span>
-                    <span className="d-flex flex-column">
+                    <span className="d-flex flex-column col-md-2">
                       {results?.wrongAnswerCount}
                       <a>Yanlış</a>
                     </span>
-                    <span className="d-flex flex-column">
+                    <span className="d-flex flex-column col-md-2">
                       {results?.emptyAnswerCount}
                       <a>Boş</a>
                     </span>
-                    <span className="d-flex flex-column">
+                    <span className="d-flex flex-column col-md-2">
                       {results?.point} <a>Puan</a>
                     </span>
                   </div>

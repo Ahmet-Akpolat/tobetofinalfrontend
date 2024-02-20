@@ -7,6 +7,7 @@ import ReactLoading from "react-loading";
 import { toast } from "react-toastify";
 import Checkmark from "./CheckMark/Checkmark";
 import ResultScreen from "../ResultScreen/ResultScreen";
+import { ClipLoader } from "react-spinners";
 
 type Props = {
   show: boolean;
@@ -120,14 +121,9 @@ const ExamModal = (props: Props) => {
             <Modal.Body>
               <div className="quiz-screen">
                 {loadingControl && (
-                  <>
-                    <ReactLoading
-                      type="spin"
-                      color="purple"
-                      width={"40%"}
-                      height={"10%"}
-                    ></ReactLoading>
-                  </>
+                  <div className="d-flex align-items-center justify-content-center h-100 w-100">
+                    <ClipLoader color="#9933ff" size={50} />
+                  </div>
                 )}
                 {!loadingControl && !show && (
                   <>
@@ -215,8 +211,8 @@ const ExamModal = (props: Props) => {
                 )}
                 {show && (
                   <div className="column">
-                    <div className="row">
-                      <Checkmark size={"40%"} color={"green"} />
+                    <div className="row gap-4">
+                      <Checkmark size={200} color={"green"} />
                       <span className="d-flex align-items-center justify-content-center text-success">
                         Testiniz Gönderildi 2 Saniye İçerisinde Sayfa
                         Yenilendiğinde Görebileceksiniz.

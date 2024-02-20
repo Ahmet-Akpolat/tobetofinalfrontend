@@ -27,7 +27,7 @@ const Navbar = () => {
         data-bs-target="#navbarNav"
         aria-controls="navbarNav"
         aria-expanded="false"
-        aria-label="Toggle navigation"
+        aria-label="Toggle navigation" 
       >
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -119,7 +119,7 @@ const Navbar = () => {
       <div className="navbar-sec">
         <div className="d-flex justify-space-center align-items-center">
           <div className="header-avatar ">
-            <div className="me-2 d-flex align-items-center justify-content-center">
+            <div className="d-flex align-items-center justify-content-center">
               <span>
                 <img
                   className="navbar-profile-photo"

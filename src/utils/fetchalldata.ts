@@ -1,8 +1,8 @@
 import { Dispatch } from "redux";
 import announcementService from "../services/announcementService";
 import appealService from "../services/appealService";
-import examService from "../services/examService";
 import lectureService from "../services/lectureService";
+import quizService from "../services/quizService";
 import studentService from "../services/studentService";
 import surveyService from "../services/surveyService";
 import { setAnnouncement } from "../store/slices/announcementSlice";
@@ -11,14 +11,15 @@ import { setExams } from "../store/slices/examSlice";
 import { setLecture } from "../store/slices/lectureSlice";
 import { setStudent } from "../store/slices/studentSlice";
 import { setSurvey } from "../store/slices/surveySlice";
-import quizService from "../services/quizService";
 
 const fetchAllData = async (dispatch: Dispatch) => {
   const allData = (await studentService.getStudentAllData()).data as any;
-  dispatch(setAnnouncement(allData.classAnnouncements));
   dispatch(setLecture(allData.classLectures));
   dispatch(setSurvey(allData.classSurveys));
   dispatch(setExams(allData.classQuizs));
+
+  const announcements = await announcementService.getAll(0, 12);
+  dispatch(setAnnouncement(announcements));
 
   const appeal = await appealService.getAll(0, 12);
   dispatch(setAppeal(appeal));

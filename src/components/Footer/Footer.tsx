@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer({ backgroundColor }: any) {
@@ -21,7 +22,9 @@ function Footer({ backgroundColor }: any) {
           <div className="col-6 col-lg-8 my-4">
             <ul className="list-unstyled mb-0 d-flex flex-wrap  justify-content-end justify-content-lg-end">
               <li className="mb-lg-0">
-                <a className="btnn btn-light-light">Bize Ulaşın</a>
+                <Link to={"https://www.instagram.com/tobeto_official/"}>
+                  <a className="btnn btn-light-light">Bize Ulaşın</a>
+                </Link>
               </li>
             </ul>
           </div>
