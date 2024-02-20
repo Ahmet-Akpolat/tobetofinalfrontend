@@ -1,9 +1,5 @@
 import { useState } from "react";
-import { Dropdown } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { selectStudent } from "../../store/slices/studentSlice";
-import { Logout } from "../../utils/logout";
 import "./AuthNav.css";
 
 const AuthNav = () => {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ClipLoader } from "react-spinners";
 import announcementService from "../../../services/announcementService";
@@ -23,7 +23,6 @@ function AnnouncementExpandDisplay() {
     const data = await announcementService.getAllWithData(pageNumber, 12);
     setLoading(false);
     setAnnouncements(data.items);
-    setPageSize(data.pages);
   };
 
   const getReadedAnnouncements = async (pageNumber: any) => {
@@ -40,6 +39,14 @@ function AnnouncementExpandDisplay() {
   window.onload = async () => {
     await fetchAnnouncements(dispatch);
   };
+
+  useEffect(() => {
+    async function getPageSize() {
+      const data = await announcementService.getAllWithData(0, 12);
+      setPageSize(data.pages);
+    }
+    getPageSize();
+  }, []);
 
   return (
     <main>
