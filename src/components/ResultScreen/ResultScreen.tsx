@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import "./ResultScreen.css";
 import quizService from "../../services/quizService";
+import "./ResultScreen.css";
 
 type Props = {
   show: boolean;

@@ -1,8 +1,4 @@
 import Modal from "react-bootstrap/Modal";
-import { selectAnnouncement } from "../../../store/slices/announcementSlice";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import ExceptionService from "../../../utils/exceptionService";
 import examService from "../../../services/examService";
 
 function ExamModal({ exam, isJoined, show, onHide }: any) {

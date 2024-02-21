@@ -1,6 +1,6 @@
+import { useSelector } from "react-redux";
 import { selectLoading } from "../../store/slices/loadingSlice";
 import "./OverlayLoader.css";
-import { useSelector } from "react-redux";
 
 export const OverlayLoader = () => {
   const isLoading = useSelector(selectLoading);

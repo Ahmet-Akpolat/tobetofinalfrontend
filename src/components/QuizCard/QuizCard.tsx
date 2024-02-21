@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import "./QuizCard.css";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { GetByIdQuizResponse } from "../../models/responses/QuizResponses";
 import ExamSession from "../../pages/ExamSession/ExamSession";
-import { useDispatch, useSelector } from "react-redux";
 import { selectStudent } from "../../store/slices/studentSlice";
 import ResultScreen from "../ResultScreen/ResultScreen";
+import "./QuizCard.css";
 type Props = {
   quizs: any;
 };

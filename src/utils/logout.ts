@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { clearAuth } from "../store/slices/authSlice";
 import { clearStudent } from "../store/slices/studentSlice";
 import { clearAppeal } from "../store/slices/appealSlice";
