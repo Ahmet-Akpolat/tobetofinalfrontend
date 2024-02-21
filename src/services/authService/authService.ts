@@ -52,12 +52,14 @@ class AuthService {
 
   async refreshToken() {
     var refreshTokenData = localStorage.getItem("RefreshToken");
-    await axiosInstance
-      .get(`${baseUrl}/Auth/RefreshForValue?refreshToken=` + refreshTokenData)
-      .then((r: any) => {
-        localStorage.setItem("RefreshToken", r.data.refreshTokenValue);
-        localStorage.setItem("Token", r.data.accessToken.token);
-      });
+    if (refreshTokenData) {
+      await axiosInstance
+        .get(`${baseUrl}/Auth/RefreshForValue?refreshToken=` + refreshTokenData)
+        .then((r: any) => {
+          localStorage.setItem("RefreshToken", r.data.refreshTokenValue);
+          localStorage.setItem("Token", r.data.accessToken.token);
+        });
+    }
   }
 }
 
