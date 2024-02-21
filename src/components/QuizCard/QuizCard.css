@@ -31,20 +31,21 @@
 .dashboard-card-slim .btnnn {
   border-radius: 50px;
   transition: 0.5s;
-  word-wrap: break-word;
   max-width: 100%;
   border: none;
-  padding: 12px;
   font-size: 13px;
+  min-height: 38px;
+  min-width: 100px;
+  max-width: 100%;
 }
 
 .quiz-btn:hover {
   scale: 1.05;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1400px) {
   .btnnn {
-    font-size: 10.2px !important;
+    font-size: 11px !important;
   }
 
   .quiz-header {

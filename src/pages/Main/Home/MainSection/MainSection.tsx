@@ -20,10 +20,6 @@ const MainSection = () => {
   const lectures = useSelector(selectLecture);
   const surveys = useSelector(selectSurvey);
 
-  const readAnnouncementsCount = announcements.filter(
-    (announcement: any) => !announcement.isRead
-  ).length;
-
   const [activeNavLink, setActiveNavLink] = useState("appeals");
   const handleNavLinkClick = (navLinkId: any) => {
     setActiveNavLink(navLinkId);
@@ -101,10 +97,14 @@ const MainSection = () => {
                 >
                   Duyuru ve Haberlerim
                 </button>
-                {readAnnouncementsCount != 0 && (
+                {announcements[announcements.length - 1].unreadedAnnouncement >
+                  0 && (
                   <div className="announcements-natification">
                     <span className="announcements-count">
-                      {announcements[12]?.unreadedAnnouncement}
+                      {
+                        announcements[announcements.length - 1]
+                          ?.unreadedAnnouncement
+                      }
                     </span>
                   </div>
                 )}
@@ -174,14 +174,15 @@ const MainSection = () => {
               {section == 2 && (
                 <div className="tab-pane fade show active">
                   <div className="row">
-                    {announcements.length === 0 ? (
+                    {announcements.length === 1 ? (
                       <NoContent content="duyurunuz" />
                     ) : (
                       announcements
                         .slice(0, MAX_ITEMS_DISPLAY.announcements)
-                        .map((announcement: any) => (
-                          <Announcement announcement={announcement} />
-                        ))
+                        .map((announcement: any) => {
+                          if (announcement.announcementName)
+                            return <Announcement announcement={announcement} />;
+                        })
                     )}
                   </div>
                   {announcements.length > MAX_ITEMS_DISPLAY.announcements && (
