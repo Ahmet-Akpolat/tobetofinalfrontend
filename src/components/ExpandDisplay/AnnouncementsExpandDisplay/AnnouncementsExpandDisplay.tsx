@@ -38,7 +38,6 @@ function AnnouncementExpandDisplay() {
   };
 
   window.onload = async () => {
-    console.log(announcements);
     await fetchAnnouncements(dispatch, announcements);
   };
 
