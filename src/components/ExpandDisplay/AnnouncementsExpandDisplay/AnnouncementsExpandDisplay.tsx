@@ -34,12 +34,12 @@ function AnnouncementExpandDisplay() {
     );
     setLoading(false);
     setAnnouncements(data.data.items);
-    console.log(data.data.items);
     setPageSize(data.data.pages);
   };
 
   window.onload = async () => {
-    await fetchAnnouncements(dispatch);
+    console.log(announcements);
+    await fetchAnnouncements(dispatch, announcements);
   };
 
   useEffect(() => {
@@ -62,7 +62,7 @@ function AnnouncementExpandDisplay() {
             </div>
           </div>
         </div>
-        {!announcements.length && clicked != 1 && !loading ? (
+        {announcements.length < 2 && clicked != 1 && !loading ? (
           <div className="container-fluid">
             <NoContent content="ders" />
           </div>

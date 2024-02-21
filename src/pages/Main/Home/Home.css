@@ -24,6 +24,12 @@
   width: 150px;
 }
 
+@media (max-width: 600px) {
+  .dot-img {
+    display: none;
+  }
+}
+
 .tobeto-text-welcome {
   font-size: 30pt;
   font-weight: 400;

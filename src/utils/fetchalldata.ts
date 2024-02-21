@@ -26,11 +26,6 @@ const fetchAllData = async (dispatch: Dispatch) => {
     ])
   );
 
-  console.log([
-    ...announcements,
-    { unreadedAnnouncement: allData.readingAnnouncement },
-  ]);
-
   const appeal = await appealService.getAll(0, 12);
   dispatch(setAppeal(appeal));
 
@@ -48,10 +43,6 @@ export const fetchLectures = async (dispatch: Dispatch) => {
   dispatch(setLecture(lectures));
 };
 
-export const fetchAnnouncements = async (dispatch: Dispatch) => {
-  const announcements = await announcementService.getAll(0, 12);
-  dispatch(setAnnouncement(announcements));
-};
 
 export const fetchSurveys = async (dispatch: Dispatch) => {
   const surveys = await surveyService.getAll(0, 12);
@@ -61,6 +52,22 @@ export const fetchSurveys = async (dispatch: Dispatch) => {
 export const fetchExams = async (dispatch: Dispatch) => {
   const exams = await quizService.GetForClassStudent();
   dispatch(setExams(exams));
+};
+
+export const fetchAnnouncements = async (
+  dispatch: Dispatch,
+  oldAnnouncements: any
+) => {
+  const announcements = await announcementService.getAll(0, 12);
+  dispatch(
+    setAnnouncement([
+      ...announcements,
+      {
+        unreadedAnnouncement:
+          oldAnnouncements[oldAnnouncements.length - 1].unreadedAnnouncement,
+      },
+    ])
+  );
 };
 
 export default fetchAllData;

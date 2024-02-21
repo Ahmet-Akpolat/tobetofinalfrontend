@@ -93,11 +93,8 @@ function PersonalInformations() {
   const updateStudent = async (updatedValues: any) => {
     updatedValues.profilePhotoPath = initialValues.profilePhotoPath;
     updatedValues.cityId = cityId;
-    console.log(updatedValues);
     await studentService.update(updatedValues);
     const newStudent = await studentService.getByToken();
-    console.log(newStudent);
-
     dispatch(setStudent(newStudent));
     toast.success("Değişiklikler Kaydedildi!");
   };
