@@ -101,10 +101,10 @@ const MainSection = () => {
                 >
                   Duyuru ve Haberlerim
                 </button>
-                {readAnnouncementsCount && (
+                {readAnnouncementsCount != 0 && (
                   <div className="announcements-natification">
                     <span className="announcements-count">
-                      {readAnnouncementsCount}
+                      {announcements[12]?.unreadedAnnouncement}
                     </span>
                   </div>
                 )}

@@ -44,8 +44,6 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: any) {
     getContentViewers();
   }, [reloadFlag]);
 
-  console.log(content);
-
   return (
     <div className="lecture-detail-sidebar">
       <div className="container">
