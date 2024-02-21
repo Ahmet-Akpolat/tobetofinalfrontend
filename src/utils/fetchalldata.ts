@@ -19,7 +19,17 @@ const fetchAllData = async (dispatch: Dispatch) => {
   dispatch(setExams(allData.classQuizs));
 
   const announcements = await announcementService.getAll(0, 12);
-  dispatch(setAnnouncement(announcements));
+  dispatch(
+    setAnnouncement([
+      ...announcements,
+      { unreadedAnnouncement: allData.readingAnnouncement },
+    ])
+  );
+
+  console.log([
+    ...announcements,
+    { unreadedAnnouncement: allData.readingAnnouncement },
+  ]);
 
   const appeal = await appealService.getAll(0, 12);
   dispatch(setAppeal(appeal));

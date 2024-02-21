@@ -23,6 +23,7 @@ function AnnouncementExpandDisplay() {
     const data = await announcementService.getAllWithData(pageNumber, 12);
     setLoading(false);
     setAnnouncements(data.items);
+    setPageSize(data.pages);
   };
 
   const getReadedAnnouncements = async (pageNumber: any) => {
@@ -33,6 +34,7 @@ function AnnouncementExpandDisplay() {
     );
     setLoading(false);
     setAnnouncements(data.data.items);
+    console.log(data.data.items);
     setPageSize(data.data.pages);
   };
 
@@ -112,7 +114,8 @@ function AnnouncementExpandDisplay() {
                 <>
                   <div className="row list">
                     {announcements.map((announcement: any) => {
-                      return <Announcement announcement={announcement} />;
+                      if (announcement.announcementName)
+                        return <Announcement announcement={announcement} />;
                     })}
                   </div>
                   <div className="pages-control anim-fadein">
