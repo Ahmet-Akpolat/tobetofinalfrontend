@@ -1,12 +1,9 @@
-import { BaseService } from "./baseService";
-import axiosInstance from "../utils/axiosInterceptors";
-import {
-  GetByIdQuizResponse,
-  GetListQuizListItemDto,
-} from "../models/responses/QuizResponses";
-import { AxiosResponse } from "axios";
 import { CreateStudentQuizOptionRequest } from "../models/requests/StudentQuizOptionRequest";
 import { CreateStudentQuizResultRequest } from "../models/requests/StudentQuizResultRequests";
+import {
+  GetByIdQuizResponse
+} from "../models/responses/QuizResponses";
+import axiosInstance from "../utils/axiosInterceptors";
 
 class QuizService {
   async GetForAllStudent() {

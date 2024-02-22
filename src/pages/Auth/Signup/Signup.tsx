@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import { Form, Formik } from "formik";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "./Signup.css";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ErrorMessage, Field, Form, Formik } from "formik";
 import { object, ref, string } from "yup";
 import FormikInput from "../../../components/FormikInput/FormikInput";
 import { CreateStudentRequest } from "../../../models/requests/StudentRequests";
 import AuthService from "../../../services/authService/authService";
-import { passwordValidator } from "../../../utils/customValidations";
-import { useDispatch } from "react-redux";
 import {
   activeLoading,
   clearLoading,
 } from "../../../store/slices/loadingSlice";
-import exceptionService from "../../../utils/exceptionService";
+import { passwordValidator } from "../../../utils/customValidations";
+import "./Signup.css";
 
 const Signup = () => {
   const navigate = useNavigate();

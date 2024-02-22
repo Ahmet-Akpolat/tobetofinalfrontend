@@ -10,12 +10,14 @@ const ExceptionService = () => {
     if (currentTime - lastErrorTime > errorInterval) {
       lastErrorTime = currentTime;
       if (
-        (errorData.type.includes("validation") ||
-          errorData.type.includes("business")) &&
-        errorData.title !== "Validation error(s)"
+        (errorData.type.includes("business")) 
       ) {
         return errorData.detail;
-      } else if (
+      }
+      else if (errorData.type.includes("validation") ){
+        return errorData.Errors[0].Errors[0]
+      }
+      else if (
         errorData.title.includes("authorization") ||
         errorData.title.includes("Authorization")
       ) {

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "./Reviews.css";
+import { useEffect, useState } from "react";
 import QuizCard from "../../components/QuizCard/QuizCard";
-import quizService from "../../services/quizService";
 import { GetByIdQuizResponse } from "../../models/responses/QuizResponses";
+import quizService from "../../services/quizService";
+import "./Reviews.css";
 
 const Reviews = () => {
   const [quizs, setQuizs] = useState<GetByIdQuizResponse[]>();

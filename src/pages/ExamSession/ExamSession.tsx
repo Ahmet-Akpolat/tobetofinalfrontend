@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import "./ExamSession.css";
+import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { GetByIdQuizResponse } from "../../models/responses/QuizResponses";
-import quizService from "../../services/quizService";
+import { useDispatch, useSelector } from "react-redux";
 import ExamModal from "../../components/ExamModal/ExamModal";
 import { CreateStudentQuizResultRequest } from "../../models/requests/StudentQuizResultRequests";
+import { GetByIdQuizResponse } from "../../models/responses/QuizResponses";
+import quizService from "../../services/quizService";
 import studentService from "../../services/studentService";
-import { useDispatch, useSelector } from "react-redux";
 import { selectStudent, setStudent } from "../../store/slices/studentSlice";
+import "./ExamSession.css";
 type Props = {
   show: boolean;
   quizId: number | undefined;

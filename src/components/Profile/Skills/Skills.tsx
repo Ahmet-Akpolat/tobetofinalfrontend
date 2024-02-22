@@ -1,13 +1,12 @@
+import { Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
-import "./Skills.css";
-import skillService from "../../../services/StudentProfileSettingsServices/skillService";
-import { Field, Formik, Form } from "formik";
-import studentService from "../../../services/studentService";
-import { CreateStudentSkillRequest } from "../../../models/requests/StudentSkillRequests";
-
-import { SkillResponse } from "../../../models/responses/SkillResponses";
 import { useDispatch, useSelector } from "react-redux";
+import { CreateStudentSkillRequest } from "../../../models/requests/StudentSkillRequests";
+import { SkillResponse } from "../../../models/responses/SkillResponses";
+import skillService from "../../../services/StudentProfileSettingsServices/skillService";
+import studentService from "../../../services/studentService";
 import { selectStudent, setStudent } from "../../../store/slices/studentSlice";
+import "./Skills.css";
 
 function Skills() {
   const dispatch = useDispatch();

@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import "./ExamModal.css";
+import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import quizService from "../../services/quizService";
-import { CreateStudentQuizOptionRequest } from "../../models/requests/StudentQuizOptionRequest";
-import ReactLoading from "react-loading";
-import { toast } from "react-toastify";
-import Checkmark from "./CheckMark/Checkmark";
-import ResultScreen from "../ResultScreen/ResultScreen";
 import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
+import { CreateStudentQuizOptionRequest } from "../../models/requests/StudentQuizOptionRequest";
+import quizService from "../../services/quizService";
+import Checkmark from "./CheckMark/Checkmark";
+import "./ExamModal.css";
 
 type Props = {
   show: boolean;
