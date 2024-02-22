@@ -184,7 +184,7 @@ const ProfileDetail = () => {
                 <div className="cv-box cv-padding">
                   <div className="cv-box-header">
                     <div className="d-flex justify-content-between">
-                      <span>Izlenilen Icerik Analizi</span>
+                      <span>İzlenilen İcerik Analizi</span>
                     </div>
                     <hr />
                   </div>
