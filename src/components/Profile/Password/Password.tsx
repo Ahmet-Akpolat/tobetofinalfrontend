@@ -46,7 +46,7 @@ function Password() {
               <FormikInput
                 name="lastPassword"
                 type="password"
-                placeholder="Eski Sifre"
+                placeholder="Eski Şifre"
               />
             </div>
             <div className="profile-input col-12 col-md-4 mb-4">
@@ -54,7 +54,7 @@ function Password() {
               <FormikInput
                 name="newPassword"
                 type="password"
-                placeholder="Yeni Sifre"
+                placeholder="Yeni Şifre"
               />
             </div>
             <div className="profile-input col-12 col-md-4 mb-4">
@@ -62,7 +62,7 @@ function Password() {
               <FormikInput
                 name="checkNewPassword"
                 type="password"
-                placeholder="Yeni Sifre Tekrar"
+                placeholder="Yeni Şifre Tekrar"
               />
             </div>
           </div>

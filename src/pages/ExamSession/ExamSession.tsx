@@ -89,8 +89,8 @@ const ExamSession = (props: Props) => {
                     <span>Soru Sayısı : {quizDetail?.quizQuestionCount} </span>
                     <span>Soru Tipi : Çoktan Seçmeli</span>
                     <span>
-                      Önceki Soruya Dönemeyeceksiniz Ona Göre Emin Olmadan
-                      Sonraki Soruya Geçmeyiniz
+                      Önceki soruya dönemeyeceksiniz ona göre emin olmadan
+                      sonraki soruya geçmeyiniz.
                     </span>
                   </div>
                   <div className="row ">

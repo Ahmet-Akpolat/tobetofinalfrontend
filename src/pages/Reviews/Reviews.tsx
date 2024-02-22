@@ -68,7 +68,7 @@ const Reviews = () => {
                   <span>Kazanım Odaklı Testler</span>
                   <p>
                     Dijital gelişim kategorisindeki eğitimlere başlamadan
-                    öncekonuyla ilgili bilgin ölçülür ve seviyene göre
+                    önce konuyla ilgili bilgin ölçülür ve seviyene göre
                     yönlendirilirsin.
                   </p>
                   <p></p>

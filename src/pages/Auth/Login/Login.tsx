@@ -27,7 +27,7 @@ const Login = () => {
     email: Yup.string().required("Doldurulması zorunlu alan*"),
     password: Yup.string()
       .required("Doldurulması zorunlu alan*")
-      .min(6, "Sifreniz 6 karakterden fazla olmalidir"),
+      .min(6, "Şifreniz 6 karakterden fazla olmalıdır"),
   });
 
   const handleLogin = async (values: AuthLoginRequest) => {
