@@ -64,7 +64,7 @@ function Languages() {
                 <select
                   onChange={(e: any) => setSelectLanguage(e.target.value)}
                 >
-                  <option>Seciniz</option>
+                  <option>Seçiniz</option>
                   {languageOptions.map((lang: any) => (
                     <option value={lang.id}>{lang.name}</option>
                   ))}
@@ -72,7 +72,7 @@ function Languages() {
               </div>
               <div className="profile-input col-6">
                 <Field as="select" name="languageLevelId">
-                  <option>Seciniz</option>
+                  <option>Seçiniz</option>
                   {languageLevels.map(
                     (langlevel: any) =>
                       langlevel.languageId == selectLanguage && (

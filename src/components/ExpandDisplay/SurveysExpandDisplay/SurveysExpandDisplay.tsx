@@ -89,7 +89,7 @@ function SurveysExpandDisplay() {
                         getReadedSurveys(0);
                       }}
                     >
-                      Katildiklarim
+                      Katıldıklarım
                     </button>
                   </li>
                 </div>

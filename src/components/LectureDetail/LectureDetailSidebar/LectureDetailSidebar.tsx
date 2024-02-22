@@ -58,7 +58,7 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: any) {
                   <h3>{content.name}</h3>
                   <div className="d-flex align-items-center gap-3">
                     <div className="content-type">
-                      <span>VIDEO</span>
+                      <span>VİDEO</span>
                     </div>
                     <div className="content-time d-flex align-items-center">
                       <img
@@ -94,7 +94,7 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: any) {
                   <div className="d-flex gap-2 align-items-center">
                     <div>
                       <button className="content-detail-button">
-                        <strong>EGITIME GIT</strong>
+                        <strong>EĞİTİME GİT</strong>
                       </button>
                     </div>
                     <div className="more-button">
@@ -151,7 +151,7 @@ function LectureDetailSidebar({ setShowDetail, lectureId }: any) {
           {content.instructors.length && (
             <div className="mt-3">
               <div>
-                <strong>Egitmenler</strong>
+                <strong>Eğitmenler</strong>
               </div>
               {content.instructors?.map((instructor: any) => (
                 <div>

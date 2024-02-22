@@ -214,8 +214,8 @@ const ExamModal = (props: Props) => {
                     <div className="row gap-4">
                       <Checkmark size={200} color={"green"} />
                       <span className="d-flex align-items-center justify-content-center text-success">
-                        Testiniz Gönderildi 2 Saniye İçerisinde Sayfa
-                        Yenilendiğinde Görebileceksiniz.
+                        Testiniz Gönderildi. 2 saniye içerisinde sayfa
+                        yenilendiğinde görebileceksiniz.
                       </span>
                     </div>
                   </div>
