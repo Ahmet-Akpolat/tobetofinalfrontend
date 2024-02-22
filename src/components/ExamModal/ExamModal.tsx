@@ -33,6 +33,7 @@ const ExamModal = (props: Props) => {
       });
     }
   };
+  
   const nextQuestion = async () => {
     if (props.quizId != undefined) {
       if (choosenOption == undefined) {
@@ -104,6 +105,7 @@ const ExamModal = (props: Props) => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
   return (
     <>
       <Modal

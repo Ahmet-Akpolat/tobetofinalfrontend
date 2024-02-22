@@ -14,7 +14,19 @@ function LectureContentHeader({ index }: any) {
   const lectureContents = lecture.courses;
 
   useEffect(() => {
-    dispatch(setContent(lectureContents[0].contents[0]));
+    outerLoop: for (var i = 0; lectureContents[i]; i++) {
+      for (var j = 0; lectureContents[i].contents[j]; j++) {
+        if (
+          !contentViews.some(
+            (contentView: any) =>
+              contentView === lectureContents[i].contents[j].id
+          )
+        ) {
+          dispatch(setContent(lectureContents[i].contents[j]));
+          break outerLoop;
+        }
+      }
+    }
   }, []);
 
   return (

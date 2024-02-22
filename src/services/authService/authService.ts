@@ -42,11 +42,19 @@ class AuthService {
   }
 
   async changePassword(data: any) {
+    const localToken = localStorage.getItem("Token");
     try {
-      await axiosInstance.put(`/Students/forPassword`, data);
+      await axios.put(`${baseUrl}/Students/forPassword`, data, {
+        headers: {
+          Authorization: `Bearer ${localToken}`,
+        },
+      });
+      toast.success(
+        "Sifreniz basariyla degistirildi. Lutfen tekrar giris yapiniz"
+      );
       Logout(store.dispatch);
     } catch (error: any) {
-      toast.error(ExceptionService.errorSelector(error.response.data));
+      toast.error("Eski sifreniz yanlis.");
     }
   }
 
