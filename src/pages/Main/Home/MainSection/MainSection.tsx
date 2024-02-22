@@ -147,7 +147,6 @@ const MainSection = () => {
                   )}
                 </div>
               )}
-
               {section == 1 && (
                 <div className="tab-pane fade show active">
                   <div className="row">

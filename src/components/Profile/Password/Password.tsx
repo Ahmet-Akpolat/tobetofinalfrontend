@@ -20,7 +20,7 @@ function Password() {
         [Yup.ref("lastPassword")],
         "Yeni sifreniz eskisiyle ayni olamaz"
       ),
-    checkNewPassword: Yup.string().oneOf(
+    checkNewPassword: Yup.string().required("Doldurulmasi zorunlu alan*").oneOf(
       [Yup.ref("newPassword")],
       "Sifreler eslesmiyor"
     ),
@@ -28,7 +28,6 @@ function Password() {
 
   const changePassword = async (data: any) => {
     await authService.changePassword(data);
-    toast.success("Sifreniz basariyla degistirildi. Lutfen tekrar giris yapiniz");
   };
 
   return (

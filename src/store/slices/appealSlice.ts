@@ -25,7 +25,7 @@ export const appealSlice = createSlice({
   },
 });
 
-// Reducer'ları ve action'ları export et
+
 export const { setAppeal, clearAppeal } = appealSlice.actions;
 export default appealSlice.reducer;
 export const selectAppeal = (state:any) => state.appeal.appeal;
