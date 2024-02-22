@@ -28,7 +28,7 @@ const Lecture = ({ lecture }: any) => {
           <div className="d-flex flex-column">
             <span>{lecture?.lectureName}</span>
             <span className="platform-course-date">
-              {formatDate(lecture?.startDate)}
+              {formatDate(lecture?.lectureStartDate)}
             </span>
           </div>
           <a className="apply-btn" onClick={handleClick}>
