@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import quizService from "../../services/quizService";
 import "./ResultScreen.css";
+import StudentQuizDetail from "./Details/StudentQuizDetail";
 
 type Props = {
   show: boolean;
@@ -11,7 +12,7 @@ type Props = {
 
 const ResultScreen = (props: Props) => {
   const [results, setResults] = useState<any>();
-
+  const [showDetail,setShowDetails]=useState<boolean>(false);
   const getResult = async () => {
     if (props.quizId != undefined) {
       await quizService.getByQuizId(props.quizId).then((response) => {
@@ -37,6 +38,7 @@ const ResultScreen = (props: Props) => {
           <div className="modal-content">
             <Modal.Body>
               <div className="quiz-screen">
+                {!showDetail&&true?(
                 <div className="result-screen ">
                   <span className="result-title">Test Sonucu</span>
                   <div className="result-items col-15">
@@ -56,7 +58,14 @@ const ResultScreen = (props: Props) => {
                       {results?.point} <a>Puan</a>
                     </span>
                   </div>
-                </div>
+                  <div className="row">
+                    <button onClick={()=>setShowDetails(true)} className="btn btn-primary mt-8 ms-auto me-auto" style={{width:"max-content"}}>
+                      Detayları Görüntüle
+                      </button>
+                    </div>
+                </div>):(
+                  <StudentQuizDetail quizId={props.quizId} />
+                )}
               </div>
             </Modal.Body>
           </div>
