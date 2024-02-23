@@ -112,7 +112,7 @@ function Education() {
               <FormikInput name="branch" />
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
-              <label>Başlangic Yılı*</label>
+              <label>Başlangıç Yılı*</label>
               <FormikInput name="startDate" type="date" />
             </div>
             {endDateControl && (

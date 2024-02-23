@@ -6,7 +6,7 @@ function InfoCard({ background, header, onClick }: any) {
       <div>
         <h1 className="mt-5">{header}</h1>
         <button className="link-button w-100" onClick={onClick}>
-          <strong>Basla</strong>
+          <strong>Başla</strong>
         </button>
       </div>
     </div>

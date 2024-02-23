@@ -56,7 +56,7 @@ function AnnouncementExpandDisplay() {
           <div className="page-banner-card">
             <div className="container">
               <div className="row">
-                <strong>Duyurularim</strong>
+                <strong>Duyurularım</strong>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@ function AnnouncementExpandDisplay() {
                         getReadedAnnouncements(0);
                       }}
                     >
-                      Okuduklarim
+                      Okuduklarım
                     </button>
                   </li>
                 </div>

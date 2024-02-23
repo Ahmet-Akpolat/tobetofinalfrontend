@@ -34,15 +34,15 @@ const Signup = () => {
       .required("Doldurulması zorunlu alan*"),
     password: string()
       .required("Doldurulması zorunlu alan*")
-      .min(6, "Sifreniz 6 karakterden uzun olmalidir")
+      .min(6, "Şifreniz 6 karakterden uzun olmalıdır")
       .test(
-        "buyuk-kucuk-sayi",
+        "büyük-küçük-sayı",
         "En Az 1 Büyük Harf, 1 Küçük Harf ve 1 Sayı Giriniz!",
         passwordValidator
       ),
     retypePassword: string()
       .required("Doldurulması zorunlu alan*")
-      .oneOf([ref("password")], "Şifreler Eslesmiyor"),
+      .oneOf([ref("password")], "Şifreler Eşleşmiyor"),
   });
 
   const submit = async (values: CreateStudentRequest) => {

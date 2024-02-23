@@ -58,7 +58,7 @@ function Certificates() {
                   </>
                 )}
               </label>
-              <span>Dosya YÜkle</span>
+              <span>Dosya Yükle</span>
             </div>
           </div>
         </div>

@@ -58,14 +58,14 @@ const ProfileDetail = () => {
 
   const data = [
     {
-      label: "Izlenilen Icerik Sayisi",
+      label: "İzlenilen İçerik Sayısı",
       value: activityDates.reduce(
         (accumulator: any, currentValue: any) =>
           accumulator + currentValue.count,
         0
       ),
     },
-    { label: "Toplam Icerik Sayisi", value: totalContents },
+    { label: "Toplam İçerik Sayısı", value: totalContents },
   ];
 
   return (
@@ -184,7 +184,7 @@ const ProfileDetail = () => {
                 <div className="cv-box cv-padding">
                   <div className="cv-box-header">
                     <div className="d-flex justify-content-between">
-                      <span>Izlenilen Icerik Analizi</span>
+                      <span>İzlenilen İçerik Analizi</span>
                     </div>
                     <hr />
                   </div>
@@ -234,7 +234,7 @@ const ProfileDetail = () => {
                           labels: activityDates.map((data: any) => data.date),
                           datasets: [
                             {
-                              label: "Tarihlere Gore Izlenen Icerik",
+                              label: "Tarihlere Göre İzlenen İçerik",
                               data: activityDates.map(
                                 (data: any) => data.count
                               ),

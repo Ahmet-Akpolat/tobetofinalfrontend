@@ -44,11 +44,11 @@ function PersonalInformations() {
     birthDate: Yup.string().required("Doldurulması zorunlu alan*"),
     country: Yup.string().required("Doldurulması zorunlu alan*"),
     email: Yup.string()
-      .email("Lutfen Gecerli Bir E-Posta Adresi Giriniz")
+      .email("Lütfen Geçerli Bir E-Posta Adresi Giriniz")
       .required("Doldurulması zorunlu alan*"),
     phone: Yup.string()
-      .phone("TR", "Lutfen Gecerli Bir Telefon Numarasi Giriniz")
-      .min(11, "Lutfen Gecerli Bir Telefon Numarasi Giriniz")
+      .phone("TR", "Lütfen Geçerli Bir Telefon Numarası Giriniz")
+      .min(11, "Lütfen Geçerli Bir Telefon Numarası Giriniz")
       .required("Doldurulması zorunlu alan*"),
     nationalIdentity: Yup.string()
       .required("Aboneliklerde fatura için doldurulması zorunlu alan*")
