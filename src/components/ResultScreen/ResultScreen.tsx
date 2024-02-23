@@ -37,8 +37,8 @@ const ResultScreen = (props: Props) => {
         <div className="">
           <div className="modal-content">
             <Modal.Body>
-              <div className="quiz-screen">
-                {!showDetail && true ? (
+              {!showDetail && true ? (
+                <div className="quiz-screen">
                   <div className="result-screen ">
                     <span className="result-title">Test Sonucu</span>
                     <div className="result-items col-15">
@@ -75,10 +75,12 @@ const ResultScreen = (props: Props) => {
                       </button>
                     </div>
                   </div>
-                ) : (
+                </div>
+              ) : (
+                <div className="quiz-screen" style={{ minHeight: "800px" }}>
                   <StudentQuizDetail quizId={props.quizId} />
-                )}
-              </div>
+                </div>
+              )}
             </Modal.Body>
           </div>
         </div>

@@ -12,8 +12,6 @@ import {
 } from "../../../store/slices/loadingSlice";
 import fetchAllData from "../../../utils/fetchalldata";
 import "./Login.css";
-import { toast } from "react-toastify";
-import exceptionService from "../../../utils/exceptionService";
 
 const Login = () => {
   const dispatch = useDispatch();

@@ -19,7 +19,7 @@ function Languages() {
   const [languageLevels, setLanguageLevels] = useState([] as any);
 
   const validationSchema = Yup.object({
-    languageLevelId: Yup.string().required("Lutfen secim yapiniz"),
+    languageLevelId: Yup.string().required("Lütfen seçim yapınız."),
   });
 
   const getLanguageOptions = async () => {

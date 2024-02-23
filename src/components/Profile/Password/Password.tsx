@@ -1,5 +1,4 @@
 import { Form, Formik } from "formik";
-import { toast } from "react-toastify";
 import * as Yup from "yup";
 import authService from "../../../services/authService/authService";
 import { passwordValidator } from "../../../utils/customValidations";
@@ -7,9 +6,9 @@ import FormikInput from "../../FormikInput/FormikInput";
 
 function Password() {
   const validationSchema = Yup.object({
-    lastPassword: Yup.string().required("Doldurulmasi zorunlu alan*"),
+    lastPassword: Yup.string().required("Doldurulması zorunlu alan*"),
     newPassword: Yup.string()
-      .min(6, "Sifreniz 6 karakterden uzun olmalidir")
+      .min(6, "Şifreniz 6 karakterden uzun olmalıdır!")
       .required("Doldurulmasi zorunlu alan*")
       .test(
         "buyuk-kucuk-sayi",
@@ -18,12 +17,11 @@ function Password() {
       )
       .notOneOf(
         [Yup.ref("lastPassword")],
-        "Yeni sifreniz eskisiyle ayni olamaz"
+        "Yeni şifreniz eskisiyle aynı olamaz!"
       ),
-    checkNewPassword: Yup.string().required("Doldurulmasi zorunlu alan*").oneOf(
-      [Yup.ref("newPassword")],
-      "Sifreler eslesmiyor"
-    ),
+    checkNewPassword: Yup.string()
+      .required("Doldurulması zorunlu alan*")
+      .oneOf([Yup.ref("newPassword")], "Şifreler eşleşmiyor!"),
   });
 
   const changePassword = async (data: any) => {
