@@ -42,4 +42,4 @@ export const studentSlice = createSlice({
 export const { setStudent, clearStudent } = studentSlice.actions;
 export default studentSlice.reducer;
 export const selectStudent = (state: any) => state.student.student;
-export const selectIsStudentSet = (state: any) => !!state.student.student?.id;
+export const selectIsStudentSet = (state: any) => state.student.student?.id;

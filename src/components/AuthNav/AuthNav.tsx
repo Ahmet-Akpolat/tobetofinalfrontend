@@ -59,7 +59,7 @@ const AuthNav = () => {
                   setSelectedItemId("profile");
                 }}
               >
-                <a className="nav-link">Profilim</a>
+                <a className="nav-link">Hakkımızda</a>
               </li>
               <li
                 className={`nav-item ${
@@ -70,7 +70,7 @@ const AuthNav = () => {
                   setSelectedItemId("educations");
                 }}
               >
-                <a className="nav-link">Eğitimlerim</a>
+                <a className="nav-link">Yenilikler</a>
               </li>
               <li
                 className={`nav-item ${
@@ -81,7 +81,7 @@ const AuthNav = () => {
                   setSelectedItemId("announcements");
                 }}
               >
-                <a className="nav-link">Duyuru ve Haberler</a>
+                <a className="nav-link">Bize Ulaşın</a>
               </li>
               <li
                 className={`nav-item ${
@@ -92,7 +92,7 @@ const AuthNav = () => {
                   setSelectedItemId("surveys");
                 }}
               >
-                <a className="nav-link">Anketler</a>
+                <a className="nav-link">Tobeto'da Bu Ay</a>
               </li>
             </ul>
             <div className="d-flex justify-space-center align-items-center gap-2">
