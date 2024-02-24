@@ -6,6 +6,7 @@ import { SkillResponse } from "../../../models/responses/SkillResponses";
 import skillService from "../../../services/StudentProfileSettingsServices/skillService";
 import studentService from "../../../services/studentService";
 import { selectStudent, setStudent } from "../../../store/slices/studentSlice";
+import * as Yup from "yup";
 import "./Skills.css";
 
 function Skills() {
@@ -16,6 +17,10 @@ function Skills() {
   const initialValues = {
     skillId: null,
   };
+
+  const validationSchema = Yup.object({
+    skillId: Yup.string().required("Lütfen seçim yapınız."),
+  });
 
   const getSkills = async () => {
     const data = await skillService.getAll();
@@ -47,6 +52,7 @@ function Skills() {
   return (
     <div>
       <Formik
+      validationSchema={validationSchema}
         initialValues={initialValues}
         onSubmit={(initialValues: any) => {
           addStudentSkills(initialValues);
