@@ -36,7 +36,11 @@ class QuizService {
   }
   async getByQuizId(quizId: number) {
     const response = await axiosInstance.get(`StudentQuizResults/${quizId}`);
-    return response.data; // Directly returning the data part of the response
+    return response.data; 
+  }
+  async getByQuizDetailWithByQuizId(quizId: number) {
+    const response = await axiosInstance.get(`Quizs/GetQuizDetailForStudent${quizId}`);
+    return response.data; 
   }
 }
 

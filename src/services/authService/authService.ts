@@ -50,11 +50,11 @@ class AuthService {
         },
       });
       toast.success(
-        "Sifreniz basariyla degistirildi. Lutfen tekrar giris yapiniz"
+        "Şifreniz başarıyla değiştirildi. Lütfen tekrar giriş yapınız."
       );
       Logout(store.dispatch);
     } catch (error: any) {
-      toast.error("Eski sifreniz yanlis.");
+      toast.error("Eski şifreniz yanlış.");
     }
   }
 
