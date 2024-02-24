@@ -1,5 +1,6 @@
 .notfound-page {
   min-height: 72vh;
+  position: relative;
 }
 
 .notfound-page h1 {
@@ -11,4 +12,30 @@
 .notfound-page h2 {
   font-size: 32pt;
   font-weight: 500;
+}
+
+.notfound-back-button {
+  animation: fadeIn 0.6s ease-in-out;
+  position: absolute;
+}
+
+.notfound-back-button::before {
+  content: "";
+  background-image: url(/public/icons/arrow_back_FILL0.svg);
+  background-color: #9933ff;
+  position: absolute;
+  width: 2.4em;
+  height: 2.4em;
+  border-radius: 30px;
+  left: -100px;
+  top: 0px;
+  cursor: pointer;
+  transition: transform 1s;
+}
+
+@media (max-width: 767px) {
+  .notfound-back-button::before {
+    left: 20px;
+    top: -50px;
+  }
 }

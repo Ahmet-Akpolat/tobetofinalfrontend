@@ -75,10 +75,7 @@ function App() {
           <Route path="/degerlendirmeler" element={<Reviews />} />
         </Route>
 
-        <Route element={<MainLayout />}>
-          <Route path="*" element={<Notfound />} />
-        </Route>
-        
+        <Route path="*" element={<Notfound />} />
       </Routes>
       <OverlayLoader />
       <ToastContainer
