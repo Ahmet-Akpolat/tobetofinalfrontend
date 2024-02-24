@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AuthNav.css";
+import { toast } from "react-toastify";
 
 const AuthNav = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const AuthNav = () => {
                   selectedItemId === "home" ? "selected" : ""
                 }`}
                 onClick={() => {
-                  navigate("/");
+                  toast.info("Bu içeriği görebilmek için giriş yapmalısınız!");
                   setSelectedItemId("home");
                 }}
               >
@@ -55,7 +56,7 @@ const AuthNav = () => {
                   selectedItemId === "profile" ? "selected" : ""
                 }`}
                 onClick={() => {
-                  navigate("/profil-detay");
+                  toast.info("Bu içeriği görebilmek için giriş yapmalısınız!");
                   setSelectedItemId("profile");
                 }}
               >
@@ -66,7 +67,7 @@ const AuthNav = () => {
                   selectedItemId === "degerlendirmeler" ? "selected" : ""
                 }`}
                 onClick={() => {
-                  navigate("/degerlendirmeler");
+                  toast.info("Bu içeriği görebilmek için giriş yapmalısınız!");
                   setSelectedItemId("degerlendirmeler");
                 }}
               >
@@ -77,7 +78,7 @@ const AuthNav = () => {
                   selectedItemId === "educations" ? "selected" : ""
                 }`}
                 onClick={() => {
-                  navigate("/egitimlerim");
+                  toast.info("Bu içeriği görebilmek için giriş yapmalısınız!");
                   setSelectedItemId("educations");
                 }}
               >
@@ -88,7 +89,7 @@ const AuthNav = () => {
                   selectedItemId === "announcements" ? "selected" : ""
                 }`}
                 onClick={() => {
-                  navigate("/duyurularim");
+                  toast.info("Bu içeriği görebilmek için giriş yapmalısınız!");
                   setSelectedItemId("announcements");
                 }}
               >
@@ -99,7 +100,7 @@ const AuthNav = () => {
                   selectedItemId === "surveys" ? "selected" : ""
                 }`}
                 onClick={() => {
-                  navigate("/anketlerim");
+                  toast.info("Bu içeriği görebilmek için giriş yapmalısınız!");
                   setSelectedItemId("surveys");
                 }}
               >
