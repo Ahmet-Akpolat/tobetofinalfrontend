@@ -5,6 +5,7 @@ import { clearAnnouncement } from "../store/slices/announcementSlice";
 import { clearLecture } from "../store/slices/lectureSlice";
 import { clearSurvey } from "../store/slices/surveySlice";
 import { clearExams } from "../store/slices/examSlice";
+import { clearNavlink } from "../store/slices/navbarSlice";
 
 export const Logout = (dispatch: any) => {
   dispatch(clearAuth());
@@ -14,4 +15,5 @@ export const Logout = (dispatch: any) => {
   dispatch(clearLecture());
   dispatch(clearSurvey());
   dispatch(clearExams());
+  dispatch(clearNavlink());
 };

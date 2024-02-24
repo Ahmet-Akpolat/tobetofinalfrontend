@@ -2,10 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AuthNav.css";
 import { toast } from "react-toastify";
+import { setNavlink } from "../../store/slices/navbarSlice";
+import { useDispatch } from "react-redux";
 
 const AuthNav = () => {
   const navigate = useNavigate();
   const [selectedItemId, setSelectedItemId] = useState("home");
+  const dispatch = useDispatch();
 
   return (
     <nav className="auth-navbar navbar navbar-expand-xxl navbar-custom py-4 mb-4 navbar-dark bg-dark">
@@ -22,7 +25,13 @@ const AuthNav = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="d-flex media-width justify-content-around align-items-center w-100">
-          <Link to="/" onClick={() => setSelectedItemId("home")}>
+          <Link
+            to="/"
+            onClick={() => {
+              setSelectedItemId("home");
+              dispatch(setNavlink("/"));
+            }}
+          >
             <span className="tobetoImagee">
               <span>
                 <img src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg'%20version='1.1'%20width='170'%20height='35'/>" />
@@ -47,6 +56,7 @@ const AuthNav = () => {
                 onClick={() => {
                   toast.info("Bu içeriği görebilmek için giriş yapmalısınız!");
                   setSelectedItemId("home");
+                  dispatch(setNavlink("/"));
                 }}
               >
                 <a className="nav-link">Ana Sayfa</a>
@@ -58,6 +68,7 @@ const AuthNav = () => {
                 onClick={() => {
                   toast.info("Bu içeriği görebilmek için giriş yapmalısınız!");
                   setSelectedItemId("profile");
+                  dispatch(setNavlink("/profil-detay"));
                 }}
               >
                 <a className="nav-link">Profilim</a>
@@ -69,6 +80,7 @@ const AuthNav = () => {
                 onClick={() => {
                   toast.info("Bu içeriği görebilmek için giriş yapmalısınız!");
                   setSelectedItemId("degerlendirmeler");
+                  dispatch(setNavlink("/degerlendirmeler"));
                 }}
               >
                 <a className="nav-link">Değerlendirmeler</a>
@@ -80,6 +92,7 @@ const AuthNav = () => {
                 onClick={() => {
                   toast.info("Bu içeriği görebilmek için giriş yapmalısınız!");
                   setSelectedItemId("educations");
+                  dispatch(setNavlink("/egitimlerim"));
                 }}
               >
                 <a className="nav-link">Eğitimlerim</a>
@@ -91,6 +104,7 @@ const AuthNav = () => {
                 onClick={() => {
                   toast.info("Bu içeriği görebilmek için giriş yapmalısınız!");
                   setSelectedItemId("announcements");
+                  dispatch(setNavlink("/duyurularim"));
                 }}
               >
                 <a className="nav-link">Duyuru ve Haberler</a>
@@ -102,6 +116,7 @@ const AuthNav = () => {
                 onClick={() => {
                   toast.info("Bu içeriği görebilmek için giriş yapmalısınız!");
                   setSelectedItemId("surveys");
+                  dispatch(setNavlink("/anketlerim"));
                 }}
               >
                 <a className="nav-link">Anketler</a>
@@ -116,7 +131,9 @@ const AuthNav = () => {
               </span>
               <span
                 className="authnav-signup btn-rainbow"
-                onClick={() => navigate("/signup")}
+                onClick={() => {
+                  navigate("/signup");
+                }}
               >
                 Ücretsiz Üye Ol
               </span>

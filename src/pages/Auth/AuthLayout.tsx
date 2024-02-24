@@ -4,16 +4,18 @@ import { selectIsAuthenticated } from "../../store/slices/authSlice";
 import { selectIsStudentSet } from "../../store/slices/studentSlice";
 import AuthNav from "../../components/AuthNav/AuthNav";
 import Footer from "../../components/Footer/Footer";
+import { selectNavlink } from "../../store/slices/navbarSlice";
 
 const AuthLayout = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const isSetStudent = useSelector(selectIsStudentSet);
+  const navbarlink = useSelector(selectNavlink);
 
   return (
     <div>
       <>
         {isAuthenticated && isSetStudent ? (
-          <Navigate to="/" />
+          <Navigate to={navbarlink} />
         ) : (
           <>
             <section>

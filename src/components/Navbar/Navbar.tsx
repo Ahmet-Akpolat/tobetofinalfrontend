@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { selectStudent } from "../../store/slices/studentSlice";
 import { Logout } from "../../utils/logout";
 import "./Navbar.css";
@@ -11,12 +11,36 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const student = useSelector(selectStudent);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const location = useLocation();
 
   const [selectedItemId, setSelectedItemId] = useState("home");
 
   const handleLogout = () => {
     Logout(dispatch);
   };
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case "/":
+        setSelectedItemId("home");
+        break;
+      case "/profil-detay":
+        setSelectedItemId("profile");
+        break;
+      case "/degerlendirmeler":
+        setSelectedItemId("review");
+        break;
+      case "/egitimlerim":
+        setSelectedItemId("educations");
+        break;
+      case "/anketlerim":
+        setSelectedItemId("surveys");
+        break;
+      case "/duyurularim":
+        setSelectedItemId("announcements");
+        break;
+    }
+  }, [location.pathname]);
 
   return (
     <nav className="navbar navbar-expand-xxl navbar-custom py-4 mb-4 bg-white">
@@ -27,7 +51,7 @@ const Navbar = () => {
         data-bs-target="#navbarNav"
         aria-controls="navbarNav"
         aria-expanded="false"
-        aria-label="Toggle navigation" 
+        aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -54,7 +78,6 @@ const Navbar = () => {
             }`}
             onClick={() => {
               navigate("/");
-              setSelectedItemId("home");
             }}
           >
             <a className="nav-link">Ana Sayfa</a>
@@ -65,7 +88,6 @@ const Navbar = () => {
             }`}
             onClick={() => {
               navigate("/profil-detay");
-              setSelectedItemId("profile");
             }}
           >
             <a className="nav-link">Profilim</a>
@@ -76,7 +98,6 @@ const Navbar = () => {
             }`}
             onClick={() => {
               navigate("/degerlendirmeler");
-              setSelectedItemId("review");
             }}
           >
             <a className="nav-link">Değerlendirmeler</a>
@@ -87,7 +108,6 @@ const Navbar = () => {
             }`}
             onClick={() => {
               navigate("/egitimlerim");
-              setSelectedItemId("educations");
             }}
           >
             <a className="nav-link">Eğitimlerim</a>
