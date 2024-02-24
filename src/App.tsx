@@ -15,6 +15,7 @@ import Profile from "./pages/Profile/Profile";
 import ProfileDetail from "./pages/ProfileDetail/ProfileDetail";
 import authService from "./services/authService/authService";
 import Reviews from "./pages/Reviews/Reviews";
+import Notfound from "./pages/Notfound/Notfound";
 
 let lastErrorTime = 0;
 const errorInterval = 3000;
@@ -73,6 +74,11 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/degerlendirmeler" element={<Reviews />} />
         </Route>
+
+        <Route element={<MainLayout />}>
+          <Route path="*" element={<Notfound />} />
+        </Route>
+        
       </Routes>
       <OverlayLoader />
       <ToastContainer

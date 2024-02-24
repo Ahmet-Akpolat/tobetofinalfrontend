@@ -1,0 +1,14 @@
+.notfound-page {
+  min-height: 72vh;
+}
+
+.notfound-page h1 {
+  color: #82fd;
+  font-size: 60pt;
+  font-weight: 700;
+}
+
+.notfound-page h2 {
+  font-size: 32pt;
+  font-weight: 500;
+}
