@@ -16,7 +16,7 @@ import { formatDate } from "../../utils/formatDate";
 import "./LectureDetail.css";
 
 let lastErrorTime = 0;
-const errorInterval = 3000;
+const errorInterval = 1000;
 
 function LectureDetail() {
   const navigate = useNavigate();
@@ -33,6 +33,7 @@ function LectureDetail() {
     totalWatchedCount: lecture?.totalWatchedCount,
   });
   const contentViews = useSelector(selectContentViews);
+  const [likeActions, setLikeActions] = useState(false);
 
   const getLectureDetails = async () => {
     const newLecture = (await lectureService.getWithDetails(lecture.id)) as any;
@@ -51,13 +52,11 @@ function LectureDetail() {
       setLiked(true);
       setNumberOfLikes(numberOfLikes + 1);
     }
-    const currentTime = new Date().getTime();
-    if (currentTime - lastErrorTime > errorInterval) {
-      lastErrorTime = currentTime;
-      await lectureService.setLectureLiked(student.id, lecture.id);
-      const newLecture = await lectureService.getWithDetails(lecture.id);
-      dispatch(setLectureDetail(newLecture));
-    }
+    setLikeActions(true);
+    await lectureService.setLectureLiked(student.id, lecture.id);
+    const newLecture = await lectureService.getWithDetails(lecture.id);
+    dispatch(setLectureDetail(newLecture));
+    setLikeActions(false);
   };
 
   const handleBackButton = () => {
@@ -93,7 +92,11 @@ function LectureDetail() {
                 </div>
                 <div className="actions d-flex align-items-center">
                   <div className="like-actions ">
-                    <div className="like" onClick={setLectureLiked}>
+                    <div
+                      className="like"
+                      onClick={setLectureLiked}
+                      style={{ pointerEvents: likeActions ? "none" : "auto" }}
+                    >
                       <img
                         src={
                           liked === false

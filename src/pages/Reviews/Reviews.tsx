@@ -14,6 +14,7 @@ const Reviews = () => {
 
   useEffect(() => {
     getQuizs();
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -67,8 +68,8 @@ const Reviews = () => {
                 <div className="dashboard-card4 equal-box">
                   <span>Kazanım Odaklı Testler</span>
                   <p>
-                    Dijital gelişim kategorisindeki eğitimlere başlamadan
-                    önce konuyla ilgili bilgin ölçülür ve seviyene göre
+                    Dijital gelişim kategorisindeki eğitimlere başlamadan önce
+                    konuyla ilgili bilgin ölçülür ve seviyene göre
                     yönlendirilirsin.
                   </p>
                   <p></p>

@@ -49,7 +49,7 @@ const Home = () => {
             <InfoCard
               background="background-2"
               header="Kendini değerlendir"
-              onClick={() => navigate("/profil-detay")}
+              onClick={() => navigate("/degerlendirmeler")}
             />
             <InfoCard
               background="background-3"

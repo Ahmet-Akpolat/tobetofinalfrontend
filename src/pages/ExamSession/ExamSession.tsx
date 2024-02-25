@@ -60,6 +60,7 @@ const ExamSession = (props: Props) => {
   useEffect(() => {
     getQuizDetail();
     setModalControl(props.show);
+    window.scrollTo(0, 0);
   }, [reloadFlag]);
 
   return (
@@ -71,10 +72,10 @@ const ExamSession = (props: Props) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-
-
-        {loadingControl == true ? <ClipLoader color="#9933ff" size={50} />
-          : (<div className="">
+        {loadingControl == true ? (
+          <ClipLoader color="#9933ff" size={50} />
+        ) : (
+          <div className="">
             <div className="modal-content">
               <Modal.Header closeButton>
                 <span className="quiz-details-header">{quizDetail?.name}</span>
@@ -84,16 +85,18 @@ const ExamSession = (props: Props) => {
                   <div className="join-screen">
                     <p>
                       <p>
-                        Bu sınav {quizDetail?.quizQuestionCount} sorudan oluşmakta
-                        olup sınav süresi {quizDetail?.duration} dakikadır. Sınav
-                        çoktan seçmeli test şeklinde olup sınavı yarıda
-                        bıraktığınız taktırde çözdüğünüz kısım kadarıyla
-                        değerlendirileceksiniz.
+                        Bu sınav {quizDetail?.quizQuestionCount} sorudan
+                        oluşmakta olup sınav süresi {quizDetail?.duration}{" "}
+                        dakikadır. Sınav çoktan seçmeli test şeklinde olup
+                        sınavı yarıda bıraktığınız taktırde çözdüğünüz kısım
+                        kadarıyla değerlendirileceksiniz.
                       </p>
                     </p>
                     <div>
                       <span>Sınav Süresi : {quizDetail?.duration} Dakika</span>
-                      <span>Soru Sayısı : {quizDetail?.quizQuestionCount} </span>
+                      <span>
+                        Soru Sayısı : {quizDetail?.quizQuestionCount}{" "}
+                      </span>
                       <span>Soru Tipi : Çoktan Seçmeli</span>
                       <span>
                         Önceki soruya dönemeyeceksiniz ona göre emin olmadan
@@ -121,7 +124,8 @@ const ExamSession = (props: Props) => {
                 </div>
               </Modal.Body>
             </div>
-          </div>)}
+          </div>
+        )}
       </Modal>
       {modalShow && (
         <ExamModal

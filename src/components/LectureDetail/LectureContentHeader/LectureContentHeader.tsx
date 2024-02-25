@@ -17,7 +17,7 @@ function LectureContentHeader({ index }: any) {
     outerLoop: for (var i = 0; lectureContents[i]; i++) {
       for (var j = 0; lectureContents[i].contents[j]; j++) {
         if (
-          !contentViews.some(
+          contentViews?.some(
             (contentView: any) =>
               contentView === lectureContents[i].contents[j].id
           )
