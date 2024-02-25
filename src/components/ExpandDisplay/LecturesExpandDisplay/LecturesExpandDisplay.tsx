@@ -65,7 +65,7 @@ function LecturesExpandDisplay() {
             </div>
           </div>
         </div>
-        {!lectures.length && clicked != 1 && !loading ? (
+        {!lectures.length && clicked == 0 && !loading ? (
           <div className="container-fluid">
             <NoContent content="ders" />
           </div>
