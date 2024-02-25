@@ -54,7 +54,11 @@ function LectureContentHeader({ index }: any) {
               <div className="mb-1">
                 <text>{content.name}</text>
               </div>
-              <sub>{`Video ${content.duration} dk`}</sub>
+              <sub>
+                {content.duration > 60
+                  ? `${Math.round(content.duration / 60)} saat`
+                  : `${content.duration} dk`}
+              </sub>
               {contentViews.includes(content.id) && (
                 <div className="is-finish"></div>
               )}

@@ -17,7 +17,12 @@ function LectureVideo({ setShowDetail }: any) {
             <strong>{content.name}</strong>
           </div>
           <div className="d-flex justify-content-between">
-            <text style={{ color: "grey" }}>Video - {content.duration} dk</text>
+            <text style={{ color: "grey" }}>
+              Video -{" "}
+              {content.duration > 60
+                ? `${Math.round(content.duration / 60)} saat`
+                : `${content.duration} dk`}
+            </text>
           </div>
         </div>
         <div className="col-4 col-md-4">
