@@ -14,6 +14,7 @@ import {
 import { selectStudent } from "../../store/slices/studentSlice";
 import { formatDate } from "../../utils/formatDate";
 import "./LectureDetail.css";
+import LectureComment from "../../components/LectureDetail/LectureComment/LectureComment";
 
 let lastErrorTime = 0;
 const errorInterval = 1000;
@@ -156,6 +157,11 @@ function LectureDetail() {
                   Hakkında
                 </button>
               </li>
+              <li className="nav-item">
+                <button className="nav-link" onClick={() => setSection(2)}>
+                  Yorumlar
+                </button>
+              </li>
             </ul>
           </div>
         </div>
@@ -163,6 +169,7 @@ function LectureDetail() {
         {section === 1 && (
           <LectureInfo lectureCompletionDetail={lectureCompletionDetail} />
         )}
+        {section === 2 && <LectureComment />}
       </div>
       {showDetail === true && (
         <LectureDetailSidebar

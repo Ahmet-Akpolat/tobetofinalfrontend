@@ -132,6 +132,21 @@ class LectureService extends BaseService<
       contentId: contentId,
     });
   }
+
+  async getLectureComments(lectureId: string, pageIndex: number, pageSize: number) {
+    const comments = await axiosInstance.get(`StudentLectureComments/GetListByLectureId/${lectureId}?PageIndex=${pageIndex}&PageSize=${pageSize}`)
+    return comments;
+  }
+
+  async setLectureComments(values:any) {
+    await axiosInstance.post(`StudentLectureComments`, values )
+  }
+
+  async putLectureComments(values:any) {
+    await axiosInstance.put("StudentLectureComments", values)
+  }
 }
+
+
 
 export default new LectureService();
