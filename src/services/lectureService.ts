@@ -133,20 +133,37 @@ class LectureService extends BaseService<
     });
   }
 
-  async getLectureComments(lectureId: string, pageIndex: number, pageSize: number) {
-    const comments = await axiosInstance.get(`StudentLectureComments/GetListByLectureId/${lectureId}?PageIndex=${pageIndex}&PageSize=${pageSize}`)
-    return comments;
+  async getLectureComments(
+    lectureId: string,
+    pageIndex: number,
+    pageSize: number
+  ) {
+    return await axiosInstance.get(
+      `StudentLectureComments/GetListByLectureId/${lectureId}?PageIndex=${pageIndex}&PageSize=${pageSize}`
+    );
   }
 
-  async setLectureComments(values:any) {
-    await axiosInstance.post(`StudentLectureComments`, values )
+  async getLectureCommentById(lectureId: string) {
+    return await axiosInstance.get(
+      `StudentLectureComments/${lectureId}`
+    );
   }
 
-  async putLectureComments(values:any) {
-    await axiosInstance.put("StudentLectureComments", values)
+  async setLectureComments(values: any) {
+    await axiosInstance.post(`StudentLectureComments`, values);
+  }
+
+  async deleteLectureComment(id: any) {
+    await axiosInstance.delete(`StudentLectureComments/${id}`);
+  }
+
+  async setLectureSubComments(values: any) {
+    await axiosInstance.post(`CommentSubComments`, values);
+  }
+
+  async deleteLectureSubComment(id: any) {
+    await axiosInstance.delete(`CommentSubComments/${id}`);
   }
 }
-
-
 
 export default new LectureService();

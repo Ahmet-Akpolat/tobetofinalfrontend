@@ -16,9 +16,6 @@ import { formatDate } from "../../utils/formatDate";
 import "./LectureDetail.css";
 import LectureComment from "../../components/LectureDetail/LectureComment/LectureComment";
 
-let lastErrorTime = 0;
-const errorInterval = 1000;
-
 function LectureDetail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -159,7 +156,7 @@ function LectureDetail() {
               </li>
               <li className="nav-item">
                 <button className="nav-link" onClick={() => setSection(2)}>
-                  Yorumlar
+                  Yorumlar 
                 </button>
               </li>
             </ul>

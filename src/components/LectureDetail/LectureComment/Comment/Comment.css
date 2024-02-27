@@ -1,0 +1,97 @@
+.comment-card {
+  padding: 20px;
+  border: 1px rgb(226, 226, 226) solid;
+  border-radius: 30px;
+}
+
+.comment-profile-photo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.user-infos span {
+  color: #2372ba;
+  font-size: small;
+}
+
+.comment-card p {
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.comment-delete-button {
+  padding: 5px;
+  border: 1px #ff4757 solid;
+  color: #ff4757;
+  border-radius: 30px;
+  min-width: 50px;
+  text-align: center;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.comment-subcomment-button {
+  padding: 5px;
+  border: 1px black solid;
+  border-radius: 30px;
+  transition: 0.4s;
+}
+
+.comment-subcomment-button {
+  cursor: pointer;
+}
+
+.comment-subcomment-button:hover {
+  scale: 1.06;
+  background-color: gray;
+  border: 1px gray solid;
+  color: white;
+}
+
+.comment-delete-button:hover {
+  scale: 1.06;
+  background-color: #ff4757;
+  color: white;
+}
+
+.comment-events {
+  display: flex;
+  gap: 4px;
+  font-size: large;
+  justify-content: end;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.send-button {
+  background-color: #93f;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+  position: absolute;
+  top: 3px;
+  right: -8px;
+}
+
+.send-button:before {
+  content: url(/public/icons/send_FILL0.svg);
+  position: absolute;
+  top: 7px;
+  right: 6px;
+}
+
+.comment-area input,
+.comment-area textarea,
+.comment-area select {
+  border: 1px solid #b3a6c0;
+  border-radius: 20px;
+  width: 95%;
+  padding: 10px;
+  transition: 0.5s;
+}
+
+.comment-area {
+  position: relative;
+}
