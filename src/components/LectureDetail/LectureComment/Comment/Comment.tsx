@@ -15,6 +15,7 @@ const Comment = ({
 }: any) => {
   const [showSubComments, setShowSubComments] = useState(false);
   const [subComments, setSubComments] = useState(comment.commentSubComments);
+  const [showFullComment, setShowFullComment] = useState(false);
 
   const initialValues = {
     subComment: null,
@@ -107,7 +108,31 @@ const Comment = ({
         </div>
       </div>
       <div>
-        <p>{comment.comment}</p>
+        {comment.comment.length > 400 ? (
+          !showFullComment ? (
+            <>
+              <p>{comment.comment.substring(0, 400)}...</p>
+              <button
+                className="more-button"
+                onClick={() => setShowFullComment(true)}
+              >
+                Devamını oku
+              </button>
+            </>
+          ) : (
+            <>
+              <p>{comment.comment}</p>
+              <button
+                className="less-button"
+                onClick={() => setShowFullComment(false)}
+              >
+                Daha az göster
+              </button>
+            </>
+          )
+        ) : (
+          <p>{comment.comment}</p>
+        )}
       </div>
       {showSubComments && !isSubComment && (
         <div className="anim-fadein">

@@ -95,3 +95,18 @@
 .comment-area {
   position: relative;
 }
+
+.more-button,
+.less-button {
+  border: none;
+  background: none;
+  color: grey;
+  transition: 0.3s;
+}
+
+.more-button:hover,
+.less-button:hover {
+  border-radius: 15px;
+  background-color: rgba(170, 170, 170, 0.6);
+  color: white;
+}

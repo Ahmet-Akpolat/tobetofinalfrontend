@@ -145,18 +145,27 @@ function LectureDetail() {
           <div className="col-12 mb-4">
             <ul className="nav nav-tabs mainTablist" role="tablist">
               <li className="nav-item">
-                <button className="nav-link" onClick={() => setSection(0)}>
+                <button
+                  className={`nav-link ${section === 0 ? "active" : ""}`}
+                  onClick={() => setSection(0)}
+                >
                   İçerik
                 </button>
               </li>
               <li className="nav-item">
-                <button className="nav-link" onClick={() => setSection(1)}>
+                <button
+                  className={`nav-link ${section === 1 ? "active" : ""}`}
+                  onClick={() => setSection(1)}
+                >
                   Hakkında
                 </button>
               </li>
               <li className="nav-item">
-                <button className="nav-link" onClick={() => setSection(2)}>
-                  Yorumlar 
+                <button
+                  className={`nav-link ${section === 2 ? "active" : ""}`}
+                  onClick={() => setSection(2)}
+                >
+                  Yorumlar
                 </button>
               </li>
             </ul>
