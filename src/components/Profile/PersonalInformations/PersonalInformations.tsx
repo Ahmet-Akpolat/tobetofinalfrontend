@@ -151,7 +151,7 @@ function PersonalInformations() {
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
               <label>Adınız*</label>
-              <FormikInput name="firstName" label="Adiniz*" />
+              <FormikInput name="firstName"/>
             </div>
             <div className="profile-input col-12 col-md-6 mb-4">
               <label>Soyadınız*</label>
