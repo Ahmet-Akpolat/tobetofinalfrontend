@@ -7,7 +7,7 @@ import {
   CreatedAppealResponse,
   GetListAppealResponse,
   UpdatedAppealResponse,
-} from "../models/responses/AppealResponses";
+} from "../models/responses/AppealResponses"; //empty
 import { BaseService } from "./baseService";
 
 class AppealService extends BaseService<
